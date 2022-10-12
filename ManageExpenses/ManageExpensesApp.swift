@@ -11,7 +11,7 @@ import SwiftUI
 struct ManageExpensesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginIntroView()
         }
     }
 }

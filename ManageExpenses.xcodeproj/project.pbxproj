@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
-		5F4B7BD528F6C3B600EFC1F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD428F6C3B600EFC1F5 /* ContentView.swift */; };
+		5F4B7BD528F6C3B600EFC1F5 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD428F6C3B600EFC1F5 /* LoginIntroView.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
 		5F4B7BE428F6C3BC00EFC1F5 /* ManageExpensesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BE328F6C3BC00EFC1F5 /* ManageExpensesTests.swift */; };
 		5F4B7BEE28F6C3BC00EFC1F5 /* ManageExpensesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BED28F6C3BC00EFC1F5 /* ManageExpensesUITests.swift */; };
 		5F4B7BF028F6C3BC00EFC1F5 /* ManageExpensesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BEF28F6C3BC00EFC1F5 /* ManageExpensesUITestsLaunchTests.swift */; };
+		5F4B7BFD28F6C56B00EFC1F5 /* LoginIntroPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */; };
+		5F4B7BFF28F6CE5D00EFC1F5 /* LoginIntroWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BFE28F6CE5D00EFC1F5 /* LoginIntroWidgetView.swift */; };
+		5F4B7C0128F6CE8400EFC1F5 /* LoginIntroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */; };
+		5F4B7C0328F6D1CA00EFC1F5 /* PageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0228F6D1CA00EFC1F5 /* PageControlView.swift */; };
+		5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0428F6D27600EFC1F5 /* CustomColor.swift */; };
+		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
+		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
+		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +44,7 @@
 /* Begin PBXFileReference section */
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
-		5F4B7BD428F6C3B600EFC1F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5F4B7BD428F6C3B600EFC1F5 /* LoginIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5F4B7BDF28F6C3BC00EFC1F5 /* ManageExpensesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManageExpensesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +52,14 @@
 		5F4B7BE928F6C3BC00EFC1F5 /* ManageExpensesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManageExpensesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BED28F6C3BC00EFC1F5 /* ManageExpensesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesUITests.swift; sourceTree = "<group>"; };
 		5F4B7BEF28F6C3BC00EFC1F5 /* ManageExpensesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroPageView.swift; sourceTree = "<group>"; };
+		5F4B7BFE28F6CE5D00EFC1F5 /* LoginIntroWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroWidgetView.swift; sourceTree = "<group>"; };
+		5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroModel.swift; sourceTree = "<group>"; };
+		5F4B7C0228F6D1CA00EFC1F5 /* PageControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControlView.swift; sourceTree = "<group>"; };
+		5F4B7C0428F6D27600EFC1F5 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsStyles.swift; sourceTree = "<group>"; };
+		5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWidgetView.swift; sourceTree = "<group>"; };
+		5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +110,17 @@
 		5F4B7BD128F6C3B600EFC1F5 /* ManageExpenses */ = {
 			isa = PBXGroup;
 			children = (
+				5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */,
 				5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */,
-				5F4B7BD428F6C3B600EFC1F5 /* ContentView.swift */,
+				5F4B7BD428F6C3B600EFC1F5 /* LoginIntroView.swift */,
+				5F4B7C0228F6D1CA00EFC1F5 /* PageControlView.swift */,
 				5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */,
 				5F4B7BD828F6C3BC00EFC1F5 /* Preview Content */,
+				5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */,
+				5F4B7BFE28F6CE5D00EFC1F5 /* LoginIntroWidgetView.swift */,
+				5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */,
+				5F4B7C0428F6D27600EFC1F5 /* CustomColor.swift */,
+				5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */,
 			);
 			path = ManageExpenses;
 			sourceTree = "<group>";
@@ -125,6 +148,15 @@
 				5F4B7BEF28F6C3BC00EFC1F5 /* ManageExpensesUITestsLaunchTests.swift */,
 			);
 			path = ManageExpensesUITests;
+			sourceTree = "<group>";
+		};
+		5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */ = {
+			isa = PBXGroup;
+			children = (
+				5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */,
+				5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */,
+			);
+			path = ButtonWidgetView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +289,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F4B7BD528F6C3B600EFC1F5 /* ContentView.swift in Sources */,
+				5F4B7C0128F6CE8400EFC1F5 /* LoginIntroModel.swift in Sources */,
+				5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */,
+				5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */,
+				5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */,
+				5F4B7BD528F6C3B600EFC1F5 /* LoginIntroView.swift in Sources */,
+				5F4B7BFF28F6CE5D00EFC1F5 /* LoginIntroWidgetView.swift in Sources */,
+				5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */,
+				5F4B7BFD28F6C56B00EFC1F5 /* LoginIntroPageView.swift in Sources */,
 				5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */,
+				5F4B7C0328F6D1CA00EFC1F5 /* PageControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
