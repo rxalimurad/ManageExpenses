@@ -19,13 +19,17 @@ struct LoginIntroView: View {
                     LoginIntroPage(id: "3", title: "Planning ahead", desc: "Setup your budget for each category so you in control", image: "planMoney"),
                     
                 ]))
-                Group {
-                    NavigationLink(destination: SignUpView()) {
-                        ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.disabled(true)
-                    }
-                    ButtonWidgetView(title: "Login", style: .secondaryButton) {}.disabled(true)
+                
+                NavigationLink(destination: SignUpView()) {
+                    ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.disabled(true)
+                        .padding([.trailing, .leading], 40)
                 }
-            }.navigationBarBackButtonHidden(true)
+                ButtonWidgetView(title: "Login", style: .secondaryButton) {}.disabled(true)
+                    .padding([.bottom], 20)
+                    .padding([.trailing, .leading], 40)
+            }.navigationBarTitle("")
+                .navigationBarHidden(true)
+            
         }
     }
 }
@@ -33,5 +37,9 @@ struct LoginIntroView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         LoginIntroView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+                        .previewDisplayName("iPhone 12")
+       
     }
 }
+

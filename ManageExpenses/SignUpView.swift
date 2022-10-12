@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State var emailAddress = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         NavigationView {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-//                .setNavigation() {
-//                    self.mode.wrappedValue.dismiss()
-//                }
+            VStack(spacing: 0) {
+                InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 20, minLength: 2, regex: Constants.regex.email), text: $emailAddress)
+                    .padding([.all], 30)
+                    
+                InputWidgetView(hint:"Password", properties: InputProperties(maxLength: 20, minLength: 2, regex: Constants.regex.email, isSecure: true), text: $emailAddress)
+                    .padding([.trailing, .leading, .bottom], 30)
+                ButtonWidgetView(title: "Sign Up", style: .primaryButton, action: {
+                    
+                })
+                    .padding([.trailing, .leading, .bottom], 30)
+                   
+                    
+                
+            }
+                
+    
+                
+        }.setNavigation(title: "Sign Up") {
+            mode.wrappedValue.dismiss()
         }
     }
 }
@@ -27,8 +43,8 @@ struct signUpView_Previews: PreviewProvider {
 }
 
 extension NavigationView {
-    func setNavigation(action: @escaping ()-> Void) {
-        self.navigationTitle("Sign Up")
+    func setNavigation(title: String, action: @escaping () -> Void) -> some View {
+        self.navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {

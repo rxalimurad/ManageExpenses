@@ -9,12 +9,12 @@ import SwiftUI
 
 struct LoginIntroPageView: View {
     var pageData: LoginIntroPage
-   
+    let imageSize = UIScreen.main.bounds.height * 0.3
     var body: some View {
         VStack {
             Image(pageData.image)
                 .resizable()
-                .frame(width: 312, height: 312)
+                .frame(width: imageSize, height: imageSize)
                 .padding([.bottom],40)
             Text(pageData.title)
                 .font(.system(size: 32, weight: .bold, design: .default))

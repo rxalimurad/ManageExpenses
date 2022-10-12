@@ -15,6 +15,8 @@ enum CustomColor {
     
     static let baseLight = Color("baseLight")
     static let baseLight_80 = Color("baseLight").opacity(80)
+    static let baseLight_60 = Color("baseLight_60")
+    static let baseLight_20 = Color("baseLight_20")
     
     
     
