@@ -15,9 +15,8 @@ struct PrimaryButton: ButtonStyle {
         HStack {
             configuration.label
         }
-        .font(.system(size: 18, weight:.medium))
+        .font(.system(size: 18, weight:.semibold))
         .foregroundColor(CustomColor.baseLight_80)
-        .padding()
         .background(CustomColor.primaryColor)
         .cornerRadius(16)
     }
@@ -29,14 +28,35 @@ struct SecondaryButton: ButtonStyle {
         HStack {
             configuration.label
         }
-        .font(.system(size: 18, weight:.medium))
+        .font(.system(size: 18, weight:.semibold))
         .foregroundColor(CustomColor.primaryColor)
-        .padding()
         .background(CustomColor.primaryColor.opacity(0.2))
         .cornerRadius(16)
     }
   
 }
+
+struct WhiteButton: ButtonStyle {
+   
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+        }
+        .font(.system(size: 18, weight:.semibold))
+        .foregroundColor(CustomColor.baseDark_50)
+        .background(CustomColor.baseLight)
+        .overlay( RoundedRectangle(cornerRadius: 16)
+                    .stroke(CustomColor.baseLight_60))
+        .cornerRadius(16)
+    }
+  
+}
+
+extension ButtonStyle where Self == WhiteButton {
+    static var whiteButton: WhiteButton { .init() }
+}
+
 extension ButtonStyle where Self == SecondaryButton {
     static var secondaryButton: SecondaryButton { .init() }
 }

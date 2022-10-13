@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ManageExpensesApp: App {
+
     var body: some Scene {
         WindowGroup {
-            LoginIntroView()
+            LoginIntroView(viewModel: LoginIntroViewModel())
         }
     }
 }

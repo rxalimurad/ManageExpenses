@@ -12,7 +12,7 @@ struct LoginIntroPageView: View {
     let imageSize = UIScreen.main.bounds.height * 0.3
     var body: some View {
         VStack {
-            Image(pageData.image)
+                pageData.image
                 .resizable()
                 .frame(width: imageSize, height: imageSize)
                 .padding([.bottom],40)
@@ -25,9 +25,6 @@ struct LoginIntroPageView: View {
                 .foregroundColor(Color(red: 0.569, green: 0.569, blue: 0.624))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20.0)
-            
-            
-            
         }
     }
 }
@@ -35,7 +32,7 @@ struct LoginIntroPageView: View {
 struct LoginIntroPageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LoginIntroPageView(pageData: LoginIntroPage(id: "1", title: "Gain total control of your money", desc: "Become your own money manager and make every cent count", image: "controlMoney"))
+            LoginIntroPageView(pageData: LoginIntroPage(id: "1", title: "Gain total control of your money", desc: "Become your own money manager and make every cent count", image: Image.Custom.knowMoney))
             
         }
     }

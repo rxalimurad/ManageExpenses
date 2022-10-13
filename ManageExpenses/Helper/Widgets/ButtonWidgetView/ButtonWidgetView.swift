@@ -10,18 +10,29 @@ import SwiftUI
 struct ButtonWidgetView<Style: ButtonStyle>: View {
     private var style: Style
     private var title: String
+    private var image: Image?
     private var action: () -> Void
     
-    init(title: String, style: Style, action: @escaping () -> Void) {
+    init(title: String, image: Image? = nil, style: Style, action: @escaping () -> Void) {
         self.title = title
         self.style = style
         self.action = action
+        self.image = image
     }
     
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .frame(maxWidth: .infinity)
+            HStack {
+                if let image = image {
+                    image
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                        .padding([.leading], 16)
+                }
+                Text(title)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 56)
+                
         }.buttonStyle(style)
             
         

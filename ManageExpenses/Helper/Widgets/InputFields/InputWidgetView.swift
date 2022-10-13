@@ -10,35 +10,60 @@ import Combine
 
 struct InputProperties {
     var maxLength: Int
-    var minLength: Int
+    var minLength: Int = 1
     var regex: String = ""
     var isSecure: Bool = false
 }
 struct InputWidgetView: View {
-    let hint: String
-    let properties: InputProperties
-    @State var isErrorShowing
-    = false
+    @State var isSecured = false
+    @State var isErrorShowing = false
     @State var errorMsg = ""
+    
+    let hint: String
+    var properties: InputProperties
     @Binding var text: String
+    
+    init(hint: String, properties: InputProperties, text: Binding<String>) {
+        isSecured = properties.isSecure
+        self.hint = hint
+        self.properties = properties
+        self._text = text
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
-            
-            TextField(hint, text: $text, onEditingChanged: { _ in
-                isErrorShowing = returnTrue()
-            }, onCommit: {
-                withAnimation {
-                    isErrorShowing = validate()
+            ZStack(alignment: .trailing) {
+                Group {
+                    if properties.isSecure && isSecured {
+                        SecureField(hint, text: $text) {
+                            isErrorShowing = !validate(isToValidate: true)
+                        }
+                    } else {
+                        TextField(hint, text: $text, onEditingChanged: { begin in
+                            withAnimation {
+                                isErrorShowing = !validate(isToValidate: !begin)
+                            }
+                        }
+                        )
+                    }
+                    
                 }
-            }).onChange(of: Just(text), perform: { _ in
+                if properties.isSecure {
+                    Button(action: {
+                        isSecured.toggle()
+                    }) {
+                        Image(systemName: self.isSecured ? "eye.slash" : "eye")
+                            .accentColor(.gray)
+                    }
+                }
+            }.onReceive(Just(text), perform: { _ in
                 DispatchQueue.main.async {
-                    isErrorShowing = returnTrue()
                     if text.count > properties.maxLength {
                         text = String(text.prefix(properties.maxLength))
                     }
                 }
             })
-
+            
             
                 .font(.system(size: 16))
                 .foregroundColor(CustomColor.baseLight_20)
@@ -48,7 +73,7 @@ struct InputWidgetView: View {
             
             Text(errorMsg)
                 .font(.system(size: 13))
-                .foregroundColor(.red).isHidden(isErrorShowing)
+                .foregroundColor(.red).isShowing(isErrorShowing)
                 .padding([.leading], 16)
         }
         
@@ -58,7 +83,10 @@ struct InputWidgetView: View {
     func returnTrue() -> Bool {
         return false
     }
-    func validate() -> Bool {
+    func validate(isToValidate: Bool) -> Bool {
+        if !isToValidate {
+            return true
+        }
         if text.isEmpty {
             errorMsg = "Please enter \(hint)"
             return false

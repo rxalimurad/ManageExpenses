@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension View {
-  @ViewBuilder func isHidden(_ hidden: Bool) -> some View {
-        if !hidden {
+  @ViewBuilder func isShowing(_ showing: Bool) -> some View {
+        if showing {
             self
         }
     }
