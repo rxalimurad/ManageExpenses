@@ -14,4 +14,14 @@ extension String {
         let regex = try! NSRegularExpression(pattern: regex)
         return regex.firstMatch(in: self, options: [], range: range) != nil
     }
+    
+    var digits: [Int] {
+        var result = [Int]()
+                for char in self {
+            if let number = Int(String(char)) {
+                result.append(number)
+            }
+        }
+        return result
+    }
 }

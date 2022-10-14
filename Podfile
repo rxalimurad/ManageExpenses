@@ -6,6 +6,8 @@ target 'ManageExpenses' do
   use_frameworks!
 
   # Pods for ManageExpenses
+	pod 'Introspect'
+
 
   target 'ManageExpensesTests' do
     inherit! :search_paths

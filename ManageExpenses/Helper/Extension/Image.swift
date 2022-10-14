@@ -14,6 +14,7 @@ extension Image {
         static let planMoney = Image("planMoney")
         static let knowMoney = Image("knowMoney")
         static let controlMoney = Image("controlMoney")
+        static let circleFill = Image(systemName: "circle.fill")
     }
     
 }

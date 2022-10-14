@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
     var viewModel: ViewModel
     
-    
     var body: some View {
         NavigationView {
             VStack {

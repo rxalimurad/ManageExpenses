@@ -139,7 +139,6 @@
 				FAA478E128F879BA00C06B31 /* Views */,
 				FAA478E428F87B8300C06B31 /* ViewModels */,
 				FAA478EB28F8811A00C06B31 /* Resource */,
-				FA37668628F71E0A0080AA2C /* Vendors */,
 				5F4B7BD828F6C3BC00EFC1F5 /* Preview Content */,
 			);
 			path = ManageExpenses;
@@ -177,13 +176,6 @@
 				5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */,
 			);
 			path = ButtonWidgetView;
-			sourceTree = "<group>";
-		};
-		FA37668628F71E0A0080AA2C /* Vendors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Vendors;
 			sourceTree = "<group>";
 		};
 		FAA478E128F879BA00C06B31 /* Views */ = {

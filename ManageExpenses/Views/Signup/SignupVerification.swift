@@ -13,7 +13,9 @@ struct SignupVerification: View {
     
     var body: some View {
         VStack {
-            PasscodeWidgetView()
+            Spacer()
+            PasscodeWidgetView(validPin: .constant("000000"))
+            Spacer()
         }.setNavigation(title: "Verifications") {
             mode.wrappedValue.dismiss()
         }

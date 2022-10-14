@@ -6,24 +6,19 @@
 //
 
 import SwiftUI
+import Introspect
 
-import SwiftUI
 public struct PasscodeWidgetView: View {
     
-    var maxDigits: Int = 8
-    var label = "Enter your Verification Code"
+    let maxDigits: Int = 6
     
     @State var pin: String = ""
     @State var isDisabled = false
-    
-    
-    var handler: ((String, (Bool) -> Void) -> Void)?
-    
+    @State var shake = false
+    @Binding var validPin: String
+    @State var color = CustomColor.baseLight_20
     public var body: some View {
-        VStack(spacing: 29) {
-            Text(label)
-                .font(.system(size: 38))
-                .foregroundColor(CustomColor.baseDark)
+        VStack(spacing: 5) {
             ZStack {
                 pinDots
                 backgroundField
@@ -33,14 +28,13 @@ public struct PasscodeWidgetView: View {
     }
     
     private var pinDots: some View {
-        HStack {
-            Spacer()
-            ForEach(0..<maxDigits) { index in
-                Image(systemName: self.getImageName(at: index))
-                    .font(.system(size: 20, weight: .thin, design: .default))
-                Spacer()
+        HStack(spacing: 10) {
+            ForEach(0 ..< maxDigits) { index in
+                self.getImageName(at: index)
+                    .frame(width: 20, height: 20)
             }
-        }
+            
+        } .transition(.slide)
     }
     
     private var backgroundField: some View {
@@ -50,11 +44,13 @@ public struct PasscodeWidgetView: View {
         })
         
         return TextField("", text: boundPin, onCommit: submitPin)
-        .accentColor(.clear)
-           .foregroundColor(.clear)
-//           .focused(.constant(true))
-           .keyboardType(.numberPad)
-           .disabled(isDisabled)
+            .accentColor(.clear)
+            .foregroundColor(.clear)
+            .keyboardType(.numberPad)
+            .introspectTextField { textField in
+                textField.becomeFirstResponder()
+            }
+            .disabled(isDisabled)
     }
     
     
@@ -65,29 +61,46 @@ public struct PasscodeWidgetView: View {
         
         if pin.count == maxDigits {
             isDisabled = true
-            
-            handler?(pin) { isSuccess in
-                if isSuccess {
-                    print("pin matched, go to next page, no action to perfrom here")
-                } else {
-                    pin = ""
-                    isDisabled = false
-                    print("this has to called after showing toast why is the failure")
-                }
-            }
+            validate()
+        } else {
+            color = CustomColor.baseLight_20
         }
-
+        
         if pin.count > maxDigits {
             pin = String(pin.prefix(maxDigits))
             submitPin()
         }
     }
     
-    private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
-            return "circle"
+    func validate() {
+        pin = ""
+        isDisabled = false
+        if pin != validPin {
+            color = .red
+            withAnimation {
+                shake.toggle()
+            }
+        } else {
+            color = .green
         }
-        return "circle.fill"
+        
+    }
+    
+    
+    
+    private func getImageName(at index: Int) -> AnyView {
+        if index >= self.pin.count {
+            return AnyView(
+                Image.Custom.circleFill
+                    .font(.system(size: 16, weight: .thin, design: .default))
+                    .foregroundColor(color)
+            )
+        }
+        
+        return AnyView(
+            Text("\(self.pin.digits[index])")
+                .font(.system(size: 32, weight: .bold, design: .default))
+        )
     }
 }
 
