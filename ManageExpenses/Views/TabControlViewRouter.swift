@@ -14,6 +14,6 @@ enum Page {
      case user
  }
 
-class HomeViewRouter: ObservableObject {
+class TabControlViewRouter: ObservableObject {
     @Published var currentPage: Page = .home
 }

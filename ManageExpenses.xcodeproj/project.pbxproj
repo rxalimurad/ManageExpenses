@@ -29,10 +29,11 @@
 		FA7F86A128F9F71E00108E3A /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A028F9F71E00108E3A /* ResetPasswordView.swift */; };
 		FA7F86A528FA69AF00108E3A /* SetupAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */; };
 		FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */; };
-		FA7F86AA28FAB3B900108E3A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A928FAB3B900108E3A /* HomeView.swift */; };
+		FA7F86AA28FAB3B900108E3A /* TabControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A928FAB3B900108E3A /* TabControlView.swift */; };
 		FA7F86AC28FAB5E600108E3A /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86AB28FAB5E600108E3A /* TabBarIcon.swift */; };
-		FA7F86AE28FAC3A100108E3A /* HomeViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86AD28FAC3A100108E3A /* HomeViewRouter.swift */; };
+		FA7F86AE28FAC3A100108E3A /* TabControlViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86AD28FAC3A100108E3A /* TabControlViewRouter.swift */; };
 		FA7F86B128FAC90100108E3A /* PlusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86B028FAC90100108E3A /* PlusMenu.swift */; };
+		FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FB34728FB08D800D0097D /* HomeView.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -98,10 +99,11 @@
 		FA7F86A028F9F71E00108E3A /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAccountView.swift; sourceTree = "<group>"; };
 		FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBankView.swift; sourceTree = "<group>"; };
-		FA7F86A928FAB3B900108E3A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FA7F86A928FAB3B900108E3A /* TabControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabControlView.swift; sourceTree = "<group>"; };
 		FA7F86AB28FAB5E600108E3A /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
-		FA7F86AD28FAC3A100108E3A /* HomeViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewRouter.swift; sourceTree = "<group>"; };
+		FA7F86AD28FAC3A100108E3A /* TabControlViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabControlViewRouter.swift; sourceTree = "<group>"; };
 		FA7F86B028FAC90100108E3A /* PlusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusMenu.swift; sourceTree = "<group>"; };
+		FA7FB34728FB08D800D0097D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -260,15 +262,23 @@
 			path = SetupAccount;
 			sourceTree = "<group>";
 		};
-		FA7F86A828FAAACB00108E3A /* Home */ = {
+		FA7F86A828FAAACB00108E3A /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FA7F86A928FAB3B900108E3A /* HomeView.swift */,
+				FA7F86A928FAB3B900108E3A /* TabControlView.swift */,
 				FA7F86AB28FAB5E600108E3A /* TabBarIcon.swift */,
-				FA7F86AD28FAC3A100108E3A /* HomeViewRouter.swift */,
+				FA7F86AD28FAC3A100108E3A /* TabControlViewRouter.swift */,
 				FA7F86B028FAC90100108E3A /* PlusMenu.swift */,
 			);
-			name = Home;
+			name = Base;
+			sourceTree = "<group>";
+		};
+		FA7FB34628FB08BE00D0097D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FA7FB34728FB08D800D0097D /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		FAA478E128F879BA00C06B31 /* Views */ = {
@@ -278,7 +288,8 @@
 				FAA478E928F880D300C06B31 /* Signup */,
 				FA7F869828F9ED3100108E3A /* Login */,
 				FA7F86A228FA695200108E3A /* SetupAccount */,
-				FA7F86A828FAAACB00108E3A /* Home */,
+				FA7F86A828FAAACB00108E3A /* Base */,
+				FA7FB34628FB08BE00D0097D /* Home */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -649,7 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA478F228F8AEF300C06B31 /* PasscodeWidgetView.swift in Sources */,
-				FA7F86AA28FAB3B900108E3A /* HomeView.swift in Sources */,
+				FA7F86AA28FAB3B900108E3A /* TabControlView.swift in Sources */,
 				5F4B7C0128F6CE8400EFC1F5 /* LoginIntroModel.swift in Sources */,
 				5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */,
 				5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */,
@@ -661,6 +672,7 @@
 				FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */,
 				FAB1E34628F746AA00667CF2 /* Constants.swift in Sources */,
 				FA7F86AC28FAB5E600108E3A /* TabBarIcon.swift in Sources */,
+				FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */,
 				FAB1E34128F743E500667CF2 /* Utilities.swift in Sources */,
 				FA7F86B128FAC90100108E3A /* PlusMenu.swift in Sources */,
 				FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */,
@@ -669,7 +681,7 @@
 				FA7F869728F9D43F00108E3A /* Shake.swift in Sources */,
 				FAB1E34828F7E8FF00667CF2 /* NavigationView.swift in Sources */,
 				FAB1E34A28F7EDC900667CF2 /* Image.swift in Sources */,
-				FA7F86AE28FAC3A100108E3A /* HomeViewRouter.swift in Sources */,
+				FA7F86AE28FAC3A100108E3A /* TabControlViewRouter.swift in Sources */,
 				FAB1E35028F7F81F00667CF2 /* WebView.swift in Sources */,
 				5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */,
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,

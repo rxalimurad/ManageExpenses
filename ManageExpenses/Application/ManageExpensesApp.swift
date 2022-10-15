@@ -18,7 +18,7 @@ struct ManageExpensesApp: App {
         WindowGroup {
             
 //            LoginIntroView(viewModel: LoginIntroViewModel())
-            HomeView(viewRouter: HomeViewRouter())
+            TabControlView(viewRouter: TabControlViewRouter())
 //            SignUpView()
         }
     }

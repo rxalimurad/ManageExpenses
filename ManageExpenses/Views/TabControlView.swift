@@ -1,0 +1,93 @@
+//
+//  HomeView.swift
+//  ManageExpenses
+//
+//  Created by murad on 15/10/2022.
+//
+
+import SwiftUI
+
+struct TabControlView: View {
+    @StateObject var viewRouter: TabControlViewRouter
+    @State var showPopUp = false
+    
+    var body: some View {
+        ZStack {
+            if showPopUp {
+                
+                LinearGradient(gradient: Gradient(colors:
+                                                    [CustomColor.primaryColor.opacity(0.0),
+                                                     CustomColor.primaryColor.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            GeometryReader { geometry in
+                VStack {
+                    Spacer()
+                    Group {
+                        switch viewRouter.currentPage {
+                        case .home:
+                            HomeView()
+                        case .liked:
+                            Text("Liked")
+                        case .records:
+                            Text("Records")
+                        case .user:
+                            Text("User")
+                        }
+                    }.allowsHitTesting(!showPopUp)
+                    Spacer()
+                    ZStack {
+                        HStack {
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.home, tabName: "Home").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .liked, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "liked").allowsHitTesting(!showPopUp)
+                            
+                            
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(CustomColor.primaryColor)
+                                    .frame(width: 56, height: 56)
+                                
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30 , height: 30)
+                                    .foregroundColor(CustomColor.baseLight)
+                                    .rotationEffect(Angle(degrees: showPopUp ? 45 : 0))
+                                
+                            }.onTapGesture {
+                                withAnimation {
+                                    showPopUp.toggle()
+                                }
+                            }
+                            .offset(y: -geometry.size.height/8/2)
+                            
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .records, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "Records").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "Account").allowsHitTesting(!showPopUp)
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height/8)
+                        .background(CustomColor.baseLight_80.opacity(0)).shadow(radius: 0)
+                    }.overlay(plusMenu(geometry: geometry), alignment: .center)
+                    
+                }
+                .edgesIgnoringSafeArea(.bottom)
+                
+            }
+        }
+    }
+    
+    @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
+        if showPopUp {
+            PlusMenu(widthAndHeight: geometry.size.width/7)
+                .offset(y: -geometry.size.height/6)
+                .isShowing(showPopUp)
+            
+        }
+    }
+}
+
+struct TabControlView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabControlView(viewRouter: TabControlViewRouter())
+    }
+}
