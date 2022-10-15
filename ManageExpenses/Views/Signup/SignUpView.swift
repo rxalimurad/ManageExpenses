@@ -73,15 +73,17 @@ struct SignUpView: View {
                 })
                     .padding([.trailing, .leading], 16)
                 
-                Group {
-                    Text("Already have an account? ")
-                        .foregroundColor(CustomColor.baseLight_20)
-                    +
-                    Text("Login")
-                        .foregroundColor(CustomColor.primaryColor)
-                }.font(.system(size: 16, weight: .medium))
-                    .padding([.top], 19)
-                    .padding([.top], 30)
+                NavigationLink(destination: LoginView()) {
+                    Group {
+                        Text("Already have an account? ")
+                            .foregroundColor(CustomColor.baseLight_20)
+                        +
+                        Text("Login")
+                            .foregroundColor(CustomColor.primaryColor)
+                    }.font(.system(size: 16, weight: .medium))
+                        .padding([.top], 19)
+                        .padding([.top], 30)
+                }
                 
                 Spacer()
                 

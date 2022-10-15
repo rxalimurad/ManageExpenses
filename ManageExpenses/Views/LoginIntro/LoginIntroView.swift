@@ -26,9 +26,11 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
                     ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.disabled(true)
                         .padding([.trailing, .leading], 16)
                 }
+                NavigationLink(destination: LoginView()) {
                 ButtonWidgetView(title: "Login", style: .secondaryButton) {}.disabled(true)
                     .padding([.bottom], 20)
                     .padding([.trailing, .leading], 16)
+                }
             }.navigationBarTitle("")
                 .navigationBarHidden(true)
             

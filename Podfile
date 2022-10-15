@@ -7,7 +7,7 @@ target 'ManageExpenses' do
 
   # Pods for ManageExpenses
 	pod 'Introspect'
-
+  pod 'lottie-ios'
 
   target 'ManageExpensesTests' do
     inherit! :search_paths

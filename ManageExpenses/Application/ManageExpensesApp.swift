@@ -17,8 +17,9 @@ struct ManageExpensesApp: App {
     var body: some Scene {
         WindowGroup {
             
-            LoginIntroView(viewModel: LoginIntroViewModel())
-//            SignupVerification()
+//            LoginIntroView(viewModel: LoginIntroViewModel())
+            HomeView(viewRouter: HomeViewRouter())
+//            SignUpView()
         }
     }
 }
