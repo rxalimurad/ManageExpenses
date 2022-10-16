@@ -23,11 +23,10 @@ struct TabControlView: View {
             
             GeometryReader { geometry in
                 VStack {
-                    Spacer()
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            HomeView()
+                            HomeView(safeAreaInsets: geometry.safeAreaInsets)
                         case .liked:
                             Text("Liked")
                         case .records:
@@ -70,7 +69,7 @@ struct TabControlView: View {
                     }.overlay(plusMenu(geometry: geometry), alignment: .center)
                     
                 }
-                .edgesIgnoringSafeArea(.bottom)
+                .edgesIgnoringSafeArea(.all)
                 
             }
         }
