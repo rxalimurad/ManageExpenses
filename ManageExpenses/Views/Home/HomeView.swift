@@ -13,11 +13,6 @@ struct HomeView: View {
     
     init(safeAreaInsets: EdgeInsets) {
         self.safeAreaInsets = safeAreaInsets
-        UISegmentedControl.appearance().selectedSegmentTintColor =  UIColor(CustomColor.bgYellow)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
-        UISegmentedControl.appearance().backgroundColor = .white
-
     }
     
     @State private var options = ["Day","Week","Month", "year"]
@@ -28,36 +23,41 @@ struct HomeView: View {
                 .background(LinearGradient(colors: [CustomColor.bgYellow, CustomColor.bgYellow.opacity(0.2)], startPoint: .top, endPoint: .bottom))
             
                 .cornerRadius(28, corners: [.bottomLeft, .bottomRight])
-            Text("Spend Frequency")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(CustomColor.baseDark)
-                .padding([.top], 13)
-                .padding([.leading], 16)
-                .frame(maxWidth: .infinity, alignment: .leading)
             
-            LineChart(chartData: data)
-                .pointMarkers(chartData: data)
-                .touchOverlay(chartData: data,
-                              formatter: numberFormatter)
-                .xAxisLabels(chartData: data)
-                .yAxisLabels(chartData: data,
-                             formatter: numberFormatter)
-            
-                .id(data.id)
-                .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 500, maxHeight: 600, alignment: .center)
-                .padding([.trailing], 16)
-                .padding([.top], 29)
-            
-            
-            Picker("Numbers", selection: $selectedIndex) {
-                ForEach(0 ..< options.count) { index in
-                    Text(self.options[index]).tag(index)
+            ScrollView {
+                VStack {
+                Text("Spend Frequency")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(CustomColor.baseDark)
+                    .padding([.top], 13)
+                    .padding([.leading], 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                LineChart(chartData: data)
+                    .pointMarkers(chartData: data)
+                    .touchOverlay(chartData: data,
+                                  formatter: numberFormatter)
+                    .xAxisLabels(chartData: data)
+                    .yAxisLabels(chartData: data,
+                                 formatter: numberFormatter)
+
+                    .id(data.id)
+                    .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 300, alignment: .center)
+                    .padding([.trailing], 16)
+                    .padding([.top], 29)
+                
+                Text("Weeks").foregroundColor(CustomColor.primaryColor).font(.caption)
+                    .padding([.horizontal], 5)
+                Picker("Numbers", selection: $selectedIndex) {
+                    ForEach(0 ..< options.count) { index in
+                        Text(self.options[index]).tag(index)
+                    }
                 }
-            }
-            .pickerStyle(SegmentedPickerStyle())
+                .pickerStyle(SegmentedPickerStyle())
+                }
+            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             
-            
-            Spacer()
+//            Spacer()
             
             
         }
@@ -186,8 +186,6 @@ struct HomeView: View {
             markerType: LineMarkerType.full(attachment: MarkerAttachment.point,
                                             colour: CustomColor.primaryColor),
             xAxisLabelColour: CustomColor.primaryColor,
-            xAxisTitle: "Weeks",
-            xAxisTitleColour: CustomColor.primaryColor,
             xAxisBorderColour: CustomColor.primaryColor,
             yAxisLabelPosition: .leading,
             yAxisLabelColour: CustomColor.primaryColor,
@@ -214,3 +212,4 @@ struct HomeView_Previews: PreviewProvider {
         HomeView(safeAreaInsets: EdgeInsets())
     }
 }
+

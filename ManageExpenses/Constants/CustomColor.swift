@@ -25,4 +25,7 @@ enum CustomColor {
     static let bgYellow = Color("yellowBg_100")
     static let bgYellow_0 = Color("yellowBg_0")
     
+    static let yellow = Color("yellowColor")
+    static let yellow_20 = Color("yellowColor_20")
+    
 }
