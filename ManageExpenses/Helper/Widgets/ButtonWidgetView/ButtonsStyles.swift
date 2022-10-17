@@ -52,6 +52,19 @@ struct WhiteButton: ButtonStyle {
     }
   
 }
+struct SecondaryButtonSmall: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+        }
+        .font(.system(size: 14, weight:.medium))
+        .foregroundColor(CustomColor.primaryColor)
+        .background(CustomColor.primaryColor.opacity(0.2))
+        .cornerRadius(16)
+    }
+  
+}
 
 extension ButtonStyle where Self == WhiteButton {
     static var whiteButton: WhiteButton { .init() }
@@ -59,6 +72,9 @@ extension ButtonStyle where Self == WhiteButton {
 
 extension ButtonStyle where Self == SecondaryButton {
     static var secondaryButton: SecondaryButton { .init() }
+}
+extension ButtonStyle where Self == SecondaryButtonSmall {
+    static var secondaryButtonSmall: SecondaryButtonSmall { .init() }
 }
 
 extension ButtonStyle where Self == PrimaryButton {

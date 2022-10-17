@@ -19,6 +19,7 @@ enum CustomColor {
     static let baseLight_20 = Color("baseLight_20")
     
     static let baseDark = Color("baseDark")
+    static let baseDark_25 = Color("baseDark_25")
     static let baseDark_50 = Color("baseDark_50")
     static let baseDark_75 = Color("baseDark_75")
     

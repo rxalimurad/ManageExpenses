@@ -165,6 +165,9 @@
 		FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58128FC1D7F0038E099 /* PieChart.swift */; };
 		FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58228FC1D7F0038E099 /* DoughnutChart.swift */; };
 		FA82B59128FC1D7F0038E099 /* PieChartEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */; };
+		FA82B59428FDD93E0038E099 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59328FDD93E0038E099 /* Date.swift */; };
+		FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59528FDDEB30038E099 /* TransactionModel.swift */; };
+		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -367,6 +370,9 @@
 		FA82B58128FC1D7F0038E099 /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		FA82B58228FC1D7F0038E099 /* DoughnutChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoughnutChart.swift; sourceTree = "<group>"; };
 		FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartEnums.swift; sourceTree = "<group>"; };
+		FA82B59328FDD93E0038E099 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		FA82B59528FDDEB30038E099 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -543,6 +549,8 @@
 			children = (
 				FA7FB34728FB08D800D0097D /* HomeView.swift */,
 				5F062CE028FD4AC600BB97D7 /* TransactionView.swift */,
+				FA82B59528FDDEB30038E099 /* TransactionModel.swift */,
+				FA82B59728FDDF980038E099 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1184,6 +1192,7 @@
 				FAB1E34728F7E8FF00667CF2 /* View.swift */,
 				FAB1E34928F7EDC900667CF2 /* Image.swift */,
 				FABF09C928FBDF3E0072EB16 /* Shape.swift */,
+				FA82B59328FDD93E0038E099 /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1585,6 +1594,7 @@
 				FA82B4B128FC0F240038E099 /* BarChartData.swift in Sources */,
 				FA82B4FF28FC0F260038E099 /* FloatingInfoBox.swift in Sources */,
 				FA82B4ED28FC0F250038E099 /* ExtraLineDataPoint.swift in Sources */,
+				FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */,
 				FA82B4D028FC0F240038E099 /* Extension+NSNotificationName.swift in Sources */,
 				FA82B4B428FC0F240038E099 /* BarChartDataPoint.swift in Sources */,
 				FA82B4B328FC0F240038E099 /* StackedBarDataPoint.swift in Sources */,
@@ -1599,6 +1609,7 @@
 				FA82B4A328FC0F240038E099 /* RoundedRectangleBarShape.swift in Sources */,
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,
 				FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */,
+				FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
 				FA82B52028FC0F270038E099 /* FilledTopLine.swift in Sources */,
 				FA82B4B928FC0F240038E099 /* Bars.swift in Sources */,
@@ -1614,6 +1625,7 @@
 				FA82B50628FC0F260038E099 /* LineShape.swift in Sources */,
 				FA7F86A128F9F71E00108E3A /* ResetPasswordView.swift in Sources */,
 				FA82B58D28FC1D7F0038E099 /* DoughnutChartData.swift in Sources */,
+				FA82B59428FDD93E0038E099 /* Date.swift in Sources */,
 				FA82B4F028FC0F250038E099 /* DataFunctionsProtocol.swift in Sources */,
 				FA82B4F428FC0F250038E099 /* HorizontalGridView.swift in Sources */,
 				FA82B4CB28FC0F240038E099 /* SharedProtocolsExtensions.swift in Sources */,

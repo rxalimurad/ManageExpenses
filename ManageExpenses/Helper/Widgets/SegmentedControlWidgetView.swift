@@ -24,7 +24,6 @@ struct SegmentedControlWidgetView: View {
                                 .font(.system(size: 14, weight: .bold))
                                 .padding(.vertical, 8.0)
                                 .foregroundColor(index == selectedIndex ? CustomColor.yellow : CustomColor.baseLight_20)
-                                .animation(.easeIn)
                                 .frame(maxWidth: .infinity)
                                 .matchedGeometryEffect(
                                     id: index,

@@ -16,7 +16,7 @@ struct WebView: UIViewRepresentable {
     
     
     func makeUIView(context: Context) -> WKWebView {
-        let html = Utilities.getHtml(for: type) ?? ""
+        let html = type.getHtml() ?? ""
         let webView = WKWebView(frame: .zero)
         webView.loadHTMLString(html, baseURL: nil)
         return webView

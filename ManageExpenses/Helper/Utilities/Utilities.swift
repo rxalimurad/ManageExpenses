@@ -7,14 +7,20 @@
 
 import Foundation
 
-class Utilities {
+enum Utilities {
     
-    static func getHtml(for htmlType: HTMLType) -> String? {
-       let fileName = htmlType.rawValue
-        if let filepath = Bundle.main.path(forResource: fileName, ofType: nil) {
-            return try? String(contentsOfFile: filepath)
-        }
-        return nil
+    static func getFormattedAmount(_ sym: String, amount: Double) -> String {
+        let FAmount = getAmountWith(amount: amount)
+        let neg = (amount < 0) ? "-" : ""
+        return neg + sym + FAmount
+    }
+    
+    private static func getAmountWith(amount: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.usesGroupingSeparator = true
+        numberFormatter.groupingSize = 3
+        return numberFormatter.string(for: abs(amount)) ?? ""
     }
     
     

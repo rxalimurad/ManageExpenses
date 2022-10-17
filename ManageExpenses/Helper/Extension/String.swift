@@ -24,4 +24,12 @@ extension String {
         }
         return result
     }
+    
+    func toDate() -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.format.date + " " + Constants.format.time
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter.date(from: self) ?? Date()
+    }
+ 
 }

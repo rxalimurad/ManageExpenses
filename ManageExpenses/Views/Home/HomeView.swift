@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var viewModel = HomeViewModel()
+    
     var safeAreaInsets: EdgeInsets
     var data = getChartData()
-    
-    init(safeAreaInsets: EdgeInsets) {
-        self.safeAreaInsets = safeAreaInsets
-    }
-    
-    @State private var options = ["Day","Week","Month", "year"]
+    @State private var isGraphShowing = true
+    @State private var isRecentTransactionShowing = false
+    @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
     var body: some View {
         VStack(alignment: .center) {
@@ -25,14 +24,14 @@ struct HomeView: View {
             
             ScrollView {
                 VStack {
-                    Text("").frame(height: 15)
+                    Text("").frame(height: 10)
                     Text("Spending Frequency")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(CustomColor.baseDark)
                         .padding([.top], 0)
                         .padding([.leading], 16)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                        .isShowing(isGraphShowing)
                     LineChart(chartData: data)
                         .pointMarkers(chartData: data)
                         .touchOverlay(chartData: data,
@@ -44,52 +43,55 @@ struct HomeView: View {
                         .id(data.id)
                         .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
                         .padding([.trailing], 16)
-                        .padding([.top], 10)
+                        .padding([.top], 15)
+                        .isShowing(isGraphShowing)
                     
                     Text("Weeks").foregroundColor(CustomColor.primaryColor).font(.caption)
                         .padding([.horizontal], 5)
+                        .isShowing(isGraphShowing)
                     
-                    SegmentedControlWidgetView(
-                        items: options,
-                        selectedIndex: $selectedIndex
-                    ).padding([.horizontal], 10)
+                    VStack {
+                        SegmentedControlWidgetView(
+                            items: options,
+                            selectedIndex: $selectedIndex
+                        ).padding([.horizontal], 10)
+                        
+                        HStack {
+                            Text("Recent Transaction")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(CustomColor.baseDark)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
+                            ButtonWidgetView(title: "View All", style: .secondaryButtonSmall) {
+                            }.frame(width: 78, height: 32)
+                        }
+                        .padding([.top, .leading, .trailing], 16)
+                        ForEach(viewModel.recentTransactionsKeys, id: \.self) { headerTransDate in
+                            Text(headerTransDate)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(CustomColor.baseDark)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.horizontal], 19)
+                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+                                TransactionView(transaction: transaction)
+                            }
+                        }
+                    }.isShowing(isRecentTransactionShowing)
+                        .transition(.move(edge: .bottom))
+
+
                     
-                    Text("Spending Frequency")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(CustomColor.baseDark)
-                        .padding([.top], 0)
-                        .padding([.leading], 16)
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    
-                    Text("Spending Frequency")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(CustomColor.baseDark)
-                        .padding([.top], 0)
-                        .padding([.leading], 16)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    Text("Spending Frequency")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(CustomColor.baseDark)
-                        .padding([.top], 0)
-                        .padding([.leading], 16)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    Text("Spending Frequency")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(CustomColor.baseDark)
-                        .padding([.top], 0)
-                        .padding([.leading], 16)
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                 }
                 
-            }.frame(maxWidth: .infinity, maxHeight: 1000, alignment: .center)
-            
-            
+            }
+
+        }.onAppear(){
+            withAnimation(.linear(duration: 1.0)) {
+                isRecentTransactionShowing.toggle()
+                }
+           
             
         }
         
@@ -116,31 +118,21 @@ struct HomeView: View {
                 .padding([.leading], 16)
                 
                 Spacer()
-                
-                HStack(alignment: .center) {
-                    Image.Custom.downArrow
-                        .padding([.leading ], 13)
-                    Text("This Month")
+                VStack {
+                    Text("Account Balance")
                         .font(.system(size: 14, weight: .medium))
-                        .padding([.top,.bottom], 11)
-                        .padding([.trailing], 16)
+                        .foregroundColor(CustomColor.baseLight_20)
+                    Text("$9,400")
+                        .font(.system(size: 40, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark_75)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 40, style: .circular)
-                    .stroke(CustomColor.baseLight_60, lineWidth: 1)
-                )
-                
                 Spacer()
                 Image.Custom.bell
                     .padding([.trailing], 21)
             }.padding([.top, .bottom], 12)
                 .padding([.top], safeAreaInsets.top)
             
-            Text("Account Balance")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(CustomColor.baseLight_20)
-            Text("$9,400")
-                .font(.system(size: 40, weight: .semibold))
-                .foregroundColor(CustomColor.baseDark_75)
+          
             
             HStack(spacing: 16) {
                 totalIncomeView
@@ -221,16 +213,7 @@ struct HomeView: View {
             yAxisLabelType: .numeric,
             yAxisTitle: "",
             yAxisTitleColour: .black)
-        
-        
-        
-        
-        let chartData = LineChartData(dataSets       : data,
-                                      chartStyle     : chartStyle)
-        
-        
-        
-        return chartData
+        return LineChartData(dataSets: data, chartStyle: chartStyle)
         
     }
 }
