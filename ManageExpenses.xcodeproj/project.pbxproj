@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		56C715AFE7A6A7DC42F75DDA /* Pods_ManageExpenses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639BE43C136F8B1BC6CF5701 /* Pods_ManageExpenses.framework */; };
+		5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */; };
+		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -201,6 +203,8 @@
 		04FB04FF2C1F2E83C13AF92F /* Pods_ManageExpensesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpensesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3730BF7754F8E125C8BD00EB /* Pods-ManageExpenses.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses.release.xcconfig"; path = "Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses.release.xcconfig"; sourceTree = "<group>"; };
 		3E2170CF1E12497C91FCAEE3 /* Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig"; path = "Target Support Files/Pods-ManageExpenses-ManageExpensesUITests/Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlWidgetView.swift; sourceTree = "<group>"; };
+		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -538,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				FA7FB34728FB08D800D0097D /* HomeView.swift */,
+				5F062CE028FD4AC600BB97D7 /* TransactionView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1198,6 +1203,7 @@
 			children = (
 				FAB1E33A28F7358C00667CF2 /* InputFields */,
 				5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */,
+				5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1566,9 +1572,11 @@
 				FA82B4EF28FC0F250038E099 /* ChartViewData.swift in Sources */,
 				FA82B50C28FC0F260038E099 /* LineStyle.swift in Sources */,
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
+				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
 				FA82B4D528FC0F250038E099 /* Legends.swift in Sources */,
 				FA82B4C228FC0F240038E099 /* TouchOverlayMarker.swift in Sources */,
 				FA82B4BA28FC0F240038E099 /* BarChartSubViews.swift in Sources */,
+				5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */,
 				FA82B51A28FC0F270038E099 /* PosistionIndicator.swift in Sources */,
 				FA82B4B728FC0F240038E099 /* GroupedBarChart.swift in Sources */,
 				FA82B50B28FC0F260038E099 /* LineDataSet.swift in Sources */,

@@ -21,49 +21,78 @@ struct HomeView: View {
         VStack(alignment: .center) {
             summaryView
                 .background(LinearGradient(colors: [CustomColor.bgYellow, CustomColor.bgYellow.opacity(0.2)], startPoint: .top, endPoint: .bottom))
-            
                 .cornerRadius(28, corners: [.bottomLeft, .bottomRight])
             
             ScrollView {
                 VStack {
-                Text("Spend Frequency")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(CustomColor.baseDark)
-                    .padding([.top], 13)
-                    .padding([.leading], 16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                LineChart(chartData: data)
-                    .pointMarkers(chartData: data)
-                    .touchOverlay(chartData: data,
-                                  formatter: numberFormatter)
-                    .xAxisLabels(chartData: data)
-                    .yAxisLabels(chartData: data,
-                                 formatter: numberFormatter)
-
-                    .id(data.id)
-                    .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 300, alignment: .center)
-                    .padding([.trailing], 16)
-                    .padding([.top], 29)
+                    Text("").frame(height: 15)
+                    Text("Spending Frequency")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark)
+                        .padding([.top], 0)
+                        .padding([.leading], 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    LineChart(chartData: data)
+                        .pointMarkers(chartData: data)
+                        .touchOverlay(chartData: data,
+                                      formatter: numberFormatter)
+                        .xAxisLabels(chartData: data)
+                        .yAxisLabels(chartData: data,
+                                     formatter: numberFormatter)
+                    
+                        .id(data.id)
+                        .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
+                        .padding([.trailing], 16)
+                        .padding([.top], 10)
+                    
+                    Text("Weeks").foregroundColor(CustomColor.primaryColor).font(.caption)
+                        .padding([.horizontal], 5)
+                    
+                    SegmentedControlWidgetView(
+                        items: options,
+                        selectedIndex: $selectedIndex
+                    ).padding([.horizontal], 10)
+                    
+                    Text("Spending Frequency")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark)
+                        .padding([.top], 0)
+                        .padding([.leading], 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    Text("Spending Frequency")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark)
+                        .padding([.top], 0)
+                        .padding([.leading], 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    Text("Spending Frequency")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark)
+                        .padding([.top], 0)
+                        .padding([.leading], 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    Text("Spending Frequency")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(CustomColor.baseDark)
+                        .padding([.top], 0)
+                        .padding([.leading], 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
                 
-                Text("Weeks").foregroundColor(CustomColor.primaryColor).font(.caption)
-                    .padding([.horizontal], 5)
-                Picker("Numbers", selection: $selectedIndex) {
-                    ForEach(0 ..< options.count) { index in
-                        Text(self.options[index]).tag(index)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                }
-            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }.frame(maxWidth: .infinity, maxHeight: 1000, alignment: .center)
             
-//            Spacer()
             
             
         }
-        ScrollView {
-            
-        }
+        
         
     }
     
@@ -97,7 +126,7 @@ struct HomeView: View {
                         .padding([.trailing], 16)
                 }
                 .overlay(RoundedRectangle(cornerRadius: 40, style: .circular)
-                            .stroke(CustomColor.baseLight_60, lineWidth: 1)
+                    .stroke(CustomColor.baseLight_60, lineWidth: 1)
                 )
                 
                 Spacer()
@@ -122,7 +151,6 @@ struct HomeView: View {
                     .frame(height: 80)
             }
             .padding([.leading, .trailing], 16)
-            .padding([.bottom], 23)
             
             
         }.cornerRadius(15)
@@ -173,13 +201,13 @@ struct HomeView: View {
         let data = LineDataSet(
             dataPoints: [
                 LineChartDataPoint(value: 500, xAxisLabel: "1", description: "Monday"),
-                LineChartDataPoint(value: 10, xAxisLabel: "2", description: "Tuesday"),
-                LineChartDataPoint(value: 2 , xAxisLabel: "3", description: "Wednesday"),
-                LineChartDataPoint(value: 10, xAxisLabel: "4", description: "Thursday"),
+                LineChartDataPoint(value: 1000, xAxisLabel: "2", description: "Tuesday"),
+                LineChartDataPoint(value: 700 , xAxisLabel: "3", description: "Wednesday"),
+                LineChartDataPoint(value: 800, xAxisLabel: "4", description: "Thursday"),
                 
             ],
-            pointStyle: PointStyle(pointSize: 8, borderColour:.yellow, fillColour: .green, lineWidth: 6, pointType: .filled, pointShape: .circle),
-            style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine))
+            pointStyle: PointStyle(pointSize: 12, borderColour:.yellow, fillColour: .red, lineWidth: 10, pointType: .filled, pointShape: .circle),
+            style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine, strokeStyle: Stroke(lineWidth: 8)))
         
         
         let chartStyle = LineChartStyle(

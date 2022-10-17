@@ -10,3 +10,12 @@ import Foundation
 enum HTMLType: String {
     case terms = "termAndCondition.html"
 }
+
+enum TransactionType: String {
+    case shopping
+    case subscription
+    case salary
+    case transport
+    case food
+}
+

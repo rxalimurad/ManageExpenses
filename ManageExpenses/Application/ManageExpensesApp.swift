@@ -16,9 +16,9 @@ struct ManageExpensesApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            
+            TransactionView(transType: .food, transName: "Food", transDesc: "Buy a burger")
 //            LoginIntroView(viewModel: LoginIntroViewModel())
-            TabControlView(viewRouter: TabControlViewRouter())
+            //TabControlView(viewRouter: TabControlViewRouter())
 //            SignUpView()
         }
     }
