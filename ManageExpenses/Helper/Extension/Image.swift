@@ -19,8 +19,10 @@ extension Image {
         static let home = Image("home")
         static let bell = Image("bell")
         static let downArrow = Image("downArrow")
+        static let transaction = Image("transaction")
         static let inflow = Image("inflow")
         static let outflow = Image("outflow")
+        static let filter = Image("filter")
  
     }
     

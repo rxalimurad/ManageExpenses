@@ -22,6 +22,8 @@
 		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
 		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
+		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
+		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		7BD363534F71BB687E4280C4 /* Pods_ManageExpenses_ManageExpensesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6375A11B988E95AEB77642F2 /* Pods_ManageExpenses_ManageExpensesUITests.framework */; };
 		BBB12C67A94BC6A470AAD6BD /* Pods_ManageExpensesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB04FF2C1F2E83C13AF92F /* Pods_ManageExpensesTests.framework */; };
 		FA7F869728F9D43F00108E3A /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869628F9D43F00108E3A /* Shake.swift */; };
@@ -223,6 +225,8 @@
 		5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsStyles.swift; sourceTree = "<group>"; };
 		5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWidgetView.swift; sourceTree = "<group>"; };
 		5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
+		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		6375A11B988E95AEB77642F2 /* Pods_ManageExpenses_ManageExpensesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpenses_ManageExpensesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		639BE43C136F8B1BC6CF5701 /* Pods_ManageExpenses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpenses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF5681D1C21E4308D9CE077 /* Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig"; path = "Target Support Files/Pods-ManageExpenses-ManageExpensesUITests/Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -501,6 +505,15 @@
 				5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */,
 			);
 			path = ButtonWidgetView;
+			sourceTree = "<group>";
+		};
+		5FB6ECA728FEA6AD00D74B68 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
+				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
+			);
+			path = Transactions;
 			sourceTree = "<group>";
 		};
 		D63DEAD8EBD50458B5BB1BF1 /* Frameworks */ = {
@@ -1100,6 +1113,7 @@
 				FA7F86A228FA695200108E3A /* SetupAccount */,
 				FA7F86A828FAAACB00108E3A /* Base */,
 				FA7FB34628FB08BE00D0097D /* Home */,
+				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1561,6 +1575,7 @@
 				FAB1E34A28F7EDC900667CF2 /* Image.swift in Sources */,
 				FA82B50728FC0F260038E099 /* PointShape.swift in Sources */,
 				FA7F86AE28FAC3A100108E3A /* TabControlViewRouter.swift in Sources */,
+				5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */,
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
 				FA82B4B528FC0F240038E099 /* GroupedBarDataPoint.swift in Sources */,
@@ -1614,6 +1629,7 @@
 				FA82B52028FC0F270038E099 /* FilledTopLine.swift in Sources */,
 				FA82B4B928FC0F240038E099 /* Bars.swift in Sources */,
 				FA82B4E428FC0F250038E099 /* LinearTrendLineShape.swift in Sources */,
+				5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */,
 				FA82B4A928FC0F240038E099 /* BarChartStyle.swift in Sources */,
 				FA82B3AD28FC01EC0038E099 /* PieSliceView.swift in Sources */,
 				FA82B4FD28FC0F260038E099 /* YAxisLabels.swift in Sources */,

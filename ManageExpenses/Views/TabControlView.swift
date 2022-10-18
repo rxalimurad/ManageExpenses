@@ -27,8 +27,8 @@ struct TabControlView: View {
                         switch viewRouter.currentPage {
                         case .home:
                             HomeView(safeAreaInsets: geometry.safeAreaInsets)
-                        case .liked:
-                            Text("Liked")
+                        case .tranactions:
+                            TransactionTabView(safeAreaInsets: geometry.safeAreaInsets)
                         case .records:
                             Text("Records")
                         case .user:
@@ -39,7 +39,7 @@ struct TabControlView: View {
                     ZStack {
                         HStack {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.home, tabName: "Home").allowsHitTesting(!showPopUp)
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .liked, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "liked").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .tranactions, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.transaction, tabName: "Transactions").allowsHitTesting(!showPopUp)
                             
                             
                             ZStack {

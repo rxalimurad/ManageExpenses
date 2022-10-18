@@ -79,11 +79,7 @@ struct HomeView: View {
                     }.isShowing(isRecentTransactionShowing)
                         .transition(.move(edge: .bottom))
 
-
-                    
-                    
-                    
-                }
+}
                 
             }
 

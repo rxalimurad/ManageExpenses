@@ -9,7 +9,7 @@ import SwiftUI
 
 enum Page {
      case home
-     case liked
+     case tranactions
      case records
      case user
  }
