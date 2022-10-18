@@ -6,7 +6,6 @@ target 'ManageExpenses' do
   use_frameworks!
 
   # Pods for ManageExpenses
-	pod 'Introspect'
   pod 'lottie-ios'
 
   target 'ManageExpensesTests' do

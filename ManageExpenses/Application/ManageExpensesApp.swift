@@ -17,8 +17,9 @@ struct ManageExpensesApp: App {
     var body: some Scene {
         WindowGroup {
 //            LoginIntroView(viewModel: LoginIntroViewModel())
-            TabControlView(viewRouter: TabControlViewRouter())
+//            TabControlView(viewRouter: TabControlViewRouter())
 //            SignUpView()
+            AmountInputWidget()
         }
     }
 }
