@@ -11,6 +11,10 @@ struct TabControlView: View {
     @StateObject var viewRouter: TabControlViewRouter
     @State var showPopUp = false
     
+    @State var showIncome = false
+    @State var showExpense = false
+    @State var showConvert = false
+    
     var body: some View {
         ZStack {
             if showPopUp {
@@ -18,7 +22,7 @@ struct TabControlView: View {
                 LinearGradient(gradient: Gradient(colors:
                                                     [CustomColor.primaryColor.opacity(0.0),
                                                      CustomColor.primaryColor.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             }
             
             GeometryReader { geometry in
@@ -72,14 +76,28 @@ struct TabControlView: View {
                 .edgesIgnoringSafeArea(.all)
                 
             }
+        }.sheet(isPresented: $showIncome) {
+            AddExpenseIncomeView()
         }
     }
     
     @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
         if showPopUp {
-            PlusMenu(widthAndHeight: geometry.size.width/7)
-                .offset(y: -geometry.size.height/6)
-                .isShowing(showPopUp)
+            PlusMenu(widthAndHeight: geometry.size.width/7) {action in
+                switch action {
+                case .income:
+                    showIncome.toggle()
+                    showPopUp.toggle()
+                case .expense:
+                    showExpense.toggle()
+                    showPopUp.toggle()
+                case .convert:
+                    showConvert.toggle()
+                    showPopUp.toggle()
+                }
+            }
+            .offset(y: -geometry.size.height/6)
+            .isShowing(showPopUp)
             
         }
     }

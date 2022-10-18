@@ -24,6 +24,7 @@
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
+		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
 		7BD363534F71BB687E4280C4 /* Pods_ManageExpenses_ManageExpensesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6375A11B988E95AEB77642F2 /* Pods_ManageExpenses_ManageExpensesUITests.framework */; };
 		BBB12C67A94BC6A470AAD6BD /* Pods_ManageExpensesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB04FF2C1F2E83C13AF92F /* Pods_ManageExpensesTests.framework */; };
 		FA7F869728F9D43F00108E3A /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869628F9D43F00108E3A /* Shake.swift */; };
@@ -227,6 +228,7 @@
 		5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
+		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
 		6375A11B988E95AEB77642F2 /* Pods_ManageExpenses_ManageExpensesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpenses_ManageExpensesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		639BE43C136F8B1BC6CF5701 /* Pods_ManageExpenses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpenses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF5681D1C21E4308D9CE077 /* Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig"; path = "Target Support Files/Pods-ManageExpenses-ManageExpensesUITests/Pods-ManageExpenses-ManageExpensesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 			children = (
 				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
 				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
+				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -1532,6 +1535,7 @@
 				FA82B4D628FC0F250038E099 /* disableAnimation.swift in Sources */,
 				FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */,
 				FAB1E34628F746AA00667CF2 /* Constants.swift in Sources */,
+				5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */,
 				FA7F86AC28FAB5E600108E3A /* TabBarIcon.swift in Sources */,
 				FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */,
 				FAB1E34128F743E500667CF2 /* Utilities.swift in Sources */,

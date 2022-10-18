@@ -84,9 +84,9 @@ struct HomeView: View {
             }
 
         }.onAppear(){
-            withAnimation(.linear(duration: 1.0)) {
+//            withAnimation(.linear(duration: 1.0)) {
                 isRecentTransactionShowing.toggle()
-                }
+//                }
            
             
         }
