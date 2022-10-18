@@ -19,10 +19,14 @@ struct AmountInputWidget: View {
                 .toolbar {
 
                     ToolbarItem(placement: .keyboard) {
-                       Button("Done") {
-                            keyboardShowing = false
-                       }.foregroundColor(CustomColor.primaryColor)
-                            .font(.system(size: 13, weight: .semibold))
+                        HStack {
+                            Spacer()
+                            Button("Done") {
+                                 keyboardShowing = false
+                            }.foregroundColor(CustomColor.primaryColor)
+                                 .font(.system(size: 13, weight: .semibold))
+                        }
+                      
                     }
                 }
                 .placeholder(when: amount.isEmpty, placeholder: {
