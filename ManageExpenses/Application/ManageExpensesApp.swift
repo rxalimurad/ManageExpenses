@@ -19,7 +19,7 @@ struct ManageExpensesApp: App {
 //            LoginIntroView(viewModel: LoginIntroViewModel())
 //            TabControlView(viewRouter: TabControlViewRouter())
 //            SignUpView()
-            AmountInputWidget()
+            AddExpenseIncomeView(newEntryType: .income)
         }
     }
 }

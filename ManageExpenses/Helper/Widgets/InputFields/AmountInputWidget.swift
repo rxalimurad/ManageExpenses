@@ -17,17 +17,18 @@ struct AmountInputWidget: View {
             TextField("", text: $amount)
                 .focused($keyboardShowing)
                 .toolbar {
+
                     ToolbarItem(placement: .keyboard) {
-                        Spacer()
-                        Button("Done") {
+                       Button("Done") {
                             keyboardShowing = false
-                        }
+                       }.foregroundColor(CustomColor.primaryColor)
+                            .font(.system(size: 13, weight: .semibold))
                     }
                 }
                 .placeholder(when: amount.isEmpty, placeholder: {
                     Text("0")
                 })
-            //                .keyboardType(.decimalPad)
+                .keyboardType(.decimalPad)
                 .onChange(of: amount) { _ in
                     let filtered = amount.filter {"0123456789.".contains($0)}
                     if filtered.contains(".") {
