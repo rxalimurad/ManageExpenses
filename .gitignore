@@ -1,0 +1,6 @@
+
+*.xcuserstate
+*.xcbkptlist
+*.xcworkspacedata
+ManageExpenses.xcodeproj/xcuserdata/murad.xcuserdatad/xcschemes/xcschememanagement.plist
+ManageExpenses.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
