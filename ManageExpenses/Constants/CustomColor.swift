@@ -28,5 +28,8 @@ enum CustomColor {
     
     static let yellow = Color("yellowColor")
     static let yellow_20 = Color("yellowColor_20")
+    static let red = Color("redColor")
+    static let green = Color("greenColor")
+    static let blue = Color("blueColor")
     
 }

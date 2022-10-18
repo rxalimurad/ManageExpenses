@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     @Published var recentTransactionsKeys = [String]()
     var recentTransactionsDict = [String: [TransactionModel]]()
     init() {
-        var recentTransactions = [
+        let recentTransactions = [
             TransactionModel(type: .food, name: "Food", desc: "JalalSons", amount: 499.003, currencySymbol: "$", date: "Sep 03 2022 09:30 pm".toDate()),
             TransactionModel(type: .food, name: "Food", desc: "JalalSons", amount: 499.003, currencySymbol: "$", date: "Jan 03 2022 09:30 pm".toDate()),
             TransactionModel(type: .food, name: "Food", desc: "JalalSons", amount: 499.003, currencySymbol: "$", date: "Jan 03 2022 09:30 pm".toDate()),

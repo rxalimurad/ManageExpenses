@@ -10,10 +10,8 @@ import SwiftUI
 struct TabControlView: View {
     @StateObject var viewRouter: TabControlViewRouter
     @State var showPopUp = false
-    
-    @State var showIncome = false
-    @State var showExpense = false
-    @State var showConvert = false
+    @State var showNewEntryScreen = false
+    @State var newEntryType: PlusMenuAction?
     
     var body: some View {
         ZStack {
@@ -22,7 +20,7 @@ struct TabControlView: View {
                 LinearGradient(gradient: Gradient(colors:
                                                     [CustomColor.primaryColor.opacity(0.0),
                                                      CustomColor.primaryColor.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
+                    .edgesIgnoringSafeArea(.all)
             }
             
             GeometryReader { geometry in
@@ -51,7 +49,7 @@ struct TabControlView: View {
                                     .foregroundColor(CustomColor.primaryColor)
                                     .frame(width: 56, height: 56)
                                 
-                                Image(systemName: "plus")
+                                Image.Custom.plus
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30 , height: 30)
@@ -65,8 +63,8 @@ struct TabControlView: View {
                             }
                             .offset(y: -geometry.size.height/8/2)
                             
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .records, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "Records").allowsHitTesting(!showPopUp)
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.google, tabName: "Account").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .records, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.budget, tabName: "Budget").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.user, tabName: "Profile").allowsHitTesting(!showPopUp)
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/8)
                         .background(CustomColor.baseLight_80.opacity(0)).shadow(radius: 0)
@@ -76,25 +74,22 @@ struct TabControlView: View {
                 .edgesIgnoringSafeArea(.all)
                 
             }
-        }.sheet(isPresented: $showIncome) {
-            AddExpenseIncomeView()
+        }.fullScreenCover(isPresented: $showNewEntryScreen) {
+            
+        } content: {
+            if let newEntryType = newEntryType {
+                AddExpenseIncomeView(newEntryType: newEntryType)
+            }
         }
+        
     }
     
     @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
         if showPopUp {
-            PlusMenu(widthAndHeight: geometry.size.width/7) {action in
-                switch action {
-                case .income:
-                    showIncome.toggle()
-                    showPopUp.toggle()
-                case .expense:
-                    showExpense.toggle()
-                    showPopUp.toggle()
-                case .convert:
-                    showConvert.toggle()
-                    showPopUp.toggle()
-                }
+            PlusMenu() {action in
+                self.newEntryType = action
+                showNewEntryScreen.toggle()
+                showPopUp.toggle()
             }
             .offset(y: -geometry.size.height/6)
             .isShowing(showPopUp)

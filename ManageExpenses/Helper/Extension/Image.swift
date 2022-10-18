@@ -23,6 +23,14 @@ extension Image {
         static let inflow = Image("inflow")
         static let outflow = Image("outflow")
         static let filter = Image("filter")
+        static let navBack = Image("navBack")
+        static let budget = Image("budget")
+        static let user = Image("user")
+        static let plus = Image(systemName: "plus")
+        static let incomeBtn = Image("incomeBtn")
+        static let expenseBtn = Image("expenseBtn")
+        static let transferBtn = Image("transferBtn")
+        
  
     }
     

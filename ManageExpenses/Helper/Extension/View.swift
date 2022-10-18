@@ -17,7 +17,9 @@ extension View {
                     Button {
                         action()
                     } label: {
-                        Image(systemName: "arrow.backward").foregroundColor(titleColor)
+                        Image.Custom.navBack
+                            .renderingMode(.template)
+                            .foregroundColor(titleColor)
                     }
                     
                 }

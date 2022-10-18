@@ -9,25 +9,66 @@ import SwiftUI
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
+    
+    @State var amount = ""
+    var newEntryType: PlusMenuAction
     var body: some View {
         ZStack {
-            CustomColor.primaryColor.edgesIgnoringSafeArea(.all)
-        VStack {
-         Spacer()
-            
-            
-        }
-       
-        }
-        .setNavigation(title: "Add new account", titleColor: CustomColor.baseLight) {
-                mode.wrappedValue.dismiss()
+            getBgColor(type: newEntryType).edgesIgnoringSafeArea(.all)
+            VStack {
+                NavigationBar(title: getTitle(type: newEntryType)) {
+                    mode.wrappedValue.dismiss()
+                }
+                Spacer()
+                
+                Text("How much?")
+                    .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
+                    .font(.system(size: 18, weight: .medium))
+                    .padding([.top], 80)
+                    .padding([.leading], 25)
+                    .multilineTextAlignment(.leading)
+
+                AmountInputWidget()
+                    .font(.system(size: 64, weight: .medium))
+                    .foregroundColor(CustomColor.baseLight_80)
+                    .padding([.top], 13)
+                    .padding([.leading], 25)
+                Spacer()
             }
+            
+        }
+        
     }
+    
+  
+    
+    func getTitle(type: PlusMenuAction) -> String {
+        switch type {
+        case .income:
+            return  "Income"
+        case .expense:
+            return  "Expense"
+        case .convert:
+            return  "Transfer"
+        }
+    }
+    func getBgColor(type: PlusMenuAction) -> Color {
+        switch type {
+        case .income:
+            return  CustomColor.green
+        case .expense:
+            return  CustomColor.red
+        case .convert:
+            return  CustomColor.blue
+        }
+    }
+    
+    
 }
 
 struct AddExpenseIncomeView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseIncomeView()
+        AddExpenseIncomeView(newEntryType: .income)
     }
 }
+

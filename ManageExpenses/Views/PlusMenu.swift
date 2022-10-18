@@ -14,21 +14,21 @@ enum PlusMenuAction {
 }
 
 struct PlusMenu: View {
-    
-    let widthAndHeight: CGFloat
     let action: (PlusMenuAction) -> Void
+    let widthAndHeight: CGFloat = 56
+    let imgWidthAndHeight: CGFloat  = 32
     var body: some View {
         VStack {
             HStack(spacing: 50) {
                 ZStack {
                     Circle()
-                        .foregroundColor(CustomColor.primaryColor)
+                        .foregroundColor(CustomColor.blue)
                         .frame(width: widthAndHeight, height: widthAndHeight)
-                    Image(systemName: "paperplane.circle.fill")
+                    Image.Custom.transferBtn
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(15)
-                        .frame(width: widthAndHeight, height: widthAndHeight)
+                        
+                        .frame(width: imgWidthAndHeight, height: imgWidthAndHeight)
                         .foregroundColor(.white)
                 }
                 
@@ -39,13 +39,13 @@ struct PlusMenu: View {
             HStack(spacing: 50) {
                 ZStack {
                     Circle()
-                        .foregroundColor(CustomColor.primaryColor)
+                        .foregroundColor(CustomColor.green)
                         .frame(width: widthAndHeight, height: widthAndHeight)
-                    Image(systemName: "record.circle")
+                    Image.Custom.incomeBtn
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(15)
-                        .frame(width: widthAndHeight, height: widthAndHeight)
+                       
+                        .frame(width: imgWidthAndHeight, height: imgWidthAndHeight)
                         .foregroundColor(.white)
                 }.onTapGesture {
                     action(.income)
@@ -56,13 +56,13 @@ struct PlusMenu: View {
                 
                 ZStack {
                     Circle()
-                        .foregroundColor(CustomColor.primaryColor)
+                        .foregroundColor(CustomColor.red)
                         .frame(width: widthAndHeight, height: widthAndHeight)
-                    Image(systemName: "folder")
+                    Image.Custom.expenseBtn
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(15)
-                        .frame(width: widthAndHeight, height: widthAndHeight)
+                       
+                        .frame(width: imgWidthAndHeight, height: imgWidthAndHeight)
                         .foregroundColor(.white)
                 }.onTapGesture {
                     action(.expense)

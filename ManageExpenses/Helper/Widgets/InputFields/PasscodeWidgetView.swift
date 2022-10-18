@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-//,,..import Introspect
+import Introspect
 
 public struct PasscodeWidgetView: View {
     let maxDigits: Int = 6
@@ -40,11 +40,11 @@ public struct PasscodeWidgetView: View {
             .accentColor(.clear)
             .foregroundColor(.clear)
             .keyboardType(.numberPad)
-//            .introspectTextField { textField in
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-//                    textField.becomeFirstResponder()
-//                }
-//            }
+            .introspectTextField { textField in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    textField.becomeFirstResponder()
+                }
+            }
             .onChange(of: Just(pin), perform: { _ in
                 DispatchQueue.main.async {
                     if pin.count > maxDigits {

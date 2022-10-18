@@ -171,6 +171,8 @@
 		FA82B59428FDD93E0038E099 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59328FDD93E0038E099 /* Date.swift */; };
 		FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59528FDDEB30038E099 /* TransactionModel.swift */; };
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
+		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
+		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -379,6 +381,8 @@
 		FA82B59328FDD93E0038E099 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FA82B59528FDDEB30038E099 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -556,6 +560,7 @@
 				FA7F86AB28FAB5E600108E3A /* TabBarIcon.swift */,
 				FA7F86AD28FAC3A100108E3A /* TabControlViewRouter.swift */,
 				FA7F86B028FAC90100108E3A /* PlusMenu.swift */,
+				FA8A362F28FF1B4800129051 /* NavigationBar.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -1197,6 +1202,7 @@
 				FAB1E33B28F735A600667CF2 /* InputWidgetView.swift */,
 				FAA478F128F8AEF300C06B31 /* PasscodeWidgetView.swift */,
 				FA7F869628F9D43F00108E3A /* Shake.swift */,
+				FA8A363128FF320200129051 /* AmountInputWidget.swift */,
 			);
 			path = InputFields;
 			sourceTree = "<group>";
@@ -1602,6 +1608,7 @@
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
 				FA82B4D528FC0F250038E099 /* Legends.swift in Sources */,
+				FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */,
 				FA82B4C228FC0F240038E099 /* TouchOverlayMarker.swift in Sources */,
 				FA82B4BA28FC0F240038E099 /* BarChartSubViews.swift in Sources */,
 				5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */,
@@ -1646,6 +1653,7 @@
 				FA7F86A128F9F71E00108E3A /* ResetPasswordView.swift in Sources */,
 				FA82B58D28FC1D7F0038E099 /* DoughnutChartData.swift in Sources */,
 				FA82B59428FDD93E0038E099 /* Date.swift in Sources */,
+				FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */,
 				FA82B4F028FC0F250038E099 /* DataFunctionsProtocol.swift in Sources */,
 				FA82B4F428FC0F250038E099 /* HorizontalGridView.swift in Sources */,
 				FA82B4CB28FC0F240038E099 /* SharedProtocolsExtensions.swift in Sources */,
