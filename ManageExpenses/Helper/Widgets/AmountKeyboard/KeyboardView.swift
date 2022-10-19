@@ -47,18 +47,29 @@ struct KeyboardView: View {
             }
         } else if element == "•" {
             if !updatedAmount.contains(".") {
-                updatedAmount = updatedAmount + "."
+                updatedAmount = updatedAmount + "\(updatedAmount.isEmpty ? "0." : ".")"
             }
         } else {
-            updatedAmount = updatedAmount + "\(element)"
+            if isValidAmount(amount: updatedAmount + "\(element)") {
+                updatedAmount = updatedAmount + "\(element)"
+            }
         }
         
         
         return updatedAmount
     }
-    private func getAmountSize(amount: String) -> (Int, Int) {
+    //2.33 33.
+    
+    private func isValidAmount(amount: String) -> Bool {
         let array = amount.split(separator: ".")
-        
+        if array.count == 1 { // not decimal point
+            return amount.count <= maxLength
+        } else if array.count == 2 {
+            return String(array[0]).count <= maxLength && String(array[1]).count <= precision
+        } else {
+            return false
+        }
+
     }
 }
 

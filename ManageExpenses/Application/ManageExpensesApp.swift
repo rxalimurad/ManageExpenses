@@ -28,6 +28,7 @@ struct ManageExpensesApp: App {
                 Text("Tap me!!!")
             }.sheet(isPresented: $isButtonShow) {
                 KeyboardWidget(amount: $amount)
+                
             }
 
         }

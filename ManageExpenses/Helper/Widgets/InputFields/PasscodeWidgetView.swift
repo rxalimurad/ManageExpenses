@@ -14,7 +14,6 @@ public struct PasscodeWidgetView: View {
     @State var pin: String = ""
     @Binding var validPin: String
     @State var color = CustomColor.baseLight_20
-    @FocusState var focused: Bool
     
     public var body: some View {
         ZStack(alignment: .leading) {
@@ -39,7 +38,6 @@ public struct PasscodeWidgetView: View {
             .accentColor(.clear)
             .foregroundColor(.clear)
             .keyboardType(.numberPad)
-            .focused($focused)
             .onChange(of: Just(pin), perform: { _ in
                 DispatchQueue.main.async {
                     if pin.count > maxDigits {
