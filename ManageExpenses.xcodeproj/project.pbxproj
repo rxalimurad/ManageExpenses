@@ -10,6 +10,8 @@
 		56C715AFE7A6A7DC42F75DDA /* Pods_ManageExpenses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639BE43C136F8B1BC6CF5701 /* Pods_ManageExpenses.framework */; };
 		5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */; };
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
+		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
+		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -213,6 +215,8 @@
 		3E2170CF1E12497C91FCAEE3 /* Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig"; path = "Target Support Files/Pods-ManageExpenses-ManageExpensesUITests/Pods-ManageExpenses-ManageExpensesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlWidgetView.swift; sourceTree = "<group>"; };
 		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -439,6 +443,15 @@
 				C0879803A6D5FA9432838272 /* Pods-ManageExpensesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5F0D72C328FFE8A600FB0843 /* AmountKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */,
+				5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */,
+			);
+			path = AmountKeyboard;
 			sourceTree = "<group>";
 		};
 		5F4B7BC628F6C3B600EFC1F5 = {
@@ -1233,6 +1246,7 @@
 		FAB1E34B28F7F74B00667CF2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				5F0D72C328FFE8A600FB0843 /* AmountKeyboard */,
 				FAB1E33A28F7358C00667CF2 /* InputFields */,
 				5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */,
 				5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */,
@@ -1557,6 +1571,7 @@
 				FAB1E33F28F73F0900667CF2 /* UIView.swift in Sources */,
 				FA7F869728F9D43F00108E3A /* Shake.swift in Sources */,
 				FA82B58828FC1D7F0038E099 /* PieChartStyle.swift in Sources */,
+				5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */,
 				FA82B50A28FC0F260038E099 /* MultiLineDataSet.swift in Sources */,
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
@@ -1634,6 +1649,7 @@
 				FA82B51D28FC0F270038E099 /* MultiLineChart.swift in Sources */,
 				FA82B4A328FC0F240038E099 /* RoundedRectangleBarShape.swift in Sources */,
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,
+				5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */,
 				FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */,
 				FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
