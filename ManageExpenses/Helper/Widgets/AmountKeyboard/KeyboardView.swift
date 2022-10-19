@@ -9,15 +9,18 @@ import SwiftUI
 
 struct KeyboardView: View {
     @Binding var amount: String
+    
+    let maxLength = 8
+    let precision = 2
     var keys = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], ["•", "0", "<"]]
     var body: some View {
         VStack {
             ForEach(Array(keys.enumerated()), id: \.0) { index, col in
-                 VStack {
+                VStack {
                     HStack {
                         ForEach(Array(col.enumerated()), id: \.0) { (index , element )in
                             Button {
-                                amount = amount + "\(element)"
+                                amount = getUpdatedAmount(amount: amount, element: element)
                             } label: {
                                 Text("\(element)")
                                     .font(.system(size: element == "•" ? 28 : 28 , weight: .regular))
@@ -32,6 +35,29 @@ struct KeyboardView: View {
                 Spacer().isShowing(index != keys.count )
             }
         }
+        
+    }
+    
+    private func getUpdatedAmount(amount: String, element: String) -> String {
+        //,,.. length Check
+        var updatedAmount = amount
+        if element == "<" {
+            if !amount.isEmpty {
+                _ = updatedAmount.removeLast()
+            }
+        } else if element == "•" {
+            if !updatedAmount.contains(".") {
+                updatedAmount = updatedAmount + "."
+            }
+        } else {
+            updatedAmount = updatedAmount + "\(element)"
+        }
+        
+        
+        return updatedAmount
+    }
+    private func getAmountSize(amount: String) -> (Int, Int) {
+        let array = amount.split(separator: ".")
         
     }
 }

@@ -15,7 +15,14 @@ struct KeyboardWidget: View {
             Spacer()
             VStack {
                 Text("Enter Amount")
-                TextField("0", text: $amount)
+                ZStack(alignment: .bottom) {
+                    TextField("0", text: $amount)
+                        .multilineTextAlignment(.center)
+                    Divider()
+                        .frame(height: 1)
+                        .background(Color.red)
+                }
+                .padding(.horizontal, 30)
                 KeyboardView(amount: $amount)
                     .frame(width: 269, height: 256)
                 
