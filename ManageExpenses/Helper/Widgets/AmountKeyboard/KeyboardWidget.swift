@@ -15,88 +15,83 @@ struct KeyboardWidget: View {
     @State private var pAmount = ""
     @State private var offset = CGSize(width: 0, height: 0)
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                Spacer()
-                if isShowing {
-                    VStack {
-                        Text("Enter Amount")
-                            .padding([.top], 35)
-                            .font(.system(size: 14, weight: .regular))
-                        ZStack(alignment: .bottom) {
-                            Group {
-                                Text("0")
-                                    .isShowing(amount.isEmpty)
-                                    .foregroundColor(.gray.opacity(0.4))
-                                Text($amount.wrappedValue)
-                                    .isShowing(!amount.isEmpty)
-                            }
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 40, weight: .bold))
-                            .padding([.top], 5)
-                            .padding([.bottom], 10)
-                            Divider()
-                                .frame(height: 1)
-                                .background(Color.gray)
+        VStack {
+            Spacer()
+            if isShowing {
+                VStack {
+                    Text("Enter Amount")
+                        .padding([.top], 35)
+                        .font(.system(size: 14, weight: .regular))
+                    ZStack(alignment: .bottom) {
+                        Group {
+                            Text("0")
+                                .isShowing(amount.isEmpty)
+                                .foregroundColor(.gray.opacity(0.4))
+                            Text($amount.wrappedValue)
+                                .isShowing(!amount.isEmpty)
                         }
-                        .padding([.horizontal, .bottom], 0)
-                        KeyboardView(amount: $amount)
-                            .frame(height: 256)
-                            .padding([.top], 40)
-                            .padding([.bottom], 20)
-                            .padding([.horizontal], 20)
-                        ButtonWidgetView(title: "Done", style: .primaryButton) {
-                            //mode.wrappedValue.dismiss()
-                            withAnimation{
-                                isShowing.toggle()
-                            }
-                        }.padding([.bottom], 30)
-                        
-                        Button {
-                            withAnimation{
-                                isShowing.toggle()
-                            }
-                        } label: {
-                            ZStack {
-                                Circle()
-                                    .foregroundColor(.gray.opacity(0.4))
-                                Image.Custom.plus.rotationEffect(Angle(degrees: 45))
-                                    .foregroundColor(CustomColor.baseLight)
-                            }.frame(width: 40, height: 40)
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: 40, weight: .bold))
+                        .padding([.top], 5)
+                        .padding([.bottom], 10)
+                        Divider()
+                            .frame(height: 1)
+                            .background(Color.gray)
+                    }
+                    .padding([.horizontal, .bottom], 0)
+                    KeyboardView(amount: $amount)
+                        .padding([.top], 40)
+                        .padding([.bottom], 20)
+                        .padding([.horizontal], 20)
+                    ButtonWidgetView(title: "Done", style: .primaryButton) {
+                        withAnimation{
+                            isShowing.toggle()
                         }
-                        .padding([.bottom], abs(geometry.safeAreaInsets.bottom) + 5.0)
+                    }.padding([.bottom], 30)
+                    
+                    Button {
+                        withAnimation{
+                            isShowing.toggle()
+                        }
+                    } label: {
+                        Image.Custom.plus.rotationEffect(Angle(degrees: 45))
+                            .font(.system(size: 30))
+                            .foregroundColor(CustomColor.baseDark)
                         
-                        
-                    }.padding(.horizontal, 40)
-                        .background(
-                            RoundedCorner(radius: 30)
-                                .foregroundColor(CustomColor.keyboardBg)
-                        )
-                        .foregroundColor(CustomColor.baseDark_50)
-                        .transition(.move(edge: .bottom))
-                        .cornerRadius(30, corners: [.topLeft, .topRight])
-                        .offset(offset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged({ gesture in
-                                    if gesture.translation.height > 0 {
-                                        offset = CGSize(width: 0, height: gesture.translation.height)
+                    }
+                    .padding([.bottom], abs(geometry.safeAreaInsets.bottom))
+                    
+                    
+                }.padding(.horizontal, 40)
+                    .background(
+                        RoundedCorner(radius: 30)
+                            .foregroundColor(CustomColor.keyboardBg)
+                    )
+                    .foregroundColor(CustomColor.baseDark_50)
+                    .transition(.move(edge: .bottom))
+                    .cornerRadius(30, corners: [.topLeft, .topRight])
+                    .offset(offset)
+                    .gesture(
+                        DragGesture()
+                            .onChanged({ gesture in
+                                if gesture.translation.height > 0 {
+                                    offset = CGSize(width: 0, height: gesture.translation.height)
+                                }
+                                if gesture.translation.height > geometry.size.height * 0.2 {
+                                    withAnimation{
+                                        isShowing = false
                                     }
-                                    if gesture.translation.height > geometry.size.height * 0.2 {
-                                        withAnimation{
-                                            isShowing = false
-                                        }
-                                    }
-                                })
-                                .onEnded({ gesture in
-                                    withAnimation {
-                                        offset = CGSize(width: 0, height: 0)
-                                    }
-                                })
-                        )
-                }
+                                }
+                            })
+                            .onEnded({ gesture in
+                                withAnimation {
+                                    offset = CGSize(width: 0, height: 0)
+                                }
+                            })
+                    )
             }
-        }.onAppear() {
+        }
+        .onAppear() {
             offset = CGSize(width: 0, height: 0)
         }
     }

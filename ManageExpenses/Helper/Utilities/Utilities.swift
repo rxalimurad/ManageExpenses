@@ -15,7 +15,7 @@ enum Utilities {
         return neg + sym + FAmount
     }
     
-    private static func getAmountWith(amount: Double) -> String {
+     static func getAmountWith(amount: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesGroupingSeparator = true
