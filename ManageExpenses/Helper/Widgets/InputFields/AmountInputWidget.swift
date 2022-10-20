@@ -9,31 +9,29 @@ import SwiftUI
 
 struct AmountInputWidget: View {
     @State private var amount = ""
+    @State private var showSheet = false
     
     var body: some View {
-        
-        HStack {
-            Text("$")
-            TextField("", text: $amount)
-               
-                .placeholder(when: amount.isEmpty, placeholder: {
-                    Text("0")
-                })
-                .keyboardType(.decimalPad)
-                .onChange(of: amount) { _ in
-                    let filtered = amount.filter {"0123456789.".contains($0)}
-                    if filtered.contains(".") {
-                        let splitted = filtered.split(separator: ".", omittingEmptySubsequences: false)
-                        if splitted.count >= 2 {
-                            let preDecimal = String(splitted[0])
-                            let afterDecimal = String(splitted[1])
-                            amount = "\(preDecimal).\(afterDecimal)"
+        GeometryReader { geometry in
+            ZStack {
+                HStack {
+                    Group {
+                        Text("$")
+                        Text("0")
+                            .isShowing(amount.isEmpty)
+                            .foregroundColor(.gray.opacity(0.8))
+                        Text($amount.wrappedValue)
+                            .isShowing(!amount.isEmpty)
+                    }.onTapGesture {
+                        withAnimation {
+                            showSheet.toggle()
                         }
                     }
                 }
-            
-            
-            
+                KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showSheet)
+                    
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
     }
 }

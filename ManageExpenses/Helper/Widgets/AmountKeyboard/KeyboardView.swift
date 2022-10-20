@@ -69,7 +69,7 @@ struct KeyboardView: View {
         } else {
             return false
         }
-
+        
     }
 }
 

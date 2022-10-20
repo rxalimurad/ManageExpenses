@@ -32,4 +32,6 @@ enum CustomColor {
     static let green = Color("greenColor")
     static let blue = Color("blueColor")
     
+    static let keyboardBg = Color("keyboardBg")
+    
 }
