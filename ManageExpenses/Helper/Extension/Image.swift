@@ -30,6 +30,7 @@ extension Image {
         static let incomeBtn = Image("incomeBtn")
         static let expenseBtn = Image("expenseBtn")
         static let transferBtn = Image("transferBtn")
+        static let attachment = Image("attachment")
         
  
     }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NavigationBar: View {
     let title: String
+    let top: CGFloat
     let action: () -> Void
     let titleColor: Color = CustomColor.baseLight
     var body: some View {
@@ -30,9 +31,14 @@ struct NavigationBar: View {
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
             Spacer()
-            Image("")
-                .frame(width: 32, height: 32)
-            
-        }
+            Button {
+                action()
+            } label: {
+                Image.Custom.navBack
+                    .renderingMode(.template)
+                    .foregroundColor(titleColor)
+                    .frame(width: 52, height: 52).hidden()
+            }
+        }.padding([.top], top)
     }
 }

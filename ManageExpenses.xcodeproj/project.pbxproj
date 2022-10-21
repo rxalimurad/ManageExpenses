@@ -12,6 +12,7 @@
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
+		5F4040A0290295BA00ECC069 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectorView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -217,6 +218,7 @@
 		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
+		5F40409F290295B900ECC069 /* SelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1250,6 +1252,7 @@
 				FAB1E33A28F7358C00667CF2 /* InputFields */,
 				5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */,
 				5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */,
+				5F40409F290295B900ECC069 /* SelectorView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1573,6 +1576,7 @@
 				FA82B58828FC1D7F0038E099 /* PieChartStyle.swift in Sources */,
 				5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */,
 				FA82B50A28FC0F260038E099 /* MultiLineDataSet.swift in Sources */,
+				5F4040A0290295BA00ECC069 /* SelectorView.swift in Sources */,
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
 				FA82B4CD28FC0F240038E099 /* API.swift in Sources */,

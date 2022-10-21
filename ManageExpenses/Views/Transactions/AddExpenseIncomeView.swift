@@ -9,35 +9,90 @@ import SwiftUI
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+    @State var showSheet = false
+    @State var isRepeated = false
     @State var amount = ""
+    @State private var phase = 0.0
+    
+    
     var newEntryType: PlusMenuAction
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                getBgColor(type: newEntryType).edgesIgnoringSafeArea(.all)
-                VStack {
-                    NavigationBar(title: getTitle(type: newEntryType)) {
-                        mode.wrappedValue.dismiss()
-                    }
-                    Spacer()
-                    
-                    Text("How much?")
-                        .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
-                        .font(.system(size: 18, weight: .medium))
-                        .padding([.top], 80)
-                        .padding([.leading], 25)
-                        .multilineTextAlignment(.leading)
-                    
-                    AmountInputWidget(geometry: geometry)
-                        .font(.system(size: 64, weight: .medium))
-                        .foregroundColor(CustomColor.baseLight_80)
-                        .padding([.top], 13)
-                        .padding([.leading], 0)
-                    Spacer()
+            VStack(alignment: .leading) {
+                NavigationBar(title: getTitle(type: newEntryType), top: geometry.safeAreaInsets.top) {
+                    mode.wrappedValue.dismiss()
                 }
+                Spacer()
+                Text("Income")
+                    .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
+                    .font(.system(size: 18, weight: .medium))
+                    .padding([.top], 80) //,,..
+                    .padding([.leading], 26)
+                AmountInputWidget(amount: amount)
+                    .font(.system(size: 64, weight: .medium))
+                    .foregroundColor(CustomColor.baseLight)
+                    .padding([.top], 13)
+                    .onTapGesture {
+                        withAnimation {
+                            showSheet.toggle()
+                        }
+                    }
                 
-            }.edgesIgnoringSafeArea(.bottom)
+                VStack {
+                    InputWidgetView(hint: "Category", properties: InputProperties(maxLength: 10, isSelector: true), text: .constant(""))
+                        .padding([.top], 24)
+                    InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
+                        .padding([.top], 16)
+                    InputWidgetView(hint: "Wallet", properties: InputProperties(maxLength: 10, isSelector: true), text: .constant(""))
+                        .padding([.top], 16)
+                    HStack {
+                        Image.Custom.attachment
+                        Text("Add Attachment")
+                        
+                    }.background(
+                        Rectangle()
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
+                            .onAppear {
+                                withAnimation(.linear.repeatForever(autoreverses: false)) {
+                                    phase -= 20
+                                }
+                            }
+                        
+                    )
+                    
+                    HStack {
+                        VStack {
+                            Text("Repeat")
+                            Text("Repeat Transaction")
+                        }
+                        Toggle("", isOn: $isRepeated)
+                        
+                    }
+                    
+                    ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                        
+                    }
+                    .padding([.bottom], geometry.safeAreaInsets.bottom + 10)
+                    
+                }
+                .padding([.horizontal], 16)
+                .cornerRadius(30, corners: [.topLeft, .topRight])
+                .background(
+                    RoundedCorner(radius: 30)
+                        .foregroundColor(CustomColor.baseLight)
+                )
+                
+                
+            }
+            .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showSheet), alignment: .center)
+            .background(
+                Rectangle()
+                    .foregroundColor(getBgColor(type: newEntryType))
+                
+            )
+            .edgesIgnoringSafeArea([.all])
+            
+            
         }
     }
     

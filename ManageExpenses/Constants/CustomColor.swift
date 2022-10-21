@@ -33,5 +33,5 @@ enum CustomColor {
     static let blue = Color("blueColor")
     
     static let keyboardBg = Color("keyboardBg")
-    
+    static let hintColor = Color("hintColor").opacity(0.85)
 }

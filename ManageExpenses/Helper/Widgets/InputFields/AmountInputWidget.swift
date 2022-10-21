@@ -8,27 +8,23 @@
 import SwiftUI
 
 struct AmountInputWidget: View {
-    @State private var amount = ""
+    var amount = ""
+    @State private var amountState = ""
     @State private var showSheet = false
-    var geometry: GeometryProxy
     var body: some View {
         ZStack {
             HStack {
-                Group {
-                    Text("$")
-                    Text("0")
-                        .isShowing(amount.isEmpty)
-                        .foregroundColor(.gray.opacity(0.8))
-                    Text(getFormattedAmount(amount: $amount.wrappedValue))
-                        .isShowing(!amount.isEmpty)
-                }.onTapGesture {
-                    withAnimation {
-                        showSheet.toggle()
-                    }
-                }
-            }
-            KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showSheet)
-            
+                Text("$")
+                Text("0")
+                    .isShowing(amount.isEmpty)
+                    .foregroundColor(.gray.opacity(0.8))
+                Text(getFormattedAmount(amount: amount))
+                    .isShowing(!amount.isEmpty)
+                
+                   
+            }.multilineTextAlignment(.leading)
+            .padding([.leading], 25)
+             
         }
     }
     

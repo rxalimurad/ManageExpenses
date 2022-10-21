@@ -11,12 +11,13 @@ struct KeyboardWidget: View {
     
     var geometry: GeometryProxy
     @Binding var amount: String
+    @State private var amountState: String = ""
     @Binding var isShowing : Bool
     @State private var pAmount = ""
     @State private var offset = CGSize(width: 0, height: 0)
     var body: some View {
         VStack {
-            Spacer()
+        
             if isShowing {
                 VStack {
                     Text("Enter Amount")
@@ -25,10 +26,10 @@ struct KeyboardWidget: View {
                     ZStack(alignment: .bottom) {
                         Group {
                             Text("0")
-                                .isShowing(amount.isEmpty)
+                                .isShowing(amountState.isEmpty)
                                 .foregroundColor(.gray.opacity(0.4))
-                            Text($amount.wrappedValue)
-                                .isShowing(!amount.isEmpty)
+                            Text($amountState.wrappedValue)
+                                .isShowing(!amountState.isEmpty)
                         }
                         .multilineTextAlignment(.center)
                         .font(.system(size: 40, weight: .bold))
@@ -39,18 +40,20 @@ struct KeyboardWidget: View {
                             .background(Color.gray)
                     }
                     .padding([.horizontal, .bottom], 0)
-                    KeyboardView(amount: $amount)
+                    KeyboardView(amount: $amountState)
                         .padding([.top], 40)
                         .padding([.bottom], 20)
                         .padding([.horizontal], 20)
                     ButtonWidgetView(title: "Done", style: .primaryButton) {
                         withAnimation{
                             isShowing.toggle()
+                            amount = amountState
                         }
                     }.padding([.bottom], 30)
                     
                     Button {
                         withAnimation{
+                         
                             isShowing.toggle()
                         }
                     } label: {
@@ -91,8 +94,10 @@ struct KeyboardWidget: View {
                     )
             }
         }
+        .padding([.top], geometry.size.height * 0.25)
         .onAppear() {
             offset = CGSize(width: 0, height: 0)
+            amountState = amount
         }
     }
 }
