@@ -17,7 +17,7 @@ struct AmountInputWidget: View {
                 Text("$")
                 Text("0")
                     .isShowing(amount.isEmpty)
-                    .foregroundColor(.gray.opacity(0.8))
+                    .foregroundColor(CustomColor.baseLight.opacity(0.7))
                 Text(getFormattedAmount(amount: amount))
                     .isShowing(!amount.isEmpty)
                 

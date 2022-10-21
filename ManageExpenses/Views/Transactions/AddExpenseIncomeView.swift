@@ -26,7 +26,6 @@ struct AddExpenseIncomeView: View {
                 Text("Income")
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
-                    .padding([.top], 80) //,,..
                     .padding([.leading], 26)
                 AmountInputWidget(amount: amount)
                     .font(.system(size: 64, weight: .medium))
@@ -44,36 +43,44 @@ struct AddExpenseIncomeView: View {
                     InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
                         .padding([.top], 16)
                     InputWidgetView(hint: "Wallet", properties: InputProperties(maxLength: 10, isSelector: true), text: .constant(""))
-                        .padding([.top], 16)
-                    HStack {
-                        Image.Custom.attachment
-                        Text("Add Attachment")
+                        .padding([.top, .bottom], 16)
+                    HStack(alignment: .center) {
+                        HStack(spacing: 10) {
+                            Image.Custom.attachment
+                            Text("Add Attachment")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding([.vertical], 16)
                         
-                    }.background(
+                    }
+                    
+                    .background(
                         Rectangle()
                             .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
-                            .onAppear {
-                                withAnimation(.linear.repeatForever(autoreverses: false)) {
-                                    phase -= 20
-                                }
-                            }
-                        
+                            .foregroundColor(CustomColor.baseLight_20)
+                            .cornerRadius(5)
                     )
                     
                     HStack {
-                        VStack {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("Repeat")
+                                .font(.system(size: 16))
+                                .foregroundColor(CustomColor.baseDark_25)
+                            
                             Text("Repeat Transaction")
+                                .font(.system(size: 13))
+                                .foregroundColor(CustomColor.baseLight_20)
                         }
+                        .padding([.leading], 16)
                         Toggle("", isOn: $isRepeated)
                         
                     }
+                    .padding([.vertical], 16)
                     
                     ButtonWidgetView(title: "Continue", style: .primaryButton) {
                         
                     }
                     .padding([.bottom], geometry.safeAreaInsets.bottom + 10)
-                    
                 }
                 .padding([.horizontal], 16)
                 .cornerRadius(30, corners: [.topLeft, .topRight])
@@ -81,8 +88,6 @@ struct AddExpenseIncomeView: View {
                     RoundedCorner(radius: 30)
                         .foregroundColor(CustomColor.baseLight)
                 )
-                
-                
             }
             .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showSheet), alignment: .center)
             .background(
