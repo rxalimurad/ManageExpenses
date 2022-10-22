@@ -10,12 +10,10 @@ import SwiftUI
 struct SelectorWidgetView: View {
     @State var showSelection = false
     let hint: String
-    @Binding var text: String
+    let isMultiSelector: Bool = false
+    @State var text: String
+    @Binding var data: [SelectDataModel]
     
-    init(hint: String, text: Binding<String>) {
-        self.hint = hint
-        self._text = text
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,9 +41,8 @@ struct SelectorWidgetView: View {
             .overlay( RoundedRectangle(cornerRadius: 16).stroke(CustomColor.baseLight_60))
             
         }
-        
-        .popover(isPresented: $showSelection) {
-            SelectionView()
+        .fullScreenCover(isPresented: $showSelection) {
+            SelectionView(data: $data, isMultiSelector: isMultiSelector, text: $text, title: hint)
         }
         
         
@@ -54,8 +51,8 @@ struct SelectorWidgetView: View {
     
 }
 
-struct SelectorWidgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectorWidgetView(hint: ")", text: .constant("0"))
-    }
-}
+//struct SelectorWidgetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SelectorWidgetView(hint: ")", text: .constant("0"))
+//    }
+//}

@@ -13,7 +13,6 @@ struct KeyboardWidget: View {
     @Binding var amount: String
     @State private var amountState: String = ""
     @Binding var isShowing : Bool
-    @State private var pAmount = ""
     @State private var offset = CGSize(width: 0, height: 0)
     var body: some View {
         VStack {

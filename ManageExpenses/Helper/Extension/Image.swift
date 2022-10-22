@@ -35,6 +35,8 @@ extension Image {
         static let gallery = Image("gallery")
         static let file = Image("file")
         static let grayCross = Image("grayCross")
+        static let checked = Image(systemName: "checkmark.circle.fill")
+        static let unchecked = Image(systemName: "ccheckmark.circle")
         
  
     }

@@ -12,12 +12,14 @@ struct NavigationBar: View {
     let title: String
     let top: CGFloat
     let titleColor: Color
+    let showBackBtn: Bool
     let action: () -> Void
     
-    init(title: String, top: CGFloat, titleColor: Color = CustomColor.baseLight, action: @escaping () -> Void) {
+    init(title: String, top: CGFloat, titleColor: Color = CustomColor.baseLight, showBackBtn: Bool = true, action: @escaping () -> Void) {
         self.title = title
         self.top = top
         self.titleColor = titleColor
+        self.showBackBtn = showBackBtn
         self.action = action
     }
     
@@ -30,7 +32,7 @@ struct NavigationBar: View {
                     .renderingMode(.template)
                     .foregroundColor(titleColor)
                     .frame(width: 52, height: 52)
-            }
+            }.isShowing(showBackBtn)
             Spacer()
             Text(title)
                 .font(.system(size:18, weight: .semibold))

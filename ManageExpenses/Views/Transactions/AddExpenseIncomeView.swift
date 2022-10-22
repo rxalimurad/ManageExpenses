@@ -18,6 +18,16 @@ struct AddExpenseIncomeView: View {
     @State var isCategoryshown = false
     @State var amount = ""
     @State private var phase = 0.0
+    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
+                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
+                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
+                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
+                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
+    
+    @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", Image: .Custom.camera, color: .red),
+                               SelectDataModel(id: "2", desc: "Bank Al Habib", Image: .Custom.bell, color: .green),
+                               SelectDataModel(id: "3", desc: "SadaaPay", Image: .Custom.bell, color: .yellow),
+                                   ]
     
     
     var newEntryType: PlusMenuAction
@@ -57,17 +67,7 @@ struct AddExpenseIncomeView: View {
                 .background(ColoredView(color: .clear))
                 .edgesIgnoringSafeArea(.all)
             }
-            .fullScreenCover(isPresented: $isCategoryshown) {
-                ZStack (alignment: .bottom) {
-                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            isCategoryshown.toggle()
-                        }
-                    getCategoryPicker(geometry)
-                }
-                .background(ColoredView(color: .clear))
-                .edgesIgnoringSafeArea(.all)
-            }
+            
             .background(
                 Rectangle()
                     .foregroundColor(getBgColor(type: newEntryType))
@@ -87,11 +87,11 @@ struct AddExpenseIncomeView: View {
     
     private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-            SelectorWidgetView(hint: "Category", text: .constant(""))
+            SelectorWidgetView(hint: "Category", text: "", data: $categoryData)
                 .padding([.top], 24)
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
                 .padding([.top], 16)
-            SelectorWidgetView(hint: "Wallet", text: .constant(""))
+            SelectorWidgetView(hint: "Wallet", text: "" , data: $walletData)
                 .padding([.top, .bottom], 16)
             if selectedImage == nil {
                 HStack(alignment: .center) {
@@ -138,26 +138,26 @@ struct AddExpenseIncomeView: View {
             
             
             
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Repeat")
-                        .font(.system(size: 16))
-                        .foregroundColor(CustomColor.baseDark_25)
-                    
-                    Text("Repeat Transaction")
-                        .font(.system(size: 13))
-                        .foregroundColor(CustomColor.baseLight_20)
-                }
-                .padding([.leading], 16)
-                Toggle("", isOn: $isRepeated)
-                
-            }
-            .padding([.vertical], 16)
+//            HStack {
+//                VStack(alignment: .leading, spacing: 4) {
+//                    Text("Repeat")
+//                        .font(.system(size: 16))
+//                        .foregroundColor(CustomColor.baseDark_25)
+//
+//                    Text("Repeat Transaction")
+//                        .font(.system(size: 13))
+//                        .foregroundColor(CustomColor.baseLight_20)
+//                }
+//                .padding([.leading], 16)
+//                Toggle("", isOn: $isRepeated)
+//
+//            }
+//            .padding([.vertical], 16)
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 
             }
-            .padding([.top], 24)
+            .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
         }
         .padding([.horizontal], 16)
@@ -168,44 +168,17 @@ struct AddExpenseIncomeView: View {
         )
     
     }
-    private func getCategoryPicker(_ geometry: GeometryProxy) ->  some View {
-        VStack {
-            indicator
-                .onTapGesture {
-                    isAtchmntViewShown.toggle()
-                }
-                .padding([.top], 16)
-                .padding([.bottom], 48)
-            HStack(spacing: 8) {
-                AttachmentView(image: .Custom.camera, title: "Camera") {
-                    isAtchmntViewShown.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        self.isCamerPkrShown.toggle()
-                    }
-                }
-                AttachmentView(image: .Custom.gallery, title: "Image") {
-                    isAtchmntViewShown.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        self.isImgPkrShown.toggle()
-                    }
-                }
-               
-            }
-            .padding([.horizontal], 16)
-            .padding([.bottom], 16 + geometry.safeAreaInsets.bottom)
-        }
-        
-        .background(ColoredView(color: .white))
-        .cornerRadius(15, corners: [.topLeft, .topRight])
-    }
     private func attachmentSheet(_ geometry: GeometryProxy) ->  some View {
         VStack {
-            indicator
-                .onTapGesture {
-                    isAtchmntViewShown.toggle()
-                }
-                .padding([.top], 16)
-                .padding([.bottom], 48)
+            Button {
+                isAtchmntViewShown.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+                    .padding([.bottom], 48)
+            }
+
+            
             HStack(spacing: 8) {
                 AttachmentView(image: .Custom.camera, title: "Camera") {
                     isAtchmntViewShown.toggle()

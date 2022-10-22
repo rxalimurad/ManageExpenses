@@ -181,6 +181,7 @@
 		FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87B2903C6A300C5408D /* ImagePicker.swift */; };
 		FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87D29046D9700C5408D /* SelectionCell.swift */; };
 		FA94E8812904704200C5408D /* SelectorWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8802904704200C5408D /* SelectorWidgetView.swift */; };
+		FA94E8832904876100C5408D /* SelectorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8822904876100C5408D /* SelectorModel.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -399,6 +400,7 @@
 		FA94E87B2903C6A300C5408D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FA94E87D29046D9700C5408D /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
 		FA94E8802904704200C5408D /* SelectorWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorWidgetView.swift; sourceTree = "<group>"; };
+		FA94E8822904876100C5408D /* SelectorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorModel.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 			isa = PBXGroup;
 			children = (
 				5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */,
+				FA94E8822904876100C5408D /* SelectorModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1562,6 +1565,7 @@
 				FA82B4E828FC0F250038E099 /* VerticalGridShape.swift in Sources */,
 				FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */,
 				5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */,
+				FA94E8832904876100C5408D /* SelectorModel.swift in Sources */,
 				FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */,
 				FA82B58528FC1D7F0038E099 /* PieSegmentShape.swift in Sources */,
 				FA82B50D28FC0F260038E099 /* RangedLineStyle.swift in Sources */,

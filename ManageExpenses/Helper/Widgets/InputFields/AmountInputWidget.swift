@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AmountInputWidget: View {
     var amount = ""
-    @State private var amountState = ""
     var body: some View {
         ZStack {
             HStack {

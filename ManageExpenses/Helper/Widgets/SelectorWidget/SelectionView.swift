@@ -9,18 +9,45 @@ import SwiftUI
 
 struct SelectionView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Binding var data: [SelectDataModel]
+    var isMultiSelector: Bool
+    @Binding var text: String
+    var title: String
+    
     
     var body: some View {
-        VStack(spacing: 10) {
-            NavigationBar(title: "Categories", top: 0, titleColor: CustomColor.baseDark, action: {
-                mode.wrappedValue.dismiss()
-            })
+        GeometryReader { geometry in
+            VStack(spacing: 15) {
+                NavigationBar(title: title, top: 0, titleColor: CustomColor.baseDark, action: {
+                    mode.wrappedValue.dismiss()
+                })
 
-        
-            ScrollView {
-                ForEach(0 ..< 199) {_ in
-                    SelectionCell(title: "Food", color: .red)
-                        .padding([.horizontal], 16)
+            
+                ScrollView {
+                    ForEach(0 ..< data.count) { index in
+                        Button {
+                            for i in 0 ..< data.count {
+                                data[i].isSelected = false
+                            }
+                            data[index].isSelected.toggle()
+                            if !isMultiSelector {
+                                text = data[index].desc
+                                withAnimation {
+                                    mode.wrappedValue.dismiss()
+                                }
+                            }
+                        } label: {
+                            SelectionCell(title: data[index].desc, color: data[index].color, img: data[index].Image, isSelected: data[index].isSelected)
+                                .padding([.horizontal], 16)
+                        }
+
+                    }
+                }
+                if isMultiSelector {
+                    ButtonWidgetView(title: "Done", style: .primaryButton) {
+                        mode.wrappedValue.dismiss()
+                    }
+                    .padding([.horizontal, .top], 16)
                 }
             }
         }
