@@ -31,6 +31,10 @@ extension Image {
         static let expenseBtn = Image("expenseBtn")
         static let transferBtn = Image("transferBtn")
         static let attachment = Image("attachment")
+        static let camera = Image("camera")
+        static let gallery = Image("gallery")
+        static let file = Image("file")
+        static let grayCross = Image("grayCross")
         
  
     }

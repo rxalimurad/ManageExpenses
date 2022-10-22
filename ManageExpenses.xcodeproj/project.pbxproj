@@ -12,7 +12,7 @@
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
-		5F4040A0290295BA00ECC069 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectorView.swift */; };
+		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -176,6 +176,11 @@
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
 		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
+		FA94E8782903B0FE00C5408D /* ColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8772903B0FE00C5408D /* ColoredView.swift */; };
+		FA94E87A2903B7F800C5408D /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8792903B7F800C5408D /* AttachmentView.swift */; };
+		FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87B2903C6A300C5408D /* ImagePicker.swift */; };
+		FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87D29046D9700C5408D /* SelectionCell.swift */; };
+		FA94E8812904704200C5408D /* SelectorWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8802904704200C5408D /* SelectorWidgetView.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -218,7 +223,7 @@
 		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
-		5F40409F290295B900ECC069 /* SelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorView.swift; sourceTree = "<group>"; };
+		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -389,6 +394,11 @@
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
+		FA94E8772903B0FE00C5408D /* ColoredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredView.swift; sourceTree = "<group>"; };
+		FA94E8792903B7F800C5408D /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
+		FA94E87B2903C6A300C5408D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FA94E87D29046D9700C5408D /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
+		FA94E8802904704200C5408D /* SelectorWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorWidgetView.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -534,6 +544,7 @@
 				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
 				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
 				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
+				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -1127,6 +1138,16 @@
 			path = Extras;
 			sourceTree = "<group>";
 		};
+		FA94E87F2904702700C5408D /* SelectorWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5F40409F290295B900ECC069 /* SelectionView.swift */,
+				FA94E87D29046D9700C5408D /* SelectionCell.swift */,
+				FA94E8802904704200C5408D /* SelectorWidgetView.swift */,
+			);
+			path = SelectorWidget;
+			sourceTree = "<group>";
+		};
 		FAA478E128F879BA00C06B31 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,7 +1273,9 @@
 				FAB1E33A28F7358C00667CF2 /* InputFields */,
 				5F4B7C0628F6D7B000EFC1F5 /* ButtonWidgetView */,
 				5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */,
-				5F40409F290295B900ECC069 /* SelectorView.swift */,
+				FA94E87F2904702700C5408D /* SelectorWidget */,
+				FA94E8772903B0FE00C5408D /* ColoredView.swift */,
+				FA94E87B2903C6A300C5408D /* ImagePicker.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1539,10 +1562,12 @@
 				FA82B4E828FC0F250038E099 /* VerticalGridShape.swift in Sources */,
 				FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */,
 				5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */,
+				FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */,
 				FA82B58528FC1D7F0038E099 /* PieSegmentShape.swift in Sources */,
 				FA82B50D28FC0F260038E099 /* RangedLineStyle.swift in Sources */,
 				FA82B4C328FC0F240038E099 /* AccessibilityRectangle.swift in Sources */,
 				FA82B4AE28FC0F240038E099 /* GroupedBarChartData.swift in Sources */,
+				FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */,
 				FA82B4A828FC0F240038E099 /* BarStyle.swift in Sources */,
 				FAB1E35828F7FCC300667CF2 /* Enums.swift in Sources */,
 				FA7F869F28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift in Sources */,
@@ -1575,8 +1600,9 @@
 				FA7F869728F9D43F00108E3A /* Shake.swift in Sources */,
 				FA82B58828FC1D7F0038E099 /* PieChartStyle.swift in Sources */,
 				5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */,
+				FA94E8782903B0FE00C5408D /* ColoredView.swift in Sources */,
 				FA82B50A28FC0F260038E099 /* MultiLineDataSet.swift in Sources */,
-				5F4040A0290295BA00ECC069 /* SelectorView.swift in Sources */,
+				5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */,
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
 				FA82B4CD28FC0F240038E099 /* API.swift in Sources */,
@@ -1604,6 +1630,7 @@
 				FAB1E34A28F7EDC900667CF2 /* Image.swift in Sources */,
 				FA82B50728FC0F260038E099 /* PointShape.swift in Sources */,
 				FA7F86AE28FAC3A100108E3A /* TabControlViewRouter.swift in Sources */,
+				FA94E8812904704200C5408D /* SelectorWidgetView.swift in Sources */,
 				5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */,
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
@@ -1612,6 +1639,7 @@
 				FA82B4CA28FC0F240038E099 /* PublishableProtocol.swift in Sources */,
 				FA82B50428FC0F260038E099 /* YAxisPOI.swift in Sources */,
 				FA82B4FE28FC0F260038E099 /* InfoBox.swift in Sources */,
+				FA94E87A2903B7F800C5408D /* AttachmentView.swift in Sources */,
 				FA82B4F328FC0F250038E099 /* LineAndBarProtocols.swift in Sources */,
 				FA82B4F528FC0F250038E099 /* VerticalGridView.swift in Sources */,
 				FA82B4FC28FC0F260038E099 /* LinearTrendLine.swift in Sources */,

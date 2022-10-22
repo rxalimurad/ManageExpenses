@@ -10,7 +10,6 @@ import SwiftUI
 struct AmountInputWidget: View {
     var amount = ""
     @State private var amountState = ""
-    @State private var showSheet = false
     var body: some View {
         ZStack {
             HStack {

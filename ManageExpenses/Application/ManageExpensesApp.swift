@@ -19,10 +19,11 @@ struct ManageExpensesApp: App {
     var body: some Scene {
         WindowGroup {
             //            LoginIntroView(viewModel: LoginIntroViewModel())
-                        TabControlView(viewRouter: TabControlViewRouter())
+//                        TabControlView(viewRouter: TabControlViewRouter())
             //            SignUpView()
             //            AddExpenseIncomeView(newEntryType: .income)
-//            AddExpenseIncomeView(newEntryType: .income)
+            AddExpenseIncomeView(newEntryType: .income)
+            
         }
     }
     

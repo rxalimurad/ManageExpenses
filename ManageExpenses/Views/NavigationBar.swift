@@ -11,8 +11,16 @@ import SwiftUI
 struct NavigationBar: View {
     let title: String
     let top: CGFloat
+    let titleColor: Color
     let action: () -> Void
-    let titleColor: Color = CustomColor.baseLight
+    
+    init(title: String, top: CGFloat, titleColor: Color = CustomColor.baseLight, action: @escaping () -> Void) {
+        self.title = title
+        self.top = top
+        self.titleColor = titleColor
+        self.action = action
+    }
+    
     var body: some View {
         HStack {
             Button {

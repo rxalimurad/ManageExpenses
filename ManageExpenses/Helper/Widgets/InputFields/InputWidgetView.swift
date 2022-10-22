@@ -13,18 +13,16 @@ struct InputProperties {
     var minLength: Int = 1
     var regex: String = ""
     var isSecure: Bool = false
-    var isSelector: Bool = false
 }
 struct InputWidgetView: View {
     @State var isSecured = false
     @State var isErrorShowing = false
     @State var errorMsg = ""
-    @State var showSelection = false
     
     let hint: String
     var properties: InputProperties
     @Binding var text: String
-    
+
     init(hint: String, properties: InputProperties, text: Binding<String>) {
         isSecured = properties.isSecure
         self.hint = hint
@@ -36,14 +34,7 @@ struct InputWidgetView: View {
         VStack(alignment: .leading) {
             ZStack(alignment: .trailing) {
                 Group {
-                    if properties.isSelector {
-                        Text(text.isEmpty ? hint : text)
-                            .foregroundColor(text.isEmpty ? CustomColor.hintColor : CustomColor.baseLight_20)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .onTapGesture {
-                                showSelection.toggle()
-                            }
-                    } else if properties.isSecure && isSecured {
+                    if properties.isSecure && isSecured {
                         SecureField(hint, text: $text) {
                             isErrorShowing = !validate(isToValidate: true)
                         }
@@ -57,11 +48,7 @@ struct InputWidgetView: View {
                     }
                     
                 }
-                if properties.isSelector {
-                    Image.Custom.downArrow
-                }
-                
-                else if properties.isSecure {
+               if properties.isSecure {
                     Button(action: {
                         isSecured.toggle()
                     }) {
@@ -70,9 +57,7 @@ struct InputWidgetView: View {
                     }
                 }
                
-                    NumberPicker(selection: .constant(2010), isShowing: $showSelection)
-                        .animation(.linear)
-                        .offset(y: self.showSelection ? 0 : UIScreen.main.bounds.height + 200)
+                  
               
                 
             }.onReceive(Just(text), perform: { _ in
@@ -95,6 +80,7 @@ struct InputWidgetView: View {
                 .foregroundColor(.red).isShowing(isErrorShowing)
                 .padding([.leading], 16)
         }
+       
         
         
     }
