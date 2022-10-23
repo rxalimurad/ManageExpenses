@@ -22,7 +22,7 @@ struct InputWidgetView: View {
     let hint: String
     var properties: InputProperties
     @Binding var text: String
-    
+
     init(hint: String, properties: InputProperties, text: Binding<String>) {
         isSecured = properties.isSecure
         self.hint = hint
@@ -48,7 +48,7 @@ struct InputWidgetView: View {
                     }
                     
                 }
-                if properties.isSecure {
+               if properties.isSecure {
                     Button(action: {
                         isSecured.toggle()
                     }) {
@@ -56,6 +56,10 @@ struct InputWidgetView: View {
                             .accentColor(.gray)
                     }
                 }
+               
+                  
+              
+                
             }.onReceive(Just(text), perform: { _ in
                 DispatchQueue.main.async {
                     if text.count > properties.maxLength {
@@ -65,17 +69,18 @@ struct InputWidgetView: View {
             })
             
             
-                .font(.system(size: 16))
-                .foregroundColor(CustomColor.baseLight_20)
-                .frame(height: 32)
-                .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 20))
-                .overlay( RoundedRectangle(cornerRadius: 16) .stroke(isErrorShowing ? .red : CustomColor.baseLight_60))
+            .font(.system(size: 16))
+            .foregroundColor(CustomColor.baseLight_20)
+            .frame(height: 32)
+            .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 20))
+            .overlay( RoundedRectangle(cornerRadius: 16) .stroke(isErrorShowing ? .red : CustomColor.baseLight_60))
             
             Text(errorMsg)
                 .font(.system(size: 13))
                 .foregroundColor(.red).isShowing(isErrorShowing)
                 .padding([.leading], 16)
         }
+       
         
         
     }

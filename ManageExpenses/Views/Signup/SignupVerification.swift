@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct SignupVerification: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     

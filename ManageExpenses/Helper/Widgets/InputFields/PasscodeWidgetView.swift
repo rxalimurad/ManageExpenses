@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Combine
-import Introspect
 
 public struct PasscodeWidgetView: View {
     let maxDigits: Int = 6
@@ -15,7 +14,6 @@ public struct PasscodeWidgetView: View {
     @State var pin: String = ""
     @Binding var validPin: String
     @State var color = CustomColor.baseLight_20
-    
     
     public var body: some View {
         ZStack(alignment: .leading) {
@@ -40,11 +38,6 @@ public struct PasscodeWidgetView: View {
             .accentColor(.clear)
             .foregroundColor(.clear)
             .keyboardType(.numberPad)
-            .introspectTextField { textField in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    textField.becomeFirstResponder()
-                }
-            }
             .onChange(of: Just(pin), perform: { _ in
                 DispatchQueue.main.async {
                     if pin.count > maxDigits {

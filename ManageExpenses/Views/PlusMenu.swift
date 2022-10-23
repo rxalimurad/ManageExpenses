@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum PlusMenuAction {
+enum PlusMenuAction: String {
     case income
     case expense
     case convert

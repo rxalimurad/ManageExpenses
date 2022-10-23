@@ -66,6 +66,6 @@ struct TransactionView: View {
 
 struct TransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionView(transaction: TransactionModel(type: .food, name: "Food", desc: "Buy a burger", amount: 34.0, currencySymbol: "₨", date: Date()))
+        TransactionView(transaction: TransactionModel(id: 1, category: .food, name: "Food", desc: "Buy a burger", amount: 34.0, currencySymbol: "₨", date: Date(), type: .income))
     }
 }

@@ -15,6 +15,9 @@ struct TransactionTabView: View {
         VStack {
             headerView
             subHeader
+                .cornerRadius(10)
+                .padding([.horizontal], 16)
+                
             transactions
         }
         

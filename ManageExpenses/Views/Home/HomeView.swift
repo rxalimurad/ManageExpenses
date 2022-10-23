@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var isRecentTransactionShowing = false
     @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
+    @State private var selectedTrans: TransactionModel?
     var body: some View {
         VStack(alignment: .center) {
             summaryView
@@ -63,6 +64,7 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Spacer()
                             ButtonWidgetView(title: "View All", style: .secondaryButtonSmall) {
+                                
                             }.frame(width: 78, height: 32)
                         }
                         .padding([.top, .leading, .trailing], 16)
@@ -73,7 +75,11 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding([.horizontal], 19)
                             ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-                                TransactionView(transaction: transaction)
+                                Button {
+                                    selectedTrans = transaction
+                                } label: {
+                                    TransactionView(transaction: transaction)
+                                }
                             }
                         }
                     }.isShowing(isRecentTransactionShowing)
@@ -83,7 +89,13 @@ struct HomeView: View {
                 
             }
 
-        }.onAppear(){
+        }
+        .fullScreenCover(item: $selectedTrans, content: { trans in
+            TransactionDetailView(transaction: trans)
+        })
+        
+        
+        .onAppear(){
 //            withAnimation(.linear(duration: 1.0)) {
                 isRecentTransactionShowing.toggle()
 //                }

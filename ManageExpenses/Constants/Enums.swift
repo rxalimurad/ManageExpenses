@@ -19,7 +19,7 @@ enum HTMLType: String {
     }
 }
 
-enum TransactionType: String {
+enum TransactionCategory: String {
     case shopping
     case subscription
     case salary

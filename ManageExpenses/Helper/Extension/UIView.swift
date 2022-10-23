@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-extension View {
-  @ViewBuilder func isShowing(_ showing: Bool) -> some View {
-        if showing {
-            self
-        }
-    }
+extension UIView {
+  
+    public func asUIImage() -> UIImage {
+           let renderer = UIGraphicsImageRenderer(bounds: bounds)
+           return renderer.image { rendererContext in
+               layer.render(in: rendererContext.cgContext)
+           }
+       }
 }

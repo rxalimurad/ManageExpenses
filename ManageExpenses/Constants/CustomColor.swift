@@ -10,7 +10,7 @@ import SwiftUI
 enum CustomColor {
     
     static let primaryColor = Color("primaryColor")
-    static let primaryColor_20 = Color("primaryColor_20")
+    static let primaryColor_20 = Color("primaryColor").opacity(0.2)
     
     
     static let baseLight = Color("baseLight")
@@ -32,4 +32,6 @@ enum CustomColor {
     static let green = Color("greenColor")
     static let blue = Color("blueColor")
     
+    static let keyboardBg = Color("keyboardBg")
+    static let hintColor = Color("hintColor").opacity(0.85)
 }

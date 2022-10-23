@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct AmountInputWidget: View {
-    @State private var amount = ""
+    var amount = ""
     var body: some View {
-      
-                HStack {
-                    Text("$")
-                    TextField("0", text: $amount)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: amount) { _ in
-                            let filtered = amount.filter {"0123456789.".contains($0)}
-                            
-                            if filtered.contains(".") {
-                                let splitted = filtered.split(separator: ".", omittingEmptySubsequences: false)
-                                if splitted.count >= 2 {
-                                    let preDecimal = String(splitted[0])
-                                    let afterDecimal = String(splitted[1])
-                                    amount = "\(preDecimal).\(afterDecimal)"
-                                }
-                            }
-                        }
-               
+        ZStack {
+            HStack {
+                Text("$")
+                Text("0")
+                    .isShowing(amount.isEmpty)
+                    .foregroundColor(CustomColor.baseLight.opacity(0.7))
+                Text(getFormattedAmount(amount: amount))
+                    .isShowing(!amount.isEmpty)
+                
+                   
+            }.multilineTextAlignment(.leading)
+            .padding([.leading], 25)
+             
         }
+    }
+    
+    private func getFormattedAmount(amount: String) -> String {
+        Utilities.getAmountWith(amount: Double(amount) ?? 0)
     }
 }
