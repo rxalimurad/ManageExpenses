@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ManageExpensesApp: App {
-    @State private var showSheet = false
+    @State private var isSplashShowing = true
     
     @State var amount = ""
     init() {
@@ -19,10 +19,15 @@ struct ManageExpensesApp: App {
     var body: some Scene {
         WindowGroup {
             //            LoginIntroView(viewModel: LoginIntroViewModel())
-                        TabControlView(viewRouter: TabControlViewRouter())
+//                        TabControlView(viewRouter: TabControlViewRouter())
             //            SignUpView()
             //            AddExpenseIncomeView(newEntryType: .income)
 //            AddExpenseIncomeView(newEntryType: .convert)
+            if isSplashShowing {
+                SplashView(isShowing: $isSplashShowing)
+            } else {
+                TabControlView(viewRouter: TabControlViewRouter())
+            }
             
         }
     }

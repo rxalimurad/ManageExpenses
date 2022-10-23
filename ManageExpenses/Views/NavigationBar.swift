@@ -14,13 +14,25 @@ struct NavigationBar: View {
     let titleColor: Color
     let showBackBtn: Bool
     let action: () -> Void
+    let rightBtnImage: Image?
+    let rightBtnAction: (() -> Void)?
     
-    init(title: String, top: CGFloat, titleColor: Color = CustomColor.baseLight, showBackBtn: Bool = true, action: @escaping () -> Void) {
+    init(title: String,
+         top: CGFloat,
+         titleColor: Color = CustomColor.baseLight,
+         showBackBtn: Bool = true,
+         action: @escaping () -> Void,
+         rightBtnImage: Image? = nil,
+         rightBtnAction: (() -> Void)? = nil
+    
+    ) {
         self.title = title
         self.top = top
         self.titleColor = titleColor
         self.showBackBtn = showBackBtn
         self.action = action
+        self.rightBtnImage = rightBtnImage
+        self.rightBtnAction = rightBtnAction
     }
     
     var body: some View {
@@ -42,12 +54,21 @@ struct NavigationBar: View {
                 .multilineTextAlignment(.center)
             Spacer()
             Button {
-                action()
+                rightBtnAction?()
             } label: {
-                Image.Custom.navBack
+                if rightBtnImage == nil {
+                    Image.Custom.navBack
                     .renderingMode(.template)
                     .foregroundColor(titleColor)
                     .frame(width: 52, height: 52).hidden()
+                }
+                else {
+                rightBtnImage?
+                    .renderingMode(.template)
+                    .foregroundColor(titleColor)
+                    .frame(width: 52, height: 52)
+                }
+                    
             }
         }.padding([.top], top)
     }

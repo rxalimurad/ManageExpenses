@@ -14,8 +14,10 @@ struct TransactionDetailView: View {
         GeometryReader { geometry in
             VStack {
                 VStack(alignment: .center) {
-                    NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top) {
+                    NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
                         mode.wrappedValue.dismiss()
+                    }, rightBtnImage: .Custom.delete) {
+                        
                     }
                     AmountInputWidget(amount: "\(transaction.amount)")
                         .font(.system(size: 64, weight: .medium))
