@@ -30,6 +30,7 @@
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
 		7BD363534F71BB687E4280C4 /* Pods_ManageExpenses_ManageExpensesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6375A11B988E95AEB77642F2 /* Pods_ManageExpenses_ManageExpensesUITests.framework */; };
 		BBB12C67A94BC6A470AAD6BD /* Pods_ManageExpensesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB04FF2C1F2E83C13AF92F /* Pods_ManageExpensesTests.framework */; };
+		FA2132AE2905922E002EEBF4 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2132AD2905922E002EEBF4 /* Line.swift */; };
 		FA7F869728F9D43F00108E3A /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869628F9D43F00108E3A /* Shake.swift */; };
 		FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869928F9ED6D00108E3A /* LoginView.swift */; };
 		FA7F869D28F9F03A00108E3A /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */; };
@@ -182,6 +183,8 @@
 		FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87D29046D9700C5408D /* SelectionCell.swift */; };
 		FA94E8812904704200C5408D /* SelectorWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8802904704200C5408D /* SelectorWidgetView.swift */; };
 		FA94E8832904876100C5408D /* SelectorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8822904876100C5408D /* SelectorModel.swift */; };
+		FA94E8862904997D00C5408D /* AlertX in Frameworks */ = {isa = PBXBuildFile; productRef = FA94E8852904997D00C5408D /* AlertX */; };
+		FA94E888290533E700C5408D /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E887290533E700C5408D /* TransactionDetailView.swift */; };
 		FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupVerification.swift */; };
@@ -249,6 +252,7 @@
 		B6A8A7F4992E5CE7AACCCEC1 /* Pods-ManageExpenses.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses.debug.xcconfig"; path = "Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses.debug.xcconfig"; sourceTree = "<group>"; };
 		C0879803A6D5FA9432838272 /* Pods-ManageExpensesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpensesTests.release.xcconfig"; path = "Target Support Files/Pods-ManageExpensesTests/Pods-ManageExpensesTests.release.xcconfig"; sourceTree = "<group>"; };
 		E91A519EC38A1BEBDC2D317F /* Pods-ManageExpensesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpensesTests.debug.xcconfig"; path = "Target Support Files/Pods-ManageExpensesTests/Pods-ManageExpensesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA2132AD2905922E002EEBF4 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		FA7F869628F9D43F00108E3A /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		FA7F869928F9ED6D00108E3A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -401,6 +405,7 @@
 		FA94E87D29046D9700C5408D /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
 		FA94E8802904704200C5408D /* SelectorWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorWidgetView.swift; sourceTree = "<group>"; };
 		FA94E8822904876100C5408D /* SelectorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorModel.swift; sourceTree = "<group>"; };
+		FA94E887290533E700C5408D /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
 		FAA478E528F87BD700C06B31 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVerification.swift; sourceTree = "<group>"; };
@@ -423,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA94E8862904997D00C5408D /* AlertX in Frameworks */,
 				56C715AFE7A6A7DC42F75DDA /* Pods_ManageExpenses.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,6 +553,7 @@
 				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
 				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
 				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
+				FA94E887290533E700C5408D /* TransactionDetailView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -1287,6 +1294,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB1E34F28F7F81F00667CF2 /* WebView.swift */,
+				FA2132AD2905922E002EEBF4 /* Line.swift */,
 			);
 			path = BridgingUIKit;
 			sourceTree = "<group>";
@@ -1317,6 +1325,9 @@
 			dependencies = (
 			);
 			name = ManageExpenses;
+			packageProductDependencies = (
+				FA94E8852904997D00C5408D /* AlertX */,
+			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
 			productType = "com.apple.product-type.application";
@@ -1392,6 +1403,9 @@
 				Base,
 			);
 			mainGroup = 5F4B7BC628F6C3B600EFC1F5;
+			packageReferences = (
+				FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */,
+			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1548,6 +1562,7 @@
 				FA82B50128FC0F260038E099 /* ExtraYAxisLabels.swift in Sources */,
 				FA82B51128FC0F260038E099 /* LineChartProtocols.swift in Sources */,
 				FA82B4EC28FC0F250038E099 /* GridStyle.swift in Sources */,
+				FA94E888290533E700C5408D /* TransactionDetailView.swift in Sources */,
 				5F4B7C0128F6CE8400EFC1F5 /* LoginIntroModel.swift in Sources */,
 				FA82B50F28FC0F260038E099 /* LineChartStyle.swift in Sources */,
 				FA82B4EA28FC0F250038E099 /* Marker.swift in Sources */,
@@ -1567,6 +1582,7 @@
 				5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */,
 				FA94E8832904876100C5408D /* SelectorModel.swift in Sources */,
 				FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */,
+				FA2132AE2905922E002EEBF4 /* Line.swift in Sources */,
 				FA82B58528FC1D7F0038E099 /* PieSegmentShape.swift in Sources */,
 				FA82B50D28FC0F260038E099 /* RangedLineStyle.swift in Sources */,
 				FA82B4C328FC0F240038E099 /* AccessibilityRectangle.swift in Sources */,
@@ -2047,6 +2063,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/neel-makhecha/AlertX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA94E8852904997D00C5408D /* AlertX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */;
+			productName = AlertX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5F4B7BC728F6C3B600EFC1F5 /* Project object */;
 }

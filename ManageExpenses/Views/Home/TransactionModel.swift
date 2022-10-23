@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct TransactionModel: Hashable {
-    var type: TransactionType
+struct TransactionModel: Hashable, Identifiable {
+    var id: Int
+    var category: TransactionCategory
     var name: String
     var desc: String
     var amount: Double
     var currencySymbol: String
     var date: Date
+    var type: PlusMenuAction
 }

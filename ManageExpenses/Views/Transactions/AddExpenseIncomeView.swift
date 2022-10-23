@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertX
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -16,6 +17,7 @@ struct AddExpenseIncomeView: View {
     @State var isImgPkrShown = false
     @State var isCamerPkrShown = false
     @State var isCategoryshown = false
+    @State var isTransactionAdded = false
     @State var amount = ""
     @State private var phase = 0.0
     @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
@@ -38,7 +40,7 @@ struct AddExpenseIncomeView: View {
                     mode.wrappedValue.dismiss()
                 }
                
-                Text("Income")
+                Text("How much?")
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
                     .padding([.leading], 26)
@@ -54,7 +56,7 @@ struct AddExpenseIncomeView: View {
                 
                Spacer()
             }
-            .overlay(addDetailsView(geometry),alignment: .bottom)
+            .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
             .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
             .fullScreenCover(isPresented: $isAtchmntViewShown) {
                 ZStack (alignment: .bottom) {
@@ -84,8 +86,95 @@ struct AddExpenseIncomeView: View {
         }
     }
     
+    @ViewBuilder private func getAddDetailsView(type: PlusMenuAction, _ geometry: GeometryProxy)  -> some View {
+        if type == .convert {
+            addDetailsViewTransfer(geometry)
+        } else {
+            addDetailsViewExpenseIncome(geometry)
+        }
+    }
     
-    private func addDetailsView(_ geometry: GeometryProxy) -> some View {
+    @ViewBuilder private func addDetailsViewTransfer(_ geometry: GeometryProxy) -> some View {
+        VStack {
+            
+            ZStack(alignment: .center) {
+                HStack(alignment: .center, spacing: 16) {
+                    SelectorWidgetView(hint: "From", text: "", data: $categoryData)
+                    
+                    SelectorWidgetView(hint: "To", text: "", data: $categoryData)
+                       
+                }
+                Image.Custom.transferSign
+            }
+            .padding([.top], 24)
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
+                .padding([.top], 16)
+                .padding([.top, .bottom], 16)
+            if selectedImage == nil {
+                HStack(alignment: .center) {
+                    HStack(spacing: 10) {
+                        Image.Custom.attachment
+                        Text("Add Attachment")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding([.vertical], 16)
+                    
+                }.onTapGesture {
+                    withAnimation {
+                        isAtchmntViewShown.toggle()
+                    }
+                }.background(
+                    Rectangle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
+                        .foregroundColor(CustomColor.baseLight_20)
+                        .cornerRadius(5)
+                )
+            } else {
+                HStack {
+                    ZStack(alignment: .topTrailing) {
+                        selectedImage?
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        Button {
+                            withAnimation {
+                                selectedImage = nil
+                            }
+                        } label: {
+                            Image.Custom.grayCross
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .offset(x: 12, y: -12)
+                        }
+
+                            
+                    }
+                    Spacer()
+                }
+            }
+            
+
+            ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                isTransactionAdded.toggle()
+            }
+            .padding([.top], 40)
+            .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
+            .alertX(isPresented: $isTransactionAdded, content: {
+                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
+                    mode.wrappedValue.dismiss()
+                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+                })
+        }
+        .padding([.horizontal], 16)
+        .cornerRadius(30, corners: [.topLeft, .topRight])
+        .background(
+            RoundedCorner(radius: 30)
+                .foregroundColor(CustomColor.baseLight)
+        )
+    
+    }
+    
+    @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {
         VStack {
             SelectorWidgetView(hint: "Category", text: "", data: $categoryData)
                 .padding([.top], 24)
@@ -155,10 +244,15 @@ struct AddExpenseIncomeView: View {
 //            .padding([.vertical], 16)
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                
+                isTransactionAdded.toggle()
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
+            .alertX(isPresented: $isTransactionAdded, content: {
+                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
+                    mode.wrappedValue.dismiss()
+                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+                })
         }
         .padding([.horizontal], 16)
         .cornerRadius(30, corners: [.topLeft, .topRight])
