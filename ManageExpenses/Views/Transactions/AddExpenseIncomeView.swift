@@ -10,6 +10,8 @@ import AlertX
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State var showAmtKeybd = false
     @State var isRepeated = false
     @State var isAtchmntViewShown = false
@@ -155,7 +157,10 @@ struct AddExpenseIncomeView: View {
             
 
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                isTransactionAdded.toggle()
+                
+             isTransactionAdded.toggle()
+                addItem()
+             
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
@@ -172,6 +177,23 @@ struct AddExpenseIncomeView: View {
                 .foregroundColor(CustomColor.baseLight)
         )
     
+    }
+    
+    private func addItem() {
+            let transaction = Transaction(context: viewContext)
+            transaction.category = ""
+            transaction.transAmount = Double(amount)!
+            transaction.transName = "Food"
+            transaction.transDesc = "kldsfjklsgn skfgjfklgn erijterig reit ierjt ierjt irtjr"
+//             transaction.image = selectedImage
+            transaction.date = Date()
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        
     }
     
     @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {

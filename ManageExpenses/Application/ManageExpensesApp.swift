@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct ManageExpensesApp: App {
+    let persistenceController = PersistenceController.shared
+
     @State private var isSplashShowing = true
     
     @State var amount = ""
@@ -26,7 +28,9 @@ struct ManageExpensesApp: App {
             if isSplashShowing {
                 SplashView(isShowing: $isSplashShowing)
             } else {
+//                LoginIntroView(viewModel: LoginIntroViewModel())
                 TabControlView(viewRouter: TabControlViewRouter())
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
             
         }

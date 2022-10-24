@@ -6,18 +6,16 @@
 //
 
 import Foundation
-
+import CoreData
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published var recentTransactionsKeys = [String]()
-    var recentTransactionsDict = [String: [Transaction]]()
-    init() {
-        let recentTransactions: [Transaction] = [ ]
-        recentTransactionsDict = getTransactionDict(transactions: recentTransactions)
-        
-    }
     
-    func getTransactionDict(transactions: [Transaction]) -> [String: [Transaction]] {
+
+    var recentTransactionsDict = [String: [Transaction]]()
+    
+    func getTransactionDict(transactions: FetchedResults<Transaction>) {
         recentTransactionsKeys = []
         let sortedTrans = transactions.sorted(by: { $0.date! > $1.date! })
         var dict = [String: [Transaction]]()
@@ -30,7 +28,7 @@ class HomeViewModel: ObservableObject {
             }
             
         }
-        return dict
+        recentTransactionsDict =  dict
     }
     
 }

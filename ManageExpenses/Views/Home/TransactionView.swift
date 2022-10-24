@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TransactionView: View {
+    
     var transaction: Transaction
     var body: some View {
         

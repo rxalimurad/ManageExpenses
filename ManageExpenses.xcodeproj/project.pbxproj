@@ -13,7 +13,7 @@
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
 		5F4040A42906496A00ECC069 /* Transactions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */; };
-		5F4040A729065E6D00ECC069 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */; };
+		5F4040A729065E6D00ECC069 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4040A629065E6D00ECC069 /* PersistenceController.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -398,7 +398,7 @@
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
 		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		5F4040A32906496A00ECC069 /* Transactions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transactions.xcdatamodel; sourceTree = "<group>"; };
-		5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		5F4040A629065E6D00ECC069 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -804,7 +804,7 @@
 		5F4040A529065E5000ECC069 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */,
+				5F4040A629065E6D00ECC069 /* PersistenceController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -2560,7 +2560,7 @@
 				FA82B58628FC1D7F0038E099 /* DoughnutSegmentShape.swift in Sources */,
 				FA82B4F928FC0F250038E099 /* LineAndBarEnums.swift in Sources */,
 				FA82B4FB28FC0F260038E099 /* XAxisGrid.swift in Sources */,
-				5F4040A729065E6D00ECC069 /* CoreDataHandler.swift in Sources */,
+				5F4040A729065E6D00ECC069 /* PersistenceController.swift in Sources */,
 				FA2134042905C914002EEBF4 /* PieChart.swift in Sources */,
 				FA2134542905C916002EEBF4 /* HomeView.swift in Sources */,
 				FA2133DC2905C913002EEBF4 /* Bars.swift in Sources */,

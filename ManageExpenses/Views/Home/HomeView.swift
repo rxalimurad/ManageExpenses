@@ -9,7 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
-    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.transId, ascending: true)],
+        animation: .default)
+    private var recentTransactions: FetchedResults<Transaction>
     var safeAreaInsets: EdgeInsets
     var data = getChartData()
     @State private var isGraphShowing = true
@@ -17,12 +20,14 @@ struct HomeView: View {
     @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
     @State private var selectedTrans: Transaction?
+
     var body: some View {
         VStack(alignment: .center) {
             summaryView
                 .background(LinearGradient(colors: [CustomColor.bgYellow, CustomColor.bgYellow.opacity(0.2)], startPoint: .top, endPoint: .bottom))
                 .cornerRadius(28, corners: [.bottomLeft, .bottomRight])
-            
+
+           
             ScrollView {
                 VStack {
                     Text("").frame(height: 10)
@@ -96,6 +101,7 @@ struct HomeView: View {
         
         
         .onAppear(){
+            viewModel.getTransactionDict(transactions: recentTransactions)
 //            withAnimation(.linear(duration: 1.0)) {
                 isRecentTransactionShowing.toggle()
 //                }
