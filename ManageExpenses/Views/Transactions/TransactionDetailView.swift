@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    var transaction: TransactionModel
+    var transaction: Transaction
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -19,18 +19,18 @@ struct TransactionDetailView: View {
                     }, rightBtnImage: .Custom.delete) {
                         
                     }
-                    AmountInputWidget(amount: "\(transaction.amount)")
+                    AmountInputWidget(amount: "\(transaction.transAmount)")
                         .font(.system(size: 64, weight: .medium))
                         .foregroundColor(CustomColor.baseLight)
                         .padding([.top], 26)
                     
                     
-                    Text(transaction.name)
+                    Text(transaction.transName ?? "")
                          .foregroundColor(CustomColor.baseLight_80)
                          .font(.system(size: 16, weight: .medium))
                          .padding([.top], 0)
                     
-                    Text(transaction.date.dateToShow)
+                    Text(transaction.date!.dateToShow)
                          .foregroundColor(CustomColor.baseLight_80)
                          .font(.system(size: 13, weight: .medium))
                          .padding([.top], 8)
@@ -38,7 +38,7 @@ struct TransactionDetailView: View {
                 
                 }.background(
                     Rectangle()
-                        .foregroundColor(getBgColor(type: transaction.type))
+                        .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.transType ?? "") ?? .expense))
                     
                 ).cornerRadius(30, corners: [.bottomLeft, .bottomRight])
               
@@ -49,7 +49,7 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                                
-                            Text(transaction.type.rawValue)
+                            Text(transaction.transType ?? "")
                                 .foregroundColor(CustomColor.baseDark)
                                 .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
@@ -60,7 +60,7 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                                
-                            Text(transaction.category.rawValue)
+                            Text(transaction.category ?? "")
                                 .foregroundColor(CustomColor.baseDark)
                                 .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
@@ -94,7 +94,7 @@ struct TransactionDetailView: View {
                             .padding([.top], 14)
                             .multilineTextAlignment(.leading)
                             .frame(maxHeight: .infinity)
-                        Text(transaction.desc)
+                        Text(transaction.transDesc ?? "")
                             .foregroundColor(CustomColor.baseDark)
                             .font(.system(size: 16, weight: .medium))
                             .padding([.horizontal], 16)

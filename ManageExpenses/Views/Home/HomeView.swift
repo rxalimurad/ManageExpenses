@@ -16,7 +16,7 @@ struct HomeView: View {
     @State private var isRecentTransactionShowing = false
     @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
-    @State private var selectedTrans: TransactionModel?
+    @State private var selectedTrans: Transaction?
     var body: some View {
         VStack(alignment: .center) {
             summaryView

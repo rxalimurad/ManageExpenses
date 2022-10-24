@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransactionView: View {
-    var transaction: TransactionModel
+    var transaction: Transaction
     var body: some View {
         
         HStack(alignment: .center) {
@@ -40,11 +40,11 @@ struct TransactionView: View {
 
     private var transInfo: some View {
         VStack(alignment: .leading, spacing: 13) {
-            Text(transaction.name)
+            Text(transaction.transName ?? "")
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(CustomColor.baseDark_25)
             
-            Text(transaction.desc)
+            Text(transaction.transDesc ?? "")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
                 .lineLimit(1)
@@ -52,20 +52,14 @@ struct TransactionView: View {
     }
     private var transInfoAmount: some View {
         VStack(alignment: .trailing, spacing: 13) {
-            Text(Utilities.getFormattedAmount(transaction.currencySymbol, amount: transaction.amount))
+            Text(Utilities.getFormattedAmount("$", amount: transaction.transAmount))
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(transaction.amount < 0 ? .red : .green)
+                .foregroundColor((transaction.transAmount) < 0 ? .red : .green)
             
-            Text(transaction.date.timeToShow)
+            Text(transaction.date!.timeToShow)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
         }
         .padding([.trailing], 16)
-    }
-}
-
-struct TransactionView_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionView(transaction: TransactionModel(id: 1, category: .food, name: "Food", desc: "Buy a burger", amount: 34.0, currencySymbol: "₨", date: Date(), type: .income))
     }
 }

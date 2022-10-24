@@ -22,8 +22,19 @@ enum HTMLType: String {
 enum TransactionCategory: String {
     case shopping
     case subscription
-    case salary
+    case gift
+    case car
+    case Entertainment
+    case pets
+    case transfer
+    case health
     case transport
     case food
+    case eatingOut
+    case taxi
+    case toiletry
+    case communication
+    case sports
+    case clothes
 }
 

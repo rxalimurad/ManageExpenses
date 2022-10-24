@@ -12,6 +12,8 @@
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
+		5F4040A42906496A00ECC069 /* Transactions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */; };
+		5F4040A729065E6D00ECC069 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BDA28F6C3BC00EFC1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD928F6C3BC00EFC1F5 /* Preview Assets.xcassets */; };
@@ -21,6 +23,7 @@
 		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
 		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
+		5FAF69742906B09500849C95 /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF69732906B09500849C95 /* DataSets.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
@@ -167,7 +170,6 @@
 		FA21344F2905C916002EEBF4 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21337E2905C912002EEBF4 /* ManageExpensesApp.swift */; };
 		FA2134502905C916002EEBF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2133802905C912002EEBF4 /* Assets.xcassets */; };
 		FA2134512905C916002EEBF4 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2133832905C912002EEBF4 /* TransactionView.swift */; };
-		FA2134522905C916002EEBF4 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2133842905C912002EEBF4 /* TransactionModel.swift */; };
 		FA2134532905C916002EEBF4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2133852905C912002EEBF4 /* HomeViewModel.swift */; };
 		FA2134542905C916002EEBF4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2133862905C912002EEBF4 /* HomeView.swift */; };
 		FA2134552905C916002EEBF4 /* SetupAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2133882905C912002EEBF4 /* SetupAccountView.swift */; };
@@ -361,7 +363,6 @@
 		FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58228FC1D7F0038E099 /* DoughnutChart.swift */; };
 		FA82B59128FC1D7F0038E099 /* PieChartEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */; };
 		FA82B59428FDD93E0038E099 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59328FDD93E0038E099 /* Date.swift */; };
-		FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59528FDDEB30038E099 /* TransactionModel.swift */; };
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
 		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
@@ -396,6 +397,8 @@
 		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
 		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		5F4040A32906496A00ECC069 /* Transactions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transactions.xcdatamodel; sourceTree = "<group>"; };
+		5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -406,6 +409,7 @@
 		5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsStyles.swift; sourceTree = "<group>"; };
 		5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWidgetView.swift; sourceTree = "<group>"; };
 		5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5FAF69732906B09500849C95 /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
@@ -556,7 +560,6 @@
 		FA21337E2905C912002EEBF4 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		FA2133802905C912002EEBF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA2133832905C912002EEBF4 /* TransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
-		FA2133842905C912002EEBF4 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		FA2133852905C912002EEBF4 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA2133862905C912002EEBF4 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FA2133882905C912002EEBF4 /* SetupAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupAccountView.swift; sourceTree = "<group>"; };
@@ -749,7 +752,6 @@
 		FA82B58228FC1D7F0038E099 /* DoughnutChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoughnutChart.swift; sourceTree = "<group>"; };
 		FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartEnums.swift; sourceTree = "<group>"; };
 		FA82B59328FDD93E0038E099 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		FA82B59528FDDEB30038E099 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
@@ -797,6 +799,14 @@
 				5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */,
 			);
 			path = AmountKeyboard;
+			sourceTree = "<group>";
+		};
+		5F4040A529065E5000ECC069 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5F4040A629065E6D00ECC069 /* CoreDataHandler.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		5F4B7BC628F6C3B600EFC1F5 = {
@@ -1532,7 +1542,6 @@
 			isa = PBXGroup;
 			children = (
 				FA2133832905C912002EEBF4 /* TransactionView.swift */,
-				FA2133842905C912002EEBF4 /* TransactionModel.swift */,
 				FA2133852905C912002EEBF4 /* HomeViewModel.swift */,
 				FA2133862905C912002EEBF4 /* HomeView.swift */,
 			);
@@ -1729,7 +1738,6 @@
 			children = (
 				FA7FB34728FB08D800D0097D /* HomeView.swift */,
 				5F062CE028FD4AC600BB97D7 /* TransactionView.swift */,
-				FA82B59528FDDEB30038E099 /* TransactionModel.swift */,
 				FA82B59728FDDF980038E099 /* HomeViewModel.swift */,
 			);
 			path = Home;
@@ -2310,6 +2318,7 @@
 			children = (
 				5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */,
 				FA94E8822904876100C5408D /* SelectorModel.swift */,
+				5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2360,6 +2369,7 @@
 		FAA478ED28F881AC00C06B31 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				5F4040A529065E5000ECC069 /* CoreData */,
 				FAB1E34E28F7F7DE00667CF2 /* BridgingUIKit */,
 				FAB1E35328F7F98700667CF2 /* HTMLs */,
 				FAB1E33D28F73EF200667CF2 /* Extension */,
@@ -2399,6 +2409,7 @@
 				5F4B7C0428F6D27600EFC1F5 /* CustomColor.swift */,
 				FAB1E34528F746AA00667CF2 /* Constants.swift */,
 				FAB1E35728F7FCC300667CF2 /* Enums.swift */,
+				5FAF69732906B09500849C95 /* DataSets.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -2549,6 +2560,7 @@
 				FA82B58628FC1D7F0038E099 /* DoughnutSegmentShape.swift in Sources */,
 				FA82B4F928FC0F250038E099 /* LineAndBarEnums.swift in Sources */,
 				FA82B4FB28FC0F260038E099 /* XAxisGrid.swift in Sources */,
+				5F4040A729065E6D00ECC069 /* CoreDataHandler.swift in Sources */,
 				FA2134042905C914002EEBF4 /* PieChart.swift in Sources */,
 				FA2134542905C916002EEBF4 /* HomeView.swift in Sources */,
 				FA2133DC2905C913002EEBF4 /* Bars.swift in Sources */,
@@ -2663,6 +2675,7 @@
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
 				FA82B4CD28FC0F240038E099 /* API.swift in Sources */,
+				5F4040A42906496A00ECC069 /* Transactions.xcdatamodeld in Sources */,
 				FA21345E2905C916002EEBF4 /* AttachmentView.swift in Sources */,
 				FA2133C92905C913002EEBF4 /* RangedBarDataSet.swift in Sources */,
 				FA2134322905C915002EEBF4 /* LineChartStyle.swift in Sources */,
@@ -2812,9 +2825,9 @@
 				FA2133CB2905C913002EEBF4 /* BarStyle.swift in Sources */,
 				FA2134692905C917002EEBF4 /* WebView.swift in Sources */,
 				FA2134342905C915002EEBF4 /* LineChartProtocols.swift in Sources */,
+				5FAF69742906B09500849C95 /* DataSets.swift in Sources */,
 				FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */,
 				FA82B4D028FC0F240038E099 /* Extension+NSNotificationName.swift in Sources */,
-				FA2134522905C916002EEBF4 /* TransactionModel.swift in Sources */,
 				FA82B4B428FC0F240038E099 /* BarChartDataPoint.swift in Sources */,
 				FA82B4B328FC0F240038E099 /* StackedBarDataPoint.swift in Sources */,
 				FA2134572905C916002EEBF4 /* TabControlViewRouter.swift in Sources */,
@@ -2841,7 +2854,6 @@
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,
 				5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */,
 				FAA478E628F87BD700C06B31 /* LoginIntroViewModel.swift in Sources */,
-				FA82B59628FDDEB30038E099 /* TransactionModel.swift in Sources */,
 				FA2134632905C916002EEBF4 /* PlusMenu.swift in Sources */,
 				FA2134882905CF31002EEBF4 /* SplashView.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
@@ -3130,6 +3142,19 @@
 			productName = AlertX;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5F4040A32906496A00ECC069 /* Transactions.xcdatamodel */,
+			);
+			currentVersion = 5F4040A32906496A00ECC069 /* Transactions.xcdatamodel */;
+			path = Transactions.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5F4B7BC728F6C3B600EFC1F5 /* Project object */;
 }
