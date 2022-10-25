@@ -222,6 +222,8 @@
 		FA2134882905CF31002EEBF4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2134872905CF31002EEBF4 /* SplashView.swift */; };
 		FA21348A2905CFE2002EEBF4 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2134892905CFE2002EEBF4 /* LottieView.swift */; };
 		FA21348D2905D2C0002EEBF4 /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */; };
+		FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E66B290836DA008CF65A /* MiscListOfData.swift */; };
+		FA24E67129083871008CF65A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E67029083871008CF65A /* ProfileView.swift */; };
 		FA7F869728F9D43F00108E3A /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869628F9D43F00108E3A /* Shake.swift */; };
 		FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869928F9ED6D00108E3A /* LoginView.swift */; };
 		FA7F869D28F9F03A00108E3A /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */; };
@@ -612,6 +614,8 @@
 		FA2134872905CF31002EEBF4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		FA2134892905CFE2002EEBF4 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
+		FA24E66B290836DA008CF65A /* MiscListOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscListOfData.swift; sourceTree = "<group>"; };
+		FA24E67029083871008CF65A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FA7F869628F9D43F00108E3A /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		FA7F869928F9ED6D00108E3A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -1704,6 +1708,14 @@
 			path = AmountKeyboard;
 			sourceTree = "<group>";
 		};
+		FA24E66D29083835008CF65A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA24E67029083871008CF65A /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		FA7F869828F9ED3100108E3A /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -2302,6 +2314,7 @@
 				FA7F86A828FAAACB00108E3A /* Base */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
+				FA24E66D29083835008CF65A /* Profile */,
 				FA2134872905CF31002EEBF4 /* SplashView.swift */,
 			);
 			path = Views;
@@ -2322,6 +2335,7 @@
 				5F4B7C0028F6CE8400EFC1F5 /* LoginIntroModel.swift */,
 				FA94E8822904876100C5408D /* SelectorModel.swift */,
 				5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */,
+				FA24E66B290836DA008CF65A /* MiscListOfData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2557,6 +2571,7 @@
 				FA2133FD2905C914002EEBF4 /* PieChartStyle.swift in Sources */,
 				FA21346B2905C917002EEBF4 /* Date.swift in Sources */,
 				FA2134642905C916002EEBF4 /* TabControlView.swift in Sources */,
+				FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */,
 				FA2134672905C917002EEBF4 /* ForgotPasswordView.swift in Sources */,
 				FA2133F82905C913002EEBF4 /* Legends.swift in Sources */,
 				FA2134312905C915002EEBF4 /* PointStyle.swift in Sources */,
@@ -2869,6 +2884,7 @@
 				FA2134292905C914002EEBF4 /* LineShape.swift in Sources */,
 				FA82B4E428FC0F250038E099 /* LinearTrendLineShape.swift in Sources */,
 				FA2134272905C914002EEBF4 /* YAxisPOI.swift in Sources */,
+				FA24E67129083871008CF65A /* ProfileView.swift in Sources */,
 				5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */,
 				FA21347B2905C917002EEBF4 /* ImagePicker.swift in Sources */,
 				FA82B4A928FC0F240038E099 /* BarChartStyle.swift in Sources */,

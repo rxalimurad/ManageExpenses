@@ -73,29 +73,22 @@ struct HomeView: View {
                             }.frame(width: 78, height: 32)
                         }
                         .padding([.top, .leading, .trailing], 16)
+                     
                         
-                        ForEach(recentTransactions, id: \.self) { trans in
-                            Button {
-                                selectedTrans = trans
-                            } label: {
-                                TransactionView(transaction: trans)
+                        ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
+                            Text(headerTransDate)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(CustomColor.baseDark)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.horizontal], 19)
+                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+                                Button {
+                                    selectedTrans = transaction
+                                } label: {
+                                    TransactionView(transaction: transaction)
+                                }
                             }
                         }
-                        
-//                        ForEach(viewModel.recentTransactionsKeys, id: \.self) { headerTransDate in
-//                            Text(headerTransDate)
-//                                .font(.system(size: 16, weight: .medium))
-//                                .foregroundColor(CustomColor.baseDark)
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                                .padding([.horizontal], 19)
-//                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-//                                Button {
-//                                    selectedTrans = transaction
-//                                } label: {
-//                                    TransactionView(transaction: transaction)
-//                                }
-//                            }
-//                        }
                     }.transition(.move(edge: .bottom))
 
 }
@@ -107,13 +100,6 @@ struct HomeView: View {
             TransactionDetailView(transaction: trans)
         })
         
-        
-        .onAppear(){
-            viewModel.getTransactionDict(transactions: recentTransactions)
-        }
-        .onDisappear() {
-            viewModel.getTransactionDict(transactions: recentTransactions)
-        }
         
         
     }
@@ -142,7 +128,7 @@ struct HomeView: View {
                     Text("Account Balance")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(CustomColor.baseLight_20)
-                    Text("$9,400")
+                    Text(viewModel.getAccountBalance(trans: recentTransactions))
                         .font(.system(size: 40, weight: .semibold))
                         .foregroundColor(CustomColor.baseDark_75)
                 }
@@ -177,7 +163,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Income")
                         .font(.system(size: 14, weight: .medium))
-                    Text("$5000")
+                    Text(viewModel.getIncome(trans: recentTransactions))
                         .font(.system(size: 22, weight: .semibold))
                 }
                 .foregroundColor(CustomColor.baseLight_80)
@@ -193,7 +179,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Expenses")
                         .font(.system(size: 14, weight: .medium))
-                    Text("$50")
+                    Text(viewModel.getExpense(trans: recentTransactions))
                         .font(.system(size: 22, weight: .semibold))
                 }.foregroundColor(CustomColor.baseLight_80)
             }

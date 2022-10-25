@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AmountInputWidget: View {
     var amount = ""
+    var leading: CGFloat = 25
     var body: some View {
         ZStack {
             HStack {
@@ -21,7 +22,7 @@ struct AmountInputWidget: View {
                 
                    
             }.multilineTextAlignment(.leading)
-            .padding([.leading], 25)
+            .padding([.leading], leading)
              
         }
     }

@@ -34,7 +34,7 @@ struct TabControlView: View {
                         case .records:
                             Text("Records")
                         case .user:
-                            Text("User")
+                            ProfileView(safeAreaInsets: geometry.safeAreaInsets)
                         }
                     }.allowsHitTesting(!showPopUp)
                     Spacer()

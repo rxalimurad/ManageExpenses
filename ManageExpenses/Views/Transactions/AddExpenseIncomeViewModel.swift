@@ -29,7 +29,7 @@ class AddExpenseIncomeViewModel: ObservableObject {
         trans.id = UUID()
         trans.category = category
         trans.date = Date()
-        trans.image = image.asUIImage().jpegData(compressionQuality: 1.0)
+        trans.image = image.asUIImage().jpegData(compressionQuality: 0.3)
         save(context: context)
      
     }

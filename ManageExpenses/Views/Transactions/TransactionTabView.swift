@@ -9,8 +9,12 @@ import SwiftUI
 
 struct TransactionTabView: View {
     var safeAreaInsets: EdgeInsets
-    
-    @ObservedObject var viewModel = TransactionViewModel()
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
+        animation: .default)
+    private var recentTransactions: FetchedResults<Transaction>
+    @State private var selectedTrans: Transaction?
+    @ObservedObject var viewModel = HomeViewModel()
     var body: some View {
         VStack {
             headerView
@@ -20,6 +24,9 @@ struct TransactionTabView: View {
                 
             transactions
         }
+        .fullScreenCover(item: $selectedTrans, content: { trans in
+            TransactionDetailView(transaction: trans)
+        })
         
     }
     
@@ -39,16 +46,21 @@ struct TransactionTabView: View {
     
     var transactions: some View {
         ScrollView {
-            ForEach(viewModel.transactionsKeys, id: \.self) { headerTransDate in
+            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
                 Text(headerTransDate)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(CustomColor.baseDark)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.horizontal], 19)
-                ForEach(viewModel.transactionsDict[headerTransDate]!, id: \.self) { transaction in
-                    TransactionView(transaction: transaction)
+                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+                    Button {
+                        selectedTrans = transaction
+                    } label: {
+                        TransactionView(transaction: transaction)
+                    }
                 }
             }
+
         }
     }
     

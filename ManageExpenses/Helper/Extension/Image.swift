@@ -39,6 +39,7 @@ extension Image {
         static let unchecked = Image(systemName: "ccheckmark.circle")
         static let transferSign = Image("transferSign")
         static let delete = Image("delete")
+        static let edit = Image("edit")
         
         
     }

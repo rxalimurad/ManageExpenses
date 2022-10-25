@@ -13,7 +13,6 @@ struct TransactionDetailView: View {
     @State var attachmentImage = Image("")
     var body: some View {
         GeometryReader { geometry in
-            if #available(iOS 15.0, *) {
                 VStack {
                     VStack(alignment: .center) {
                         NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
@@ -21,7 +20,7 @@ struct TransactionDetailView: View {
                         }, rightBtnImage: .Custom.delete) {
                             
                         }
-                        AmountInputWidget(amount: "\(transaction.transAmount)")
+                        AmountInputWidget(amount: "\(transaction.transAmount)", leading: 0)
                             .font(.system(size: 64, weight: .medium))
                             .foregroundColor(CustomColor.baseLight)
                             .padding([.top], 26)
@@ -110,18 +109,16 @@ struct TransactionDetailView: View {
                                 .padding([.horizontal], 16)
                                 .padding([.top], 16)
                                 .multilineTextAlignment(.leading)
-                                .frame(maxWidth: .infinity)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 .isShowing(transaction.image != nil)
                             
                             attachmentImage
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .cornerRadius(10)
-                                .overlay(RoundedRectangle(cornerRadius: 10)
-                                    .stroke(CustomColor.baseLight_20, lineWidth: 0.5))
                                 .shadow(radius: 10)
                                 .padding([.horizontal], 16)
                                 .padding([.top], 16).isShowing(transaction.image != nil)
+                                .cornerRadius(20)
                         }
                     }
                     .offset(x: 0, y: -35)
@@ -134,12 +131,13 @@ struct TransactionDetailView: View {
                     .padding([.bottom], geometry.safeAreaInsets.bottom + 20)
                     
                 }.edgesIgnoringSafeArea([.all])
-                    .task {
-                       attachmentImage = Image.getImage(data: transaction.image)
+                .onAppear() {
+                    DispatchQueue.global(qos: .background).async {
+                        attachmentImage = Image.getImage(data: transaction.image)
                     }
-            } else {
-                // Fallback on earlier versions
-            }
+                }
+            
+            
             
             
         }
