@@ -59,7 +59,7 @@ struct SignUpView: View {
                 NavigationLink(destination: SignupVerification()) {
                     ButtonWidgetView(title: "Sign Up", style: .primaryButton, action: {
                         
-                    }).disabled(true)
+                    }).allowsHitTesting(false)
                         .padding([.top], 27)
                         .padding([.trailing, .leading], 16)
                 }

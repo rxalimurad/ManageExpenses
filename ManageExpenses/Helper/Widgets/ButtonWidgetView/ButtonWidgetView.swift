@@ -11,6 +11,7 @@ struct ButtonWidgetView<Style: ButtonStyle>: View {
     private var style: Style
     private var title: String
     private var image: Image?
+    private var isDisabled: Bool = false
     private var action: () -> Void
     
     init(title: String, image: Image? = nil, style: Style, action: @escaping () -> Void) {
@@ -33,7 +34,8 @@ struct ButtonWidgetView<Style: ButtonStyle>: View {
             }
             .frame(maxWidth: .infinity, maxHeight: 56)
                 
-        }.buttonStyle(style)
+        }
+        .buttonStyle(style)
             
         
     }

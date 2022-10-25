@@ -32,7 +32,7 @@ struct ForgotPasswordConfirmationView: View {
             NavigationLink(destination: ResetPasswordView()) {
                 ButtonWidgetView(title: "Back to Login", style: .primaryButton, action: {
                     
-                }).disabled(true)
+                }).allowsHitTesting(false)
                     .padding([.bottom], 50)
                     .padding([.trailing, .leading], 16)
             }

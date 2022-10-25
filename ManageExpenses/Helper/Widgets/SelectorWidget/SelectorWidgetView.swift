@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SelectorWidgetView: View {
-    @State var showSelection = false
     let hint: String
-    let isMultiSelector: Bool = false
-    @State var text: String
+    @Binding var text: String
     @Binding var data: [SelectDataModel]
     
+    @State var showSelection = false
+    let isMultiSelector: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {

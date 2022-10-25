@@ -30,7 +30,7 @@ struct ResetPasswordView: View {
             NavigationLink(destination: LoginIntroView(viewModel: LoginIntroViewModel())) {
                 ButtonWidgetView(title: "Continue", style: .primaryButton, action: {
                     
-                }).disabled(true)
+                }).allowsHitTesting(false)
                     .padding([.top], 32)
                     .padding([.trailing, .leading], 16)
             }

@@ -10,13 +10,13 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.transId, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
         animation: .default)
     private var recentTransactions: FetchedResults<Transaction>
     var safeAreaInsets: EdgeInsets
     var data = getChartData()
     @State private var isGraphShowing = true
-    @State private var isRecentTransactionShowing = false
+    @State private var isRecentTransactionShowing = true
     @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
     @State private var selectedTrans: Transaction?
@@ -73,22 +73,30 @@ struct HomeView: View {
                             }.frame(width: 78, height: 32)
                         }
                         .padding([.top, .leading, .trailing], 16)
-                        ForEach(viewModel.recentTransactionsKeys, id: \.self) { headerTransDate in
-                            Text(headerTransDate)
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(CustomColor.baseDark)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding([.horizontal], 19)
-                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-                                Button {
-                                    selectedTrans = transaction
-                                } label: {
-                                    TransactionView(transaction: transaction)
-                                }
+                        
+                        ForEach(recentTransactions, id: \.self) { trans in
+                            Button {
+                                selectedTrans = trans
+                            } label: {
+                                TransactionView(transaction: trans)
                             }
                         }
-                    }.isShowing(isRecentTransactionShowing)
-                        .transition(.move(edge: .bottom))
+                        
+//                        ForEach(viewModel.recentTransactionsKeys, id: \.self) { headerTransDate in
+//                            Text(headerTransDate)
+//                                .font(.system(size: 16, weight: .medium))
+//                                .foregroundColor(CustomColor.baseDark)
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+//                                .padding([.horizontal], 19)
+//                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+//                                Button {
+//                                    selectedTrans = transaction
+//                                } label: {
+//                                    TransactionView(transaction: transaction)
+//                                }
+//                            }
+//                        }
+                    }.transition(.move(edge: .bottom))
 
 }
                 
@@ -102,11 +110,9 @@ struct HomeView: View {
         
         .onAppear(){
             viewModel.getTransactionDict(transactions: recentTransactions)
-//            withAnimation(.linear(duration: 1.0)) {
-                isRecentTransactionShowing.toggle()
-//                }
-           
-            
+        }
+        .onDisappear() {
+            viewModel.getTransactionDict(transactions: recentTransactions)
         }
         
         

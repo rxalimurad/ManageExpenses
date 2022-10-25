@@ -27,7 +27,7 @@ struct LoginView: View {
             NavigationLink(destination: SetupAccountView()) {
                 ButtonWidgetView(title: "Login", style: .primaryButton, action: {
                     
-                }).disabled(true)
+                }).allowsHitTesting(false)
                     .padding([.top], 40)
                     .padding([.trailing, .leading], 16)
             }

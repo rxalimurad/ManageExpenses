@@ -51,7 +51,7 @@ struct SignupVerification: View {
                     withAnimation(.default) {
                                         self.attempts += 1
                                     }
-                }).disabled(true)
+                }).allowsHitTesting(false)
                     .padding([.trailing, .leading], 16)
                     .padding([.top], 30)
             }

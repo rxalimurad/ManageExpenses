@@ -58,7 +58,7 @@ struct KeyboardView: View {
         
         return updatedAmount
     }
-    //2.33 33.
+   
     
     private func isValidAmount(amount: String) -> Bool {
         let array = amount.split(separator: ".")

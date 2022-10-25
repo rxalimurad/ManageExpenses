@@ -11,16 +11,26 @@ import AlertX
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var viewModel = AddExpenseIncomeViewModel()
+    
+    // Mark: - State Variables for User Input
+    @State var amount = ""
+    @State var category = ""
+    @State var description = ""
+    @State var wallet = ""
+    @State var toWallet = ""
+    @State var fromWallet = ""
+    @State var selectedImage: Image?
     
     @State var showAmtKeybd = false
     @State var isRepeated = false
     @State var isAtchmntViewShown = false
-    @State var selectedImage: Image?
+    
+    
     @State var isImgPkrShown = false
     @State var isCamerPkrShown = false
     @State var isCategoryshown = false
     @State var isTransactionAdded = false
-    @State var amount = ""
     @State private var phase = 0.0
     @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
                                SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
@@ -29,9 +39,9 @@ struct AddExpenseIncomeView: View {
                                SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
     
     @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", Image: .Custom.camera, color: .red),
-                               SelectDataModel(id: "2", desc: "Bank Al Habib", Image: .Custom.bell, color: .green),
-                               SelectDataModel(id: "3", desc: "SadaaPay", Image: .Custom.bell, color: .yellow),
-                                   ]
+                             SelectDataModel(id: "2", desc: "Bank Al Habib", Image: .Custom.bell, color: .green),
+                             SelectDataModel(id: "3", desc: "SadaaPay", Image: .Custom.bell, color: .yellow),
+    ]
     
     
     var newEntryType: PlusMenuAction
@@ -41,7 +51,7 @@ struct AddExpenseIncomeView: View {
                 NavigationBar(title: getTitle(type: newEntryType), top: geometry.safeAreaInsets.top) {
                     mode.wrappedValue.dismiss()
                 }
-               
+                
                 Text("How much?")
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
@@ -56,7 +66,7 @@ struct AddExpenseIncomeView: View {
                         }
                     }
                 
-               Spacer()
+                Spacer()
             }
             .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
             .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
@@ -101,15 +111,15 @@ struct AddExpenseIncomeView: View {
             
             ZStack(alignment: .center) {
                 HStack(alignment: .center, spacing: 16) {
-                    SelectorWidgetView(hint: "From", text: "", data: $categoryData)
+                    SelectorWidgetView(hint: "From", text: $fromWallet, data: $categoryData)
                     
-                    SelectorWidgetView(hint: "To", text: "", data: $categoryData)
-                       
+                    SelectorWidgetView(hint: "To", text: $toWallet, data: $categoryData)
+                    
                 }
                 Image.Custom.transferSign
             }
             .padding([.top], 24)
-            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description)
                 .padding([.top], 16)
                 .padding([.top, .bottom], 16)
             if selectedImage == nil {
@@ -148,122 +158,13 @@ struct AddExpenseIncomeView: View {
                                 .frame(width: 24, height: 24)
                                 .offset(x: 12, y: -12)
                         }
-
-                            
+                        
+                        
                     }
                     Spacer()
                 }
             }
             
-
-            ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                
-             isTransactionAdded.toggle()
-                addItem()
-             
-            }
-            .padding([.top], 40)
-            .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
-            .alertX(isPresented: $isTransactionAdded, content: {
-                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
-                    mode.wrappedValue.dismiss()
-                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
-                })
-        }
-        .padding([.horizontal], 16)
-        .cornerRadius(30, corners: [.topLeft, .topRight])
-        .background(
-            RoundedCorner(radius: 30)
-                .foregroundColor(CustomColor.baseLight)
-        )
-    
-    }
-    
-    private func addItem() {
-            let transaction = Transaction(context: viewContext)
-            transaction.category = ""
-            transaction.transAmount = Double(amount)!
-            transaction.transName = "Food"
-            transaction.transDesc = "kldsfjklsgn skfgjfklgn erijterig reit ierjt ierjt irtjr"
-//             transaction.image = selectedImage
-            transaction.date = Date()
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        
-    }
-    
-    @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {
-        VStack {
-            SelectorWidgetView(hint: "Category", text: "", data: $categoryData)
-                .padding([.top], 24)
-            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: .constant(""))
-                .padding([.top], 16)
-            SelectorWidgetView(hint: "Wallet", text: "" , data: $walletData)
-                .padding([.top, .bottom], 16)
-            if selectedImage == nil {
-                HStack(alignment: .center) {
-                    HStack(spacing: 10) {
-                        Image.Custom.attachment
-                        Text("Add Attachment")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding([.vertical], 16)
-                    
-                }.onTapGesture {
-                    withAnimation {
-                        isAtchmntViewShown.toggle()
-                    }
-                }.background(
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
-                        .foregroundColor(CustomColor.baseLight_20)
-                        .cornerRadius(5)
-                )
-            } else {
-                HStack {
-                    ZStack(alignment: .topTrailing) {
-                        selectedImage?
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(10)
-                        Button {
-                            withAnimation {
-                                selectedImage = nil
-                            }
-                        } label: {
-                            Image.Custom.grayCross
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .offset(x: 12, y: -12)
-                        }
-
-                            
-                    }
-                    Spacer()
-                }
-            }
-            
-            
-            
-//            HStack {
-//                VStack(alignment: .leading, spacing: 4) {
-//                    Text("Repeat")
-//                        .font(.system(size: 16))
-//                        .foregroundColor(CustomColor.baseDark_25)
-//
-//                    Text("Repeat Transaction")
-//                        .font(.system(size: 13))
-//                        .foregroundColor(CustomColor.baseLight_20)
-//                }
-//                .padding([.leading], 16)
-//                Toggle("", isOn: $isRepeated)
-//
-//            }
-//            .padding([.vertical], 16)
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 isTransactionAdded.toggle()
@@ -274,7 +175,7 @@ struct AddExpenseIncomeView: View {
                 AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
                     mode.wrappedValue.dismiss()
                 })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
-                })
+            })
         }
         .padding([.horizontal], 16)
         .cornerRadius(30, corners: [.topLeft, .topRight])
@@ -282,7 +183,86 @@ struct AddExpenseIncomeView: View {
             RoundedCorner(radius: 30)
                 .foregroundColor(CustomColor.baseLight)
         )
+        
+    }
     
+    private func validateExpenseIncomeForm() -> Bool {
+        return !(amount.isEmpty || category.isEmpty || description.isEmpty || wallet.isEmpty)
+    }
+    
+    
+    @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {
+        VStack {
+            SelectorWidgetView(hint: "Category", text: $category, data: $categoryData)
+                .padding([.top], 24)
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: $description)
+                .padding([.top], 16)
+            SelectorWidgetView(hint: "Wallet", text: $wallet , data: $walletData)
+                .padding([.top, .bottom], 16)
+            if selectedImage == nil {
+                HStack(alignment: .center) {
+                    HStack(spacing: 10) {
+                        Image.Custom.attachment
+                        Text("Add Attachment")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding([.vertical], 16)
+                    
+                }.onTapGesture {
+                    withAnimation {
+                        isAtchmntViewShown.toggle()
+                    }
+                }.background(
+                    Rectangle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
+                        .foregroundColor(CustomColor.baseLight_20)
+                        .cornerRadius(5)
+                )
+            } else {
+                HStack {
+                    ZStack(alignment: .topTrailing) {
+                        selectedImage?
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                        Button {
+                            withAnimation {
+                                selectedImage = nil
+                            }
+                        } label: {
+                            Image.Custom.grayCross
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .offset(x: 12, y: -12)
+                        }
+                        
+                        
+                    }
+                    Spacer()
+                }
+            }
+            ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                isTransactionAdded.toggle()
+                viewModel.saveTransaction(context: viewContext, amount: amount, name: category, desc: description, type: newEntryType.rawValue, category: category, wallet: wallet, image: selectedImage)
+            }
+            
+            
+            .disabled(!validateExpenseIncomeForm())
+            .padding([.top], 40)
+            .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
+            .alertX(isPresented: $isTransactionAdded, content: {
+                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
+                    mode.wrappedValue.dismiss()
+                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+            })
+        }
+        .padding([.horizontal], 16)
+        .cornerRadius(30, corners: [.topLeft, .topRight])
+        .background(
+            RoundedCorner(radius: 30)
+                .foregroundColor(CustomColor.baseLight)
+        )
+        
     }
     private func attachmentSheet(_ geometry: GeometryProxy) ->  some View {
         VStack {
@@ -293,7 +273,7 @@ struct AddExpenseIncomeView: View {
                     .padding([.top], 16)
                     .padding([.bottom], 48)
             }
-
+            
             
             HStack(spacing: 8) {
                 AttachmentView(image: .Custom.camera, title: "Camera") {
@@ -308,7 +288,7 @@ struct AddExpenseIncomeView: View {
                         self.isImgPkrShown.toggle()
                     }
                 }
-               
+                
             }
             .padding([.horizontal], 16)
             .padding([.bottom], 16 + geometry.safeAreaInsets.bottom)

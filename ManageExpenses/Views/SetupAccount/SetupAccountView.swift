@@ -27,7 +27,7 @@ struct SetupAccountView: View {
             Spacer()
             NavigationLink(destination: AddNewBankView()) {
                 ButtonWidgetView(title: "Let’s go", style: .primaryButton, action: {
-                }).disabled(true)
+                }).allowsHitTesting(false)
                     .padding([.bottom], 50)
                     .padding([.trailing, .leading], 16)
             }

@@ -40,7 +40,14 @@ extension Image {
         static let transferSign = Image("transferSign")
         static let delete = Image("delete")
         
- 
+        
+    }
+    
+    
+    static func getImage(data: Data?) -> Image {
+        guard let data = data else { return Image.Custom.downArrow}
+        let img: UIImage = UIImage(data: data) ?? UIImage()
+        return Image(uiImage: img)
     }
     
 }

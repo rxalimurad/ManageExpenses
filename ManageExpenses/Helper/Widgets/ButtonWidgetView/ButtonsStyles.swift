@@ -17,7 +17,7 @@ struct PrimaryButton: ButtonStyle {
         }
         .font(.system(size: 18, weight:.semibold))
         .foregroundColor(CustomColor.baseLight_80)
-        .background(CustomColor.primaryColor)
+        .background(isEnabled ? CustomColor.primaryColor : CustomColor.primaryColor.opacity(0.5))
         .cornerRadius(16)
     }
   

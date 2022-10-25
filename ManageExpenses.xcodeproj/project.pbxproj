@@ -23,6 +23,7 @@
 		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
 		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
+		5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */; };
 		5FAF69742906B09500849C95 /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF69732906B09500849C95 /* DataSets.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
@@ -409,6 +410,7 @@
 		5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsStyles.swift; sourceTree = "<group>"; };
 		5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWidgetView.swift; sourceTree = "<group>"; };
 		5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeViewModel.swift; sourceTree = "<group>"; };
 		5FAF69732906B09500849C95 /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
@@ -866,6 +868,7 @@
 				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
 				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
 				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
+				5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */,
 				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
 				FA94E887290533E700C5408D /* TransactionDetailView.swift */,
 			);
@@ -2769,6 +2772,7 @@
 				FA2134102905C914002EEBF4 /* ExtraLineDataPoint.swift in Sources */,
 				FA21342E2905C915002EEBF4 /* LineDataSet.swift in Sources */,
 				FA2134532905C916002EEBF4 /* HomeViewModel.swift in Sources */,
+				5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */,
 				FA21346C2905C917002EEBF4 /* UIView.swift in Sources */,
 				FA21342D2905C915002EEBF4 /* MultiLineDataSet.swift in Sources */,
 				FA2134452905C915002EEBF4 /* PieSliceView.swift in Sources */,

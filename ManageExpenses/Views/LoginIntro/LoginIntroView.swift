@@ -23,11 +23,11 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
                 }
                 
                 NavigationLink(destination: SignUpView()) {
-                    ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.disabled(true)
+                    ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.allowsHitTesting(false)
                         .padding([.trailing, .leading], 16)
                 }
                 NavigationLink(destination: LoginView()) {
-                ButtonWidgetView(title: "Login", style: .secondaryButton) {}.disabled(true)
+                ButtonWidgetView(title: "Login", style: .secondaryButton) {}.allowsHitTesting(false)
                     .padding([.bottom], 20)
                     .padding([.trailing, .leading], 16)
                 }
