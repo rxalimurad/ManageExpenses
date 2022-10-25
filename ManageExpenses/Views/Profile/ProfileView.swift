@@ -44,29 +44,37 @@ struct ProfileView: View {
                 ZStack {
                     CustomColor.baseLight.edgesIgnoringSafeArea([.all])
                     VStack {
+                        Spacer()
                         HStack {
                             Image.Custom.account
                             Text("Account")
                             Spacer()
                         }
+                        Spacer()
                         Divider()
+                        Spacer()
                         HStack {
                             Image.Custom.settings
                             Text("Settings")
                             Spacer()
                         }
+                        Spacer()
                         Divider()
+                        Spacer()
                         HStack {
                             Image.Custom.exportData
                             Text("Export Data")
                             Spacer()
                         }
+                        Spacer()
                         Divider()
+                        Spacer()
                         HStack {
                             Image.Custom.logout
                             Text("Logout")
                             Spacer()
                         }
+                        Spacer()
                     }
                 }
                 .cornerRadius(20)
