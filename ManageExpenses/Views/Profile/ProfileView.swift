@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     var safeAreaInsets: EdgeInsets
     var body: some View {
+        ZStack {
+            CustomColor.baseLight_60.edgesIgnoringSafeArea([.all])
             VStack {
                 HStack {
                     ZStack {
@@ -31,20 +33,49 @@ struct ProfileView: View {
                             .foregroundColor(CustomColor.baseDark_75)
                             .font(.system(size: 24, weight: .semibold))
                     }
+                    .padding([.leading], 10)
                     
                     Spacer()
                     Image.Custom.edit
                 }
                 .padding([.horizontal], 20)
-                .padding([.top], safeAreaInsets.top + 30)
+                .padding([.top], safeAreaInsets.top + 15)
                 
-                VStack {
-                    
+                ZStack {
+                    CustomColor.baseLight.edgesIgnoringSafeArea([.all])
+                    VStack {
+                        HStack {
+                            Image.Custom.account
+                            Text("Account")
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Image.Custom.settings
+                            Text("Settings")
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Image.Custom.exportData
+                            Text("Export Data")
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Image.Custom.logout
+                            Text("Logout")
+                            Spacer()
+                        }
+                    }
                 }
-                
+                .cornerRadius(20)
+                .padding([.horizontal], 20)
+                .frame(maxHeight: 356)
                 Spacer()
             }
-            .background(ColoredView(color: CustomColor.baseLight_60))
+        }
+        
         
     }
 }

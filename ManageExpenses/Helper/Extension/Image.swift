@@ -40,6 +40,10 @@ extension Image {
         static let transferSign = Image("transferSign")
         static let delete = Image("delete")
         static let edit = Image("edit")
+        static let account = Image("account")
+        static let settings = Image("settings")
+        static let exportData = Image("exportData")
+        static let logout = Image("logout")
         
         
     }
