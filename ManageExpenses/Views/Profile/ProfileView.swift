@@ -44,7 +44,7 @@ struct ProfileView: View {
                 ZStack {
                     CustomColor.baseLight.edgesIgnoringSafeArea([.all])
                     VStack {
-                        Spacer()
+                        
                         HStack {
                             Image.Custom.account
                             Text("Account")
@@ -74,7 +74,7 @@ struct ProfileView: View {
                             Text("Logout")
                             Spacer()
                         }
-                        Spacer()
+                       
                     }
                 }
                 .cornerRadius(20)
