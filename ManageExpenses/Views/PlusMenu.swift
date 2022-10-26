@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum PlusMenuAction: String {
-    case income
-    case expense
-    case convert
-}
-
 struct PlusMenu: View {
     let action: (PlusMenuAction) -> Void
     let widthAndHeight: CGFloat = 56

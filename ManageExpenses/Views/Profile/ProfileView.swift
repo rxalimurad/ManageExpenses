@@ -44,37 +44,13 @@ struct ProfileView: View {
                 ZStack {
                     CustomColor.baseLight.edgesIgnoringSafeArea([.all])
                     VStack {
-                        
-                        HStack {
-                            Image.Custom.account
-                            Text("Account")
-                            Spacer()
-                        }
-                        Spacer()
+                        getSettingsCell(title: "Account", img: Image.Custom.account)
                         Divider()
-                        Spacer()
-                        HStack {
-                            Image.Custom.settings
-                            Text("Settings")
-                            Spacer()
-                        }
-                        Spacer()
+                        getSettingsCell(title: "Settings", img: Image.Custom.settings)
                         Divider()
-                        Spacer()
-                        HStack {
-                            Image.Custom.exportData
-                            Text("Export Data")
-                            Spacer()
-                        }
-                        Spacer()
+                        getSettingsCell(title: "Export Data", img: Image.Custom.exportData)
                         Divider()
-                        Spacer()
-                        HStack {
-                            Image.Custom.logout
-                            Text("Logout")
-                            Spacer()
-                        }
-                       
+                        getSettingsCell(title: "Logout", img: Image.Custom.logout)
                     }
                 }
                 .cornerRadius(20)
@@ -85,6 +61,19 @@ struct ProfileView: View {
         }
         
         
+    }
+    
+    func getSettingsCell(title: String, img: Image) -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                img
+                    .padding([.leading], 17)
+                Text(title)
+                Spacer()
+            }
+            Spacer()
+        }
     }
 }
 

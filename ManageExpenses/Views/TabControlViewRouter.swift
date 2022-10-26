@@ -10,10 +10,10 @@ import SwiftUI
 enum Page {
      case home
      case tranactions
-     case records
+     case budget
      case user
  }
 
 class TabControlViewRouter: ObservableObject {
-    @Published var currentPage: Page = .home
+    @Published var currentPage: Page = .budget //,,..
 }

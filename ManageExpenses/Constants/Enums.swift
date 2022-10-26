@@ -38,3 +38,15 @@ enum TransactionCategory: String {
     case clothes
 }
 
+enum FilterSortingBy: String, CaseIterable {
+    case hightest
+    case lowest
+    case newest
+    case oldest
+}
+enum PlusMenuAction: String, CaseIterable {
+    case income
+    case expense
+    case convert
+}
+

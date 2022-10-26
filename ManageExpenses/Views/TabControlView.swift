@@ -31,8 +31,8 @@ struct TabControlView: View {
                             HomeView(safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
                             TransactionTabView(safeAreaInsets: geometry.safeAreaInsets)
-                        case .records:
-                            Text("Records")
+                        case .budget:
+                            BudgetView(safeAreaInsets: geometry.safeAreaInsets)
                         case .user:
                             ProfileView(safeAreaInsets: geometry.safeAreaInsets)
                         }
@@ -63,7 +63,7 @@ struct TabControlView: View {
                             }
                             .offset(y: -geometry.size.height/8/2)
                             
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .records, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.budget, tabName: "Budget").allowsHitTesting(!showPopUp)
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .budget, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.budget, tabName: "Budget").allowsHitTesting(!showPopUp)
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .user, width: geometry.size.width/5, height: geometry.size.height/28, icon: Image.Custom.user, tabName: "Profile").allowsHitTesting(!showPopUp)
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/8)

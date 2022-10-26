@@ -369,6 +369,14 @@
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
 		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
+		FA8D88E82909260D00C70440 /* BottomSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */; };
+		FA8D88EA29092B1500C70440 /* DateSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */; };
+		FA8D88EC2909310A00C70440 /* TransactionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */; };
+		FA8D88EF2909373C00C70440 /* SingleFilterSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88EE2909373C00C70440 /* SingleFilterSelectionView.swift */; };
+		FA8D88F229096AF700C70440 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F129096AF700C70440 /* BudgetView.swift */; };
+		FA8D88F42909740900C70440 /* BudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F32909740900C70440 /* BudgetViewModel.swift */; };
+		FA8D88F62909775400C70440 /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F52909775400C70440 /* BudgetModel.swift */; };
+		FA8D88F829097AAE00C70440 /* CreateBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */; };
 		FA94E8782903B0FE00C5408D /* ColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8772903B0FE00C5408D /* ColoredView.swift */; };
 		FA94E87A2903B7F800C5408D /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8792903B7F800C5408D /* AttachmentView.swift */; };
 		FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87B2903C6A300C5408D /* ImagePicker.swift */; };
@@ -761,6 +769,14 @@
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
+		FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionCellView.swift; sourceTree = "<group>"; };
+		FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionCellView.swift; sourceTree = "<group>"; };
+		FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFilterView.swift; sourceTree = "<group>"; };
+		FA8D88EE2909373C00C70440 /* SingleFilterSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFilterSelectionView.swift; sourceTree = "<group>"; };
+		FA8D88F129096AF700C70440 /* BudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetView.swift; sourceTree = "<group>"; };
+		FA8D88F32909740900C70440 /* BudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewModel.swift; sourceTree = "<group>"; };
+		FA8D88F52909775400C70440 /* BudgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
+		FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBudgetView.swift; sourceTree = "<group>"; };
 		FA94E8772903B0FE00C5408D /* ColoredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredView.swift; sourceTree = "<group>"; };
 		FA94E8792903B7F800C5408D /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
 		FA94E87B2903C6A300C5408D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -875,6 +891,8 @@
 				5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */,
 				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
 				FA94E887290533E700C5408D /* TransactionDetailView.swift */,
+				FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */,
+				FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -2294,6 +2312,25 @@
 			path = Extras;
 			sourceTree = "<group>";
 		};
+		FA8D88ED2909370400C70440 /* TransactionsFilter */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */,
+				FA8D88EE2909373C00C70440 /* SingleFilterSelectionView.swift */,
+			);
+			path = TransactionsFilter;
+			sourceTree = "<group>";
+		};
+		FA8D88F029096ADE00C70440 /* Budget */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F129096AF700C70440 /* BudgetView.swift */,
+				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
+				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+			);
+			path = Budget;
+			sourceTree = "<group>";
+		};
 		FA94E87F2904702700C5408D /* SelectorWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -2314,6 +2351,8 @@
 				FA7F86A828FAAACB00108E3A /* Base */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
+				FA8D88ED2909370400C70440 /* TransactionsFilter */,
+				FA8D88F029096ADE00C70440 /* Budget */,
 				FA24E66D29083835008CF65A /* Profile */,
 				FA2134872905CF31002EEBF4 /* SplashView.swift */,
 			);
@@ -2336,6 +2375,7 @@
 				FA94E8822904876100C5408D /* SelectorModel.swift */,
 				5F4040A22906496A00ECC069 /* Transactions.xcdatamodeld */,
 				FA24E66B290836DA008CF65A /* MiscListOfData.swift */,
+				FA8D88F52909775400C70440 /* BudgetModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2579,6 +2619,7 @@
 				FA82B4F928FC0F250038E099 /* LineAndBarEnums.swift in Sources */,
 				FA82B4FB28FC0F260038E099 /* XAxisGrid.swift in Sources */,
 				5F4040A729065E6D00ECC069 /* PersistenceController.swift in Sources */,
+				FA8D88F62909775400C70440 /* BudgetModel.swift in Sources */,
 				FA2134042905C914002EEBF4 /* PieChart.swift in Sources */,
 				FA2134542905C916002EEBF4 /* HomeView.swift in Sources */,
 				FA2133DC2905C913002EEBF4 /* Bars.swift in Sources */,
@@ -2625,6 +2666,7 @@
 				FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */,
 				FA82B4A828FC0F240038E099 /* BarStyle.swift in Sources */,
 				FAB1E35828F7FCC300667CF2 /* Enums.swift in Sources */,
+				FA8D88EC2909310A00C70440 /* TransactionFilterView.swift in Sources */,
 				FA7F869F28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift in Sources */,
 				FA2134222905C914002EEBF4 /* FloatingInfoBox.swift in Sources */,
 				FAB1E34328F7441800667CF2 /* String.swift in Sources */,
@@ -2636,6 +2678,7 @@
 				FA82B58A28FC1D7F0038E099 /* PieChartProtocolsExtentions.swift in Sources */,
 				FA2133D12905C913002EEBF4 /* GroupedBarChartData.swift in Sources */,
 				FA2133EF2905C913002EEBF4 /* SharedProtocols.swift in Sources */,
+				FA8D88E82909260D00C70440 /* BottomSelectionCellView.swift in Sources */,
 				FA82B4CE28FC0F240038E099 /* CustomNoDataView.swift in Sources */,
 				FA82B4D128FC0F250038E099 /* SharedEnums.swift in Sources */,
 				FA2133F02905C913002EEBF4 /* API.swift in Sources */,
@@ -2856,11 +2899,14 @@
 				FA82B59128FC1D7F0038E099 /* PieChartEnums.swift in Sources */,
 				FA2134482905C915002EEBF4 /* Constants.swift in Sources */,
 				FA2133DD2905C913002EEBF4 /* BarChartSubViews.swift in Sources */,
+				FA8D88F829097AAE00C70440 /* CreateBudgetView.swift in Sources */,
 				FA82B4AF28FC0F240038E099 /* HorizontalBarChartData.swift in Sources */,
+				FA8D88F42909740900C70440 /* BudgetViewModel.swift in Sources */,
 				FA2133DE2905C913002EEBF4 /* BarChart.swift in Sources */,
 				FA82B4C028FC0F240038E099 /* GradientStop.swift in Sources */,
 				FA2133D42905C913002EEBF4 /* BarChartData.swift in Sources */,
 				FA2133EA2905C913002EEBF4 /* ChartMetadata.swift in Sources */,
+				FA8D88EF2909373C00C70440 /* SingleFilterSelectionView.swift in Sources */,
 				FA7F869D28F9F03A00108E3A /* ForgotPasswordView.swift in Sources */,
 				FA2134302905C915002EEBF4 /* RangedLineStyle.swift in Sources */,
 				FA2134422905C915002EEBF4 /* PathExtensions.swift in Sources */,
@@ -2898,6 +2944,7 @@
 				FA82B4CC28FC0F240038E099 /* SharedProtocols.swift in Sources */,
 				FA82B58C28FC1D7F0038E099 /* PieChartData.swift in Sources */,
 				FA82B4F728FC0F250038E099 /* PositionedPOILabel.swift in Sources */,
+				FA8D88EA29092B1500C70440 /* DateSelectionCellView.swift in Sources */,
 				FA82B3AB28FC01D00038E099 /* PieChartView.swift in Sources */,
 				FA2133ED2905C913002EEBF4 /* PublishableProtocol.swift in Sources */,
 				FA82B50628FC0F260038E099 /* LineShape.swift in Sources */,
@@ -2916,6 +2963,7 @@
 				5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */,
 				FA21340E2905C914002EEBF4 /* ExtraLineStyle.swift in Sources */,
 				FA21346D2905C917002EEBF4 /* View.swift in Sources */,
+				FA8D88F229096AF700C70440 /* BudgetView.swift in Sources */,
 				FA21344A2905C916002EEBF4 /* Enums.swift in Sources */,
 				FA2133E12905C913002EEBF4 /* BarLayout.swift in Sources */,
 				FA2134252905C914002EEBF4 /* YAxisGrid.swift in Sources */,
