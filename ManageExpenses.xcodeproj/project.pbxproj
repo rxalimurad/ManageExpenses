@@ -401,6 +401,8 @@
 		FAB1E35528F7FBFE00667CF2 /* termAndCondition.html in Resources */ = {isa = PBXBuildFile; fileRef = FAB1E35428F7FBFE00667CF2 /* termAndCondition.html */; };
 		FAB1E35828F7FCC300667CF2 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E35728F7FCC300667CF2 /* Enums.swift */; };
 		FABF09CA28FBDF3E0072EB16 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF09C928FBDF3E0072EB16 /* Shape.swift */; };
+		FAC44564290B0354005757E8 /* BudgetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC44563290B0354005757E8 /* BudgetViewCell.swift */; };
+		FAC44567290B0D0D005757E8 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = FAC44566290B0D0D005757E8 /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -801,6 +803,7 @@
 		FAB1E35428F7FBFE00667CF2 /* termAndCondition.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = termAndCondition.html; sourceTree = "<group>"; };
 		FAB1E35728F7FCC300667CF2 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		FABF09C928FBDF3E0072EB16 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		FAC44563290B0354005757E8 /* BudgetViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -809,6 +812,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA94E8862904997D00C5408D /* AlertX in Frameworks */,
+				FAC44567290B0D0D005757E8 /* WrappingHStack in Frameworks */,
 				FA2134842905CB9F002EEBF4 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2329,6 +2333,7 @@
 				FA8D88F129096AF700C70440 /* BudgetView.swift */,
 				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
 				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+				FAC44563290B0354005757E8 /* BudgetViewCell.swift */,
 			);
 			path = Budget;
 			sourceTree = "<group>";
@@ -2525,6 +2530,7 @@
 			packageProductDependencies = (
 				FA94E8852904997D00C5408D /* AlertX */,
 				FA2134832905CB9F002EEBF4 /* Lottie */,
+				FAC44566290B0D0D005757E8 /* WrappingHStack */,
 			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
@@ -2557,6 +2563,7 @@
 			packageReferences = (
 				FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */,
 				FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FAC44565290B0D0D005757E8 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
@@ -2666,6 +2673,7 @@
 				FA2134132905C914002EEBF4 /* DataFunctionsProtocol.swift in Sources */,
 				FA82B4AE28FC0F240038E099 /* GroupedBarChartData.swift in Sources */,
 				FA21343A2905C915002EEBF4 /* LineChartView.swift in Sources */,
+				FAC44564290B0354005757E8 /* BudgetViewCell.swift in Sources */,
 				FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */,
 				FA82B4A828FC0F240038E099 /* BarStyle.swift in Sources */,
 				FAB1E35828F7FCC300667CF2 /* Enums.swift in Sources */,
@@ -3200,6 +3208,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		FAC44565290B0D0D005757E8 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3212,6 +3228,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */;
 			productName = AlertX;
+		};
+		FAC44566290B0D0D005757E8 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAC44565290B0D0D005757E8 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
 		};
 /* End XCSwiftPackageProductDependency section */
 

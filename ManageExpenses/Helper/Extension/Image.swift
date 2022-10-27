@@ -44,6 +44,7 @@ extension Image {
         static let settings = Image("settings")
         static let exportData = Image("exportData")
         static let logout = Image("logout")
+        static let warning = Image("warning")
         
         
     }

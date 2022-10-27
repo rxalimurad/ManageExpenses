@@ -18,6 +18,15 @@
           "revision": "b4bd0604ded9574807f41b4004b57dd1226a30a4",
           "version": "3.5.0"
         }
+      },
+      {
+        "package": "WrappingHStack",
+        "repositoryURL": "https://github.com/dkk/WrappingHStack",
+        "state": {
+          "branch": null,
+          "revision": "52eaad02c6a621b9bb5cd56acde94f802ef669f0",
+          "version": "2.2.4"
+        }
       }
     ]
   },

@@ -33,7 +33,7 @@ struct BudgetView: View {
                 }
                 .padding([.top], safeAreaInsets.top)
                 .padding([.horizontal], 27)
-                if viewModel.monthlyBudget.isEmpty {
+                if viewModel.monthlyBudgetList.isEmpty {
                     addNRFView(geometry)
                         .padding([.top], 20)
                 } else {
@@ -57,27 +57,14 @@ struct BudgetView: View {
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
             
-                HStack(alignment: .center) {
-                    HStack(spacing: 10) {
-                        Image.Custom.attachment
-                        Text("Add Attachment")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding([.vertical], 16)
-                    
-                }.onTapGesture {
-                    withAnimation {
-                        
-                    }
-                }.background(
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6]))
-                        .foregroundColor(CustomColor.baseLight_20)
-                        .cornerRadius(5)
-                )
+            VStack {
+                ForEach(0 ..<  viewModel.monthlyBudgetList[0].budget.count, id: \.self) { index in
+                    BudgetViewCell(budget: viewModel.monthlyBudgetList[0].budget[index])
+                }
+            }
             
-            
-            ButtonWidgetView(title: "Continue", style: .primaryButton) {
+            Spacer()
+            ButtonWidgetView(title: "Create a budget", style: .primaryButton) {
                
             }
             .padding([.top], 40)
