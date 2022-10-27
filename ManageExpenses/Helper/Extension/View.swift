@@ -48,6 +48,11 @@ extension View {
               self
           }
       }
+    @ViewBuilder func isHidden(_ isHidden: Bool) -> some View {
+          if !isHidden {
+              self
+          }
+      }
     public func asUIImage() -> UIImage {
            let controller = UIHostingController(rootView: self)
             

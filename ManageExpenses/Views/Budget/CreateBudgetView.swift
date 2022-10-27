@@ -16,7 +16,7 @@ struct CreateBudgetView: View {
     @State var recieveAlerts = false
     @State var amount = ""
     @State var isCategoryshown = false
-    @State var sliderValue = 10.0
+    @State var sliderValue = 50.0
     @State var category = ""
     @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
                                SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
@@ -59,10 +59,6 @@ struct CreateBudgetView: View {
     
     
     
-    
-    
-    
-    
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
             SelectorWidgetView(hint: "Category", text: $category, data: $categoryData)
@@ -80,19 +76,18 @@ struct CreateBudgetView: View {
                         .foregroundColor(CustomColor.baseLight_20)
                 }
                 Spacer()
-                Toggle(isOn: $recieveAlerts) {}
+                Toggle(isOn: $recieveAlerts.animation()) {}
             }
             .padding([.top], 40)
-            
-            Slider(value: $sliderValue, in: 0.0...100.0, step: 1.0)
-                .accentColor(CustomColor.primaryColor)
-                .padding()
-                .isShowing(recieveAlerts)
-            
+            VStack {
+                
+                SliderWidgetView(percentage: $sliderValue, minLimit: 1, maxLimit: 100)
+                    .padding([.horizontal] , 20)
+                    .frame(height: recieveAlerts ? 30 : 0)
+                    .padding([.vertical] , 10).isHidden(!recieveAlerts)
+            }
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                
-                
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
@@ -108,9 +103,9 @@ struct CreateBudgetView: View {
     }
     
     func getAlertDesc(_ value: Double) -> String {
-        let intValue = Int(value)!
+        let intValue = Int(value)
         let value = recieveAlerts ? "\(intValue)" : "some value"
-        "Receive alert when it reaches \(value) percent of your buget."
+        return "Receive alert when it reaches \(value) percent of your buget."
     }
     
     func getBgColor() -> Color {
