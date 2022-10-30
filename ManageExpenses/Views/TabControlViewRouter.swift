@@ -15,5 +15,5 @@ enum Page {
  }
 
 class TabControlViewRouter: ObservableObject {
-    @Published var currentPage: Page = .budget //,,..
+    @Published var currentPage: Page = .home
 }

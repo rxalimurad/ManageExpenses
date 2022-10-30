@@ -15,6 +15,18 @@ class FinancialReportViewModel: ObservableObject {
                                SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
                                SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
     
+    func getPoints(transactions: FetchedResults<Transaction>) -> [PieChartDataPoint] {
+        let list = getFinanicalData(transactions:transactions)
+        var points = [PieChartDataPoint]()
+        for data in list {
+            points.append(PieChartDataPoint(value: data.amount, description: "", colour: data.category.color))
+        }
+        
+        
+        return points
+      
+    }
+    
     func getFinanicalData(transactions: FetchedResults<Transaction>) -> [FinanicalReportModel] {
         let total = getExpense(trans: transactions)
         
@@ -35,7 +47,7 @@ class FinancialReportViewModel: ObservableObject {
         
         
         
-        return reportModel
+        return reportModel.sorted(by: {abs($0.amount) > abs($1.amount) })
     }
     func getIncome(trans: FetchedResults<Transaction>) -> Double {
         var total = 0.0

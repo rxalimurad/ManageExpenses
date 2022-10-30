@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State var isLogoutShown = false
+    @State var isAboutusShown = false
+    @State var isCurrencyShown = false
+    @State var currencySymbol = "$"
     var safeAreaInsets: EdgeInsets
     var body: some View {
         ZStack {
@@ -36,7 +40,7 @@ struct ProfileView: View {
                     .padding([.leading], 10)
                     
                     Spacer()
-                    Image.Custom.edit
+                    Image.Custom.edit.hidden()
                 }
                 .padding([.horizontal], 20)
                 .padding([.top], safeAreaInsets.top + 15)
@@ -44,13 +48,35 @@ struct ProfileView: View {
                 ZStack {
                     CustomColor.baseLight.edgesIgnoringSafeArea([.all])
                     VStack {
-                        getSettingsCell(title: "Account", img: Image.Custom.account)
+                        Button {
+                            
+                        } label: {
+                            getSettingsCell(title: "Account", img: Image.Custom.account)
+                        }
+
+                        
                         Divider()
-                        getSettingsCell(title: "Settings", img: Image.Custom.settings)
+                        Button {
+                            isCurrencyShown.toggle()
+                        } label: {
+                            getSettingsCell(title: "Currency", img: Image.Custom.settings)
+                           
+                        }
+                        
                         Divider()
-                        getSettingsCell(title: "Export Data", img: Image.Custom.exportData)
+                        Button {
+                            isAboutusShown.toggle()
+                        } label: {
+                            getAboutUsCell()
+                        }
+
                         Divider()
-                        getSettingsCell(title: "Logout", img: Image.Custom.logout)
+                        Button {
+                            isLogoutShown.toggle()
+                        } label: {
+                            getSettingsCell(title: "Logout", img: Image.Custom.logout)
+                        }
+                        
                     }
                 }
                 .cornerRadius(20)
@@ -59,8 +85,61 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .fullScreenCover(isPresented: $isAboutusShown, onDismiss: {
+            
+        }, content: {
+            AboutUsView()
+        })
+        
+        .fullScreenCover(isPresented: $isLogoutShown) {
+            ZStack (alignment: .bottom) {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isLogoutShown.toggle()
+                    }
+                logoutSheet(safeAreaInsets)
+            }
+            .background(ColoredView(color: .clear))
+            .edgesIgnoringSafeArea(.all)
+        }
+        .fullScreenCover(isPresented: $isCurrencyShown) {
+            ZStack (alignment: .center) {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isCurrencyShown.toggle()
+                    }
+                currencySheet(safeAreaInsets)
+                    .padding([.horizontal], 16)
+                    
+            }
+            .background(ColoredView(color: .clear))
+            .edgesIgnoringSafeArea(.all)
+        }
         
         
+    }
+    
+    func getAboutUsCell() -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                ZStack {
+                    CustomColor.primaryColor_20
+                    Image.Custom.aboutus
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(CustomColor.primaryColor)
+                }
+                    .frame(width: 52, height: 52)
+                    .cornerRadius(16)
+                    .padding([.leading], 17)
+                Text("About Us")
+                    .foregroundColor(CustomColor.baseDark)
+                Spacer()
+            }
+            Spacer()
+        }
     }
     
     func getSettingsCell(title: String, img: Image) -> some View {
@@ -70,10 +149,89 @@ struct ProfileView: View {
                 img
                     .padding([.leading], 17)
                 Text(title)
+                    .foregroundColor(CustomColor.baseDark)
                 Spacer()
             }
             Spacer()
         }
+    }
+    
+    
+    private func logoutSheet(_ safeAreaInsets: EdgeInsets) ->  some View {
+        VStack {
+            Button {
+                isLogoutShown.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+            }
+
+            Text("Logout?")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(CustomColor.baseDark)
+                .padding([.top], 20)
+            Text("Are you sure do you wanna logout?")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(CustomColor.baseLight_20)
+                .padding([.horizontal], 16)
+                .padding([.top], 20)
+            
+            HStack(spacing: 16) {
+                ButtonWidgetView(title: "No", style: .secondaryButton) {
+                    
+                }
+                ButtonWidgetView(title: "Yes", style: .primaryButton) {
+                    
+                }
+                
+            }
+            .padding([.top], 16)
+            .padding([.horizontal], 16)
+            .padding([.bottom], 16 + safeAreaInsets.top)
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15, corners: [.topLeft, .topRight])
+    }
+    private func currencySheet(_ safeAreaInsets: EdgeInsets) ->  some View {
+        VStack {
+            Button {
+                isCurrencyShown.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+            }
+
+            Text("Enter your currency symbol")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(CustomColor.baseDark)
+                .padding([.top], 20)
+           
+            InputWidgetView(hint: "Currency Symbol", properties: InputProperties(maxLength: 3), text: $currencySymbol)
+                .padding([.horizontal], 16)
+                .padding([.vertical], 16)
+            HStack(spacing: 16) {
+               ButtonWidgetView(title: "Done", style: .primaryButton) {
+                   isCurrencyShown.toggle()
+                }
+                
+            }
+            .padding([.top], 16)
+            .padding([.horizontal], 16)
+            .padding([.bottom], 16 )
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15)
+    }
+    private var indicator: some View {
+        Rectangle()
+            .foregroundColor(CustomColor.primaryColor)
+            .cornerRadius(Constants.bottomSheet.radius)
+            .frame(
+                width: Constants.bottomSheet.indicatorWidth,
+                height: Constants.bottomSheet.indicatorHeight
+            )
     }
 }
 

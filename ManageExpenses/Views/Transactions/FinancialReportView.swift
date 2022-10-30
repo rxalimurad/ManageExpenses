@@ -32,14 +32,13 @@ struct FinancialReportView: View {
             }
             
             headerView
-            PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 200, description: "Salary", colour: .red), PieChartDataPoint(value: 2, description: "", colour: .yellow),PieChartDataPoint(value: 2, description: "Paisa", colour: .blue),PieChartDataPoint(value: 2, description: "", colour: .green)], legendTitle: ""), metadata: ChartMetadata()))
+            PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: viewModel.getPoints(transactions: recentTransactions), legendTitle: ""), metadata: ChartMetadata()))
                 .frame(height: 200)
-            SegmentedControlWidgetView(items: ["Expense", "Income"], selectedIndex: $selectedTab, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
+            SegmentedControlWidgetView(items: ["\nExpense\n", "\nIncome\n"], selectedIndex: $selectedTab, padding: 0, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
                 .padding([.top], 25)
                 .padding([.leading, .trailing], 16)
             FinancialDetailView()
-                .padding([.leading, .trailing], 16)
-                .padding()
+                
             
             Spacer()
         }
@@ -236,7 +235,10 @@ struct FinancialReportView: View {
                 ForEach(0 ..< viewModel.getFinanicalData(transactions: recentTransactions).count) {index  in
                     FinancialReportCellView(analyingData: viewModel.getFinanicalData(transactions: recentTransactions)[index])
                 }
+                
             }
+            .padding([.horizontal], 32)
+            .padding([.vertical], 10)
         }
     }
 }

@@ -45,7 +45,8 @@ extension Image {
         static let exportData = Image("exportData")
         static let logout = Image("logout")
         static let warning = Image("warning")
-        
+        static let aboutus = Image(systemName: "person.2.circle.fill")
+        static let appIcon = Image("appicon")
         
     }
     

@@ -371,6 +371,7 @@
 		FA8740EE290DAE6F00640EB5 /* ProgressBarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */; };
 		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
+		FA8BC153290EEC500025BE0A /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC152290EEC500025BE0A /* AboutUsView.swift */; };
 		FA8D88E82909260D00C70440 /* BottomSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */; };
 		FA8D88EA29092B1500C70440 /* DateSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */; };
 		FA8D88EC2909310A00C70440 /* TransactionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */; };
@@ -779,6 +780,8 @@
 		FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarWidgetView.swift; sourceTree = "<group>"; };
 		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
+		FA8BC152290EEC500025BE0A /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
+		FA8BC155290EF0DD0025BE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionCellView.swift; sourceTree = "<group>"; };
 		FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionCellView.swift; sourceTree = "<group>"; };
 		FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFilterView.swift; sourceTree = "<group>"; };
@@ -867,6 +870,7 @@
 		5F4B7BD128F6C3B600EFC1F5 /* ManageExpenses */ = {
 			isa = PBXGroup;
 			children = (
+				FA8BC155290EF0DD0025BE0A /* Info.plist */,
 				FAA478EA28F8810800C06B31 /* Application */,
 				FAB1E34428F7469400667CF2 /* Constants */,
 				FAA478ED28F881AC00C06B31 /* Helper */,
@@ -1749,6 +1753,7 @@
 			isa = PBXGroup;
 			children = (
 				FA24E67029083871008CF65A /* ProfileView.swift */,
+				FA8BC152290EEC500025BE0A /* AboutUsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2534,6 +2539,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F4B7BF328F6C3BC00EFC1F5 /* Build configuration list for PBXNativeTarget "ManageExpenses" */;
 			buildPhases = (
+				FA8BC154290EF0550025BE0A /* gitRev */,
 				5F4B7BCB28F6C3B600EFC1F5 /* Sources */,
 				5F4B7BCC28F6C3B600EFC1F5 /* Frameworks */,
 				5F4B7BCD28F6C3B600EFC1F5 /* Resources */,
@@ -2614,6 +2620,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FA8BC154290EF0550025BE0A /* gitRev */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = gitRev;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nGIT_REV=`git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :REVISION ${GIT_REV}\" \"${SRCROOT}/ManageExpenses/Info.plist\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F4B7BCB28F6C3B600EFC1F5 /* Sources */ = {
@@ -2904,6 +2931,7 @@
 				FA82B4CF28FC0F240038E099 /* LegendView.swift in Sources */,
 				FA2134732905C917002EEBF4 /* SelectionView.swift in Sources */,
 				FA2133D52905C913002EEBF4 /* RangedBarDataPoint.swift in Sources */,
+				FA8BC153290EEC500025BE0A /* AboutUsView.swift in Sources */,
 				FA2134762905C917002EEBF4 /* AmountInputWidget.swift in Sources */,
 				FA82B4C928FC0F240038E099 /* ChartImageController.swift in Sources */,
 				FA21342A2905C914002EEBF4 /* PointShape.swift in Sources */,
@@ -3138,6 +3166,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -3168,6 +3197,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

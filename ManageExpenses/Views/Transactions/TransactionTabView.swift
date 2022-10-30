@@ -70,11 +70,12 @@ struct TransactionTabView: View {
                     .foregroundColor(CustomColor.primaryColor)
                     .font(.system(size: 16, weight: .medium))
                     .padding([.vertical], 15)
+                Spacer()
+                Image.Custom.downArrow.rotationEffect(Angle(degrees: 270))
             }
 
             
-            Spacer()
-            Image.Custom.downArrow.rotationEffect(Angle(degrees: 270))
+           
         }.padding([.horizontal], 16)
             .background(CustomColor.primaryColor_20)
     }

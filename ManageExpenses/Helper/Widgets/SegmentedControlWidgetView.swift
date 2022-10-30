@@ -12,6 +12,8 @@ struct SegmentedControlWidgetView: View {
     var items: [String]
    
     @Binding var selectedIndex: Int
+    var padding = 8.0
+    var fontSize = 14.0
     var textColor = CustomColor.yellow
     var bgColor = CustomColor.yellow_20
     @Namespace var namespace
@@ -22,8 +24,8 @@ struct SegmentedControlWidgetView: View {
                     HStack {
                         ForEach(items.indices, id: \.self) { index in
                             Text(items[index])
-                                .font(.system(size: 14, weight: .bold))
-                                .padding(.vertical, 8.0)
+                                .font(.system(size: fontSize, weight: .bold))
+                                .padding(.vertical, padding)
                                 .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
                                 .frame(maxWidth: .infinity)
                                 .matchedGeometryEffect(
@@ -40,7 +42,7 @@ struct SegmentedControlWidgetView: View {
                            
                         }
                     }
-                .padding(8.0)
+                .padding(padding)
                 .background {
                     Capsule()
                         .fill(bgColor)
@@ -55,8 +57,8 @@ struct SegmentedControlWidgetView: View {
                 Picker("", selection: $selectedIndex) {
                     ForEach(items.indices, id: \.self) { index in
                         Text(items[index])
-                            .font(.system(size: 14, weight: .bold))
-                            .padding(.vertical, 8.0)
+                            .font(.system(size: fontSize, weight: .bold))
+                            .padding(.vertical, padding)
                             .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
                     }
                 }.pickerStyle(.segmented)
