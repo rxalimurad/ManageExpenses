@@ -11,6 +11,7 @@ import SwiftUI
 struct SelectDataModel: Identifiable {
     var id: String
     var desc: String
+    var balance: String?
     var Image: Image?
     var color = Color.black
     var isSelected = false

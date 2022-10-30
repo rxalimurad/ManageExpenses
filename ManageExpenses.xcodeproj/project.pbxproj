@@ -368,10 +368,15 @@
 		FA82B59128FC1D7F0038E099 /* PieChartEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */; };
 		FA82B59428FDD93E0038E099 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59328FDD93E0038E099 /* Date.swift */; };
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
+		FA864278290F0A7D006902CB /* BankDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864277290F0A7D006902CB /* BankDetailsView.swift */; };
+		FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */; };
+		FA86427C290F16A6006902CB /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86427B290F16A6006902CB /* Binding.swift */; };
 		FA8740EE290DAE6F00640EB5 /* ProgressBarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */; };
 		FA8A363028FF1B4800129051 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A362F28FF1B4800129051 /* NavigationBar.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
 		FA8BC153290EEC500025BE0A /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC152290EEC500025BE0A /* AboutUsView.swift */; };
+		FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */; };
+		FA8BC15A290EF8E40025BE0A /* BankAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */; };
 		FA8D88E82909260D00C70440 /* BottomSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */; };
 		FA8D88EA29092B1500C70440 /* DateSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */; };
 		FA8D88EC2909310A00C70440 /* TransactionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */; };
@@ -777,11 +782,16 @@
 		FA82B58428FC1D7F0038E099 /* PieChartEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartEnums.swift; sourceTree = "<group>"; };
 		FA82B59328FDD93E0038E099 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FA864277290F0A7D006902CB /* BankDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsView.swift; sourceTree = "<group>"; };
+		FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewModel.swift; sourceTree = "<group>"; };
+		FA86427B290F16A6006902CB /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarWidgetView.swift; sourceTree = "<group>"; };
 		FA8A362F28FF1B4800129051 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
 		FA8BC152290EEC500025BE0A /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		FA8BC155290EF0DD0025BE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankAccount.swift; sourceTree = "<group>"; };
+		FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountsView.swift; sourceTree = "<group>"; };
 		FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionCellView.swift; sourceTree = "<group>"; };
 		FA8D88E929092B1500C70440 /* DateSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionCellView.swift; sourceTree = "<group>"; };
 		FA8D88EB2909310A00C70440 /* TransactionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFilterView.swift; sourceTree = "<group>"; };
@@ -2336,6 +2346,17 @@
 			path = Extras;
 			sourceTree = "<group>";
 		};
+		FA8BC156290EF8B00025BE0A /* AddBankAccount */ = {
+			isa = PBXGroup;
+			children = (
+				FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */,
+				FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */,
+				FA864277290F0A7D006902CB /* BankDetailsView.swift */,
+				FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */,
+			);
+			path = AddBankAccount;
+			sourceTree = "<group>";
+		};
 		FA8D88ED2909370400C70440 /* TransactionsFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -2380,6 +2401,7 @@
 				FA8D88ED2909370400C70440 /* TransactionsFilter */,
 				FA8D88F029096ADE00C70440 /* Budget */,
 				FA24E66D29083835008CF65A /* Profile */,
+				FA8BC156290EF8B00025BE0A /* AddBankAccount */,
 				FA2134872905CF31002EEBF4 /* SplashView.swift */,
 			);
 			path = Views;
@@ -2483,6 +2505,7 @@
 				FAB1E34928F7EDC900667CF2 /* Image.swift */,
 				FABF09C928FBDF3E0072EB16 /* Shape.swift */,
 				FA82B59328FDD93E0038E099 /* Date.swift */,
+				FA86427B290F16A6006902CB /* Binding.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2761,6 +2784,7 @@
 				FAB1E34128F743E500667CF2 /* Utilities.swift in Sources */,
 				FA7F86B128FAC90100108E3A /* PlusMenu.swift in Sources */,
 				FA82B4C728FC0F240038E099 /* ChartMetadata.swift in Sources */,
+				FA8BC15A290EF8E40025BE0A /* BankAccountsView.swift in Sources */,
 				FA2133F52905C913002EEBF4 /* Extensions.swift in Sources */,
 				FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */,
 				FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */,
@@ -2836,6 +2860,7 @@
 				FA2134412905C915002EEBF4 /* LineChartEnums.swift in Sources */,
 				FA82B51628FC0F270038E099 /* LineChartDataPoint.swift in Sources */,
 				FA2134662905C916002EEBF4 /* ResetPasswordView.swift in Sources */,
+				FA864278290F0A7D006902CB /* BankDetailsView.swift in Sources */,
 				FA2134192905C914002EEBF4 /* RotatedText.swift in Sources */,
 				FA2134712905C917002EEBF4 /* Utilities.swift in Sources */,
 				FA82B4FA28FC0F260038E099 /* XAxisLabels.swift in Sources */,
@@ -2862,6 +2887,7 @@
 				5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */,
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA2134582905C916002EEBF4 /* TabBarIcon.swift in Sources */,
+				FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
 				FA82B4B528FC0F240038E099 /* GroupedBarDataPoint.swift in Sources */,
 				FA82B4E928FC0F250038E099 /* DiamondShape.swift in Sources */,
@@ -2909,6 +2935,7 @@
 				FA82B50C28FC0F260038E099 /* LineStyle.swift in Sources */,
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				FA21342B2905C914002EEBF4 /* LegendLine.swift in Sources */,
+				FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */,
 				FA2134262905C914002EEBF4 /* ExtraLine.swift in Sources */,
 				FA21345C2905C916002EEBF4 /* LoginIntroPageView.swift in Sources */,
 				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
@@ -2960,6 +2987,7 @@
 				FA2134482905C915002EEBF4 /* Constants.swift in Sources */,
 				FA2133DD2905C913002EEBF4 /* BarChartSubViews.swift in Sources */,
 				FA8D88F829097AAE00C70440 /* CreateBudgetView.swift in Sources */,
+				FA86427C290F16A6006902CB /* Binding.swift in Sources */,
 				FA82B4AF28FC0F240038E099 /* HorizontalBarChartData.swift in Sources */,
 				FA8D88F42909740900C70440 /* BudgetViewModel.swift in Sources */,
 				FA2133DE2905C913002EEBF4 /* BarChart.swift in Sources */,
@@ -3167,6 +3195,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ManageIT;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -3198,6 +3227,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ManageIT;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

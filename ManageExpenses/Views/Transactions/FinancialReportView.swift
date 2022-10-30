@@ -34,7 +34,7 @@ struct FinancialReportView: View {
             headerView
             PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: viewModel.getPoints(transactions: recentTransactions), legendTitle: ""), metadata: ChartMetadata()))
                 .frame(height: 200)
-            SegmentedControlWidgetView(items: ["\nExpense\n", "\nIncome\n"], selectedIndex: $selectedTab, padding: 0, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
+            SegmentedControlWidgetView(items: ["\nExpense\n", "\nIncome\n"], selectedIndex: $selectedTab, padding: 1, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
                 .padding([.top], 25)
                 .padding([.leading, .trailing], 16)
             FinancialDetailView()

@@ -11,6 +11,7 @@ struct ProfileView: View {
     @State var isLogoutShown = false
     @State var isAboutusShown = false
     @State var isCurrencyShown = false
+    @State var isAccountsShown = false
     @State var currencySymbol = "$"
     var safeAreaInsets: EdgeInsets
     var body: some View {
@@ -49,7 +50,7 @@ struct ProfileView: View {
                     CustomColor.baseLight.edgesIgnoringSafeArea([.all])
                     VStack {
                         Button {
-                            
+                            isAccountsShown.toggle()
                         } label: {
                             getSettingsCell(title: "Account", img: Image.Custom.account)
                         }
@@ -90,7 +91,9 @@ struct ProfileView: View {
         }, content: {
             AboutUsView()
         })
-        
+        .fullScreenCover(isPresented: $isAccountsShown, content: {
+            BankAccountsView()
+        })
         .fullScreenCover(isPresented: $isLogoutShown) {
             ZStack (alignment: .bottom) {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)

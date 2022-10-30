@@ -38,9 +38,9 @@ struct AddExpenseIncomeView: View {
                                SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
                                SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
     
-    @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", Image: .Custom.camera, color: .red),
-                             SelectDataModel(id: "2", desc: "Bank Al Habib", Image: .Custom.bell, color: .green),
-                             SelectDataModel(id: "3", desc: "SadaaPay", Image: .Custom.bell, color: .yellow),
+    @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", balance: "23.3",color: .red),
+                             SelectDataModel(id: "2", desc: "Bank Al Habib", balance: "32.3", color: .green),
+                             SelectDataModel(id: "3", desc: "SadaaPay", balance: "23.3",color: .yellow),
     ]
     
     
@@ -68,7 +68,7 @@ struct AddExpenseIncomeView: View {
                 
                 Spacer()
             }
-            .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
+            
             .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
             .fullScreenCover(isPresented: $isAtchmntViewShown) {
                 ZStack (alignment: .bottom) {
