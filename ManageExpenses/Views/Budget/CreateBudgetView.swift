@@ -17,7 +17,7 @@ struct CreateBudgetView: View {
     @State var amount = ""
     @State var isCategoryshown = false
     @State var sliderValue = 50.0
-    @State var category = ""
+    @State var category = SelectDataModel(id: "", desc: "")
     @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
                                SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
                                SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),

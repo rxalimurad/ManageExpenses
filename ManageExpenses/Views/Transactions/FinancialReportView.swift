@@ -1,39 +1,49 @@
 //
-//  TransactionView.swift
+//  FinancialReportView.swift
 //  ManageExpenses
 //
-//  Created by Ali Murad on 18/10/2022.
+//  Created by murad on 30/10/2022.
 //
 
 import SwiftUI
 
-struct TransactionTabView: View {
+struct FinancialReportView: View {
+    var viewModel =  FinancialReportViewModel()
     var safeAreaInsets: EdgeInsets
     @State var isDurationFilterSheetShowing = false
     @State var isfilterSheetShowing = false
-    @State var isfinancialReportShowing = false
     @State var customDateSeleced = false
+    @State var selectedTab = 0
+    var financialData = [FinanicalReportModel]()
+  
+    
+    
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
         animation: .default)
     private var recentTransactions: FetchedResults<Transaction>
-    @State private var selectedTrans: Transaction?
-    @ObservedObject var viewModel = HomeViewModel()
+    
     var body: some View {
         VStack {
-            headerView
-            subHeader
-                .cornerRadius(10)
-                .padding([.horizontal], 16)
+            NavigationBar(title: "Financial Report", top: 0, titleColor: CustomColor.baseDark) {
+                mode.wrappedValue.dismiss()
+            }
             
-            transactions
+            headerView
+            PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 200, description: "Salary", colour: .red), PieChartDataPoint(value: 2, description: "", colour: .yellow),PieChartDataPoint(value: 2, description: "Paisa", colour: .blue),PieChartDataPoint(value: 2, description: "", colour: .green)], legendTitle: ""), metadata: ChartMetadata()))
+                .frame(height: 200)
+            SegmentedControlWidgetView(items: ["Expense", "Income"], selectedIndex: $selectedTab, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
+                .padding([.top], 25)
+                .padding([.leading, .trailing], 16)
+            FinancialDetailView()
+                .padding([.leading, .trailing], 16)
+                .padding()
+            
+            Spacer()
         }
-        .fullScreenCover(item: $selectedTrans, content: { trans in
-            TransactionDetailView(transaction: trans)
-        })
-        .fullScreenCover(isPresented: $isfinancialReportShowing) {
-            FinancialReportView(safeAreaInsets: safeAreaInsets)
-        }
+       
         .fullScreenCover(isPresented: $isDurationFilterSheetShowing) {
             ZStack (alignment: .bottom) {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
@@ -61,43 +71,9 @@ struct TransactionTabView: View {
     
     
     
-    var subHeader: some View {
-        HStack {
-            Button {
-                isfinancialReportShowing.toggle()
-            } label: {
-                Text("See your financial report")
-                    .foregroundColor(CustomColor.primaryColor)
-                    .font(.system(size: 16, weight: .medium))
-                    .padding([.vertical], 15)
-            }
-
-            
-            Spacer()
-            Image.Custom.downArrow.rotationEffect(Angle(degrees: 270))
-        }.padding([.horizontal], 16)
-            .background(CustomColor.primaryColor_20)
-    }
     
-    var transactions: some View {
-        ScrollView {
-            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-                Text(headerTransDate)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(CustomColor.baseDark)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.horizontal], 19)
-                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-                    Button {
-                        selectedTrans = transaction
-                    } label: {
-                        TransactionView(transaction: transaction)
-                    }
-                }
-            }
-            
-        }
-    }
+    
+
     
     var headerView: some View {
         VStack {
@@ -129,10 +105,8 @@ struct TransactionTabView: View {
                 }
                 
 
-            }.padding([.top, .bottom], 12)
-                .padding([.top], safeAreaInsets.top)
-            
-            
+            }.padding([.top, .bottom], 5)
+                
                 .padding([.leading, .trailing], 16)
             
             
@@ -255,12 +229,15 @@ struct TransactionTabView: View {
         .cornerRadius(15, corners: [.topLeft, .topRight])
         .edgesIgnoringSafeArea([.all])
     }
-    
-}
-
-
-struct TransactionTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionTabView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+    @ViewBuilder func FinancialDetailView() -> some View {
+      
+        ScrollView(.vertical) {
+            VStack {
+                ForEach(0 ..< viewModel.getFinanicalData(transactions: recentTransactions).count) {index  in
+                    FinancialReportCellView(analyingData: viewModel.getFinanicalData(transactions: recentTransactions)[index])
+                }
+            }
+        }
     }
 }
+

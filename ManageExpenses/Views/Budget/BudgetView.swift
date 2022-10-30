@@ -12,6 +12,7 @@ struct BudgetView: View {
     var safeAreaInsets: EdgeInsets
     var viewModel = BudgetViewModel()
     @State var showCreatBudget = false
+    @State var selectedBudget: BudgetDetail?
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
@@ -47,7 +48,9 @@ struct BudgetView: View {
             .fullScreenCover(isPresented: $showCreatBudget) {
                 CreateBudgetView()
             }
-            
+            .fullScreenCover(item: $selectedBudget, content: { budget in
+                BudgetDetailView(budget: budget, spending: 1000)
+            })
             
         }
     }
@@ -57,15 +60,27 @@ struct BudgetView: View {
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
             
-            VStack {
-                ForEach(0 ..<  viewModel.monthlyBudgetList[0].budget.count, id: \.self) { index in
-                    BudgetViewCell(budget: viewModel.monthlyBudgetList[0].budget[index])
+            ScrollView(.vertical) {
+                VStack {
+                    ForEach(0 ..<  viewModel.monthlyBudgetList[0].budget.count, id: \.self) { index in
+                        
+                        Button {
+                            selectedBudget = viewModel.monthlyBudgetList[0].budget[index]
+                        } label: {
+                            BudgetViewCell(budget: viewModel.monthlyBudgetList[0].budget[index])
+                        }
+                        
+                       
+                    }
                 }
+                .padding([.top], 10)
             }
             
             Spacer()
             ButtonWidgetView(title: "Create a budget", style: .primaryButton) {
-               
+                withAnimation {
+                    showCreatBudget.toggle()
+                }
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
@@ -76,7 +91,7 @@ struct BudgetView: View {
         .frame(maxHeight: .infinity)
         .background(
             Rectangle()
-                .foregroundColor(CustomColor.baseLight)
+                .foregroundColor(CustomColor.baseLight_60)
         )
         .cornerRadius(30, corners: [.topLeft, .topRight])
     }

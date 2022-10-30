@@ -15,11 +15,11 @@ struct AddExpenseIncomeView: View {
     
     // Mark: - State Variables for User Input
     @State var amount = ""
-    @State var category = ""
+    @State var category = SelectDataModel(id: "", desc: "")
     @State var description = ""
-    @State var wallet = ""
-    @State var toWallet = ""
-    @State var fromWallet = ""
+    @State var wallet = SelectDataModel(id: "", desc: "")
+    @State var toWallet = SelectDataModel(id: "", desc: "")
+    @State var fromWallet = SelectDataModel(id: "", desc: "")
     @State var selectedImage: Image?
     
     @State var showAmtKeybd = false
@@ -187,7 +187,7 @@ struct AddExpenseIncomeView: View {
     }
     
     private func validateExpenseIncomeForm() -> Bool {
-        return !(amount.isEmpty || category.isEmpty || description.isEmpty || wallet.isEmpty)
+        return !(amount.isEmpty || category.desc.isEmpty || description.isEmpty || wallet.desc.isEmpty)
     }
     
     
@@ -195,6 +195,9 @@ struct AddExpenseIncomeView: View {
         VStack {
             SelectorWidgetView(hint: "Category", text: $category, data: $categoryData)
                 .padding([.top], 24)
+            BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000))
+                .padding([.top], 16)
+                .isShowing(category.desc.lowercased() == "shopping")
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: $description)
                 .padding([.top], 16)
             SelectorWidgetView(hint: "Wallet", text: $wallet , data: $walletData)
@@ -243,7 +246,7 @@ struct AddExpenseIncomeView: View {
             }
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 isTransactionAdded.toggle()
-                viewModel.saveTransaction(context: viewContext, amount: amount, name: category, desc: description, type: newEntryType.rawValue, category: category, wallet: wallet, image: selectedImage)
+                viewModel.saveTransaction(context: viewContext, amount: amount, name: category.desc, desc: description, type: newEntryType.rawValue, category: category.desc, wallet: wallet.desc, image: selectedImage)
             }
             
             

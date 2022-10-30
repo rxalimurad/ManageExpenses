@@ -6,31 +6,67 @@
 //
 
 import SwiftUI
-import WrappingHStack
 
 struct BudgetViewCell: View {
     var budget: BudgetDetail
+    var spending: Double = 1000
+    
+    var percentage: Double {
+        get {
+            if spending >= budget.limit {
+                return 100
+            }
+            return (spending / budget.limit) * 100
+        }
+    }
+    var isLimitExceed: Bool {
+        spending > budget.limit
+    }
     var body: some View {
-       // ZStack {
-           // Color.yellow.opacity(0.2)
             VStack {
-                WrappingHStack {
+                HStack {
                     getCategoryTag()
-                        .frame(height: 33)
-                        .frame(maxWidth: 200)
                     Spacer()
                     Image.Custom.warning
+                        .isShowing(isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
+                Text("Remaining $\(Utilities.getAmountWith(amount: budget.limit - spending))")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(CustomColor.baseDark)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.horizontal], 16)
+                    .padding([.top], 8)
+                ProgressBarWidgetView(percentage: percentage, color: budget.category.color)
+                    .padding([.horizontal], 16)
+                    .padding([.top, .bottom], 8)
+                    .frame(height: 20)
+                Text("$\(Utilities.getAmountWith(amount: spending)) of $\(Utilities.getAmountWith(amount: budget.limit))")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(CustomColor.baseLight_20)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.horizontal], 16)
+                    .padding([.bottom], 8)
+                Text("You’ve exceed the limit!")
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.horizontal], 16)
+                    .padding([.bottom], 8)
+                    .isShowing(isLimitExceed)
+                
             }
-//        }
-//        .cornerRadius(15)
+            .background(ColoredView(color: CustomColor.baseLight))
+        .cornerRadius(15)
+        
     }
     
+   
+    
     func getCategoryTag() -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .strokeBorder(CustomColor.baseLight_20, lineWidth: 1)
             HStack(spacing: 7) {
                 Circle()
                     .frame(width: 14, height: 14)
@@ -41,8 +77,10 @@ struct BudgetViewCell: View {
                     .padding([.trailing], 16)
             }
             .padding([.vertical,.leading], 8)
+            .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(CustomColor.baseLight_20, lineWidth: 1))
             
-        }
     }
 }
 

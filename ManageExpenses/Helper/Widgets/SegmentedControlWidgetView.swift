@@ -10,9 +10,10 @@ import SwiftUI
 struct SegmentedControlWidgetView: View {
     
     var items: [String]
-    
+   
     @Binding var selectedIndex: Int
-    
+    var textColor = CustomColor.yellow
+    var bgColor = CustomColor.yellow_20
     @Namespace var namespace
     
     var body: some View {
@@ -23,7 +24,7 @@ struct SegmentedControlWidgetView: View {
                             Text(items[index])
                                 .font(.system(size: 14, weight: .bold))
                                 .padding(.vertical, 8.0)
-                                .foregroundColor(index == selectedIndex ? CustomColor.yellow : CustomColor.baseLight_20)
+                                .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
                                 .frame(maxWidth: .infinity)
                                 .matchedGeometryEffect(
                                     id: index,
@@ -42,7 +43,7 @@ struct SegmentedControlWidgetView: View {
                 .padding(8.0)
                 .background {
                     Capsule()
-                        .fill(CustomColor.yellow_20)
+                        .fill(bgColor)
                         .matchedGeometryEffect(
                             id: selectedIndex,
                             in: namespace,
@@ -56,7 +57,7 @@ struct SegmentedControlWidgetView: View {
                         Text(items[index])
                             .font(.system(size: 14, weight: .bold))
                             .padding(.vertical, 8.0)
-                            .foregroundColor(index == selectedIndex ? CustomColor.yellow : CustomColor.baseLight_20)
+                            .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
                     }
                 }.pickerStyle(.segmented)
             }

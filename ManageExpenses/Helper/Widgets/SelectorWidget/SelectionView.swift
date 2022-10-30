@@ -11,7 +11,7 @@ struct SelectionView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Binding var data: [SelectDataModel]
     var isMultiSelector: Bool
-    @Binding var text: String
+    @Binding var text: SelectDataModel
     var title: String
     
     
@@ -31,7 +31,7 @@ struct SelectionView: View {
                             }
                             data[index].isSelected.toggle()
                             if !isMultiSelector {
-                                text = data[index].desc
+                                text = data[index]
                                 withAnimation {
                                     mode.wrappedValue.dismiss()
                                 }

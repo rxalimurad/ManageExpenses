@@ -134,6 +134,7 @@ struct HomeView: View {
                 }
                 Spacer()
                 Image.Custom.bell
+                    .hidden()
                     .padding([.trailing], 21)
             }.padding([.top, .bottom], 12)
                 .padding([.top], safeAreaInsets.top)

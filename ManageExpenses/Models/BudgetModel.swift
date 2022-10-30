@@ -13,7 +13,8 @@ struct BudgetModel {
     var budget: [BudgetDetail]
 }
 
-struct BudgetDetail {
+struct BudgetDetail: Identifiable {
+    var id = UUID()
     var category: SelectDataModel
     var limit: Double
 }

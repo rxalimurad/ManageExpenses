@@ -25,13 +25,15 @@ struct ManageExpensesApp: App {
             //            SignUpView()
             //            AddExpenseIncomeView(newEntryType: .income)
 //            AddExpenseIncomeView(newEntryType: .convert)
-            if isSplashShowing {
-                SplashView(isShowing: $isSplashShowing)
-            } else {
-//                LoginIntroView(viewModel: LoginIntroViewModel())
-                TabControlView(viewRouter: TabControlViewRouter())
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            }
+//            if isSplashShowing {
+//                SplashView(isShowing: $isSplashShowing)
+//            } else {
+////                LoginIntroView(viewModel: LoginIntroViewModel())
+//                TabControlView(viewRouter: TabControlViewRouter())
+//                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            }
+            FinancialReportView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0  ))
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            CreateBudgetView()
         }
     }
