@@ -227,7 +227,7 @@ struct TransactionTabView: View {
             .isShowing(!customDateSeleced)
         }
         
-        .background(ColoredView(color: .white))
+        .background(ColoredView(color: CustomColor.baseLight_60))
         .cornerRadius(15, corners: [.topLeft, .topRight])
         .edgesIgnoringSafeArea([.all])
     }

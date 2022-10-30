@@ -22,7 +22,7 @@ struct BottomSelectionCellView: View {
             .padding([.bottom], 16)
             .frame(maxWidth: .infinity)
         }
-        .background(ColoredView(color: CustomColor.primaryColor.opacity(0.2)))
+        .background(ColoredView(color: CustomColor.baseLight))
         .cornerRadius(10)
         .onTapGesture {
             action()
