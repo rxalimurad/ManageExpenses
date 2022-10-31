@@ -22,6 +22,5 @@ extension Date {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter.string(from: self)
     }
-    
-    
+      
 }

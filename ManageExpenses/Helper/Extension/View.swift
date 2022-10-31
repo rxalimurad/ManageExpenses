@@ -53,6 +53,8 @@ extension View {
               self
           }
       }
+ 
+    
     public func asUIImage() -> UIImage {
            let controller = UIHostingController(rootView: self)
             

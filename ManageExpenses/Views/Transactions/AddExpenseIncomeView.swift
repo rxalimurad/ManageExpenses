@@ -68,7 +68,7 @@ struct AddExpenseIncomeView: View {
                 
                 Spacer()
             }
-            
+            .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
             .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
             .fullScreenCover(isPresented: $isAtchmntViewShown) {
                 ZStack (alignment: .bottom) {
@@ -118,6 +118,7 @@ struct AddExpenseIncomeView: View {
                 }
                 Image.Custom.transferSign
             }
+            
             .padding([.top], 24)
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description)
                 .padding([.top], 16)

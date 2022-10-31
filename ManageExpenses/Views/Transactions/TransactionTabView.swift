@@ -13,6 +13,9 @@ struct TransactionTabView: View {
     @State var isfilterSheetShowing = false
     @State var isfinancialReportShowing = false
     @State var customDateSeleced = false
+    @State var dateTo = Date()
+    @State var dateFrom = Date()
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
         animation: .default)
@@ -38,9 +41,9 @@ struct TransactionTabView: View {
             ZStack (alignment: .bottom) {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        isDurationFilterSheetShowing.toggle()
+                        isfilterSheetShowing.toggle()
                     }
-                  durationFilterSheet()
+                durationFilterSheet()
             }
             .background(ColoredView(color: .clear))
             .edgesIgnoringSafeArea(.all)
@@ -153,85 +156,7 @@ struct TransactionTabView: View {
                 height: Constants.bottomSheet.indicatorHeight
             )
     }
-    
-    private func durationFilterSheet() ->  some View {
-        VStack {
-            Button {
-                isDurationFilterSheetShowing.toggle()
-            } label: {
-                indicator
-                    .padding([.top], 16)
-                   
-            }
-            
-            VStack {
-                HStack {
-                    Button {
-                        withAnimation {
-                            customDateSeleced.toggle()
-                        }
-                    } label: {
-                        Image.Custom.navBack
-                            .renderingMode(.template)
-                            .foregroundColor(CustomColor.baseDark)
-                    }
-
-                   Spacer()
-                }.padding([.horizontal], 16)
-                    .padding([.bottom], 20)
-                
-                HStack(spacing: 8) {
-                    DateSelectionCellView(title: "From Date") {
-                        
-                    }
-                    DateSelectionCellView(title: "To Date") {
-                       
-                    }
-                    
-                }
-                ButtonWidgetView(title: "Ok", style: .primaryButton) {
-                    withAnimation {
-                        customDateSeleced.toggle()
-                    }
-                }
-                .padding([.top], 20)
-                
-            }
-            .padding([.horizontal], 16)
-            .padding([.bottom], 16 + safeAreaInsets.bottom)
-            .isShowing(customDateSeleced)
-            .padding([.top], 20)
-            
-            VStack(spacing: 8) {
-                BottomSelectionCellView(title: "Today") {
-                    
-                }
-                BottomSelectionCellView(title: "This Week") {
-                    
-                }
-                BottomSelectionCellView(title: "This Month") {
-                    
-                }
-                BottomSelectionCellView(title: "This Year") {
-                    
-                }
-                BottomSelectionCellView(title: "Custom Range") {
-                    withAnimation {
-                        customDateSeleced.toggle()
-                    }
-                }
-            }
-            .padding([.top], 48)
-            .padding([.horizontal], 16)
-            .padding([.bottom], 16 + safeAreaInsets.bottom)
-            .isShowing(!customDateSeleced)
-        }
         
-        .background(ColoredView(color: CustomColor.baseLight_60))
-        .cornerRadius(15, corners: [.topLeft, .topRight])
-        .edgesIgnoringSafeArea([.all])
-    }
-    
     private func filterSheet() ->  some View {
         VStack {
             Button {
@@ -245,6 +170,31 @@ struct TransactionTabView: View {
             
             VStack(spacing: 8) {
                 TransactionFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $isfilterSheetShowing)
+            }
+            .padding([.top], 22)
+            .padding([.horizontal], 16)
+            .padding([.bottom], 16 + safeAreaInsets.bottom)
+            
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15, corners: [.topLeft, .topRight])
+        .edgesIgnoringSafeArea([.all])
+    }
+    
+    private func durationFilterSheet() ->  some View {
+        VStack {
+            Button {
+                isfilterSheetShowing.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+                   
+            }
+            
+            
+            VStack(spacing: 8) {
+                TransactionDurationFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $isDurationFilterSheetShowing, dateFrom: $dateFrom, dateTo: $dateTo)
             }
             .padding([.top], 22)
             .padding([.horizontal], 16)

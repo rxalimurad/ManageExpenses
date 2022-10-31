@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleFilterSelectionView: View {
     @Binding var selectedOpts: String
     var options: [String]
+    var action: ((String) ->Void)?
     let columns = [
            GridItem(.flexible()),
            GridItem(.flexible()),
@@ -22,6 +23,7 @@ struct SingleFilterSelectionView: View {
             Button {
                 withAnimation {
                     selectedOpts = option
+                    action?(option)
                 }
             } label: {
                 ZStack {

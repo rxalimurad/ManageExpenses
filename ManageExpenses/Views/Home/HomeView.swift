@@ -20,14 +20,14 @@ struct HomeView: View {
     @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedIndex = 1
     @State private var selectedTrans: Transaction?
-
+    
     var body: some View {
         VStack(alignment: .center) {
             summaryView
                 .background(LinearGradient(colors: [CustomColor.bgYellow, CustomColor.bgYellow.opacity(0.2)], startPoint: .top, endPoint: .bottom))
                 .cornerRadius(28, corners: [.bottomLeft, .bottomRight])
-
-           
+            
+            
             ScrollView {
                 VStack {
                     Text("").frame(height: 10)
@@ -73,7 +73,7 @@ struct HomeView: View {
                             }.frame(width: 78, height: 32)
                         }
                         .padding([.top, .leading, .trailing], 16)
-                     
+                        
                         
                         ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
                             Text(headerTransDate)
@@ -90,11 +90,11 @@ struct HomeView: View {
                             }
                         }
                     }.transition(.move(edge: .bottom))
-
-}
+                    
+                }
                 
             }
-
+            
         }
         .fullScreenCover(item: $selectedTrans, content: { trans in
             TransactionDetailView(transaction: trans)
@@ -103,10 +103,6 @@ struct HomeView: View {
         
         
     }
-    
-    
-    
-    
     
     var summaryView: some View {
         VStack {
@@ -139,7 +135,7 @@ struct HomeView: View {
             }.padding([.top, .bottom], 12)
                 .padding([.top], safeAreaInsets.top)
             
-          
+            
             
             HStack(spacing: 16) {
                 totalIncomeView
