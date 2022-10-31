@@ -112,7 +112,7 @@ struct HomeView: View {
                         .strokeBorder(CustomColor.baseLight, lineWidth: 5)
                     Circle()
                         .strokeBorder(CustomColor.primaryColor, lineWidth: 2)
-                    Image.Custom.google
+                    Image.Custom.apple
                         .resizable()
                         .frame(width: 32, height: 32)
                 }

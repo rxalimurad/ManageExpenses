@@ -27,16 +27,17 @@ struct ButtonWidgetView<Style: ButtonStyle>: View {
                 if let image = image {
                     image
                         .resizable()
-                        .frame(width: 32, height: 32)
+                        .frame(width: 20, height: 20)
                         .padding([.leading], 16)
                 }
                 Text(title)
             }
             .frame(maxWidth: .infinity, maxHeight: 56)
-                
+            .frame(height: 56)
+            
         }
         .buttonStyle(style)
-            
+        
         
     }
 }

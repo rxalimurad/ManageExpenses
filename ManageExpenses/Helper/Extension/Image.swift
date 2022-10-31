@@ -10,7 +10,7 @@ import SwiftUI
 extension Image {
     
     enum Custom {
-        static let google = Image("google")
+        static let apple = Image("apple")
         static let planMoney = Image("planMoney")
         static let knowMoney = Image("knowMoney")
         static let controlMoney = Image("controlMoney")

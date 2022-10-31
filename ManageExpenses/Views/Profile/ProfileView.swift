@@ -24,7 +24,7 @@ struct ProfileView: View {
                             .strokeBorder(CustomColor.baseLight, lineWidth: 5)
                         Circle()
                             .strokeBorder(CustomColor.primaryColor, lineWidth: 2)
-                        Image.Custom.google
+                        Image.Custom.apple
                             .resizable()
                             .frame(width: 76, height: 76)
                     }
