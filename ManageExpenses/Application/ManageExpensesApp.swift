@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ManageExpensesApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     @State private var isSplashShowing = true
     
     @State var amount = ""
@@ -20,22 +20,13 @@ struct ManageExpensesApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            //            LoginIntroView(viewModel: LoginIntroViewModel())
-//                        TabControlView(viewRouter: TabControlViewRouter())
-            //            SignUpView()
-            //            AddExpenseIncomeView(newEntryType: .income)
-//            AddExpenseIncomeView(newEntryType: .convert)
             if isSplashShowing {
                 SplashView(isShowing: $isSplashShowing)
             } else {
-//                LoginIntroView(viewModel: LoginIntroViewModel())
-                TabControlView(viewRouter: TabControlViewRouter())
+                LoginIntroView(viewModel: LoginIntroViewModel())
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
-//            FinancialReportView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0  ))
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            CreateBudgetView()
         }
+        
     }
-    
 }
