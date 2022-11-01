@@ -10,6 +10,8 @@ import SwiftUI
 struct LoginView: View {
     @State var emailAddress = ""
     @State var password = ""
+//    @ObservedObject
+    var viewModel =  LoginViewModel()
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -26,7 +28,7 @@ struct LoginView: View {
             
             NavigationLink(destination: SetupAccountView()) {
                 ButtonWidgetView(title: "Login", style: .primaryButton, action: {
-                    
+                    viewModel.sendEmailVerificationCode(emailAddress: emailAddress)
                 }).allowsHitTesting(false)
                     .padding([.top], 40)
                     .padding([.trailing, .leading], 16)
