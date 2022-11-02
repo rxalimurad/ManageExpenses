@@ -59,7 +59,7 @@ struct InputWidgetView: View {
                 DispatchQueue.main.async {
                     if !text.isEmpty {
                         withAnimation {
-                            isErrorShowing = !validate(isToValidate: true)
+                            isErrorShowing = !validate()
                         }
                     }
                     if text.count > properties.maxLength {
@@ -84,10 +84,7 @@ struct InputWidgetView: View {
         
         
     }
-    func validate(isToValidate: Bool = true) -> Bool {
-        if !isToValidate {
-            return true
-        }
+    func validate() -> Bool {
         if text.isEmpty {
             errorMsg = "Please enter \(hint)"
             isValidField = true
@@ -95,31 +92,21 @@ struct InputWidgetView: View {
         } else {
             if text.count < properties.minLength {
                 errorMsg = "\(hint) length should be atleast \(properties.minLength)"
-                isValidField = true
+                isValidField = false
                 return false
             } else if text.count > properties.maxLength {
                 errorMsg = "\(hint) length should be maximum \(properties.maxLength)"
-                isValidField = true
+                isValidField = false
                 return false
             } else if !properties.regex.isEmpty && !text.vaidateRegex(regex: properties.regex) {
                 errorMsg = "Please enter valid \(hint) "
-                isValidField = true
+                isValidField = false
                 return false
             }
         }
         isValidField = true
         return true
         
-    }
-}
-
-extension InputWidgetView {
-    func handleError(_ isToShow: Bool) -> InputWidgetView {
-        if !validate(isToValidate: true) && !isErrorShowing {
-            isErrorShowing.toggle()
-        }
-        
-        return self
     }
 }
 
