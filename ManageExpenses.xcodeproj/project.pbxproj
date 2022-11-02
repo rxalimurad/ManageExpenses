@@ -27,6 +27,7 @@
 		5F7706D6290A5FD700CA68C4 /* SliderWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */; };
 		5FAF69742906B09500849C95 /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF69732906B09500849C95 /* DataSets.swift */; };
 		5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883C2912493C00233A27 /* UIApplication.swift */; };
+		5FAF883F2912972B00233A27 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883E2912972B00233A27 /* SignUpViewModel.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
@@ -448,6 +449,7 @@
 		5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWidgetView.swift; sourceTree = "<group>"; };
 		5FAF69732906B09500849C95 /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		5FAF883C2912493C00233A27 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		5FAF883E2912972B00233A27 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
@@ -2470,6 +2472,7 @@
 			isa = PBXGroup;
 			children = (
 				5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */,
+				5FAF883E2912972B00233A27 /* SignUpViewModel.swift */,
 				FAA478EF28F8849000C06B31 /* SignupVerification.swift */,
 			);
 			path = Signup;
@@ -2762,6 +2765,7 @@
 				FA82B50328FC0F260038E099 /* ExtraLine.swift in Sources */,
 				FA82B4A628FC0F240038E099 /* RangedBarDataSet.swift in Sources */,
 				FA21340B2905C914002EEBF4 /* VerticalGridShape.swift in Sources */,
+				5FAF883F2912972B00233A27 /* SignUpViewModel.swift in Sources */,
 				FA82B50528FC0F260038E099 /* AxisBorders.swift in Sources */,
 				FA82B4F628FC0F250038E099 /* RotatedText.swift in Sources */,
 				FA82B4E828FC0F250038E099 /* VerticalGridShape.swift in Sources */,
