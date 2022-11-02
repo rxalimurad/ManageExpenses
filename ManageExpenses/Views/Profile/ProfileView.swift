@@ -210,7 +210,7 @@ struct ProfileView: View {
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 20)
            
-            InputWidgetView(hint: "Currency Symbol", properties: InputProperties(maxLength: 3), text: $currencySymbol)
+            InputWidgetView(hint: "Currency Symbol", properties: InputProperties(maxLength: 3), text: $currencySymbol, isValidField: .constant(true))
                 .padding([.horizontal], 16)
                 .padding([.vertical], 16)
             HStack(spacing: 16) {

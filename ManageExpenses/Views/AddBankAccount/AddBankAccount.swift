@@ -59,7 +59,7 @@ struct AddBankAccount: View {
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
           
-            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 10), text: $category.desc)
+            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 10), text: $category.desc, isValidField: .constant(true))
                 .padding([.top],24)
                 .padding([.horizontal], 16)
             ColorPicker("Set the bank color", selection: $category.color)

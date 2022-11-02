@@ -21,7 +21,7 @@ struct ForgotPasswordView: View {
                 .padding([.leading, .trailing], 16)
                 .multilineTextAlignment(.leading)
             
-            InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 40, regex: Constants.regex.email), text: $emailAddress)
+            InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 40, regex: Constants.regex.email), text: $emailAddress, isValidField: .constant(true))
                 .padding([.top], 46)
                 .padding([.leading, .trailing], 16)
             

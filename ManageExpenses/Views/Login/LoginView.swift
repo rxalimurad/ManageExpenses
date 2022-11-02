@@ -10,18 +10,21 @@ import SwiftUI
 struct LoginView: View {
     @State var emailAddress = ""
     @State var password = ""
-//    @ObservedObject
+    @State var isValidEmail = false
+    @State var isValidPassword = false
+    
     var viewModel =  LoginViewModel()
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
-            InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 40, regex: Constants.regex.email), text: $emailAddress)
+            InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 40, regex: Constants.regex.email), text: $emailAddress, isValidField: $isValidEmail)
                 .padding([.top], 56)
                 .padding([.leading, .trailing], 16)
+                
             
-            InputWidgetView(hint:"Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password)
+            InputWidgetView(hint:"Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password, isValidField: $isValidPassword)
                 .padding([.top], 24)
                 .padding([.leading, .trailing], 16)
             
@@ -32,7 +35,8 @@ struct LoginView: View {
                 }).allowsHitTesting(false)
                     .padding([.top], 40)
                     .padding([.trailing, .leading], 16)
-            }
+                    .disabled(!validation())
+            }.disabled(!validation())
             NavigationLink(destination: ForgotPasswordView()) {
                 Text("Forgot Password?")
                     .foregroundColor(CustomColor.primaryColor)
@@ -40,7 +44,32 @@ struct LoginView: View {
                     .padding([.top, .bottom], 33)
             }
             
+            ButtonWidgetView(title: "Sign in with Apple",
+                             image: Image.Custom.apple,
+                             style: .blackButton, action: {
+                
+            })
+            .padding([.trailing, .leading], 16)
+            Spacer()
+            HStack {
+                ButtonWidgetView(title: "Google",
+                                 image: Image.Custom.google,
+                                 style: .googleButton, action: {
+                    
+                })
+                
+                ButtonWidgetView(title: "Facebook",
+                                 image: Image.Custom.facebook,
+                                 style: .fbButton, action: {
+                    
+                })
+                
+                
+                
+            }
+            .padding([.trailing, .leading], 16)
             
+            Spacer()
             NavigationLink(destination: SignUpView()) {
                 Group {
                     Text("Don’t have an account yet? ")
@@ -51,17 +80,19 @@ struct LoginView: View {
                         .foregroundColor(CustomColor.primaryColor)
                 }.font(.system(size: 16, weight: .medium))
                     .padding([.trailing, .leading], 50)
+                    .padding([.bottom], 20)
             }
             
             
             
-            Spacer()
             
         }.setNavigation(title: "Login") {
             mode.wrappedValue.dismiss()
         }
-        
-        
+    }
+    
+    func validation() -> Bool {
+        return isValidEmail && isValidPassword
     }
 }
 

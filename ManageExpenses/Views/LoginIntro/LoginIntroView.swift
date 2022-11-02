@@ -22,15 +22,12 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
                     .tabViewStyle(.page(indexDisplayMode: .always))
                 }
                 
-                NavigationLink(destination: SignUpView()) {
-                    ButtonWidgetView(title: "Sign Up", style: .primaryButton) {}.allowsHitTesting(false)
+                NavigationLink(destination: LoginView()) {
+                    ButtonWidgetView(title: "Continue", style: .primaryButton) {}.allowsHitTesting(false)
                         .padding([.trailing, .leading], 16)
                 }
-                NavigationLink(destination: LoginView()) {
-                ButtonWidgetView(title: "Login", style: .secondaryButton) {}.allowsHitTesting(false)
-                    .padding([.bottom], 20)
-                    .padding([.trailing, .leading], 16)
-                }
+                .padding([.bottom], 20)
+
             }.navigationBarTitle("")
                 .navigationBarHidden(true)
             

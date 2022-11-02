@@ -120,7 +120,7 @@ struct AddExpenseIncomeView: View {
             }
             
             .padding([.top], 24)
-            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description)
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
                 .padding([.top, .bottom], 16)
             if selectedImage == nil {
@@ -199,7 +199,7 @@ struct AddExpenseIncomeView: View {
             BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000))
                 .padding([.top], 16)
                 .isShowing(category.desc.lowercased() == "shopping")
-            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: $description)
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
             SelectorWidgetView(hint: "Wallet", text: $wallet , data: $walletData)
                 .padding([.top, .bottom], 16)

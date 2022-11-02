@@ -26,6 +26,7 @@
 		5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */; };
 		5F7706D6290A5FD700CA68C4 /* SliderWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */; };
 		5FAF69742906B09500849C95 /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF69732906B09500849C95 /* DataSets.swift */; };
+		5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883C2912493C00233A27 /* UIApplication.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
@@ -446,6 +447,7 @@
 		5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeViewModel.swift; sourceTree = "<group>"; };
 		5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWidgetView.swift; sourceTree = "<group>"; };
 		5FAF69732906B09500849C95 /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
+		5FAF883C2912493C00233A27 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
@@ -2535,6 +2537,7 @@
 				FA82B59328FDD93E0038E099 /* Date.swift */,
 				FA86427B290F16A6006902CB /* Binding.swift */,
 				5FF15662290FD80A0005C224 /* CustomPadding.swift */,
+				5FAF883C2912493C00233A27 /* UIApplication.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2903,6 +2906,7 @@
 				FA2134712905C917002EEBF4 /* Utilities.swift in Sources */,
 				FA82B4FA28FC0F260038E099 /* XAxisLabels.swift in Sources */,
 				FA2134212905C914002EEBF4 /* InfoBox.swift in Sources */,
+				5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */,
 				FAB1E34828F7E8FF00667CF2 /* View.swift in Sources */,
 				FA82B4C628FC0F240038E099 /* InfoViewData.swift in Sources */,
 				FA2134022905C914002EEBF4 /* DoughnutChartData.swift in Sources */,

@@ -19,11 +19,11 @@ struct ResetPasswordView: View {
         VStack {
          
             
-            InputWidgetView(hint:"New Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password)
+            InputWidgetView(hint:"New Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password, isValidField: .constant(true))
                 .padding([.top], 56)
                 .padding([.leading, .trailing], 16)
             
-            InputWidgetView(hint:"Confirm New Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password)
+            InputWidgetView(hint:"Confirm New Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $password, isValidField: .constant(true))
                 .padding([.top], 24)
                 .padding([.leading, .trailing], 16)
             

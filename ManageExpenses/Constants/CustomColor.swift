@@ -31,6 +31,8 @@ enum CustomColor {
     static let red = Color("redColor")
     static let green = Color("greenColor")
     static let blue = Color("blueColor")
+    static let facebookColor = Color("facebookColor")
+    static let googleColor = Color("googleColor")
     
     static let keyboardBg = Color("keyboardBg")
     static let hintColor = Color("hintColor").opacity(0.85)
