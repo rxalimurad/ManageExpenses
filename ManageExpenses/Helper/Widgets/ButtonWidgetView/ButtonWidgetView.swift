@@ -28,7 +28,7 @@ struct ButtonWidgetView<Style: ButtonStyle>: View {
                     image
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .padding([.leading], 16)
+                        .padding([.leading], 0)
                 }
                 Text(title)
             }
