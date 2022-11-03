@@ -27,5 +27,9 @@ enum Constants {
         static let minHeightRatio: CGFloat = 0.3
     }
     
+    enum firestoreCollection {
+        static let users = "Users"
+    }
+    
     
 }

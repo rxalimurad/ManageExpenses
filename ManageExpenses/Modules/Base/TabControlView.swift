@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TabControlView: View {
+    @EnvironmentObject var sessionService: SessionService
+    
     @StateObject var viewRouter: TabControlViewRouter
     @State var showPopUp = false
     @State var showNewEntryScreen = false
@@ -35,6 +37,7 @@ struct TabControlView: View {
                             BudgetView(safeAreaInsets: geometry.safeAreaInsets)
                         case .user:
                             ProfileView(safeAreaInsets: geometry.safeAreaInsets)
+                                .environmentObject(sessionService)
                         }
                     }.allowsHitTesting(!showPopUp)
                     Spacer()

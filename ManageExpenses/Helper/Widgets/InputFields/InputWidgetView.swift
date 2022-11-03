@@ -55,7 +55,8 @@ struct InputWidgetView: View {
                 
                 
                 
-            }.onReceive(Just(text), perform: { _ in
+            }
+            .onChange(of: Just(text), perform: { _ in
                 DispatchQueue.main.async {
                     if !text.isEmpty {
                         withAnimation {
@@ -91,7 +92,7 @@ struct InputWidgetView: View {
             return false
         } else {
             if text.count < properties.minLength {
-                errorMsg = "\(hint) length should be atleast \(properties.minLength)"
+                errorMsg = "\(hint) length should be at least \(properties.minLength)"
                 isValidField = false
                 return false
             } else if text.count > properties.maxLength {

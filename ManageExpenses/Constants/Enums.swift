@@ -58,3 +58,6 @@ enum FilterDuration: String, CaseIterable {
     case custom = "Custom"
 }
 
+enum UserKeys: String {
+    case name
+}

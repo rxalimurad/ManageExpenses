@@ -22,6 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct ManageExpensesApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
+    @StateObject var sessionService = SessionService()
     @State private var isSplashShowing = true
     
     @State var amount = ""
@@ -34,8 +35,15 @@ struct ManageExpensesApp: App {
             if isSplashShowing {
                 SplashView(isShowing: $isSplashShowing)
             } else {
-                LoginIntroView(viewModel: LoginIntroViewModel())
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                switch sessionService.state {
+                case .loggedIn:
+                    TabControlView(viewRouter: TabControlViewRouter())
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                        .environmentObject(sessionService)
+                case .loggedOut:
+                    LoginIntroView(viewModel: LoginIntroViewModel())
+                        
+                }
             }
         }
         

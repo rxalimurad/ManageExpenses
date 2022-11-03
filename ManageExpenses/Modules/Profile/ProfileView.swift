@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 struct ProfileView: View {
     @State var isLogoutShown = false
     @State var isAboutusShown = false
     @State var isCurrencyShown = false
     @State var isAccountsShown = false
     @State var currencySymbol = "$"
+    @EnvironmentObject var sessionService: SessionService
     var safeAreaInsets: EdgeInsets
     var body: some View {
         ZStack {
@@ -184,7 +185,7 @@ struct ProfileView: View {
                     
                 }
                 ButtonWidgetView(title: "Yes", style: .primaryButton) {
-                    
+                    try? Auth.auth().signOut()
                 }
                 
             }
