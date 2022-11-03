@@ -40,6 +40,8 @@ struct InputWidgetView: View {
                         SecureField(hint, text: $text)
                     } else {
                         TextField(hint, text: $text)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
                     }
                     
                 }

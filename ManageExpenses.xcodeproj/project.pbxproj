@@ -213,6 +213,8 @@
 		FA8D88F42909740900C70440 /* BudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F32909740900C70440 /* BudgetViewModel.swift */; };
 		FA8D88F62909775400C70440 /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F52909775400C70440 /* BudgetModel.swift */; };
 		FA8D88F829097AAE00C70440 /* CreateBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */; };
+		FA8FC8B9291440CD004AB1BF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8FC8B8291440CD004AB1BF /* VisualEffectView.swift */; };
+		FA8FC8BB291447B8004AB1BF /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8FC8BA291447B8004AB1BF /* AlertView.swift */; };
 		FA929987290E51D900033C7E /* BudgetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA929986290E51D900033C7E /* BudgetDetailView.swift */; };
 		FA929989290E8A9400033C7E /* FinancialReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA929988290E8A9400033C7E /* FinancialReportView.swift */; };
 		FA92998B290E941600033C7E /* FinancialReportCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92998A290E941600033C7E /* FinancialReportCellView.swift */; };
@@ -445,6 +447,8 @@
 		FA8D88F32909740900C70440 /* BudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewModel.swift; sourceTree = "<group>"; };
 		FA8D88F52909775400C70440 /* BudgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
 		FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBudgetView.swift; sourceTree = "<group>"; };
+		FA8FC8B8291440CD004AB1BF /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		FA8FC8BA291447B8004AB1BF /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		FA929986290E51D900033C7E /* BudgetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailView.swift; sourceTree = "<group>"; };
 		FA929988290E8A9400033C7E /* FinancialReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportView.swift; sourceTree = "<group>"; };
 		FA92998A290E941600033C7E /* FinancialReportCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportCellView.swift; sourceTree = "<group>"; };
@@ -1442,6 +1446,8 @@
 				FA94E87B2903C6A300C5408D /* ImagePicker.swift */,
 				FA2134892905CFE2002EEBF4 /* LottieView.swift */,
 				FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */,
+				FA8FC8B8291440CD004AB1BF /* VisualEffectView.swift */,
+				FA8FC8BA291447B8004AB1BF /* AlertView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1551,7 +1557,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		FA8BC154290EF0550025BE0A /* gitRev */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1563,7 +1569,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nGIT_REV=`git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :REVISION ${GIT_REV}\" \"${SRCROOT}/ManageExpenses/Info.plist\"\n\n";
 		};
@@ -1591,6 +1597,7 @@
 				5F4B7C0128F6CE8400EFC1F5 /* LoginIntroModel.swift in Sources */,
 				FA82B50F28FC0F260038E099 /* LineChartStyle.swift in Sources */,
 				FA82B4EA28FC0F250038E099 /* Marker.swift in Sources */,
+				FA8FC8BB291447B8004AB1BF /* AlertView.swift in Sources */,
 				FA82B51028FC0F260038E099 /* LineChartProtocolsExtensions.swift in Sources */,
 				FA82B4B028FC0F240038E099 /* RangedBarChartData.swift in Sources */,
 				FA82B4AA28FC0F240038E099 /* GroupingData.swift in Sources */,
@@ -1793,6 +1800,7 @@
 				FA82B51728FC0F270038E099 /* LineChartView.swift in Sources */,
 				FA82B4AD28FC0F240038E099 /* StackedBarChartData.swift in Sources */,
 				FA82B4F228FC0F250038E099 /* PointOfInterestProtocol.swift in Sources */,
+				FA8FC8B9291440CD004AB1BF /* VisualEffectView.swift in Sources */,
 				FA82B4AC28FC0F240038E099 /* BarChartProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

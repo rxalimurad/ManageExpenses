@@ -13,11 +13,11 @@ struct WebView: UIViewRepresentable {
 
     let type: HTMLType
     
-    
-    
     func makeUIView(context: Context) -> WKWebView {
+        
         let html = type.getHtml() ?? ""
         let webView = WKWebView(frame: .zero)
+        webView.addSubview(UIActivityIndicatorView())
         webView.loadHTMLString(html, baseURL: nil)
         return webView
     }

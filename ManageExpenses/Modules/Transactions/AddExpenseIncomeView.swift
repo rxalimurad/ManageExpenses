@@ -173,9 +173,7 @@ struct AddExpenseIncomeView: View {
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
-                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
-                    mode.wrappedValue.dismiss()
-                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+                AlertView(title: "Transaction has been successfully added", mode: mode).show()
             })
         }
         .padding([.horizontal], 16)
@@ -255,9 +253,7 @@ struct AddExpenseIncomeView: View {
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
-                AlertX(title: Text("Transaction has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
-                    mode.wrappedValue.dismiss()
-                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+                AlertView(title: "Transaction has been successfully added", mode: mode).show()
             })
         }
         .padding([.horizontal], 16)

@@ -79,10 +79,9 @@ struct SignUpView: View {
                         
                     }
                 }
-                
-                
-                switch vm.state {
+             switch vm.state {
                 case .inprogress:
+                 Color.black.opacity(0.1).edgesIgnoringSafeArea([.all])
                     ProgressView()
                         .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.3)
                         .background(Color.white)
@@ -90,8 +89,9 @@ struct SignUpView: View {
                         .opacity(1)
                         .shadow(color: Color.gray.opacity(0.5), radius: 4.0, x: 1.0, y: 2.0)
                 case .failed(let error):
-                    Text(error.localizedDescription)
-                        .font(.system(size: 50))
+                 Color.black.opacity(0.1).edgesIgnoringSafeArea([.all])
+                 
+                 AlertView(title: error.localizedDescription, mode: mode).show()
                 default:
                     EmptyView()
                 }
