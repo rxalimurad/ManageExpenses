@@ -89,6 +89,9 @@ struct SignUpView: View {
                         .cornerRadius(20)
                         .opacity(1)
                         .shadow(color: Color.gray.opacity(0.5), radius: 4.0, x: 1.0, y: 2.0)
+                case .failed(let error):
+                    Text(error.localizedDescription)
+                        .font(.system(size: 50))
                 default:
                     EmptyView()
                 }
