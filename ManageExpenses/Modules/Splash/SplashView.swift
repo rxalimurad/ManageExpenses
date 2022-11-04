@@ -13,8 +13,8 @@ struct SplashView: View {
     
     var body: some View {
         VStack {
-            LottieView(lottieFile: "splashAnimation", speed: 2)
-            LottieView(lottieFile: "loadingAnimation", speed: 1)
+            LottieView(lottieFile: Constants.animationFile.splashAnimation, speed: 2)
+            LottieView(lottieFile: Constants.animationFile.loadingAnimation, speed: 1)
                 .frame(height: 100)
             VStack {
                 

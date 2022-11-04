@@ -31,5 +31,10 @@ enum Constants {
         static let users = "Users"
     }
     
+    enum animationFile {
+        static let splashAnimation = "splashAnimation"
+        static let loadingAnimation = "loadingAnimation"
+    }
+    
     
 }

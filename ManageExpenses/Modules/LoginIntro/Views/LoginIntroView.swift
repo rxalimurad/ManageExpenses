@@ -11,36 +11,36 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
     var viewModel: ViewModel
     
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(spacing: 20) {
-                    TabView() {
-                        ForEach(viewModel.getIntroPage()) { page in
-                            LoginIntroPageView(pageData: page)
-                        }
+        VStack {
+            VStack(spacing: 20) {
+                TabView() {
+                    ForEach(viewModel.getIntroPage()) { page in
+                        LoginIntroPageView(pageData: page)
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .always))
                 }
-                
-                NavigationLink(destination: LoginView()) {
-                    ButtonWidgetView(title: "Continue", style: .primaryButton) {}.allowsHitTesting(false)
-                        .padding([.trailing, .leading], 16)
-                }
-                .padding([.bottom], 20)
-
-            }.navigationBarTitle("")
-                .navigationBarHidden(true)
+                .tabViewStyle(.page(indexDisplayMode: .always))
+            }
             
-        }
+            
+            ButtonWidgetView(title: "Continue", style: .primaryButton) {
+               // viewModel.hideIntro()
+            }
+            .padding([.trailing, .leading], 16)
+            
+            .padding([.bottom], 20)
+            
+        }.navigationBarTitle("")
+            .navigationBarHidden(true)
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginIntroView(viewModel: LoginIntroViewModel())
+        LoginIntroView(viewModel: LoginIntroViewModel(.constant(true)))
             .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
-                        .previewDisplayName("iPhone 12")
-       
+            .previewDisplayName("iPhone 12")
+        
     }
 }
 

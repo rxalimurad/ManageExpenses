@@ -7,7 +7,7 @@
 
 import SwiftUI
 extension View {
-    @ViewBuilder func setNavigation(title: String, titleColor: Color? = Color.black, action: @escaping () -> Void) -> some View {
+    @ViewBuilder func setNavigation(title: String, titleColor: Color? = Color.black, showBackBtn: Bool = true, action: @escaping () -> Void) -> some View {
         self.navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
@@ -20,6 +20,7 @@ extension View {
                         Image.Custom.navBack
                             .renderingMode(.template)
                             .foregroundColor(titleColor)
+                            .isShowing(showBackBtn)
                     }
                     
                 }

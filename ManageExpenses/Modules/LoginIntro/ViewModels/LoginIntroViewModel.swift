@@ -9,10 +9,18 @@ import SwiftUI
 
 protocol LoginIntroViewModelType {
     func getIntroPage() -> [LoginIntroPage]
+    func hideIntro()
 }
 
 
 final class LoginIntroViewModel: LoginIntroViewModelType {
+    @Binding var showIntro: Bool
+    init(_ showIntro: Binding<Bool>) {
+        self._showIntro = showIntro
+    }
+    func hideIntro() {
+        showIntro.toggle()
+    }
     func getIntroPage() -> [LoginIntroPage]{
         let page1 = LoginIntroPage(id: "1", title: "Gain total control of your money", desc: "Become your own money manager and make every cent count", image: Image.Custom.controlMoney)
         let page2 = LoginIntroPage(id: "2", title: "Know where your money goes", desc: "Track your transaction easily, with categories and financial report ", image: Image.Custom.knowMoney)

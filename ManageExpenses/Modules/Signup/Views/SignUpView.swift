@@ -24,20 +24,27 @@ struct SignUpView: View {
                     InputWidgetView(hint:"Email", properties: InputProperties(maxLength: 40, regex: Constants.regex.email), text: $vm.userDetails.email, isValidField: $vm.isValidEmail)
                         .padding([.top], 16)
                         .padding([.leading, .trailing], 16)
-                    
+                    NavigationLink(destination: SignupConfirmationView(email: $vm.userDetails.email), isActive: $vm.moveNext) { EmptyView() }
                     InputWidgetView(hint:"Password", properties: InputProperties(maxLength: 20, minLength: 8, isSecure: true), text: $vm.userDetails.password, isValidField: $vm.isValidPassword)
                         .padding([.top], 16)
                         .padding([.leading, .trailing], 16)
                     
                     HStack(spacing: 0) {
-                        Image(systemName: vm.isTermsAccepted ? "checkmark.square.fill": "checkmark.square")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .padding([.trailing], 10)
-                            .foregroundColor(CustomColor.primaryColor)
-                            .onTapGesture {
-                                vm.isTermsAccepted.toggle()
+                        Group {
+                            if vm.isTermsAccepted {
+                                Image.Custom.checkedSquared
+                                    .resizable()
+                            } else {
+                                Image.Custom.unCheckedSquared
+                                    .resizable()
                             }
+                        }
+                        .frame(width: 24, height: 24)
+                        .padding([.trailing], 10)
+                        .foregroundColor(CustomColor.primaryColor)
+                        .onTapGesture {
+                            vm.isTermsAccepted.toggle()
+                        }
                         
                         HStack {
                             Text("By signing up, you agree to the ")
@@ -58,7 +65,6 @@ struct SignUpView: View {
                     .padding([.top], 17)
                     .padding([.leading, .trailing], 16)
                     
-                    //NavigationLink(destination: SignupVerification()) {
                     ButtonWidgetView(title: "Sign Up", style: .primaryButton, action: {
                         vm.createUser()
                     })
@@ -79,28 +85,29 @@ struct SignUpView: View {
                         
                     }
                 }
-             switch vm.state {
+                switch vm.state {
                 case .inprogress:
-                 Color.black.opacity(0.1).edgesIgnoringSafeArea([.all])
-                    ProgressView()
-                        .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.width * 0.3)
-                        .background(Color.white)
-                        .cornerRadius(20)
-                        .opacity(1)
-                        .shadow(color: Color.gray.opacity(0.5), radius: 4.0, x: 1.0, y: 2.0)
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea([.all])
+                    VStack {
+                        LottieView(lottieFile: Constants.animationFile.loadingAnimation, speed: 1)
+                            .frame(height: 100)
+                    }
                 case .failed(let error):
-                 Color.black.opacity(0.1).edgesIgnoringSafeArea([.all])
-                 
-                 AlertView(title: error.localizedDescription, mode: mode).show()
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea([.all])
+                    
+                    CustomAlert(title: error.localizedDescription).show() {
+                        vm.state = .na
+                    }.transition(.scale)
                 default:
                     EmptyView()
+                        .transition(.scale)
                 }
-                
-                
             }
+            
         }.setNavigation(title: "Sign Up") {
             mode.wrappedValue.dismiss()
         }
+        
         
         
         

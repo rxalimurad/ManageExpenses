@@ -27,7 +27,7 @@ struct ResetPasswordView: View {
                 .padding([.top], 24)
                 .padding([.leading, .trailing], 16)
             
-            NavigationLink(destination: LoginIntroView(viewModel: LoginIntroViewModel())) {
+            NavigationLink(destination: LoginView()) {
                 ButtonWidgetView(title: "Continue", style: .primaryButton, action: {
                     
                 }).allowsHitTesting(false)

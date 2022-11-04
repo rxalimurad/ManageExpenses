@@ -173,7 +173,9 @@ struct AddExpenseIncomeView: View {
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
-                AlertView(title: "Transaction has been successfully added", mode: mode).show()
+                AlertView(title: "Transaction has been successfully added").show() {
+                    mode.wrappedValue.dismiss()
+                }
             })
         }
         .padding([.horizontal], 16)
@@ -253,7 +255,9 @@ struct AddExpenseIncomeView: View {
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
-                AlertView(title: "Transaction has been successfully added", mode: mode).show()
+                AlertView(title: "Transaction has been successfully added").show() {
+                    mode.wrappedValue.dismiss()
+                }
             })
         }
         .padding([.horizontal], 16)

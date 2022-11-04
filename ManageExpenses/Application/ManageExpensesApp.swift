@@ -41,7 +41,7 @@ struct ManageExpensesApp: App {
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
                         .environmentObject(sessionService)
                 case .loggedOut:
-                    LoginIntroView(viewModel: LoginIntroViewModel())
+                    LoginView()
                         
                 }
             }

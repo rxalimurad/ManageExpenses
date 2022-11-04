@@ -49,6 +49,10 @@ extension Image {
         static let warning = Image("warning")
         static let aboutus = Image(systemName: "person.2.circle.fill")
         static let appIcon = Image("appicon")
+        static let checkedSquared = Image(systemName: "checkmark.square.fill")
+        static let unCheckedSquared = Image(systemName: "checkmark.square")
+        
+
         
     }
     

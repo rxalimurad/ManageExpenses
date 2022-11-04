@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 enum SignupState {
     case successful
@@ -32,6 +33,7 @@ class SignUpViewModel: ObservableObject, SignUpViewModelType {
     @Published var isValidEmail = false
     @Published var isValidPassword = false
     @Published var isValidName = false
+    @Published var moveNext = false
     @Published var state: SignupState = .na
     //MARK: - Protocol Implementation
     var service: SignupServiceType
@@ -45,6 +47,7 @@ class SignUpViewModel: ObservableObject, SignUpViewModelType {
     
     func createUser() {
         self.state = .inprogress
+        UIApplication.shared.endEditing()
         service.signup(with: userDetails)
             .sink {[weak self] res in
                 switch res {
@@ -54,6 +57,7 @@ class SignUpViewModel: ObservableObject, SignUpViewModelType {
                 }
             } receiveValue: {[weak self] in
                 self?.state = .successful
+                self?.moveNext = true
             }
             .store(in: &subscriptions)
     }
