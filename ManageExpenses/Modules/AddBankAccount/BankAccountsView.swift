@@ -25,7 +25,7 @@ struct BankAccountsView: View {
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
                 .padding([.top], 40)
-            Text(Utilities.getFormattedAmount("$", amount: walletData.map({Double($0.balance ?? "0")!}).reduce(0, +)))
+            Text(Utilities.getFormattedAmount(amount: walletData.map({Double($0.balance ?? "0")!}).reduce(0, +)))
                 .font(.system(size: 40, weight: .semibold))
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 8)
@@ -46,7 +46,7 @@ struct BankAccountsView: View {
                                     .foregroundColor(CustomColor.baseDark)
                                     .padding([.leading], 8)
                                 Spacer()
-                                Text(Utilities.getFormattedAmount("$", amount: Double(walletData[index].balance ?? "0") ?? 0))
+                                Text(Utilities.getFormattedAmount(amount: Double(walletData[index].balance ?? "0") ?? 0))
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(CustomColor.baseDark)
                                 

@@ -8,6 +8,13 @@
 import Foundation
 
 extension Date {
+    var secondsSince1970: Int64 {
+           Int64((self.timeIntervalSince1970).rounded())
+       }
+       
+       init(seconds: Int64) {
+           self = Date(timeIntervalSince1970: TimeInterval(seconds))
+       }
     
     var timeToShow: String {
         let formatter = DateFormatter()

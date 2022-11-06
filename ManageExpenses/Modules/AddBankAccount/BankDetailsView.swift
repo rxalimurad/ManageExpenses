@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct BankDetailsView: View {
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
-        animation: .default)
-    private var recentTransactions: FetchedResults<Transaction>
+//    private var recentTransactions: FetchedResults<Transaction>
     @Binding var bank: SelectDataModel
     var viewModel = BankDetailsViewModel()
     @State var editBankshown = false
@@ -33,13 +30,13 @@ struct BankDetailsView: View {
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 8)
-            Text(Utilities.getFormattedAmount("$", amount: Double(bank.balance ?? "0") ?? 0))
+            Text(Utilities.getFormattedAmount(amount: Double(bank.balance ?? "0") ?? 0))
                 .font(.system(size: 32, weight: .semibold))
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 12)
             
-            transactions
-                .padding([.top], 30)
+//            transactions
+//                .padding([.top], 30)
             
             
             Spacer()
@@ -48,21 +45,21 @@ struct BankDetailsView: View {
             AddBankAccount(category: $bank)
         }
     }
-    var transactions: some View {
-        ScrollView {
-            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-                Text(headerTransDate)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(CustomColor.baseDark)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.horizontal], 19)
-                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-                    TransactionView(transaction: transaction)
-                }
-            }
-            
-        }
-    }
+//    var transactions: some View {
+//        ScrollView {
+//            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
+//                Text(headerTransDate)
+//                    .font(.system(size: 16, weight: .medium))
+//                    .foregroundColor(CustomColor.baseDark)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding([.horizontal], 19)
+//                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+//                    TransactionView(transaction: transaction)
+//                }
+//            }
+//
+//        }
+//    }
 }
 //
 //struct BankDetails_Previews: PreviewProvider {

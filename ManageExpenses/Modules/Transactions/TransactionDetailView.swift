@@ -20,26 +20,26 @@ struct TransactionDetailView: View {
                         }, rightBtnImage: .Custom.delete) {
                             
                         }
-                        AmountInputWidget(amount: "\(transaction.transAmount)", leading: 0)
-                            .font(.system(size: 64, weight: .medium))
-                            .foregroundColor(CustomColor.baseLight)
-                            .padding([.top], 26)
+//                        AmountInputWidget(amount: "\(transaction.transAmount)", leading: 0)
+//                            .font(.system(size: 64, weight: .medium))
+//                            .foregroundColor(CustomColor.baseLight)
+//                            .padding([.top], 26)
                         
                         
-                        Text(transaction.transName ?? "")
-                            .foregroundColor(CustomColor.baseLight_80)
-                            .font(.system(size: 16, weight: .medium))
-                            .padding([.top], 0)
-                        
-                        Text(transaction.date!.dateToShow)
-                            .foregroundColor(CustomColor.baseLight_80)
-                            .font(.system(size: 13, weight: .medium))
-                            .padding([.top], 8)
-                            .padding([.bottom], 51)
+//                        Text(transaction.transName ?? "")
+//                            .foregroundColor(CustomColor.baseLight_80)
+//                            .font(.system(size: 16, weight: .medium))
+//                            .padding([.top], 0)
+//
+//                        Text(transaction.date!.dateToShow)
+//                            .foregroundColor(CustomColor.baseLight_80)
+//                            .font(.system(size: 13, weight: .medium))
+//                            .padding([.top], 8)
+//                            .padding([.bottom], 51)
                         
                     }.background(
                         Rectangle()
-                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.transType ?? "") ?? .expense))
+//                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.transType ?? "") ?? .expense))
                         
                     ).cornerRadius(30, corners: [.bottomLeft, .bottomRight])
                     
@@ -50,9 +50,9 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                             
-                            Text(transaction.transType ?? "")
-                                .foregroundColor(CustomColor.baseDark)
-                                .font(.system(size: 16, weight: .semibold))
+//                            Text(transaction.transType ?? "")
+//                                .foregroundColor(CustomColor.baseDark)
+//                                .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
                             .frame(maxWidth: .infinity)
                         
@@ -96,13 +96,13 @@ struct TransactionDetailView: View {
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
-                            Text(transaction.transDesc ?? "")
-                                .foregroundColor(CustomColor.baseDark)
-                                .font(.system(size: 16, weight: .medium))
-                                .padding([.horizontal], 16)
-                                .padding([.top], 15)
-                                .multilineTextAlignment(.leading)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+//                            Text(transaction.transDesc ?? "")
+//                                .foregroundColor(CustomColor.baseDark)
+//                                .font(.system(size: 16, weight: .medium))
+//                                .padding([.horizontal], 16)
+//                                .padding([.top], 15)
+//                                .multilineTextAlignment(.leading)
+//                                .frame(maxWidth: .infinity, alignment: .leading)
                             Text("Attachment")
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 16, weight: .medium))
@@ -110,14 +110,14 @@ struct TransactionDetailView: View {
                                 .padding([.top], 16)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .isShowing(transaction.image != nil)
+//                                .isShowing(transaction.image != nil)
                             
                             attachmentImage
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .shadow(radius: 10)
                                 .padding([.horizontal], 16)
-                                .padding([.top], 16).isShowing(transaction.image != nil)
+//                                .padding([.top], 16).isShowing(transaction.image != nil)
                                 .cornerRadius(20)
                         }
                     }
@@ -133,7 +133,7 @@ struct TransactionDetailView: View {
                 }.edgesIgnoringSafeArea([.all])
                 .onAppear() {
                     DispatchQueue.global(qos: .background).async {
-                        attachmentImage = Image.getImage(data: transaction.image)
+//                        attachmentImage = Image.getImage(data: transaction.image)
                     }
                 }
             

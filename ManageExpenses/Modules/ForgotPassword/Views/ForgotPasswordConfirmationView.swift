@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ForgotPasswordConfirmationView: View {
+    @Binding var email: String
     var body: some View {
         VStack {
             Image.Custom.emailSent
@@ -22,21 +23,27 @@ struct ForgotPasswordConfirmationView: View {
                 .padding([.top], 18)
                 .padding([.leading, .trailing], 35)
             
-            Text("Check your email test@test.com and follow the instructions to reset your password")
-                .foregroundColor(CustomColor.baseDark_50)
+            Group {
+                Text("Check your email(Inbox/Spam) ")
+                    .foregroundColor(CustomColor.baseDark_50)
+                +
+                Text("\(email) ")
+                    .foregroundColor(CustomColor.blue)
+                +
+                Text("and follow the instructions to reset your password")
+                    .foregroundColor(CustomColor.baseDark_50)
+            }
                 .font(.system(size: 16, weight: .medium))
                 .padding([.leading, .trailing], 35)
                 .multilineTextAlignment(.center)
                 .padding([.top], 18)
             Spacer()
-            NavigationLink(destination: ResetPasswordView()) {
-                ButtonWidgetView(title: "Back to Login", style: .primaryButton, action: {
-                    
-                }).allowsHitTesting(false)
+                ButtonWidgetView(title: "Login", style: .primaryButton, action: {
+                    NavigationUtil.popToRootView()
+                })
                     .padding([.bottom], 50)
                     .padding([.trailing, .leading], 16)
-            }
-        
+           
             
        
         }
@@ -46,6 +53,6 @@ struct ForgotPasswordConfirmationView: View {
 
 struct ForgotPasswordConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordConfirmationView()
+        ForgotPasswordConfirmationView(email: .constant(""))
     }
 }

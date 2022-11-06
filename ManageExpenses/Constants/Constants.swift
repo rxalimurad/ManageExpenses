@@ -9,6 +9,10 @@ import SwiftUI
 
 enum Constants {
     
+    enum persistanceKey {
+        static let currentUser = "currentUSer"
+        static let currency = "currency"
+    }
     
     enum regex {
         static let email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -29,6 +33,7 @@ enum Constants {
     
     enum firestoreCollection {
         static let users = "Users"
+        static let transactions = "Transactions"
     }
     
     enum animationFile {

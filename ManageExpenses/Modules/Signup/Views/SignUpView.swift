@@ -12,8 +12,8 @@ struct SignUpView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     //MARK: - View Model
-    @ObservedObject var vm = SignUpViewModel(service: SignupService())
-    
+    @StateObject var vm = SignUpViewModel(service: SignupService())
+   
     var body: some View {
         GeometryReader { _ in
             ZStack {
@@ -72,36 +72,24 @@ struct SignUpView: View {
                     .padding([.trailing, .leading], 16)
                     .disabled(!validation())
                     Spacer()
-                    NavigationLink(destination: LoginView()) {
+                    Button {
+                        NavigationUtil.popToRootView()
+                    } label: {
                         Group {
                             Text("Already have an account? ")
                                 .foregroundColor(CustomColor.baseLight_20)
                             +
                             Text("Login")
                                 .foregroundColor(CustomColor.primaryColor)
+                            
                         }
                         .font(.system(size: 16, weight: .medium))
                         .padding([.bottom], 20)
+                    }
+
                         
-                    }
                 }
-                switch vm.state {
-                case .inprogress:
-                    Color.black.opacity(0.3).edgesIgnoringSafeArea([.all])
-                    VStack {
-                        LottieView(lottieFile: Constants.animationFile.loadingAnimation, speed: 1)
-                            .frame(height: 100)
-                    }
-                case .failed(let error):
-                    Color.black.opacity(0.3).edgesIgnoringSafeArea([.all])
-                    
-                    CustomAlert(title: error.localizedDescription).show() {
-                        vm.state = .na
-                    }.transition(.scale)
-                default:
-                    EmptyView()
-                        .transition(.scale)
-                }
+                ViewForServiceAPI(state: $vm.state)
             }
             
         }.setNavigation(title: "Sign Up") {

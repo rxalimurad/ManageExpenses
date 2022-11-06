@@ -51,7 +51,7 @@ struct BudgetDetailView: View {
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 32)
                 
-                Text("\(Utilities.getFormattedAmount("$", amount: (budget.limit - spending)))")
+                Text("\(Utilities.getFormattedAmount(amount: (budget.limit - spending)))")
                     .font(.system(size: 64, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 3)

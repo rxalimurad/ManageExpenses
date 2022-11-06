@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
     var viewModel: ViewModel
-    
+    @Binding var showIntro: Bool
     var body: some View {
         VStack {
             VStack(spacing: 20) {
@@ -23,7 +23,7 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
             
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-               // viewModel.hideIntro()
+                showIntro.toggle()
             }
             .padding([.trailing, .leading], 16)
             
@@ -37,7 +37,7 @@ struct LoginIntroView<ViewModel: LoginIntroViewModelType>: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginIntroView(viewModel: LoginIntroViewModel(.constant(true)))
+        LoginIntroView(viewModel: LoginIntroViewModel(), showIntro: .constant(true))
             .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
             .previewDisplayName("iPhone 12")
         

@@ -11,7 +11,7 @@ import AlertX
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var viewModel = AddExpenseIncomeViewModel()
+    @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreService())
     
     // Mark: - State Variables for User Input
     @State var amount = ""
@@ -47,53 +47,56 @@ struct AddExpenseIncomeView: View {
     var newEntryType: PlusMenuAction
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                NavigationBar(title: getTitle(type: newEntryType), top: geometry.safeAreaInsets.top) {
-                    mode.wrappedValue.dismiss()
-                }
-                
-                Text("How much?")
-                    .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
-                    .font(.system(size: 18, weight: .medium))
-                    .padding([.leading], 26)
-                AmountInputWidget(amount: amount)
-                    .font(.system(size: 64, weight: .medium))
-                    .foregroundColor(CustomColor.baseLight)
-                    .padding([.top], 13)
-                    .onTapGesture {
-                        withAnimation {
-                            showAmtKeybd.toggle()
-                        }
+            ZStack {
+                VStack(alignment: .leading) {
+                    NavigationBar(title: getTitle(type: newEntryType), top: geometry.safeAreaInsets.top) {
+                        mode.wrappedValue.dismiss()
                     }
-                
-                Spacer()
-            }
-            .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
-            .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
-            .fullScreenCover(isPresented: $isAtchmntViewShown) {
-                ZStack (alignment: .bottom) {
-                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    
+                    Text("How much?")
+                        .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
+                        .font(.system(size: 18, weight: .medium))
+                        .padding([.leading], 26)
+                    AmountInputWidget(amount: amount)
+                        .font(.system(size: 64, weight: .medium))
+                        .foregroundColor(CustomColor.baseLight)
+                        .padding([.top], 13)
                         .onTapGesture {
-                            isAtchmntViewShown.toggle()
+                            withAnimation {
+                                showAmtKeybd.toggle()
+                            }
                         }
-                    attachmentSheet(geometry)
+                    
+                    Spacer()
                 }
-                .background(ColoredView(color: .clear))
-                .edgesIgnoringSafeArea(.all)
-            }
-            
-            .background(
-                Rectangle()
-                    .foregroundColor(getBgColor(type: newEntryType))
+                .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
+                .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
+                .fullScreenCover(isPresented: $isAtchmntViewShown) {
+                    ZStack (alignment: .bottom) {
+                        Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                isAtchmntViewShown.toggle()
+                            }
+                        attachmentSheet(geometry)
+                    }
+                    .background(ColoredView(color: .clear))
+                    .edgesIgnoringSafeArea(.all)
+                }
                 
-            )
-            .sheet(isPresented: $isImgPkrShown, content: {
-                ImagePicker(image: $selectedImage, type: .photoLibrary)
-            })
-            .sheet(isPresented: $isCamerPkrShown, content: {
-                ImagePicker(image: $selectedImage, type: .camera)
-            })
-            .edgesIgnoringSafeArea([.all])
+                .background(
+                    Rectangle()
+                        .foregroundColor(getBgColor(type: newEntryType))
+                    
+                )
+                .sheet(isPresented: $isImgPkrShown, content: {
+                    ImagePicker(image: $selectedImage, type: .photoLibrary)
+                })
+                .sheet(isPresented: $isCamerPkrShown, content: {
+                    ImagePicker(image: $selectedImage, type: .camera)
+                })
+                .edgesIgnoringSafeArea([.all])
+                ViewForServiceAPI(state: $viewModel.serviceStatus)
+            }
             
         }
     }
@@ -168,6 +171,7 @@ struct AddExpenseIncomeView: View {
             
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                
                 isTransactionAdded.toggle()
             }
             .padding([.top], 40)
@@ -246,8 +250,9 @@ struct AddExpenseIncomeView: View {
                 }
             }
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: amount, category: category.id, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: "\(Date().secondsSince1970)"))
                 isTransactionAdded.toggle()
-                viewModel.saveTransaction(context: viewContext, amount: amount, name: category.desc, desc: description, type: newEntryType.rawValue, category: category.desc, wallet: wallet.desc, image: selectedImage)
+                
             }
             
             

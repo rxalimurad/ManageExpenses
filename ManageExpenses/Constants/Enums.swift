@@ -60,4 +60,11 @@ enum FilterDuration: String, CaseIterable {
 
 enum UserKeys: String {
     case name
+    case email
+}
+enum ServiceAPIState {
+    case successful
+    case inprogress
+    case failed(error: NetworkingError)
+    case na
 }

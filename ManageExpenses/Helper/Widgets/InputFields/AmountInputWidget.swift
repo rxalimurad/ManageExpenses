@@ -28,6 +28,6 @@ struct AmountInputWidget: View {
     }
     
     private func getFormattedAmount(amount: String) -> String {
-        Utilities.getAmountWith(amount: Double(amount) ?? 0)
+        Utilities.getFormattedAmount(amount: Double(amount) ?? 0)
     }
 }

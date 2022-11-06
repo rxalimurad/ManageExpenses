@@ -31,7 +31,7 @@ struct BudgetViewCell: View {
                         .isShowing(isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
-                Text("Remaining $\(Utilities.getAmountWith(amount: budget.limit - spending))")
+                Text("Remaining $\(Utilities.getFormattedAmount(amount: budget.limit - spending))")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .multilineTextAlignment(.leading)
@@ -42,7 +42,7 @@ struct BudgetViewCell: View {
                     .padding([.horizontal], 16)
                     .padding([.top, .bottom], 8)
                     .frame(height: 20)
-                Text("$\(Utilities.getAmountWith(amount: spending)) of $\(Utilities.getAmountWith(amount: budget.limit))")
+                Text("\(Utilities.getFormattedAmount(amount: spending)) of \(Utilities.getFormattedAmount(amount: budget.limit))")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(CustomColor.baseLight_20)
                     .multilineTextAlignment(.leading)

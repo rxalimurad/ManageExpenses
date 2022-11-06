@@ -1,47 +1,42 @@
 //
-//  SignUpViewModel.swift
+//  ForgotPasswordViewModel.swift
 //  ManageExpenses
 //
-//  Created by Ali Murad on 02/11/2022.
+//  Created by murad on 05/11/2022.
 //
 
 import Foundation
 import Combine
 import UIKit
 
-protocol SignUpViewModelType {
-    var service: SignupServiceType { get }
+protocol ForgotPasswordViewModelType {
+    var service: ForgotPasswordServiceType { get }
+    var email: String { get }
     var state: ServiceAPIState { get }
-    var userDetails: UserDetailsModel { get }
-    init(service: SignupServiceType)
-    func createUser()
+    init(service: ForgotPasswordServiceType)
+    func resetUser()
     
-} 
+}
 
 
-class SignUpViewModel: ObservableObject, SignUpViewModelType {
+class ForgotPasswordViewModel: ObservableObject, ForgotPasswordViewModelType {
     //MARK: - Variables for Input Validations
-    @Published var isTermsAccepted = false
-    @Published var isTermsShowing = false
+    @Published var email: String = ""
     @Published var isValidEmail = false
-    @Published var isValidPassword = false
-    @Published var isValidName = false
     @Published var moveNext = false
     @Published var state: ServiceAPIState = .na
     //MARK: - Protocol Implementation
-    var service: SignupServiceType
-    
-    @Published var userDetails: UserDetailsModel = UserDetailsModel.new
+    var service: ForgotPasswordServiceType
     var subscriptions = Set<AnyCancellable>()
     
-    required init(service: SignupServiceType) {
+    required init(service: ForgotPasswordServiceType) {
         self.service = service
     }
     
-    func createUser() {
+    func resetUser() {
         self.state = .inprogress
         UIApplication.shared.endEditing()
-        service.signup(with: userDetails)
+        service.reset(email: email)
             .sink {[weak self] res in
                 switch res {
                 case .failure(let error):

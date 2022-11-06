@@ -16,12 +16,8 @@ struct TransactionTabView: View {
     @State var dateTo = Date()
     @State var dateFrom = Date()
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
-        animation: .default)
-    private var recentTransactions: FetchedResults<Transaction>
     @State private var selectedTrans: Transaction?
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
     var body: some View {
         VStack {
             headerView
@@ -85,20 +81,20 @@ struct TransactionTabView: View {
     
     var transactions: some View {
         ScrollView {
-            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-                Text(headerTransDate)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(CustomColor.baseDark)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.horizontal], 19)
-                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-                    Button {
-                        selectedTrans = transaction
-                    } label: {
-                        TransactionView(transaction: transaction)
-                    }
-                }
-            }
+//            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
+//                Text(headerTransDate)
+//                    .font(.system(size: 16, weight: .medium))
+//                    .foregroundColor(CustomColor.baseDark)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding([.horizontal], 19)
+//                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+//                    Button {
+//                        selectedTrans = transaction
+//                    } label: {
+//                        TransactionView(transaction: transaction)
+//                    }
+//                }
+//            }
             
         }
     }

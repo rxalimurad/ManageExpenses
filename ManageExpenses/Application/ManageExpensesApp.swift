@@ -20,12 +20,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct ManageExpensesApp: App {
-    let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
     @StateObject var sessionService = SessionService()
     @State private var isSplashShowing = true
     
-    @State var amount = ""
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(CustomColor.primaryColor)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor(CustomColor.primaryColor).withAlphaComponent(0.2)
@@ -38,10 +36,11 @@ struct ManageExpensesApp: App {
                 switch sessionService.state {
                 case .loggedIn:
                     TabControlView(viewRouter: TabControlViewRouter())
-                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
                         .environmentObject(sessionService)
                 case .loggedOut:
                     LoginView()
+                        .environmentObject(sessionService)
+
                         
                 }
             }

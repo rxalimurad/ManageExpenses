@@ -31,7 +31,7 @@ struct SignupConfirmationView: View {
                 Text("\(email)")
                     .foregroundColor(CustomColor.blue)
                 +
-                Text("\nKindly verify your email before logging in.")
+                Text("\nKindly verify your email(Inbox/Spam) before logging in.")
                     .foregroundColor(CustomColor.baseDark_50)
             }
             .font(.system(size: 16, weight: .medium))

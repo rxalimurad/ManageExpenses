@@ -41,11 +41,11 @@ struct TransactionView: View {
 
     private var transInfo: some View {
         VStack(alignment: .leading, spacing: 13) {
-            Text(transaction.transName ?? "")
+            Text(transaction.name)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(CustomColor.baseDark_25)
-            
-            Text(transaction.transDesc ?? "")
+
+            Text(transaction.desc)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
                 .lineLimit(1)
@@ -53,11 +53,11 @@ struct TransactionView: View {
     }
     private var transInfoAmount: some View {
         VStack(alignment: .trailing, spacing: 13) {
-            Text(Utilities.getFormattedAmount("$", amount: transaction.transAmount))
+            Text(Utilities.getFormattedAmount(amount: transaction.amount))
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundColor((transaction.transAmount) < 0 ? .red : .green)
+                .foregroundColor((transaction.amount) < 0 ? .red : .green)
             
-            Text(transaction.date!.timeToShow)
+            Text(transaction.date.timeToShow)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
         }

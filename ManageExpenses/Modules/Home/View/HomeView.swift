@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: true)],
-        animation: .default)
-    private var recentTransactions: FetchedResults<Transaction>
+    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
+    
     var safeAreaInsets: EdgeInsets
     var data = getChartData()
     @State private var isGraphShowing = true
@@ -75,13 +72,14 @@ struct HomeView: View {
                         .padding([.top, .leading, .trailing], 16)
                         
                         
-                        ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-                            Text(headerTransDate)
+                        ForEach(viewModel.transactions, id: \.self) { datedTransaction in
+                            Text(datedTransaction.date)
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(CustomColor.baseDark)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding([.horizontal], 19)
-                            ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
+                            
+                            ForEach(datedTransaction.transactions, id: \.self) { transaction in
                                 Button {
                                     selectedTrans = transaction
                                 } label: {
@@ -89,6 +87,7 @@ struct HomeView: View {
                                 }
                             }
                         }
+                        
                     }.transition(.move(edge: .bottom))
                     
                 }
@@ -124,7 +123,7 @@ struct HomeView: View {
                     Text("Account Balance")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(CustomColor.baseLight_20)
-                    Text(viewModel.getAccountBalance(trans: recentTransactions))
+                    Text(viewModel.getAccountBalance())
                         .font(.system(size: 40, weight: .semibold))
                         .foregroundColor(CustomColor.baseDark_75)
                 }
@@ -160,7 +159,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Income")
                         .font(.system(size: 14, weight: .medium))
-                    Text(viewModel.getIncome(trans: recentTransactions))
+                    Text(viewModel.getIncome())
                         .font(.system(size: 22, weight: .semibold))
                 }
                 .foregroundColor(CustomColor.baseLight_80)
@@ -176,7 +175,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Expenses")
                         .font(.system(size: 14, weight: .medium))
-                    Text(viewModel.getExpense(trans: recentTransactions))
+                    Text(viewModel.getExpense())
                         .font(.system(size: 22, weight: .semibold))
                 }.foregroundColor(CustomColor.baseLight_80)
             }
@@ -195,10 +194,10 @@ struct HomeView: View {
     static func getChartData() -> LineChartData {
         let data = LineDataSet(
             dataPoints: [
-                LineChartDataPoint(value: 500, xAxisLabel: "1", description: "Monday"),
-                LineChartDataPoint(value: 1000, xAxisLabel: "2", description: "Tuesday"),
-                LineChartDataPoint(value: 700 , xAxisLabel: "3", description: "Wednesday"),
-                LineChartDataPoint(value: 800, xAxisLabel: "4", description: "Thursday"),
+//                LineChartDataPoint(value: 500, xAxisLabel: "1", description: ""),
+//                LineChartDataPoint(value: 1000, xAxisLabel: "2", description: ""),
+//                LineChartDataPoint(value: 700 , xAxisLabel: "3", description: ""),
+//                LineChartDataPoint(value: 800, xAxisLabel: "4", description: ""),
                 
             ],
             pointStyle: PointStyle(pointSize: 12, borderColour:.yellow, fillColour: .red, lineWidth: 10, pointType: .filled, pointShape: .circle),

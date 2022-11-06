@@ -185,7 +185,7 @@ struct ProfileView: View {
                     
                 }
                 ButtonWidgetView(title: "Yes", style: .primaryButton) {
-                    try? Auth.auth().signOut()
+                    sessionService.logout()
                 }
                 
             }

@@ -17,7 +17,7 @@ struct FinancialReportCellView: View {
         HStack {
             getCategoryTag(category: analyingData.category)
             Spacer()
-            Text(Utilities.getFormattedAmount("$", amount: analyingData.amount))
+            Text(Utilities.getFormattedAmount(amount: analyingData.amount))
                 .foregroundColor(analyingData.amount > 0 ? .green : .red)
                 .font(.system(size: 24, weight: .medium))
         }
