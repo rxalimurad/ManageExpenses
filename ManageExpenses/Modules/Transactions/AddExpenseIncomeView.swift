@@ -250,7 +250,7 @@ struct AddExpenseIncomeView: View {
                 }
             }
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: amount, category: category.id, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: "\(Date().secondsSince1970)"))
+                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: Double(amount) ?? 0.0, category: category.id, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: Date().secondsSince1970))
                 isTransactionAdded.toggle()
                 
             }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import FirebaseFirestore
 struct Transaction: Identifiable, Hashable {
     let id: String
     let amount: Double
@@ -20,8 +20,8 @@ struct Transaction: Identifiable, Hashable {
     let toAcc: String
     let date: Date
     
-    init(id: String, amount: String, category: String, desc: String, name: String, wallet: String, attachment: String, type: String, fromAcc: String, toAcc: String, date: String) {
-        self.amount = Double(amount) ?? 0.0
+    init(id: String, amount: Double, category: String, desc: String, name: String, wallet: String, attachment: String, type: String, fromAcc: String, toAcc: String, date: Int64) {
+        self.amount = amount
         self.id = id
         self.category = category
         self.desc = desc
@@ -31,7 +31,27 @@ struct Transaction: Identifiable, Hashable {
         self.type = type
         self.toAcc = toAcc
         self.fromAcc = fromAcc
-        self.date = Utilities.getDate(from: date)
+        self.date = Utilities.getDate(from: "\(date)")
+    }
+    
+    
+    func fromFireStoreData(data: [String: Any]) -> Transaction {
+        if data.isEmpty {
+            return .new
+        }
+        return Transaction(
+            id: data["id"] as! String,
+            amount: data["amount"] as! Double,
+                category: data["category"] as! String,
+                desc: data["desc"] as! String,
+                name: data["name"] as! String,
+                wallet: data["wallet"] as! String,
+                attachment: data["attachment"] as! String,
+                type: data["type"] as! String,
+                fromAcc: data["fromAcc"] as! String,
+                toAcc: data["toAcc"] as! String,
+                date: (data["date"] as! Timestamp).seconds
+        )
     }
     
     func toFireStoreData() -> [String: Any] {
@@ -52,7 +72,7 @@ struct Transaction: Identifiable, Hashable {
         ]
     }
     
-    static var new = Transaction(id: "", amount: "0.0", category: "", desc: "", name: "", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: "1667678749")
+    static var new = Transaction(id: "", amount: 0.0, category: "", desc: "", name: "", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
 }
 
 struct DatedTransactions: Hashable {

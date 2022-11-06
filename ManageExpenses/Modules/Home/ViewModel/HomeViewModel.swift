@@ -11,9 +11,11 @@ import SwiftUI
 
 
 protocol HomeViewModelType {
-    var currentFilter: TransactionDuration { get }
+    var currentFilter: Int { get }
     var transactions: [DatedTransactions] { get }
+    var lineChartData: LineChartData { get }
     var dbHandler: ServiceHandlerType { get }
+    var state: ServiceAPIState { get }
     init(dbHandler: ServiceHandlerType)
     func getAccountBalance() -> String
     func getIncome() -> String
@@ -22,22 +24,17 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: ObservableObject, HomeViewModelType {
+    @Published internal var currentFilter: Int = 1
+    
     var subscriptions =  Set<AnyCancellable>()
-
-    @Published var currentFilter: TransactionDuration = .thisMonth
     @Published var transactions: [DatedTransactions] = []
-    
+    @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     var dbHandler: ServiceHandlerType
-    
+    var state: ServiceAPIState = .na
     required init(dbHandler: ServiceHandlerType) {
         self.dbHandler = dbHandler
-        self.observeDuration()
-//        let queue = DispatchQueue(label: "com.swiftpal.dispatch.qos")
-        DispatchQueue.main.async(qos: .userInitiated) {[weak self] in
-            guard let self = self else { return }
-            self.transactions = self.dbHandler.getTransactions(for: self.currentFilter)
-        }
-        
+        self.fetchTransactions()
+        observedFilter()
     }
     
     func getAccountBalance() -> String {
@@ -49,11 +46,57 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     func getExpense() -> String {
         return dbHandler.getExpense()
     }
-    func observeDuration() {
-        $currentFilter.sink {[weak self] duration in
-            guard let self = self else { return }
-            self.transactions = self.dbHandler.getTransactions(for: duration)
-        }.store(in: &subscriptions)
+    
+    func observedFilter() {
+        $currentFilter
+            .sink { filter in
+                self.fetchTransactions()
+            }
+            .store(in: &subscriptions)
     }
     
+    func fetchTransactions() {
+        state = .inprogress
+        self.dbHandler.getTransactions(for: TransactionDuration(rawValue: currentFilter) ?? TransactionDuration.thisMonth)
+            .sink(receiveCompletion: { error in
+                
+            }, receiveValue: {[weak self] transactions in
+                guard let self = self else { return }
+                self.transactions = transactions
+                self.lineChartData = self.getChartData(transaction: transactions)
+                self.state = .na
+            })
+            .store(in: &subscriptions)
+    }
+    
+    private func getChartData(transaction: [DatedTransactions]) -> LineChartData {
+        let trans = transaction.flatMap { trans in
+            return trans.transactions
+        }
+        var dataPoints = [LineChartDataPoint]()
+        
+        for t in trans.sorted(by: { $0.date < $1.date}) {
+            dataPoints.append( LineChartDataPoint(value: t.amount, xAxisLabel: "1", description: ""))
+        }
+        let data = LineDataSet(
+            dataPoints: dataPoints,
+            pointStyle: PointStyle(pointSize: 12, borderColour:.yellow, fillColour: .red, lineWidth: 10, pointType: .filled, pointShape: .circle),
+            style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine, strokeStyle: Stroke(lineWidth: 8)))
+        
+        
+        let chartStyle = LineChartStyle(
+            markerType: LineMarkerType.full(attachment: MarkerAttachment.point,
+                                            colour: CustomColor.primaryColor),
+            xAxisLabelColour: CustomColor.primaryColor,
+            xAxisBorderColour: CustomColor.primaryColor,
+            yAxisLabelPosition: .leading,
+            yAxisLabelColour: CustomColor.primaryColor,
+            yAxisNumberOfLabels: 5,
+            yAxisLabelType: .numeric,
+            yAxisTitle: "",
+            yAxisTitleColour: .black)
+        return LineChartData(dataSets: data, chartStyle: chartStyle)
+        
+    }
+
 }

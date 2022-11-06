@@ -6,22 +6,23 @@
 //
 
 import Foundation
+import Combine
 
-enum TransactionDuration {
-    case thisDay
-    case thisMonth
-    case thisWeek
-    case thisYear
+enum TransactionDuration: Int {
+    case thisDay = 0
+    case thisMonth = 1
+    case thisWeek = 2
+    case thisYear = 3
 }
 
 protocol ServiceHandlerType {
     func getTotalBalance() -> String
     func getExpense() -> String
     func getIncome() -> String
-    func addTransaction(transaction: Transaction)
-    func getTransaction(with id: String) -> Transaction
-    func getTransactions(for duration: TransactionDuration) -> [DatedTransactions]
-    func getTransactions(fromDate: Date, toDate: Date) -> [DatedTransactions]
+    func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
+    func getTransaction(with id: String) -> AnyPublisher<Transaction, NetworkingError>
+    func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError>
+    func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError>
 }
 
 
