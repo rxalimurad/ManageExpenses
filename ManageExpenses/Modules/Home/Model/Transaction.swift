@@ -42,15 +42,15 @@ struct Transaction: Identifiable, Hashable {
         return Transaction(
             id: data["id"] as! String,
             amount: data["amount"] as! Double,
-                category: data["category"] as! String,
-                desc: data["desc"] as! String,
-                name: data["name"] as! String,
-                wallet: data["wallet"] as! String,
-                attachment: data["attachment"] as! String,
-                type: data["type"] as! String,
-                fromAcc: data["fromAcc"] as! String,
-                toAcc: data["toAcc"] as! String,
-                date: (data["date"] as! Timestamp).seconds
+            category: data["category"] as! String,
+            desc: data["desc"] as! String,
+            name: data["name"] as! String,
+            wallet: data["wallet"] as! String,
+            attachment: data["attachment"] as! String,
+            type: data["type"] as! String,
+            fromAcc: data["fromAcc"] as! String,
+            toAcc: data["toAcc"] as! String,
+            date: (data["date"] as! Timestamp).seconds
         )
     }
     
@@ -67,16 +67,16 @@ struct Transaction: Identifiable, Hashable {
             "toAcc": toAcc,
             "fromAcc" : fromAcc,
             "date" : date
-               
-        
+            
+            
         ]
     }
     
-    static var new = Transaction(id: "", amount: 0.0, category: "", desc: "", name: "", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
+    static var new = Transaction(id: "Dummy", amount: 0.0, category: "Dummy", desc: "DummyDummyDummyDummyDummy", name: "Dummy", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
 }
 
 struct DatedTransactions: Hashable {
     let date: String
     let transactions: [Transaction]
-    static var new = DatedTransactions(date: "", transactions: [])
+    static var new = DatedTransactions(date: "Dummy", transactions: [Transaction.new, Transaction.new, Transaction.new, Transaction.new])
 }

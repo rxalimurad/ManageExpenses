@@ -20,6 +20,7 @@
 		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
 		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
+		5F5073172918C01C0074D08F /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5073162918C01C0074D08F /* SkeletonUI */; };
 		5F56E08629139026006E8F25 /* TabControlViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08129139025006E8F25 /* TabControlViewRouter.swift */; };
 		5F56E08729139026006E8F25 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08229139025006E8F25 /* TabBarIcon.swift */; };
 		5F56E08829139026006E8F25 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08329139025006E8F25 /* NavigationBar.swift */; };
@@ -245,7 +246,6 @@
 		FAB4651129168AFD0092BBFB /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651029168AFD0092BBFB /* ForgotPasswordService.swift */; };
 		FAB46513291692670092BBFB /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46512291692670092BBFB /* NetworkingError.swift */; };
 		FAB46515291695770092BBFB /* ViewForServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46514291695770092BBFB /* ViewForServiceAPI.swift */; };
-		FAB4651A2916ABAC0092BBFB /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = FAB465192916ABAC0092BBFB /* SQLite */; };
 		FAB4651E2916B1DD0092BBFB /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651D2916B1DD0092BBFB /* ServiceProtocol.swift */; };
 		FAB465232916B3F90092BBFB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465222916B3F90092BBFB /* Transaction.swift */; };
 		FAB465262916BAA70092BBFB /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465252916BAA70092BBFB /* FirestoreService.swift */; };
@@ -499,12 +499,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA54F57A2910300F0015E40A /* FirebaseAnalyticsSwift in Frameworks */,
+				5F5073172918C01C0074D08F /* SkeletonUI in Frameworks */,
 				FA94E8862904997D00C5408D /* AlertX in Frameworks */,
 				FA2134842905CB9F002EEBF4 /* Lottie in Frameworks */,
 				FA54F5802910300F0015E40A /* FirebaseFirestoreSwift in Frameworks */,
 				FA54F57E2910300F0015E40A /* FirebaseFirestoreCombine-Community in Frameworks */,
 				FA54F57C2910300F0015E40A /* FirebaseFirestore in Frameworks */,
-				FAB4651A2916ABAC0092BBFB /* SQLite in Frameworks */,
 				FA54F5782910300F0015E40A /* FirebaseAnalytics in Frameworks */,
 				FA54F5872911A58C0015E40A /* FirebaseAuth in Frameworks */,
 			);
@@ -1606,7 +1606,7 @@
 				FA54F57D2910300F0015E40A /* FirebaseFirestoreCombine-Community */,
 				FA54F57F2910300F0015E40A /* FirebaseFirestoreSwift */,
 				FA54F5862911A58C0015E40A /* FirebaseAuth */,
-				FAB465192916ABAC0092BBFB /* SQLite */,
+				5F5073162918C01C0074D08F /* SkeletonUI */,
 			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
@@ -1640,7 +1640,7 @@
 				FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */,
 				FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				FA54F5762910300F0015E40A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				FAB465182916ABAB0092BBFB /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
@@ -2134,6 +2134,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -2158,17 +2166,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		FAB465182916ABAB0092BBFB /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5F5073162918C01C0074D08F /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
+		};
 		FA2134832905CB9F002EEBF4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */;
@@ -2208,11 +2213,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */;
 			productName = AlertX;
-		};
-		FAB465192916ABAC0092BBFB /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAB465182916ABAB0092BBFB /* XCRemoteSwiftPackageReference "SQLite.swift" */;
-			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

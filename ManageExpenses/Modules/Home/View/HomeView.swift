@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+    
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
     
@@ -71,23 +71,7 @@ struct HomeView: View {
                             }
                             .padding([.top, .leading, .trailing], 16)
                             
-                            
-                            ForEach(viewModel.transactions, id: \.self) { datedTransaction in
-                                Text(datedTransaction.date)
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(CustomColor.baseDark)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding([.horizontal], 19)
-                                
-                                ForEach(datedTransaction.transactions, id: \.self) { transaction in
-                                    Button {
-                                        selectedTrans = transaction
-                                    } label: {
-                                        TransactionView(transaction: transaction)
-                                    }
-                                }
-                            }
-                            
+                            getTransactionView($viewModel.transactions)
                         }.transition(.move(edge: .bottom))
                         
                     }
@@ -99,11 +83,26 @@ struct HomeView: View {
                 TransactionDetailView(transaction: trans)
             })
             
-            ViewForServiceAPI(state: $viewModel.state)
+            ViewForServiceAPI(state: $viewModel.state, bgOpacity: 0.5)
         }
-        
-        
-        
+    }
+    
+    @ViewBuilder func getTransactionView(_ transactions: Binding<[DatedTransactions]>) -> some View {
+        ForEach(viewModel.transactions, id: \.self) { datedTransaction in
+            Text(datedTransaction.date)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(CustomColor.baseDark)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.horizontal], 19)
+            
+            ForEach(datedTransaction.transactions, id: \.self) { transaction in
+                Button {
+                    selectedTrans = transaction
+                } label: {
+                    TransactionView(transaction: transaction)
+                }
+            }
+        }
     }
     
     var summaryView: some View {

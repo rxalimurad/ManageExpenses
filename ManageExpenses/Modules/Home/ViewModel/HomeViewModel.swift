@@ -24,13 +24,13 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: ObservableObject, HomeViewModelType {
-    @Published internal var currentFilter: Int = 1
+    @Published internal var currentFilter: Int = 0
     
     var subscriptions =  Set<AnyCancellable>()
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     var dbHandler: ServiceHandlerType
-    var state: ServiceAPIState = .na
+    @Published var state: ServiceAPIState = .na
     required init(dbHandler: ServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
@@ -50,21 +50,24 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     func observedFilter() {
         $currentFilter
             .sink { filter in
-                self.fetchTransactions()
+                self.fetchTransactions(filter: filter)
             }
             .store(in: &subscriptions)
     }
     
-    func fetchTransactions() {
+    func fetchTransactions(filter: Int? = nil) {
+        
         state = .inprogress
-        self.dbHandler.getTransactions(for: TransactionDuration(rawValue: currentFilter) ?? TransactionDuration.thisMonth)
+        self.dbHandler.getTransactions(for: TransactionDuration(rawValue: filter ?? currentFilter) ?? TransactionDuration.thisMonth)
             .sink(receiveCompletion: { error in
-                
+                self.state = .successful
+                self.transactions = []
+                self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
             }, receiveValue: {[weak self] transactions in
                 guard let self = self else { return }
                 self.transactions = transactions
                 self.lineChartData = self.getChartData(transaction: transactions)
-                self.state = .na
+                self.state = .successful
             })
             .store(in: &subscriptions)
     }

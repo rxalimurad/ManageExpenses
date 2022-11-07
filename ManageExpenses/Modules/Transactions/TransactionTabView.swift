@@ -17,7 +17,7 @@ struct TransactionTabView: View {
     @State var dateFrom = Date()
     
     @State private var selectedTrans: Transaction?
-    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
+//    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
     var body: some View {
         VStack {
             headerView
