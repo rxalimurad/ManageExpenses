@@ -40,6 +40,7 @@ struct AddExpenseIncomeView: View {
     
     
     var newEntryType: PlusMenuAction
+    @ObservedObject var homeViewModel: HomeViewModel
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -245,8 +246,23 @@ struct AddExpenseIncomeView: View {
                 }
             }
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: Double(amount) ?? 0.0, category: category.desc, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: Date().secondsSince1970))
+                viewModel.saveTransaction(transaction:
+                                            Transaction(
+                                                id: "\(UUID())",
+                                                amount: newEntryType == .expense ? -(Double(amount) ?? 0.0) : (Double(amount) ?? 0.0),
+                                                category: category.desc,
+                                                desc: description,
+                                                name: category.desc,
+                                                wallet: wallet.desc,
+                                                attachment: "",
+                                                type: newEntryType.rawValue,
+                                                fromAcc: "",
+                                                toAcc: "",
+                                                date: Date().secondsSince1970
+                                            )
+                )
                 isTransactionAdded.toggle()
+                
                 
             }
             
@@ -256,6 +272,7 @@ struct AddExpenseIncomeView: View {
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
+                    homeViewModel.refresh()
                     mode.wrappedValue.dismiss()
                 }
             })
@@ -336,9 +353,9 @@ struct AddExpenseIncomeView: View {
     
 }
 
-struct AddExpenseIncomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExpenseIncomeView(newEntryType: .income)
-    }
-}
+//struct AddExpenseIncomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddExpenseIncomeView(newEntryType: .income, homeViewModel: <#HomeViewModel#>)
+//    }
+//}
 

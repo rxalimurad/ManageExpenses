@@ -100,28 +100,46 @@ struct HomeView: View {
     }
     
     @ViewBuilder func getTransactionView(_ transactions: Binding<[DatedTransactions]>) -> some View {
-        ForEach(viewModel.transactions, id: \.self) { datedTransaction in
-            Text(datedTransaction.date)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(CustomColor.baseDark)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.horizontal], 19)
-            
-            ForEach(datedTransaction.transactions, id: \.self) { transaction in
-                Button {
-                    selectedTrans = transaction
-                } label: {
-                    TransactionView(transaction: transaction)
-                }
+        ZStack {
+            VStack {
+                ForEach(viewModel.transactions, id: \.self) { datedTransaction in
+                    Text(datedTransaction.date)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(CustomColor.baseDark)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.horizontal], 19)
+                    
+                    ForEach(datedTransaction.transactions, id: \.self) { transaction in
+                        Button {
+                            selectedTrans = transaction
+                        } label: {
+                            TransactionView(transaction: transaction)
+                        }
+                    }
+                }.skeletonForEach(itemsCount: 5) { _ in
+                    TransactionView(transaction: Transaction.new)
+                }.setSkeleton(
+                    .constant(viewModel.isLoading),
+                    animationType: .solid(Color.gray.opacity(0.4)),
+                    animation: Animation.default,
+                    transition: AnyTransition.identity
+                )
             }
-        }.skeletonForEach(itemsCount: 5) { _ in
-            TransactionView(transaction: Transaction.new)
-        }.setSkeleton(
-            .constant(viewModel.isLoading),
-            animationType: .solid(Color.gray.opacity(0.4)),
-            animation: Animation.default,
-            transition: AnyTransition.identity
-        )
+            
+            switch viewModel.state {
+                case .successful:
+                if viewModel.transactions.isEmpty {
+                    Text("No record found\n\nPlease add new transactions using button below")
+                        .multilineTextAlignment(.center)
+                } else {
+                    EmptyView()
+                }
+                default:
+                EmptyView()
+                
+            }
+        }
+        
     }
     
     var summaryView: some View {

@@ -88,8 +88,10 @@ class FirestoreService: ServiceHandlerType {
         let db = Firestore.firestore()
         let collection = db.collection(Constants.firestoreCollection.transactions)
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
+            .whereField("type", isEqualTo: PlusMenuAction.expense.rawValue)
         return collection
     }
+    
     private func getDate(for duration: TransactionDuration) -> Timestamp {
         switch duration {
         case .thisDay:
@@ -108,7 +110,6 @@ class FirestoreService: ServiceHandlerType {
             let year = Calendar.current.component(.year, from: Date())
             let thisYear = Calendar.current.date(from: DateComponents(year: year, month: 1, day: 1))  ?? Date()
             return Timestamp(date: thisYear)
-            
         }
         
     }

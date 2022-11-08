@@ -115,9 +115,3 @@ struct CreateBudgetView: View {
     
 }
 
-struct CreateBudgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExpenseIncomeView(newEntryType: .income)
-    }
-}
-

@@ -14,7 +14,7 @@ struct TabControlView: View {
     @State var showPopUp = false
     @State var showNewEntryScreen = false
     @State var newEntryType: PlusMenuAction?
-    var homeViewModel = HomeViewModel(dbHandler: FirestoreService())
+    @ObservedObject var homeViewModel = HomeViewModel(dbHandler: FirestoreService())
     var body: some View {
         ZStack {
             if showPopUp {
@@ -81,7 +81,7 @@ struct TabControlView: View {
             
         } content: {
             if let newEntryType = newEntryType {
-                AddExpenseIncomeView(newEntryType: newEntryType)
+                AddExpenseIncomeView(newEntryType: newEntryType, homeViewModel: homeViewModel)
             }
         }
         

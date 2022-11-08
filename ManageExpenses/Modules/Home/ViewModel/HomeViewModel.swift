@@ -56,8 +56,11 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
             }
             .store(in: &subscriptions)
     }
+    func refresh() {
+        self.fetchTransactions()
+    }
     
-    func fetchTransactions(filter: Int? = nil) {
+    private func fetchTransactions(filter: Int? = nil) {
         self.transactions = []
         state = .inprogress
         isLoading = true
