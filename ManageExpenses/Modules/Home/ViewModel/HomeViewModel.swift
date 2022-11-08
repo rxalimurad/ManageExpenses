@@ -24,8 +24,10 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: ObservableObject, HomeViewModelType {
-    @Published internal var currentFilter: Int = 0
-    
+    @Published internal var currentFilter: Int = 2
+    @Published internal var isLoading: Bool = true
+    @Published internal var options = ["Day","Week","Month", "Year"]
+    @Published internal var graphXAxis = ["Hour","Day","Week", "Month"]
     var subscriptions =  Set<AnyCancellable>()
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
@@ -56,31 +58,80 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     }
     
     func fetchTransactions(filter: Int? = nil) {
-        
+        self.transactions = []
         state = .inprogress
+        isLoading = true
         self.dbHandler.getTransactions(for: TransactionDuration(rawValue: filter ?? currentFilter) ?? TransactionDuration.thisMonth)
             .sink(receiveCompletion: { error in
                 self.state = .successful
-                self.transactions = []
-                self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+                if case Subscribers.Completion.failure(_) = error {
+                    self.transactions = []
+                    self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+                    self.isLoading = false
+                }
             }, receiveValue: {[weak self] transactions in
                 guard let self = self else { return }
-                self.transactions = transactions
-                self.lineChartData = self.getChartData(transaction: transactions)
-                self.state = .successful
+                if filter == self.currentFilter {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                        self.isLoading = false
+                        self.transactions = transactions
+                        self.lineChartData = self.getChartData(transaction: transactions, filter: filter)
+                        self.state = .successful
+                    })
+                }
             })
             .store(in: &subscriptions)
     }
     
-    private func getChartData(transaction: [DatedTransactions]) -> LineChartData {
+    
+    private func getDataPoint(transaction: [Transaction], filter: Int?) -> [LineChartDataPoint] {
+        var dataPoints = [LineChartDataPoint]()
+        
+        if let filter = filter, let filterType = TransactionDuration(rawValue: filter) {
+            switch filterType {
+            case .thisDay:
+                var days = [Int: Double]()
+                for t in transaction {
+                    if days[t.date.hour24] == nil {
+                        days[t.date.hour24] = t.amount
+                    } else {
+                        days[t.date.hour24]! += t.amount
+                    }
+                }
+                for (day, amount) in days {
+                    dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(day)", description: ""))
+                }
+                return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
+            case .thisMonth: break
+               
+                
+                
+            case .thisWeek: break
+            case .thisYear:
+                var days = [Int: Double]()
+                for t in transaction {
+                    if days[t.date.get(.month)] == nil {
+                        days[t.date.get(.month)] = t.amount
+                    } else {
+                        days[t.date.get(.month)]! += t.amount
+                    }
+                }
+                for (day, amount) in days {
+                    dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(day)", description: ""))
+                }
+                return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
+            }
+             
+            return dataPoints
+        }
+        return dataPoints
+    }
+    
+    private func getChartData(transaction: [DatedTransactions], filter: Int?) -> LineChartData {
         let trans = transaction.flatMap { trans in
             return trans.transactions
         }
-        var dataPoints = [LineChartDataPoint]()
-        
-        for t in trans.sorted(by: { $0.date < $1.date}) {
-            dataPoints.append( LineChartDataPoint(value: t.amount, xAxisLabel: "1", description: ""))
-        }
+        let dataPoints = getDataPoint(transaction: trans, filter: filter)
         let data = LineDataSet(
             dataPoints: dataPoints,
             pointStyle: PointStyle(pointSize: 12, borderColour:.yellow, fillColour: .red, lineWidth: 10, pointType: .filled, pointShape: .circle),
@@ -101,5 +152,5 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
         return LineChartData(dataSets: data, chartStyle: chartStyle)
         
     }
-
+    
 }

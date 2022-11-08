@@ -10,8 +10,8 @@ import Combine
 
 enum TransactionDuration: Int {
     case thisDay = 0
-    case thisMonth = 1
-    case thisWeek = 2
+    case thisMonth = 2
+    case thisWeek = 1
     case thisYear = 3
 }
 

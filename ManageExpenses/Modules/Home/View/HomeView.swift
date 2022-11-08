@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-    
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
+    @ObservedObject var viewModel: HomeViewModel
     
     var safeAreaInsets: EdgeInsets
     
-    @State private var isGraphShowing = true
     @State private var isRecentTransactionShowing = true
-    @State private var options = ["Day","Week","Month", "Year"]
     @State private var selectedTrans: Transaction?
     
     var body: some View {
@@ -28,34 +25,39 @@ struct HomeView: View {
                 ScrollView {
                     VStack {
                         Text("").frame(height: 10)
-                        Text("Spending Frequency")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(CustomColor.baseDark)
-                            .padding([.top], 0)
-                            .padding([.leading], 16)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .isShowing(isGraphShowing)
-                        LineChart(chartData: viewModel.lineChartData)
-                            .pointMarkers(chartData: viewModel.lineChartData)
-                            .touchOverlay(chartData: viewModel.lineChartData,
-                                          formatter: numberFormatter)
-                            .xAxisLabels(chartData: viewModel.lineChartData)
-                            .yAxisLabels(chartData: viewModel.lineChartData,
-                                         formatter: numberFormatter)
-                        
-                            .id(viewModel.lineChartData.id)
-                            .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
-                            .padding([.trailing], 16)
-                            .padding([.top], 15)
-                            .isShowing(isGraphShowing)
-                        
-                        Text("Weeks").foregroundColor(CustomColor.primaryColor).font(.caption)
-                            .padding([.horizontal], 5)
-                            .isShowing(isGraphShowing)
+                        Group {
+                            Text("Spending Frequency")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(CustomColor.baseDark)
+                                .padding([.top], 0)
+                                .padding([.leading], 16)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            LineChart(chartData: viewModel.lineChartData)
+                                .pointMarkers(chartData: viewModel.lineChartData)
+                                .touchOverlay(chartData: viewModel.lineChartData,
+                                              formatter: numberFormatter)
+                                .xAxisLabels(chartData: viewModel.lineChartData)
+                                .yAxisLabels(chartData: viewModel.lineChartData,
+                                             formatter: numberFormatter)
+                            
+                                .id(viewModel.lineChartData.id)
+                                .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
+                                .padding([.trailing], 16)
+                                .padding([.top], 15)
+                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count < 2)
+                            Text("Not enough data to show")
+                                .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
+                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
+                            Text(viewModel.graphXAxis[viewModel.currentFilter])
+                                .foregroundColor(CustomColor.primaryColor).font(.caption)
+                                .padding([.horizontal], 5)
+                                .id(viewModel.currentFilter)
+                        }
                         
                         VStack {
                             SegmentedControlWidgetView(
-                                items: options,
+                                items: viewModel.options,
                                 selectedIndex: $viewModel.currentFilter
                             ).padding([.horizontal], 10)
                             
@@ -65,9 +67,18 @@ struct HomeView: View {
                                     .foregroundColor(CustomColor.baseDark)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Spacer()
-                                ButtonWidgetView(title: "View All", style: .secondaryButtonSmall) {
+                                Button {
                                     
-                                }.frame(width: 78, height: 32)
+                                } label: {
+                                    Text("View All")
+                                        .padding([.all], 15)
+                                        .font(.system(size: 14, weight:.medium))
+                                        .foregroundColor(CustomColor.primaryColor)
+                                        .background(CustomColor.primaryColor.opacity(0.2))
+                                        .cornerRadius(16)
+                                }
+                                .frame(height: 32)
+                                
                             }
                             .padding([.top, .leading, .trailing], 16)
                             
@@ -83,7 +94,7 @@ struct HomeView: View {
                 TransactionDetailView(transaction: trans)
             })
             
-            ViewForServiceAPI(state: $viewModel.state, bgOpacity: 0.5)
+            //ViewForServiceAPI(state: $viewModel.state, bgOpacity: 0.5)
         }
     }
     
@@ -102,7 +113,14 @@ struct HomeView: View {
                     TransactionView(transaction: transaction)
                 }
             }
-        }
+        }.skeletonForEach(itemsCount: 5) { _ in
+            TransactionView(transaction: Transaction.new)
+        }.setSkeleton(
+            .constant(viewModel.isLoading),
+            animationType: .solid(Color.gray.opacity(0.4)),
+            animation: Animation.default,
+            transition: AnyTransition.opacity
+        )
     }
     
     var summaryView: some View {
@@ -172,7 +190,6 @@ struct HomeView: View {
         ZStack {
             Color.red
             HStack  {
-                
                 Image.Custom.outflow
                 VStack(alignment: .leading) {
                     Text("Expenses")
@@ -194,9 +211,4 @@ struct HomeView: View {
     
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(safeAreaInsets: EdgeInsets())
-    }
-}
 

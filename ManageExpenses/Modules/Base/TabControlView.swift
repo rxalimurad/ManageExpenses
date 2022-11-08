@@ -14,7 +14,7 @@ struct TabControlView: View {
     @State var showPopUp = false
     @State var showNewEntryScreen = false
     @State var newEntryType: PlusMenuAction?
-    
+    var homeViewModel = HomeViewModel(dbHandler: FirestoreService())
     var body: some View {
         ZStack {
             if showPopUp {
@@ -22,7 +22,7 @@ struct TabControlView: View {
                 LinearGradient(gradient: Gradient(colors:
                                                     [CustomColor.primaryColor.opacity(0.0),
                                                      CustomColor.primaryColor.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             }
             
             GeometryReader { geometry in
@@ -30,7 +30,7 @@ struct TabControlView: View {
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            HomeView(safeAreaInsets: geometry.safeAreaInsets)
+                            HomeView(viewModel: homeViewModel, safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
                             TransactionTabView(safeAreaInsets: geometry.safeAreaInsets)
                         case .budget:

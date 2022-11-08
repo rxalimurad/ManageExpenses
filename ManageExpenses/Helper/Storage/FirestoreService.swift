@@ -93,14 +93,16 @@ class FirestoreService: ServiceHandlerType {
     private func getDate(for duration: TransactionDuration) -> Timestamp {
         switch duration {
         case .thisDay:
-            return Timestamp(date: Date())
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+            let start = Calendar.current.date(from: components) ?? Date()
+            return Timestamp(date: start)
         case .thisMonth:
             let year = Calendar.current.component(.year, from: Date())
             let month = Calendar.current.component(.month, from: Date())
             let thisMonth = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1)) ?? Date()
             return Timestamp(date: thisMonth)
         case .thisWeek:
-            let thisWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+            let thisWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
             return Timestamp(date: thisWeek)
         case .thisYear:
             let year = Calendar.current.component(.year, from: Date())

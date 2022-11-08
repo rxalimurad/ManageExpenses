@@ -21,7 +21,9 @@ struct SelectionCell: View {
             HStack(spacing: 15) {
                 img?
                     .renderingMode(.template)
+                    .resizable()
                     .foregroundColor(color)
+                    .frame(width: 25, height: 25)
                 if img == nil {
                     Circle()
                         .frame(width: 20, height: 20)

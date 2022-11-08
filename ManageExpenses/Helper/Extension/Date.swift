@@ -19,15 +19,26 @@ extension Date {
     var timeToShow: String {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.format.time
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.timeZone = TimeZone.current
         return formatter.string(from: self)
+    }
+    
+    var hour24: Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh"
+        formatter.timeZone = TimeZone.current
+        return Int(formatter.string(from: self))!
     }
     
     var dateToShow: String {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.format.date
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.timeZone = TimeZone.current
         return formatter.string(from: self)
     }
+    
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+          return calendar.component(component, from: self)
+      }
       
 }

@@ -20,7 +20,6 @@
 		5F4B7C0928F6D7B000EFC1F5 /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0728F6D7B000EFC1F5 /* ButtonsStyles.swift */; };
 		5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0828F6D7B000EFC1F5 /* ButtonWidgetView.swift */; };
 		5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7C0B28F6E30000EFC1F5 /* SignUpView.swift */; };
-		5F5073172918C01C0074D08F /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5073162918C01C0074D08F /* SkeletonUI */; };
 		5F56E08629139026006E8F25 /* TabControlViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08129139025006E8F25 /* TabControlViewRouter.swift */; };
 		5F56E08729139026006E8F25 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08229139025006E8F25 /* TabBarIcon.swift */; };
 		5F56E08829139026006E8F25 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E08329139025006E8F25 /* NavigationBar.swift */; };
@@ -38,6 +37,10 @@
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
+		5FBBC198291A1E840092937B /* Color+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC194291A1E840092937B /* Color+Skeleton.swift */; };
+		5FBBC199291A1E840092937B /* View+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC195291A1E840092937B /* View+Skeleton.swift */; };
+		5FBBC19A291A1E840092937B /* ForEach+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */; };
+		5FBBC19B291A1E840092937B /* EasySkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC197291A1E840092937B /* EasySkeleton.swift */; };
 		5FC0E84329152CCE00D7E00C /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0E84229152CCE00D7E00C /* NavigationUtil.swift */; };
 		5FF1565F290F89660005C224 /* TransactionDurationFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF1565E290F89660005C224 /* TransactionDurationFilterView.swift */; };
 		5FF15663290FD80A0005C224 /* CustomPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF15662290FD80A0005C224 /* CustomPadding.swift */; };
@@ -285,6 +288,10 @@
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
+		5FBBC194291A1E840092937B /* Color+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Skeleton.swift"; sourceTree = "<group>"; };
+		5FBBC195291A1E840092937B /* View+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Skeleton.swift"; sourceTree = "<group>"; };
+		5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ForEach+Skeleton.swift"; sourceTree = "<group>"; };
+		5FBBC197291A1E840092937B /* EasySkeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasySkeleton.swift; sourceTree = "<group>"; };
 		5FC0E84229152CCE00D7E00C /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		5FF1565E290F89660005C224 /* TransactionDurationFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDurationFilterView.swift; sourceTree = "<group>"; };
 		5FF15662290FD80A0005C224 /* CustomPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPadding.swift; sourceTree = "<group>"; };
@@ -499,7 +506,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA54F57A2910300F0015E40A /* FirebaseAnalyticsSwift in Frameworks */,
-				5F5073172918C01C0074D08F /* SkeletonUI in Frameworks */,
 				FA94E8862904997D00C5408D /* AlertX in Frameworks */,
 				FA2134842905CB9F002EEBF4 /* Lottie in Frameworks */,
 				FA54F5802910300F0015E40A /* FirebaseFirestoreSwift in Frameworks */,
@@ -660,6 +666,25 @@
 			path = Transactions;
 			sourceTree = "<group>";
 		};
+		5FBBC192291A1E840092937B /* EasySkeleton */ = {
+			isa = PBXGroup;
+			children = (
+				5FBBC193291A1E840092937B /* Extensions */,
+				5FBBC197291A1E840092937B /* EasySkeleton.swift */,
+			);
+			path = EasySkeleton;
+			sourceTree = "<group>";
+		};
+		5FBBC193291A1E840092937B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5FBBC194291A1E840092937B /* Color+Skeleton.swift */,
+				5FBBC195291A1E840092937B /* View+Skeleton.swift */,
+				5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5FFEA02329138AC50082745D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				FA82B3F228FC0F210038E099 /* SwiftUICharts */,
+				5FBBC192291A1E840092937B /* EasySkeleton */,
 				FA82B3AA28FC01D00038E099 /* PieChartView.swift */,
 				FA82B3AC28FC01EC0038E099 /* PieSliceView.swift */,
 			);
@@ -1606,7 +1632,6 @@
 				FA54F57D2910300F0015E40A /* FirebaseFirestoreCombine-Community */,
 				FA54F57F2910300F0015E40A /* FirebaseFirestoreSwift */,
 				FA54F5862911A58C0015E40A /* FirebaseAuth */,
-				5F5073162918C01C0074D08F /* SkeletonUI */,
 			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
@@ -1640,7 +1665,6 @@
 				FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */,
 				FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				FA54F5762910300F0015E40A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
@@ -1715,6 +1739,7 @@
 				FA82B4B028FC0F240038E099 /* RangedBarChartData.swift in Sources */,
 				FA82B4AA28FC0F240038E099 /* GroupingData.swift in Sources */,
 				FA82B4AB28FC0F240038E099 /* BarChartProtocolsExtensions.swift in Sources */,
+				5FBBC198291A1E840092937B /* Color+Skeleton.swift in Sources */,
 				FAA405BD291562FA007B3C07 /* LoginService.swift in Sources */,
 				5F56E08D291391ED006E8F25 /* SessionUserDetaills.swift in Sources */,
 				5F4B7C0A28F6D7B000EFC1F5 /* ButtonWidgetView.swift in Sources */,
@@ -1729,6 +1754,7 @@
 				FA82B4E828FC0F250038E099 /* VerticalGridShape.swift in Sources */,
 				FAA478F028F8849000C06B31 /* SignupConfirmationView.swift in Sources */,
 				5F4B7C0528F6D27600EFC1F5 /* CustomColor.swift in Sources */,
+				5FBBC19B291A1E840092937B /* EasySkeleton.swift in Sources */,
 				FA94E8832904876100C5408D /* SelectorModel.swift in Sources */,
 				FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */,
 				FA929987290E51D900033C7E /* BudgetDetailView.swift in Sources */,
@@ -1773,6 +1799,7 @@
 				FAB465232916B3F90092BBFB /* Transaction.swift in Sources */,
 				FA82B4C828FC0F240038E099 /* ColourStyle.swift in Sources */,
 				FA82B51B28FC0F270038E099 /* PointsSubView.swift in Sources */,
+				5FBBC19A291A1E840092937B /* ForEach+Skeleton.swift in Sources */,
 				FA82B4D328FC0F250038E099 /* HeaderBox.swift in Sources */,
 				FAB1E33F28F73F0900667CF2 /* UIView.swift in Sources */,
 				FA7F869728F9D43F00108E3A /* Shake.swift in Sources */,
@@ -1886,6 +1913,7 @@
 				FA82B4A328FC0F240038E099 /* RoundedRectangleBarShape.swift in Sources */,
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,
 				5F56E08A29139026006E8F25 /* TabControlView.swift in Sources */,
+				5FBBC199291A1E840092937B /* View+Skeleton.swift in Sources */,
 				5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */,
 				FA2134882905CF31002EEBF4 /* SplashView.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
@@ -2134,14 +2162,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CSolanaM/SkeletonUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -2169,11 +2189,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F5073162918C01C0074D08F /* SkeletonUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5F5073152918C01B0074D08F /* XCRemoteSwiftPackageReference "SkeletonUI" */;
-			productName = SkeletonUI;
-		};
 		FA2134832905CB9F002EEBF4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */;

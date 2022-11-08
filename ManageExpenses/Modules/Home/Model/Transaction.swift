@@ -75,7 +75,8 @@ struct Transaction: Identifiable, Hashable {
     static var new = Transaction(id: "Dummy", amount: 0.0, category: "Dummy", desc: "DummyDummyDummyDummyDummy", name: "Dummy", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
 }
 
-struct DatedTransactions: Hashable {
+struct DatedTransactions: Hashable, Identifiable {
+    let id = UUID()
     let date: String
     let transactions: [Transaction]
     static var new = DatedTransactions(date: "Dummy", transactions: [Transaction.new, Transaction.new, Transaction.new, Transaction.new])

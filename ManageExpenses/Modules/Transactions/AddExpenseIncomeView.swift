@@ -32,11 +32,6 @@ struct AddExpenseIncomeView: View {
     @State var isCategoryshown = false
     @State var isTransactionAdded = false
     @State private var phase = 0.0
-    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
-                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
-                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
-                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
-                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
     
     @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", balance: "23.3",color: .red),
                              SelectDataModel(id: "2", desc: "Bank Al Habib", balance: "32.3", color: .green),
@@ -114,9 +109,9 @@ struct AddExpenseIncomeView: View {
             
             ZStack(alignment: .center) {
                 HStack(alignment: .center, spacing: 16) {
-                    SelectorWidgetView(hint: "From", text: $fromWallet, data: $categoryData)
+                    SelectorWidgetView(hint: "From", text: $fromWallet, data: $viewModel.categoryData)
                     
-                    SelectorWidgetView(hint: "To", text: $toWallet, data: $categoryData)
+                    SelectorWidgetView(hint: "To", text: $toWallet, data: $viewModel.categoryData)
                     
                 }
                 Image.Custom.transferSign
@@ -198,7 +193,7 @@ struct AddExpenseIncomeView: View {
     
     @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {
         VStack {
-            SelectorWidgetView(hint: "Category", text: $category, data: $categoryData)
+            SelectorWidgetView(hint: "Category", text: $category, data: $viewModel.categoryData)
                 .padding([.top], 24)
             BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000))
                 .padding([.top], 16)
@@ -250,7 +245,7 @@ struct AddExpenseIncomeView: View {
                 }
             }
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: Double(amount) ?? 0.0, category: category.id, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: Date().secondsSince1970))
+                viewModel.saveTransaction(transaction: Transaction(id: "\(UUID())", amount: Double(amount) ?? 0.0, category: category.desc, desc: description, name: category.desc, wallet: wallet.desc, attachment: "", type: "expense", fromAcc: "", toAcc: "", date: Date().secondsSince1970))
                 isTransactionAdded.toggle()
                 
             }
