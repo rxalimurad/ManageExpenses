@@ -102,7 +102,7 @@ class FirestoreService: ServiceHandlerType {
             let thisMonth = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1)) ?? Date()
             return Timestamp(date: thisMonth)
         case .thisWeek:
-            let thisWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
+            let thisWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
             return Timestamp(date: thisWeek)
         case .thisYear:
             let year = Calendar.current.component(.year, from: Date())

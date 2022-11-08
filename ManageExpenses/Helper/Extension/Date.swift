@@ -25,9 +25,22 @@ extension Date {
     
     var hour24: Int {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh"
+        formatter.dateFormat = "HH"
         formatter.timeZone = TimeZone.current
         return Int(formatter.string(from: self))!
+    }
+    var month: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: self)
+    }
+    
+    var year: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: self)
     }
     
     var dateToShow: String {
@@ -39,6 +52,13 @@ extension Date {
     
     func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
           return calendar.component(component, from: self)
-      }
+    }
+    func getDate(calendar: Calendar = Calendar.current) -> Int {
+        let day = String(format: "%02d", calendar.component(Calendar.Component.day, from: self))
+        let month = String(format: "%02d", calendar.component(Calendar.Component.month, from: self))
+        let year = String(format: "%02d", calendar.component(Calendar.Component.year, from: self))
+        let dateCombined = Int("\(year)\(month)\(day)")!
+        return dateCombined
+    }
       
 }

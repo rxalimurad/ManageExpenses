@@ -72,7 +72,7 @@ struct Transaction: Identifiable, Hashable {
         ]
     }
     
-    static var new = Transaction(id: "Dummy", amount: 0.0, category: "Dummy", desc: "DummyDummyDummyDummyDummy", name: "Dummy", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
+    static var new = Transaction(id: "Dummy", amount: 0.0, category: "", desc: "DummyDummyDummyDummyDummy", name: "Dummy", wallet: "", attachment: "", type: "", fromAcc: "", toAcc: "", date: 1667678749)
 }
 
 struct DatedTransactions: Hashable, Identifiable {

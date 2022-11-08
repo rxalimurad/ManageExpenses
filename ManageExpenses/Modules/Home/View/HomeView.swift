@@ -71,7 +71,8 @@ struct HomeView: View {
                                     
                                 } label: {
                                     Text("View All")
-                                        .padding([.all], 15)
+                                        .padding([.vertical], 7)
+                                        .padding([.horizontal], 15)
                                         .font(.system(size: 14, weight:.medium))
                                         .foregroundColor(CustomColor.primaryColor)
                                         .background(CustomColor.primaryColor.opacity(0.2))
@@ -119,7 +120,7 @@ struct HomeView: View {
             .constant(viewModel.isLoading),
             animationType: .solid(Color.gray.opacity(0.4)),
             animation: Animation.default,
-            transition: AnyTransition.opacity
+            transition: AnyTransition.identity
         )
     }
     

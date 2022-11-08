@@ -27,7 +27,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     @Published internal var currentFilter: Int = 2
     @Published internal var isLoading: Bool = true
     @Published internal var options = ["Day","Week","Month", "Year"]
-    @Published internal var graphXAxis = ["Hour","Day","Week", "Month"]
+    @Published internal var graphXAxis = ["Hours (24 hour formate)","","", ""]
     var subscriptions =  Set<AnyCancellable>()
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
@@ -72,7 +72,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
             }, receiveValue: {[weak self] transactions in
                 guard let self = self else { return }
                 if filter == self.currentFilter {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0, execute: {
                         self.isLoading = false
                         self.transactions = transactions
                         self.lineChartData = self.getChartData(transaction: transactions, filter: filter)
@@ -102,12 +102,54 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
                     dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(day)", description: ""))
                 }
                 return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
-            case .thisMonth: break
-               
                 
+            case .thisWeek:
+                let thisWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date())?.dateToShow ?? ""
+                let thisDay = Date().dateToShow
+                graphXAxis[1] = "\(thisWeek) to \(thisDay)"
+                var days = [Int: Double]()
+                for t in transaction {
+                    if days[t.date.getDate()] == nil {
+                        days[t.date.getDate()] = t.amount
+                    } else {
+                        days[t.date.getDate()]! += t.amount
+                    }
+                }
+                for (day, amount) in days {
+                    let dayStr = String(Array("\(day)")[6 ... 7])
+                    dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(dayStr)", description: ""))
+                }
+                return dataPoints.sorted(by: { $0.xAxisLabel! < $1.xAxisLabel! })
                 
-            case .thisWeek: break
+            case .thisMonth:
+                graphXAxis[2] = "Days of \(Date().month)"
+                var days = [Int: Double]()
+                for t in transaction {
+                    if days[t.date.get(.day)] == nil {
+                        days[t.date.get(.day)] = t.amount
+                    } else {
+                        days[t.date.get(.day)]! += t.amount
+                    }
+                }
+                var i = 0
+                for (day, amount) in days {
+                    var xLabel = "\(day)"
+                    if days.count > 15 {
+                        if i % 2 == 1 {
+                            xLabel = "\(day)"
+                        } else {
+                            xLabel = ""
+                        }
+                    }
+                    
+                    dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: xLabel, description: "\(day)"))
+                    i += 1
+                }
+
+                return dataPoints.sorted(by: { Int($0.description!)! < Int($1.description!)!})
+                
             case .thisYear:
+                graphXAxis[3] = "Months of \(Date().year)"
                 var days = [Int: Double]()
                 for t in transaction {
                     if days[t.date.get(.month)] == nil {
@@ -122,7 +164,6 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
                 return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
             }
              
-            return dataPoints
         }
         return dataPoints
     }
@@ -134,7 +175,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
         let dataPoints = getDataPoint(transaction: trans, filter: filter)
         let data = LineDataSet(
             dataPoints: dataPoints,
-            pointStyle: PointStyle(pointSize: 12, borderColour:.yellow, fillColour: .red, lineWidth: 10, pointType: .filled, pointShape: .circle),
+            pointStyle: PointStyle(pointSize: 10, borderColour:.yellow, fillColour: .red, lineWidth: 8, pointType: .filled, pointShape: .circle),
             style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine, strokeStyle: Stroke(lineWidth: 8)))
         
         
