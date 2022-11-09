@@ -652,16 +652,8 @@
 		5FB6ECA728FEA6AD00D74B68 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
-				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
-				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
-				5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */,
-				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
-				FA94E887290533E700C5408D /* TransactionDetailView.swift */,
-				FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */,
-				FA929988290E8A9400033C7E /* FinancialReportView.swift */,
-				FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */,
-				FA92998A290E941600033C7E /* FinancialReportCellView.swift */,
+				5FBBC19E291BA9AF0092937B /* Views */,
+				5FBBC19D291BA9970092937B /* ViewModel */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -683,6 +675,37 @@
 				5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5FBBC19C291BA9510092937B /* AddTransactions */ = {
+			isa = PBXGroup;
+			children = (
+				5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */,
+				5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */,
+				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
+				FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */,
+				FA929988290E8A9400033C7E /* FinancialReportView.swift */,
+				FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */,
+				FA92998A290E941600033C7E /* FinancialReportCellView.swift */,
+			);
+			path = AddTransactions;
+			sourceTree = "<group>";
+		};
+		5FBBC19D291BA9970092937B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5FBBC19E291BA9AF0092937B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */,
+				FA94E887290533E700C5408D /* TransactionDetailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5FFEA02329138AC50082745D /* ViewModel */ = {
@@ -1379,6 +1402,7 @@
 				FA7F86A228FA695200108E3A /* SetupAccount */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
+				5FBBC19C291BA9510092937B /* AddTransactions */,
 				FA8D88ED2909370400C70440 /* TransactionsFilter */,
 				FA8D88F029096ADE00C70440 /* Budget */,
 				FA24E66D29083835008CF65A /* Profile */,

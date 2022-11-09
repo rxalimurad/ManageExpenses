@@ -66,7 +66,8 @@ struct Transaction: Identifiable, Hashable {
             "type": type,
             "toAcc": toAcc,
             "fromAcc" : fromAcc,
-            "date" : date
+            "date" : date,
+            "user" : UserDefaults.standard.currentUser?.email ?? ""
             
             
         ]

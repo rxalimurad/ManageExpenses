@@ -9,8 +9,6 @@ import Foundation
 import Combine
 import FirebaseFirestore
 class FirestoreService: ServiceHandlerType {
-    
-    
     func getTotalBalance() -> String {
         "0"
     }
@@ -56,6 +54,31 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
+    func getTransactions(duration: TransactionDuration, sortBy: SortedBy) -> AnyPublisher<[Transaction], NetworkingError> {
+        Deferred {
+            Future {[weak self] promise in
+                guard let self = self else { return }
+                self.getCollectionPath(for: duration)
+                    .getDocuments(completion: { snapshot, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let documents = snapshot?.documents, !documents.isEmpty {
+                                var transactions = [Transaction]()
+                                for document in documents {
+                                    transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
+                                }
+                                promise(.success(transactions))
+                            } else {
+                                promise(.failure(NetworkingError("No document found")))
+                            }
+                        }
+                        
+                        
+                    })
+            }
+        }.eraseToAnyPublisher()
+    }
     
     func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError> {
         Deferred {
@@ -84,13 +107,24 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-    private func getCollectionPath(for duration: TransactionDuration) -> Query {
-        let db = Firestore.firestore()
-        let collection = db.collection(Constants.firestoreCollection.transactions)
-            .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
-            .whereField("type", isEqualTo: PlusMenuAction.expense.rawValue)
-        return collection
+
+    func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.transactions)
+                    .document("id")
+                    .setData([:]){ error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(([DatedTransactions]())))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
     }
+    //MARK: - Private Helper methods
     
     private func getDate(for duration: TransactionDuration) -> Timestamp {
         switch duration {
@@ -114,23 +148,6 @@ class FirestoreService: ServiceHandlerType {
         
     }
     
-    
-    func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
-                    .document("id")
-                    .setData([:]){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(([DatedTransactions]())))
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
     private func proccessTransactions(_ transactions: [Transaction]) -> [DatedTransactions] {
         var recentTransactionsKeys: [String] = []
         let sortedTrans = transactions.sorted(by: { $0.date > $1.date })
@@ -152,6 +169,15 @@ class FirestoreService: ServiceHandlerType {
         
         return list
     }
+    
+    private func getCollectionPath(for duration: TransactionDuration) -> Query {
+        let db = Firestore.firestore()
+        let collection = db.collection(Constants.firestoreCollection.transactions)
+            .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+        return collection
+    }
+    
     
     
     

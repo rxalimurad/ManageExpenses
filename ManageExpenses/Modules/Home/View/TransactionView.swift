@@ -10,22 +10,27 @@ import SwiftUI
 struct TransactionView: View {
     
     var transaction: Transaction
+    var showDate: Bool = false
     var body: some View {
-        
-        HStack(alignment: .center) {
-            transImageView
-                .unskeletonable()
-            transInfo
-                .unskeletonable()
-            Spacer()
-            transInfoAmount
-                .unskeletonable()
+        VStack {
+            HStack(alignment: .center) {
+                transImageView
+                    .unskeletonable()
+                transInfo
+                    .unskeletonable()
+                Spacer()
+                transInfoAmount
+                    .unskeletonable()
+            }
+            .unskeletonable()
+            
         }
         .frame(maxWidth: .infinity)
         .background(CustomColor.baseLight_60.opacity(0.4))
         .cornerRadius(24)
         .padding([.horizontal], 19)
         .unskeletonable()
+        
         
     }
     
@@ -44,19 +49,20 @@ struct TransactionView: View {
         .padding([.leading], 17)
         .padding([.vertical], 14)
     }
-
+    
     private var transInfo: some View {
         VStack(alignment: .leading, spacing: 13) {
             Text(transaction.name)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(CustomColor.baseDark_25)
                 .skeletonable()
-
+            
             Text(transaction.desc)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
                 .lineLimit(1)
                 .skeletonable()
+            
         }
     }
     private var transInfoAmount: some View {
@@ -66,11 +72,24 @@ struct TransactionView: View {
                 .foregroundColor((transaction.amount) < 0 ? .red : .green)
                 .skeletonable()
             
-            Text(transaction.date.timeToShow)
+            Group {
+                Text(transaction.date.timeToShow)
+                +
+                Text(showDate ? ("\n" + transaction.date.dateToShow) : "")
+                
+            }
                 .font(.system(size: 13, weight: .medium))
+                .multilineTextAlignment(.trailing)
                 .foregroundColor(CustomColor.baseLight_20)
                 .skeletonable()
+            
         }
         .padding([.trailing], 16)
+    }
+}
+
+struct TransactionView_Previews: PreviewProvider {
+    static var previews: some View {
+        TransactionView(transaction: Transaction(id: "\(UUID())", amount: -25, category: "Food", desc: "Eating food for dinner", name: "Food", wallet: "SadaaPay", attachment: "", type: "expense", fromAcc: "", toAcc: "", date: Date().secondsSince1970))
     }
 }

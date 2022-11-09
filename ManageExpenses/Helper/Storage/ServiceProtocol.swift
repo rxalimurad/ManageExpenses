@@ -22,6 +22,7 @@ protocol ServiceHandlerType {
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
     func getTransaction(with id: String) -> AnyPublisher<Transaction, NetworkingError>
     func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError>
+    func getTransactions(duration: TransactionDuration, sortBy: SortedBy) -> AnyPublisher<[Transaction], NetworkingError>
     func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError>
 }
 

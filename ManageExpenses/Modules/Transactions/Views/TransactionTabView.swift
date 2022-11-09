@@ -9,15 +9,8 @@ import SwiftUI
 
 struct TransactionTabView: View {
     var safeAreaInsets: EdgeInsets
-    @State var isDurationFilterSheetShowing = false
-    @State var isfilterSheetShowing = false
-    @State var isfinancialReportShowing = false
-    @State var customDateSeleced = false
-    @State var dateTo = Date()
-    @State var dateFrom = Date()
+    @ObservedObject var viewModel: TransactionViewModel
     
-    @State private var selectedTrans: Transaction?
-//    @ObservedObject var viewModel = HomeViewModel(dbHandler: FirestoreService())
     var body: some View {
         VStack {
             headerView
@@ -27,30 +20,30 @@ struct TransactionTabView: View {
             
             transactions
         }
-        .fullScreenCover(item: $selectedTrans, content: { trans in
+        .fullScreenCover(item: $viewModel.selectedTrans, content: { trans in
             TransactionDetailView(transaction: trans)
         })
-        .fullScreenCover(isPresented: $isfinancialReportShowing) {
+        .fullScreenCover(isPresented: $viewModel.isfinancialReportShowing) {
             FinancialReportView(safeAreaInsets: safeAreaInsets)
         }
-        .fullScreenCover(isPresented: $isDurationFilterSheetShowing) {
+        .fullScreenCover(isPresented: $viewModel.isDurationFilterSheetShowing) {
             ZStack (alignment: .bottom) {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        isfilterSheetShowing.toggle()
+                        viewModel.isfilterSheetShowing.toggle()
                     }
                 durationFilterSheet()
             }
             .background(ColoredView(color: .clear))
             .edgesIgnoringSafeArea(.all)
         }
-        .fullScreenCover(isPresented: $isfilterSheetShowing) {
+        .fullScreenCover(isPresented: $viewModel.isfilterSheetShowing) {
             ZStack (alignment: .bottom) {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        isfilterSheetShowing.toggle()
+                        viewModel.isfilterSheetShowing.toggle()
                     }
-                  filterSheet()
+                filterSheet()
             }
             .background(ColoredView(color: .clear))
             .edgesIgnoringSafeArea(.all)
@@ -63,7 +56,7 @@ struct TransactionTabView: View {
     var subHeader: some View {
         HStack {
             Button {
-                isfinancialReportShowing.toggle()
+                viewModel.isfinancialReportShowing.toggle()
             } label: {
                 Text("See your financial report")
                     .foregroundColor(CustomColor.primaryColor)
@@ -72,29 +65,22 @@ struct TransactionTabView: View {
                 Spacer()
                 Image.Custom.downArrow.rotationEffect(Angle(degrees: 270))
             }
-
             
-           
+            
+            
         }.padding([.horizontal], 16)
             .background(CustomColor.primaryColor_20)
     }
     
     var transactions: some View {
         ScrollView {
-//            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-//                Text(headerTransDate)
-//                    .font(.system(size: 16, weight: .medium))
-//                    .foregroundColor(CustomColor.baseDark)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .padding([.horizontal], 19)
-//                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-//                    Button {
-//                        selectedTrans = transaction
-//                    } label: {
-//                        TransactionView(transaction: transaction)
-//                    }
-//                }
-//            }
+            ForEach(viewModel.transactions, id: \.self) { transaction in
+                Button {
+                    viewModel.selectedTrans = transaction
+                } label: {
+                    TransactionView(transaction: transaction, showDate: true)
+                }
+            }
             
         }
     }
@@ -104,7 +90,7 @@ struct TransactionTabView: View {
             HStack(alignment: .center) {
                 
                 Button(action: {
-                    isDurationFilterSheetShowing.toggle()
+                    viewModel.isDurationFilterSheetShowing.toggle()
                 }, label: {
                     HStack(alignment: .center) {
                         Image.Custom.downArrow
@@ -118,17 +104,17 @@ struct TransactionTabView: View {
                 })
                 .padding([.leading], 16)
                 .overlay(RoundedRectangle(cornerRadius: 40, style: .circular)
-                            .stroke(CustomColor.baseLight_60, lineWidth: 1)
+                    .stroke(CustomColor.baseLight_60, lineWidth: 1)
                 )
                 
                 Spacer()
                 Button {
-                    isfilterSheetShowing.toggle()
+                    viewModel.isfilterSheetShowing.toggle()
                 } label: {
                     Image.Custom.filter
                 }
                 
-
+                
             }.padding([.top, .bottom], 12)
                 .padding([.top], safeAreaInsets.top)
             
@@ -152,20 +138,20 @@ struct TransactionTabView: View {
                 height: Constants.bottomSheet.indicatorHeight
             )
     }
-        
+    
     private func filterSheet() ->  some View {
         VStack {
             Button {
-                isfilterSheetShowing.toggle()
+                viewModel.isfilterSheetShowing.toggle()
             } label: {
                 indicator
                     .padding([.top], 16)
-                   
+                
             }
             
             
             VStack(spacing: 8) {
-                TransactionFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $isfilterSheetShowing)
+                TransactionFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $viewModel.isfilterSheetShowing)
             }
             .padding([.top], 22)
             .padding([.horizontal], 16)
@@ -181,16 +167,16 @@ struct TransactionTabView: View {
     private func durationFilterSheet() ->  some View {
         VStack {
             Button {
-                isfilterSheetShowing.toggle()
+                viewModel.isfilterSheetShowing.toggle()
             } label: {
                 indicator
                     .padding([.top], 16)
-                   
+                
             }
             
             
             VStack(spacing: 8) {
-                TransactionDurationFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $isDurationFilterSheetShowing, dateFrom: $dateFrom, dateTo: $dateTo)
+                TransactionDurationFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $viewModel.isDurationFilterSheetShowing, dateFrom: $viewModel.dateFrom, dateTo: $viewModel.dateTo)
             }
             .padding([.top], 22)
             .padding([.horizontal], 16)
@@ -208,6 +194,6 @@ struct TransactionTabView: View {
 
 struct TransactionTabView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionTabView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+        TransactionTabView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), viewModel: TransactionViewModel(dbHandler: FirestoreService()))
     }
 }

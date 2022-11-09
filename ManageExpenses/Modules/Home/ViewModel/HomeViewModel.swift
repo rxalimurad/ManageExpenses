@@ -57,7 +57,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
             .store(in: &subscriptions)
     }
     func refresh() {
-        self.fetchTransactions()
+        self.fetchTransactions(filter: currentFilter)
     }
     
     private func fetchTransactions(filter: Int? = nil) {
@@ -87,9 +87,9 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     }
     
     
-    private func getDataPoint(transaction: [Transaction], filter: Int?) -> [LineChartDataPoint] {
+    private func getDataPoint(trans: [Transaction], filter: Int?) -> [LineChartDataPoint] {
         var dataPoints = [LineChartDataPoint]()
-        
+        let transaction = trans.filter({ $0.amount < 0})
         if let filter = filter, let filterType = TransactionDuration(rawValue: filter) {
             switch filterType {
             case .thisDay:
@@ -175,12 +175,12 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
         let trans = transaction.flatMap { trans in
             return trans.transactions
         }
-        let dataPoints = getDataPoint(transaction: trans, filter: filter)
+        let dataPoints = getDataPoint(trans: trans, filter: filter)
         let data = LineDataSet(
             dataPoints: dataPoints,
             pointStyle: PointStyle(pointSize: 10, borderColour:.yellow, fillColour: .red, lineWidth: 8, pointType: .filled, pointShape: .circle),
             style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine, strokeStyle: Stroke(lineWidth: 8)))
-        
+            
         
         let chartStyle = LineChartStyle(
             markerType: LineMarkerType.full(attachment: MarkerAttachment.point,
