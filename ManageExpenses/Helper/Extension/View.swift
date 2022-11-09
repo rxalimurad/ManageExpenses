@@ -7,7 +7,7 @@
 
 import SwiftUI
 extension View {
-    @ViewBuilder func setNavigation(title: String, titleColor: Color? = Color.black, action: @escaping () -> Void) -> some View {
+    @ViewBuilder func setNavigation(title: String, titleColor: Color? = Color.black, showBackBtn: Bool = true, action: @escaping () -> Void) -> some View {
         self.navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
@@ -20,6 +20,7 @@ extension View {
                         Image.Custom.navBack
                             .renderingMode(.template)
                             .foregroundColor(titleColor)
+                            .isShowing(showBackBtn)
                     }
                     
                 }
@@ -44,23 +45,36 @@ extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
     @ViewBuilder func isShowing(_ showing: Bool) -> some View {
-          if showing {
-              self
-          }
-      }
+        if showing {
+            self
+        }
+    }
+    @ViewBuilder func isHidden(_ isHidden: Bool) -> some View {
+        if !isHidden {
+            self
+        }
+    }
+     func customPadding(_ edges: Edge.Set, _ value: CGFloat) -> some View {
+        self.modifier(CustomPadding(edges, value))
+    }
+    
+  
+    
     public func asUIImage() -> UIImage {
-           let controller = UIHostingController(rootView: self)
-            
-           controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-           UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
-            
-           let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
-           controller.view.bounds = CGRect(origin: .zero, size: size)
-           controller.view.sizeToFit()
-            
-           // here is the call to the function that converts UIView to UIImage: `.asImage()`
-           let image = controller.view.asUIImage()
-           controller.view.removeFromSuperview()
-           return image
-       }
+        let controller = UIHostingController(rootView: self)
+        
+        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
+        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+        
+        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.sizeToFit()
+        
+        // here is the call to the function that converts UIView to UIImage: `.asImage()`
+        let image = controller.view.asUIImage()
+        controller.view.removeFromSuperview()
+        return image
+    }
+    
+    
 }

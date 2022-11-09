@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SelectorWidgetView: View {
-    @State var showSelection = false
     let hint: String
-    let isMultiSelector: Bool = false
-    @State var text: String
+    @Binding var text: SelectDataModel
     @Binding var data: [SelectDataModel]
     
+    @State var showSelection = false
+    let isMultiSelector: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,8 +22,8 @@ struct SelectorWidgetView: View {
             }, label: {
                 ZStack(alignment: .trailing) {
                     Group  {
-                        Text(text.isEmpty ? hint : text)
-                            .foregroundColor(text.isEmpty ? CustomColor.hintColor : CustomColor.baseLight_20)
+                        Text(text.desc.isEmpty ? hint : text.desc)
+                            .foregroundColor(text.desc.isEmpty ? CustomColor.hintColor : CustomColor.baseLight_20)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                     }

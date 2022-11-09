@@ -18,16 +18,18 @@ struct InputWidgetView: View {
     @State var isSecured = false
     @State var isErrorShowing = false
     @State var errorMsg = ""
+    @Binding var isValidField: Bool
     
     let hint: String
     var properties: InputProperties
     @Binding var text: String
-
-    init(hint: String, properties: InputProperties, text: Binding<String>) {
+    
+    init(hint: String, properties: InputProperties, text: Binding<String>, isValidField: Binding<Bool>) {
         isSecured = properties.isSecure
         self.hint = hint
         self.properties = properties
         self._text = text
+        self._isValidField = isValidField
     }
     
     var body: some View {
@@ -35,20 +37,15 @@ struct InputWidgetView: View {
             ZStack(alignment: .trailing) {
                 Group {
                     if properties.isSecure && isSecured {
-                        SecureField(hint, text: $text) {
-                            isErrorShowing = !validate(isToValidate: true)
-                        }
+                        SecureField(hint, text: $text)
                     } else {
-                        TextField(hint, text: $text, onEditingChanged: { begin in
-                            withAnimation {
-                                isErrorShowing = !validate(isToValidate: !begin)
-                            }
-                        }
-                        )
+                        TextField(hint, text: $text)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
                     }
                     
                 }
-               if properties.isSecure {
+                if properties.isSecure {
                     Button(action: {
                         isSecured.toggle()
                     }) {
@@ -56,12 +53,18 @@ struct InputWidgetView: View {
                             .accentColor(.gray)
                     }
                 }
-               
-                  
-              
                 
-            }.onReceive(Just(text), perform: { _ in
+                
+                
+                
+            }
+            .onChange(of: Just(text), perform: { _ in
                 DispatchQueue.main.async {
+                    if !text.isEmpty {
+                        withAnimation {
+                            isErrorShowing = !validate()
+                        }
+                    }
                     if text.count > properties.maxLength {
                         text = String(text.prefix(properties.maxLength))
                     }
@@ -80,34 +83,31 @@ struct InputWidgetView: View {
                 .foregroundColor(.red).isShowing(isErrorShowing)
                 .padding([.leading], 16)
         }
-       
+        
         
         
     }
-    
-    func returnTrue() -> Bool {
-        return false
-    }
-    func validate(isToValidate: Bool) -> Bool {
-        if !isToValidate {
-            return true
-        }
+    func validate() -> Bool {
         if text.isEmpty {
             errorMsg = "Please enter \(hint)"
+            isValidField = true
             return false
         } else {
             if text.count < properties.minLength {
-                errorMsg = "\(hint) length should be atleast \(properties.minLength)"
+                errorMsg = "\(hint) length should be at least \(properties.minLength)"
+                isValidField = false
                 return false
             } else if text.count > properties.maxLength {
                 errorMsg = "\(hint) length should be maximum \(properties.maxLength)"
+                isValidField = false
                 return false
             } else if !properties.regex.isEmpty && !text.vaidateRegex(regex: properties.regex) {
                 errorMsg = "Please enter valid \(hint) "
+                isValidField = false
                 return false
             }
         }
-        
+        isValidField = true
         return true
         
     }
@@ -118,6 +118,6 @@ struct InputWidgetView: View {
 
 struct InputWidgetView_Previews: PreviewProvider {
     static var previews: some View {
-        InputWidgetView(hint: "Email", properties: InputProperties(maxLength: 10, minLength: 0, regex: ".*"), text: .constant("3434")).padding()
+        InputWidgetView(hint: "Email", properties: InputProperties(maxLength: 10, minLength: 0, regex: ".*"), text: .constant("3434"), isValidField: .constant(true)).padding()
     }
 }

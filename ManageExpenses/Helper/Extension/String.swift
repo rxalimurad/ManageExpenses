@@ -9,6 +9,10 @@ import Foundation
 
 extension String {
     
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+    
     func vaidateRegex(regex: String) -> Bool {
         let range = NSRange(location: 0, length: self.utf16.count)
         let regex = try! NSRegularExpression(pattern: regex)
@@ -17,7 +21,7 @@ extension String {
     
     var digits: [Int] {
         var result = [Int]()
-                for char in self {
+        for char in self {
             if let number = Int(String(char)) {
                 result.append(number)
             }
@@ -31,5 +35,5 @@ extension String {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter.date(from: self) ?? Date()
     }
- 
+    
 }

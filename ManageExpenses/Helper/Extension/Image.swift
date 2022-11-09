@@ -10,7 +10,9 @@ import SwiftUI
 extension Image {
     
     enum Custom {
+        static let apple = Image("apple")
         static let google = Image("google")
+        static let facebook = Image("facebook")
         static let planMoney = Image("planMoney")
         static let knowMoney = Image("knowMoney")
         static let controlMoney = Image("controlMoney")
@@ -39,8 +41,26 @@ extension Image {
         static let unchecked = Image(systemName: "ccheckmark.circle")
         static let transferSign = Image("transferSign")
         static let delete = Image("delete")
+        static let edit = Image("edit")
+        static let account = Image("account")
+        static let settings = Image("settings")
+        static let exportData = Image("exportData")
+        static let logout = Image("logout")
+        static let warning = Image("warning")
+        static let aboutus = Image(systemName: "person.2.circle.fill")
+        static let appIcon = Image("appicon")
+        static let checkedSquared = Image(systemName: "checkmark.square.fill")
+        static let unCheckedSquared = Image(systemName: "checkmark.square")
         
- 
+
+        
+    }
+    
+    
+    static func getImage(data: Data?) -> Image {
+        guard let data = data else { return Image.Custom.downArrow}
+        let img: UIImage = UIImage(data: data) ?? UIImage()
+        return Image(uiImage: img)
     }
     
 }

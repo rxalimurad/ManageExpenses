@@ -4,3 +4,4 @@
 *.xcworkspacedata
 ManageExpenses.xcodeproj/xcuserdata/murad.xcuserdatad/xcschemes/xcschememanagement.plist
 ManageExpenses.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ManageExpenses.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
