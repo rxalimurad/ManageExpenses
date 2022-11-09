@@ -54,11 +54,11 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
-    func getTransactions(duration: TransactionDuration, sortBy: SortedBy) -> AnyPublisher<[Transaction], NetworkingError> {
+    func getTransactions(duration: TransactionDuration, sortBy: SortedBy, filterBy: PlusMenuAction) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
-                self.getCollectionPath(for: duration)
+                self.getCollectionPathForTrans(for: duration, filterBy: filterBy)
                     .getDocuments(completion: { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -68,7 +68,22 @@ class FirestoreService: ServiceHandlerType {
                                 for document in documents {
                                     transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
                                 }
-                                promise(.success(transactions))
+                                switch sortBy {
+                                case .newest:
+                                    let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
+                                    promise(.success(sortedTrans))
+                                case .oldest:
+                                    let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
+                                    promise(.success(sortedTrans))
+                                case .lowest:
+                                    let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
+                                    promise(.success(sortedTrans))
+                                case .highest:
+                                    let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
+                                    promise(.success(sortedTrans))
+                                }
+                                
+                                
                             } else {
                                 promise(.failure(NetworkingError("No document found")))
                             }
@@ -144,6 +159,8 @@ class FirestoreService: ServiceHandlerType {
             let year = Calendar.current.component(.year, from: Date())
             let thisYear = Calendar.current.date(from: DateComponents(year: year, month: 1, day: 1))  ?? Date()
             return Timestamp(date: thisYear)
+        default:
+            return Timestamp(date: Date())
         }
         
     }
@@ -176,6 +193,22 @@ class FirestoreService: ServiceHandlerType {
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
             .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
         return collection
+    }
+    private func getCollectionPathForTrans(for duration: TransactionDuration, filterBy: PlusMenuAction) -> Query {
+        let collection = self.getCollectionWithFilterBy(filterBy: filterBy)
+//            .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+    
+        return collection
+    }
+    private func getCollectionWithFilterBy(filterBy: PlusMenuAction) -> Query {
+        let db = Firestore.firestore()
+        if filterBy == .all {
+            return db.collection(Constants.firestoreCollection.transactions)
+        } else {
+            return db.collection(Constants.firestoreCollection.transactions)
+                .whereField("type", isEqualTo: filterBy.rawValue)
+        }
     }
     
     

@@ -8,24 +8,17 @@
 import Foundation
 import Combine
 
-enum SortedBy {
+enum SortedBy: String, CaseIterable {
     case newest
     case oldest
     case lowest
     case highest
 }
 
-enum TransFilters {
-    case thisDay
-    case thisWeek
-    case thisMonth
-    case thisYear
-    case customRange
-}
-
 protocol TransactionViewModelType {
-    var currentFilter: TransFilters { get }
-    var sortedBy: SortedBy { get }
+    var currentFilter: TransactionDuration { get }
+    var sortedBy: String { get }
+    var filterBy: String { get }
     var transactions: [Transaction] { get }
     var dbHandler: ServiceHandlerType { get }
     var state: ServiceAPIState { get }
@@ -45,46 +38,40 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
     @Published var selectedTrans: Transaction?
     var subscriptions =  Set<AnyCancellable>()
     //MARK: - Protocol Implementation
-    @Published var currentFilter: TransFilters = .thisMonth
-    @Published var sortedBy: SortedBy = .newest
+    @Published var currentFilter: TransactionDuration = .thisMonth
+    @Published var sortedBy: String = SortedBy.newest.rawValue
+    @Published var filterBy: String = PlusMenuAction.all.rawValue
     @Published var transactions: [Transaction] = []
     var dbHandler: ServiceHandlerType
     @Published var state: ServiceAPIState = .na
     
     required init(dbHandler: ServiceHandlerType) {
         self.dbHandler = dbHandler
-        self.fetchTransactions(filter: currentFilter, sortedBy: sortedBy)
-        self.observedFilter()
+        self.fetchTransactions()
     }
     
     //MARK: - Methods
     
-    func observedFilter() {
-        $currentFilter
-            .sink { filter in
-                self.fetchTransactions(filter: filter, sortedBy: self.sortedBy)
-            }
-            .store(in: &subscriptions)
-    }
     func refresh() {
-        self.fetchTransactions(filter: currentFilter, sortedBy: sortedBy)
+        self.fetchTransactions()
     }
     
-    private func fetchTransactions(filter: TransFilters, sortedBy: SortedBy) {
+     func fetchTransactions() {
         self.transactions = []
         state = .inprogress
-        self.dbHandler.getTransactions(duration: filter, sortBy: sortedBy)
+         self.dbHandler.getTransactions(
+            duration: currentFilter,
+            sortBy: SortedBy(rawValue: sortedBy) ?? .newest,
+            filterBy: PlusMenuAction(rawValue: filterBy) ?? .all)
             .sink { error in
                 self.state = .successful
-                if case Subscribers.Completion.failure() = error {
+              if case Subscribers.Completion.failure(_) = error {
                     self.transactions = []
                 }
-            } receiveValue: { [weal self] transactions in
+            } receiveValue: { [weak self] transactions in
                 guard let self = self else { return }
-                if filter == self.currentFilter {
                     self.transactions = transactions
                     self.state = .successful
-                }
             }
             .store(in: &subscriptions)
 

@@ -151,7 +151,8 @@ struct TransactionTabView: View {
             
             
             VStack(spacing: 8) {
-                TransactionFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $viewModel.isfilterSheetShowing)
+                TransactionFilterView(safeAreaInsets: safeAreaInsets, isfilterSheetShowing: $viewModel.isfilterSheetShowing, sortedBy: $viewModel.sortedBy, filterBy: $viewModel.filterBy, transViewModel: viewModel)
+                
             }
             .padding([.top], 22)
             .padding([.horizontal], 16)

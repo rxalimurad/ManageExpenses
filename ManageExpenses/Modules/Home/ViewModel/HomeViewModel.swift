@@ -165,6 +165,8 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
                     dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(day)", description: ""))
                 }
                 return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
+            default:
+                return []
             }
              
         }

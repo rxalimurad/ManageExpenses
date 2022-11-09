@@ -10,10 +10,11 @@ import SwiftUI
 struct TransactionFilterView: View {
     var safeAreaInsets: EdgeInsets
     @Binding var isfilterSheetShowing: Bool
-    @State var type: String = PlusMenuAction.expense.rawValue
-    @State var sortBy: String = FilterSortingBy.newest.rawValue
-    @State var showCateogory = false
-    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
+    @Binding var sortedBy: String
+    @Binding var filterBy: String
+    @ObservedObject var transViewModel: TransactionViewModel
+    @State private var showCateogory = false
+    @State private var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
                                SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
                                SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
                                SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
@@ -40,7 +41,7 @@ struct TransactionFilterView: View {
             }
             .padding([.top], 22)
             
-            SingleFilterSelectionView(selectedOpts: $type, options: PlusMenuAction.allCases.map({$0.rawValue}))
+            SingleFilterSelectionView(selectedOpts: $filterBy, options: PlusMenuAction.allCases.map({$0.rawValue}))
                 .padding([.top], 16)
             HStack {
                 Text("Sort By")
@@ -50,7 +51,7 @@ struct TransactionFilterView: View {
                 
             }
             .padding([.top], 16)
-            SingleFilterSelectionView(selectedOpts: $sortBy, options: FilterSortingBy.allCases.map({$0.rawValue}))
+            SingleFilterSelectionView(selectedOpts: $sortedBy, options: SortedBy.allCases.map({$0.rawValue}))
                 .padding([.top], 16)
             
             HStack {
@@ -83,6 +84,7 @@ struct TransactionFilterView: View {
             
             ButtonWidgetView(title: "Apply", style: .primaryButton) {
                 isfilterSheetShowing.toggle()
+                transViewModel.fetchTransactions()
             }
             .padding([.top], 34)
             .padding([.bottom], 16)
@@ -124,8 +126,8 @@ struct TransactionFilterView: View {
     }
 }
 
-struct TransactionFilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionFilterView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), isfilterSheetShowing: .constant(true))
-    }
-}
+//struct TransactionFilterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TransactionFilterView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), isfilterSheetShowing: .constant(true))
+//    }
+//}

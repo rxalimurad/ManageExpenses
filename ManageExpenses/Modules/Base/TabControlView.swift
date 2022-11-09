@@ -82,7 +82,7 @@ struct TabControlView: View {
             
         } content: {
             if let newEntryType = newEntryType {
-                AddExpenseIncomeView(newEntryType: newEntryType, homeViewModel: homeViewModel)
+                AddExpenseIncomeView(newEntryType: newEntryType, homeViewModel: homeViewModel, transViewModel: transViewModel)
             }
         }
         

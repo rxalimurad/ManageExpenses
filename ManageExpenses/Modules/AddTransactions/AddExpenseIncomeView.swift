@@ -10,7 +10,6 @@ import AlertX
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreService())
     
     // Mark: - State Variables for User Input
@@ -41,6 +40,7 @@ struct AddExpenseIncomeView: View {
     
     var newEntryType: PlusMenuAction
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var transViewModel: TransactionViewModel
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -273,6 +273,7 @@ struct AddExpenseIncomeView: View {
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
                     homeViewModel.refresh()
+                    transViewModel.refresh()
                     mode.wrappedValue.dismiss()
                 }
             })
@@ -337,6 +338,8 @@ struct AddExpenseIncomeView: View {
             return  "Expense"
         case .convert:
             return  "Transfer"
+        case .all:
+            return ""
         }
     }
     func getBgColor(type: PlusMenuAction) -> Color {
@@ -345,6 +348,8 @@ struct AddExpenseIncomeView: View {
             return  CustomColor.green
         case .expense:
             return  CustomColor.red
+        case .all:
+            return .black
         case .convert:
             return  CustomColor.blue
         }
