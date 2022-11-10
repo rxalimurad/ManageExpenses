@@ -1,0 +1,73 @@
+//
+//  FinancialReportViewModel.swift
+//  ManageExpenses
+//
+//  Created by murad on 30/10/2022.
+//
+
+import Foundation
+import CoreData
+import SwiftUI
+class FinancialReportViewModel: ObservableObject {
+    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
+                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
+                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
+                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
+                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
+    
+    func getPoints(transactions: [Transaction]) -> [PieChartDataPoint] {
+        let list = getFinanicalData(transactions:transactions)
+        var points = [PieChartDataPoint]()
+        for data in list {
+            points.append(PieChartDataPoint(value: data.amount, description: "", colour: data.category.color))
+        }
+        
+        
+        return points
+      
+    }
+    
+    func getFinanicalData(transactions: [Transaction]) -> [FinanicalReportModel] {
+        let total = getExpense(trans: transactions)
+        
+        var reportModel = categoryData.map({
+            return FinanicalReportModel(category: $0, amount: 0, total: total)
+        })
+        
+        for i in 0 ..< transactions.count {
+            if transactions[i].amount < 0 {
+                for j in 0 ..< reportModel.count {
+                    if reportModel[j].category.desc == transactions[i].name {
+                        reportModel[j].amount += transactions[i].amount
+                        break
+                    }
+                }
+            }
+        }
+        
+        
+        
+        return reportModel.sorted(by: {abs($0.amount) > abs($1.amount) })
+    }
+    func getIncome(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount > 0 {
+            total += t.amount
+            }
+        }
+        return total
+    }
+    func getExpense(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount < 0 {
+            total += abs(t.amount)
+            }
+        }
+        return total
+    }
+    
+}

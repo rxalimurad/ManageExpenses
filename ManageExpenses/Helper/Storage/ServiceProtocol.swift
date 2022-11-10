@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-enum TransactionDuration: Int {
-    case thisDay = 0
-    case thisMonth = 2
-    case thisWeek = 1
-    case thisYear = 3
-    case customRange = 4
+enum TransactionDuration: String {
+    case thisDay = "0"
+    case thisMonth = "2"
+    case thisWeek = "1"
+    case thisYear = "3"
+    case customRange = "4"
 }
 
 protocol ServiceHandlerType {
@@ -23,7 +23,7 @@ protocol ServiceHandlerType {
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
     func getTransaction(with id: String) -> AnyPublisher<Transaction, NetworkingError>
     func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError>
-    func getTransactions(duration: TransactionDuration, sortBy: SortedBy, filterBy: PlusMenuAction) -> AnyPublisher<[Transaction], NetworkingError>
+    func getTransactions(duration: String, sortBy: SortedBy, filterBy: PlusMenuAction, selectedCat: [String], fromDate: Date, toDate: Date) -> AnyPublisher<[Transaction], NetworkingError>
     func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError>
 }
 

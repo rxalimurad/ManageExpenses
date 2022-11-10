@@ -11,7 +11,7 @@ struct SegmentedControlWidgetView: View {
     
     var items: [String]
    
-    @Binding var selectedIndex: Int
+    @Binding var selectedIndex: String
     var padding = 8.0
     var fontSize = 14.0
     var textColor = CustomColor.yellow
@@ -26,7 +26,7 @@ struct SegmentedControlWidgetView: View {
                             Text(items[index])
                                 .font(.system(size: fontSize, weight: .bold))
                                 .padding(.vertical, padding)
-                                .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
+                                .foregroundColor(index == Int(selectedIndex)! ? textColor : CustomColor.baseLight_20)
                                 .frame(maxWidth: .infinity)
                                 .matchedGeometryEffect(
                                     id: index,
@@ -35,7 +35,7 @@ struct SegmentedControlWidgetView: View {
                                 )
                                 .onTapGesture {
                                     withAnimation {
-                                        selectedIndex = index
+                                        selectedIndex = "\(index)"
                                         proxy.scrollTo(index)
                                     }
                                 }
@@ -47,7 +47,7 @@ struct SegmentedControlWidgetView: View {
                     Capsule()
                         .fill(bgColor)
                         .matchedGeometryEffect(
-                            id: selectedIndex,
+                            id: Int(selectedIndex)!,
                             in: namespace,
                             isSource: false
                         )
@@ -59,7 +59,7 @@ struct SegmentedControlWidgetView: View {
                         Text(items[index])
                             .font(.system(size: fontSize, weight: .bold))
                             .padding(.vertical, padding)
-                            .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
+                            .foregroundColor(index == Int(selectedIndex)! ? textColor : CustomColor.baseLight_20)
                     }
                 }.pickerStyle(.segmented)
             }
@@ -72,7 +72,7 @@ struct SegmentedControlWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         SegmentedControlWidgetView(
             items: ["Years", "Months", "Days", "All Photos"],
-            selectedIndex: .constant(1)
+            selectedIndex: .constant("1")
         )
     }
 }

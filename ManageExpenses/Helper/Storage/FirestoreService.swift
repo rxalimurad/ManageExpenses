@@ -54,11 +54,17 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
-    func getTransactions(duration: TransactionDuration, sortBy: SortedBy, filterBy: PlusMenuAction) -> AnyPublisher<[Transaction], NetworkingError> {
+    func getTransactions(duration: String,
+                         sortBy: SortedBy,
+                         filterBy: PlusMenuAction,
+                         selectedCat: [String],
+                         fromDate: Date,
+                         toDate: Date
+    ) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
-                self.getCollectionPathForTrans(for: duration, filterBy: filterBy)
+                self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
                     .getDocuments(completion: { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -122,7 +128,7 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-
+    
     func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
         Deferred {
             Future { promise in
@@ -194,13 +200,21 @@ class FirestoreService: ServiceHandlerType {
             .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
         return collection
     }
-    private func getCollectionPathForTrans(for duration: TransactionDuration, filterBy: PlusMenuAction) -> Query {
-        let collection = self.getCollectionWithFilterBy(filterBy: filterBy)
-//            .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
+    private func getCollectionPathForTrans(for duration: String,
+                                           filterBy: PlusMenuAction,
+                                           selectedCat: [String],
+                                           fromDate: Date,
+                                           toDate: Date
+    ) -> Query {
+        var collection = self.getCollectionWithFilterBy(filterBy: filterBy)
+        collection = self.getCollectionWithCategory(query: collection, selectedCat: selectedCat)
+        collection = self.getCollectionWithRange(query: collection, duration: duration, fromDate: fromDate, toDate: toDate)
             .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
-    
+        
         return collection
     }
+    
+    
     private func getCollectionWithFilterBy(filterBy: PlusMenuAction) -> Query {
         let db = Firestore.firestore()
         if filterBy == .all {
@@ -209,6 +223,42 @@ class FirestoreService: ServiceHandlerType {
             return db.collection(Constants.firestoreCollection.transactions)
                 .whereField("type", isEqualTo: filterBy.rawValue)
         }
+    }
+    
+    private func getCollectionWithCategory(query: Query,  selectedCat: [String]) -> Query {
+        if selectedCat.isEmpty {
+            return query
+        } else {
+            return query.whereField("category", in: selectedCat)
+        }
+    }
+    
+    private func getCollectionWithRange(query: Query, duration: String, fromDate: Date, toDate: Date) -> Query {
+        if let durationFiler = FilterDuration(rawValue: duration), durationFiler == .custom {
+            return query
+                .whereField("date", isGreaterThanOrEqualTo: fromDate.startOfDay)
+                .whereField("date", isLessThanOrEqualTo: toDate.endOfDay)
+        }
+        return query.whereField("date", isGreaterThanOrEqualTo: getDateForTrans(duration: duration))
+    }
+    
+    private func getDateForTrans(duration: String) -> Timestamp {
+        if let filterDur = FilterDuration(rawValue: duration) {
+            switch filterDur {
+            case .today:
+                return self.getDate(for: .thisDay)
+            case .thisWeek:
+                return self.getDate(for: .thisWeek)
+            case .thisMonth:
+                return self.getDate(for: .thisMonth)
+            case .thisYear:
+                return self.getDate(for: .thisYear)
+            case .custom:
+                return Timestamp(date: Date())
+            }
+        }
+        
+        return Timestamp(date: Date())
     }
     
     

@@ -49,7 +49,7 @@ struct HomeView: View {
                             Text("Not enough data to show")
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
                                 .isHidden(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
-                            Text(viewModel.graphXAxis[viewModel.currentFilter])
+                            Text(viewModel.graphXAxis[Int(viewModel.currentFilter)!])
                                 .foregroundColor(CustomColor.primaryColor).font(.caption)
                                 .padding([.horizontal], 5)
                                 .id(viewModel.currentFilter)
@@ -94,8 +94,6 @@ struct HomeView: View {
             .fullScreenCover(item: $selectedTrans, content: { trans in
                 TransactionDetailView(transaction: trans)
             })
-            
-            //ViewForServiceAPI(state: $viewModel.state, bgOpacity: 0.5)
         }
     }
     

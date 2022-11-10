@@ -528,6 +528,16 @@
 			path = AmountKeyboard;
 			sourceTree = "<group>";
 		};
+		5F18036F291D237D00E40E35 /* FinancialReport */ = {
+			isa = PBXGroup;
+			children = (
+				FA929988290E8A9400033C7E /* FinancialReportView.swift */,
+				FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */,
+				FA92998A290E941600033C7E /* FinancialReportCellView.swift */,
+			);
+			path = FinancialReport;
+			sourceTree = "<group>";
+		};
 		5F4040A529065E5000ECC069 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,9 +694,6 @@
 				5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */,
 				FA94E8792903B7F800C5408D /* AttachmentView.swift */,
 				FA8D88E72909260D00C70440 /* BottomSelectionCellView.swift */,
-				FA929988290E8A9400033C7E /* FinancialReportView.swift */,
-				FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */,
-				FA92998A290E941600033C7E /* FinancialReportCellView.swift */,
 			);
 			path = AddTransactions;
 			sourceTree = "<group>";
@@ -1402,6 +1409,7 @@
 				FA7F86A228FA695200108E3A /* SetupAccount */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
+				5F18036F291D237D00E40E35 /* FinancialReport */,
 				5FBBC19C291BA9510092937B /* AddTransactions */,
 				FA8D88ED2909370400C70440 /* TransactionsFilter */,
 				FA8D88F029096ADE00C70440 /* Budget */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Utilities {
     
@@ -34,6 +35,19 @@ enum Utilities {
         return numberFormatter.string(for: abs(amount)) ?? ""
     }
     
-    
+    internal static func getCategories() -> [SelectDataModel] {
+        var casesArr = TransactionCategory.allCases
+        var categories = [SelectDataModel]()
+        casesArr.removeAll(where: {$0 == .transfer})
+        for category in casesArr {
+            if TransactionCategory.eatingout == category {
+                categories.append(SelectDataModel(id: category.rawValue, desc: "Eating Out", Image: Image("ic_\(category.rawValue.lowercased())"), color: category.getColor()))
+            } else {
+                categories.append(SelectDataModel(id: category.rawValue, desc: category.rawValue.capitalized, Image: Image("ic_\(category.rawValue.lowercased())"), color: category.getColor()))
+            }
+            
+        }
+        return categories
+    }
     
 }

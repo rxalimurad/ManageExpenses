@@ -14,11 +14,7 @@ struct TransactionFilterView: View {
     @Binding var filterBy: String
     @ObservedObject var transViewModel: TransactionViewModel
     @State private var showCateogory = false
-    @State private var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
-                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
-                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
-                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
-                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
+    @Binding var categoryData: [SelectDataModel]
     
     var body: some View {
         VStack {
@@ -27,10 +23,23 @@ struct TransactionFilterView: View {
                     .foregroundColor(CustomColor.baseDark)
                     .font(.system(size: 16, weight: .semibold))
                 Spacer()
-                ButtonWidgetView(title: "Reset", style: .secondaryButtonSmall) {
+                
+                Button {
+                    sortedBy = SortedBy.newest.rawValue
+                    filterBy = PlusMenuAction.all.rawValue
+                    categoryData = Utilities.getCategories()
                     
+                } label: {
+                    Text("Reset")
+                        .padding([.vertical], 7)
+                        .padding([.horizontal], 15)
+                        .font(.system(size: 14, weight:.medium))
+                        .foregroundColor(CustomColor.primaryColor)
+                        .background(CustomColor.primaryColor.opacity(0.2))
+                        .cornerRadius(16)
                 }
-                .frame(width: 78, height: 32)
+                .frame(height: 32)
+                
             }
             HStack {
                 Text("Filter By")
@@ -95,33 +104,38 @@ struct TransactionFilterView: View {
     
     @ViewBuilder func getCategorySelectionView() -> some View {
         if showCateogory {
-                VStack {
-                    ForEach(0 ..< categoryData.count) { index in
-                        Button {
-                            withAnimation {
-                                categoryData[index].isSelected.toggle()
+            VStack {
+                ScrollView(.vertical) {
+                    VStack {
+                        ForEach(0 ..< categoryData.count) { index in
+                            Button {
+                                withAnimation {
+                                    categoryData[index].isSelected.toggle()
+                                }
+                            } label: {
+                                SelectionCell(title: categoryData[index].desc, color: categoryData[index].color, img: categoryData[index].Image, isSelected: categoryData[index].isSelected)
+                                    .padding([.horizontal], 0)
                             }
-                        } label: {
-                            SelectionCell(title: categoryData[index].desc, color: categoryData[index].color, img: categoryData[index].Image, isSelected: categoryData[index].isSelected)
-                                .padding([.horizontal], 16)
-                        }
 
+                        }
                     }
                     
-                    ButtonWidgetView(title: "Ok", style: .primaryButton) {
-                        withAnimation {
-                            showCateogory.toggle()
-                        }
-                    }
-                    .padding([.top], 30)
+                    .transition(.move(edge: .bottom))
+                    .padding([.vertical], 20)
+                    .padding([.horizontal], 10)
+                    
                 }
-                
-                .transition(.move(edge: .bottom))
-                .padding([.all], 20)
-                .frame(maxWidth: .infinity)
-                .background(ColoredView(color: .gray.opacity(0.15)))
-                .background(ColoredView(color: CustomColor.baseLight))
-                .cornerRadius(15)
+                ButtonWidgetView(title: "Ok", style: .primaryButton) {
+                    withAnimation {
+                        showCateogory.toggle()
+                    }
+                }
+                .padding([.top], 30)
+            }
+            .frame(maxWidth: .infinity)
+            .background(ColoredView(color: .gray.opacity(0.15)))
+            .background(ColoredView(color: CustomColor.baseLight))
+            .cornerRadius(15)
         }
     }
 }

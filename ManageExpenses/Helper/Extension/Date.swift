@@ -9,12 +9,12 @@ import Foundation
 
 extension Date {
     var secondsSince1970: Int64 {
-           Int64((self.timeIntervalSince1970).rounded())
-       }
-       
-       init(seconds: Int64) {
-           self = Date(timeIntervalSince1970: TimeInterval(seconds))
-       }
+        Int64((self.timeIntervalSince1970).rounded())
+    }
+    
+    init(seconds: Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(seconds))
+    }
     
     var timeToShow: String {
         let formatter = DateFormatter()
@@ -49,9 +49,21 @@ extension Date {
         formatter.timeZone = TimeZone.current
         return formatter.string(from: self)
     }
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    
     
     func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
-          return calendar.component(component, from: self)
+        return calendar.component(component, from: self)
     }
     func getDate(calendar: Calendar = Calendar.current) -> Int {
         let day = String(format: "%02d", calendar.component(Calendar.Component.day, from: self))
@@ -60,5 +72,5 @@ extension Date {
         let dateCombined = Int("\(year)\(month)\(day)")!
         return dateCombined
     }
-      
+    
 }
