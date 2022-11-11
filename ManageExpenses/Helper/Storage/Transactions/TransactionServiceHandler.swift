@@ -1,5 +1,5 @@
 //
-//  DBHandler.swift
+//  TransactionServiceHandler.swift
 //  ManageExpenses
 //
 //  Created by murad on 05/11/2022.
@@ -16,12 +16,11 @@ enum TransactionDuration: String {
     case customRange = "4"
 }
 
-protocol ServiceHandlerType {
+protocol TransactionServiceHandlerType {
     func getTotalBalance() -> String
     func getExpense() -> String
     func getIncome() -> String
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
-    func getTransaction(with id: String) -> AnyPublisher<Transaction, NetworkingError>
     func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError>
     func getTransactions(duration: String, sortBy: SortedBy, filterBy: PlusMenuAction, selectedCat: [String], fromDate: Date, toDate: Date) -> AnyPublisher<[Transaction], NetworkingError>
     func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError>

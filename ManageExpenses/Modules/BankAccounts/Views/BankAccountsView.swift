@@ -9,11 +9,10 @@ import SwiftUI
 
 struct BankAccountsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", balance: "23.3",color: .red),
-                             SelectDataModel(id: "2", desc: "Bank Al Habib", balance: "32.3", color: .green),
-                             SelectDataModel(id: "3", desc: "SadaaPay", balance: "23.3",color: .yellow)]
     @State var selectedBank: SelectDataModel?
     @State var isAddBankShown = false
+    
+    @ObservedObject var viewModel = BankAccountViewModel(service: FirestoreBankService())
     
     var body: some View {
         VStack{
@@ -25,34 +24,35 @@ struct BankAccountsView: View {
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(CustomColor.baseLight_20)
                 .padding([.top], 40)
-            Text(Utilities.getFormattedAmount(amount: walletData.map({Double($0.balance ?? "0")!}).reduce(0, +)))
+            Text(Utilities.getFormattedAmount(amount: viewModel.banks.map({Double($0.balance ?? "0")!}).reduce(0, +)))
                 .font(.system(size: 40, weight: .semibold))
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 8)
             
             ScrollView {
                 VStack {
-                    ForEach(0 ..< walletData.count) {index in
+                    ForEach(viewModel.banks) { bank in
+                        
                         Button {
-                            selectedBank = walletData[index]
+                            selectedBank = bank
                         } label: {
                             HStack {
                                 RoundedRectangle(cornerRadius: 16)
                                     .frame(width: 48, height: 48)
-                                    .foregroundColor(walletData[index].color)
+                                    .foregroundColor(bank.color)
                                     .padding([.vertical], 12)
-                                Text(walletData[index].desc)
+                                Text(bank.desc)
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(CustomColor.baseDark)
                                     .padding([.leading], 8)
                                 Spacer()
-                                Text(Utilities.getFormattedAmount(amount: Double(walletData[index].balance ?? "0") ?? 0))
+                                Text(Utilities.getFormattedAmount(amount: Double(bank.balance ?? "0") ?? 0))
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(CustomColor.baseDark)
                                 
                             }
                         }
-
+                        
                         Divider()
                             .foregroundColor(CustomColor.baseLight_20)
                         
@@ -76,17 +76,14 @@ struct BankAccountsView: View {
             BankDetailsView(bank: $selectedBank.toUnwrapped(defaultValue: bank))
         })
         .fullScreenCover(isPresented: $isAddBankShown) {
-            AddBankAccount(category: .constant(SelectDataModel(id: "", desc: "", balance: "0", Image: nil, color: .black, isSelected: false)))
+            AddBankAccount()
         }
         
-        
-        
-        
     }
+}
+
+struct BankAccountsView_Previews: PreviewProvider {
+    static var previews: some View {
+        BankAccountsView()
     }
-    
-    struct BankAccountsView_Previews: PreviewProvider {
-        static var previews: some View {
-            BankAccountsView()
-        }
-    }
+}

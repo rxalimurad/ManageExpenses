@@ -23,7 +23,7 @@ struct TransactionTabView: View {
             TransactionDetailView(transaction: trans)
         })
         .fullScreenCover(isPresented: $viewModel.isfinancialReportShowing) {
-            FinancialReportView(safeAreaInsets: safeAreaInsets, recentTransactions: viewModel.transactions)
+            FinancialReportView(safeAreaInsets: safeAreaInsets, viewModel: viewModel)
         }
         .fullScreenCover(isPresented: $viewModel.isDurationFilterSheetShowing) {
             ZStack (alignment: .bottom) {
@@ -193,6 +193,6 @@ struct TransactionTabView: View {
 
 struct TransactionTabView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionTabView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), viewModel: TransactionViewModel(dbHandler: FirestoreService()))
+        TransactionTabView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), viewModel: TransactionViewModel(dbHandler: FirestoreTransactionsService()))
     }
 }

@@ -19,14 +19,17 @@ protocol TransactionViewModelType {
     var sortedBy: String { get }
     var filterBy: String { get }
     var transactions: [Transaction] { get }
-    var dbHandler: ServiceHandlerType { get }
+    var pieChartPoints: [PieChartDataPoint] { get }
+    var financialReportList: [FinanicalReportModel] { get}
+    var dbHandler: TransactionServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: ServiceHandlerType)
+    init(dbHandler: TransactionServiceHandlerType)
 }
 
 
 
 class TransactionViewModel: ObservableObject, TransactionViewModelType {
+    
     //MARK: - States for Views
     @Published var isDurationFilterSheetShowing = false
     @Published var isfilterSheetShowing = false
@@ -41,12 +44,14 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
     @Published var sortedBy: String = SortedBy.newest.rawValue
     @Published var filterBy: String = PlusMenuAction.all.rawValue
     @Published var transactions: [Transaction] = []
-    var dbHandler: ServiceHandlerType
+    var dbHandler: TransactionServiceHandlerType
     @Published var state: ServiceAPIState = .na
     @Published var categoryData = Utilities.getCategories()
     var selectedCategoties: [String] = []
-    
-    required init(dbHandler: ServiceHandlerType) {
+    @Published var pieChartPoints: [PieChartDataPoint] = []
+    @Published var financialReportList: [FinanicalReportModel] = []
+    @Published var selectedTab = "0"
+    required init(dbHandler: TransactionServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         self.observedCategory()
@@ -73,11 +78,14 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
             self.state = .successful
             if case Subscribers.Completion.failure(_) = error {
                 self.transactions = []
+                self.financialReportList = []
+                self.pieChartPoints = []
             }
         } receiveValue: { [weak self] transactions in
             guard let self = self else { return }
             self.transactions = transactions
-            self.state = .successful
+            self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData)
+            self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData)
         }
         .store(in: &subscriptions)
         
@@ -100,6 +108,62 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
         transDuration = FilterDuration.thisMonth.rawValue
         dateTo = Date()
         dateFrom = Date()
+    }
+    
+    //MARK: - Methods for Financial Chart
+    private func getFinacialChartPoints(transactions: [Transaction],categoryData: [SelectDataModel]) -> [PieChartDataPoint] {
+        let list = getFinanicalChartData(transactions:transactions, categoryData: categoryData)
+        var points = [PieChartDataPoint]()
+        for data in list {
+            points.append(PieChartDataPoint(value: data.amount, description: "", colour: data.category.color))
+        }
+        return points
+      
+    }
+    
+    private func getFinanicalChartData(transactions: [Transaction], categoryData: [SelectDataModel]) -> [FinanicalReportModel] {
+        var total = 1.0
+        if selectedTab == "0" {
+            total = getTotalExpense(trans: transactions)
+        } else {
+            total = getTotalIncome(trans: transactions)
+        }
+        
+        var reportModel = categoryData.map({
+            return FinanicalReportModel(category: $0, amount: 0, total: total)
+        })
+        for i in 0 ..< transactions.count {
+            if transactions[i].amount < 0 {
+                for j in 0 ..< reportModel.count {
+                    if reportModel[j].category.desc == transactions[i].name {
+                        reportModel[j].amount += transactions[i].amount
+                        break
+                    }
+                }
+            }
+        }
+        return reportModel.sorted(by: {abs($0.amount) > abs($1.amount) }).filter({ $0.amount != 0.0})
+    }
+    
+    private func getTotalIncome(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount > 0 {
+            total += abs(t.amount)
+            }
+        }
+        return total
+    }
+    private func getTotalExpense(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount < 0 {
+            total += abs(t.amount)
+            }
+        }
+        return total
     }
     
     

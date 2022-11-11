@@ -11,14 +11,8 @@ import AlertX
 struct AddBankAccount: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    // Mark: - State Variables for User Input
-    
-    @Binding var category: SelectDataModel
-    
-    @State var showAmtKeybd = false
-    @State var isBankAdded = false
-    
-    
+    // Mark: - View Model
+    @ObservedObject var viewModel = AddBankAccountViewModel(service: FirestoreBankService())
     
     
     var body: some View {
@@ -32,20 +26,20 @@ struct AddBankAccount: View {
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
                     .padding([.leading], 26)
-                AmountInputWidget(amount: category.balance ?? "0")
+                AmountInputWidget(amount: viewModel.bank.balance ?? "0")
                     .font(.system(size: 64, weight: .medium))
                     .foregroundColor(CustomColor.baseLight)
                     .padding([.top], 13)
                     .onTapGesture {
                         withAnimation {
-                            showAmtKeybd.toggle()
+                            viewModel.showAmtKeybd.toggle()
                         }
                     }
                 
                 Spacer()
             }
             .overlay(getAddDetailsView(geometry),alignment: .bottom)
-          
+            .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.bank.balance.toUnwrapped(defaultValue: "0"), isShowing: $viewModel.showAmtKeybd), alignment: .center)
             .background(
                 Rectangle()
                     .foregroundColor(CustomColor.primaryColor)
@@ -59,20 +53,21 @@ struct AddBankAccount: View {
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
           
-            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 10), text: $category.desc, isValidField: .constant(true))
+            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 10), text: $viewModel.bank.desc, isValidField: .constant(true))
                 .padding([.top],24)
                 .padding([.horizontal], 16)
-            ColorPicker("Set the bank color", selection: $category.color)
+            ColorPicker("Set the bank color", selection: $viewModel.bank.color)
                 .padding([.top],16)
                 .padding([.horizontal], 16)
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                isBankAdded.toggle()
+                viewModel.addBankAccount()
+                viewModel.isBankAdded.toggle()
                
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
-            .alertX(isPresented: $isBankAdded, content: {
+            .alertX(isPresented: $viewModel.isBankAdded, content: {
                 AlertX(title: Text("Bank has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
                     mode.wrappedValue.dismiss()
                 })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())

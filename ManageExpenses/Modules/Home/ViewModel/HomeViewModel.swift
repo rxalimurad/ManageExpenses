@@ -14,9 +14,9 @@ protocol HomeViewModelType {
     var currentFilter: String { get }
     var transactions: [DatedTransactions] { get }
     var lineChartData: LineChartData { get }
-    var dbHandler: ServiceHandlerType { get }
+    var dbHandler: TransactionServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: ServiceHandlerType)
+    init(dbHandler: TransactionServiceHandlerType)
     func getAccountBalance() -> String
     func getIncome() -> String
     func getExpense() -> String
@@ -31,9 +31,9 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     var subscriptions =  Set<AnyCancellable>()
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
-    var dbHandler: ServiceHandlerType
+    var dbHandler: TransactionServiceHandlerType
     @Published var state: ServiceAPIState = .na
-    required init(dbHandler: ServiceHandlerType) {
+    required init(dbHandler: TransactionServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         observedFilter()

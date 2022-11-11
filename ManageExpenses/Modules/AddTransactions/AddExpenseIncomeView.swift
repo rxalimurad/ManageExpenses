@@ -10,7 +10,7 @@ import AlertX
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreService())
+    @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreTransactionsService())
     
     // Mark: - State Variables for User Input
     @State var amount = ""

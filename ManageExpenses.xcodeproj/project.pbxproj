@@ -11,6 +11,11 @@
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
+		5F180373291E2B4200E40E35 /* BanksServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */; };
+		5F180375291E2BFA00E40E35 /* FirestoreBankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */; };
+		5F180379291E32E400E40E35 /* AddBankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */; };
+		5F18037B291E398A00E40E35 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037A291E398A00E40E35 /* Color.swift */; };
+		5F18037D291E3B0E00E40E35 /* BankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */; };
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
@@ -221,7 +226,6 @@
 		FA929989290E8A9400033C7E /* FinancialReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA929988290E8A9400033C7E /* FinancialReportView.swift */; };
 		FA92998B290E941600033C7E /* FinancialReportCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92998A290E941600033C7E /* FinancialReportCellView.swift */; };
 		FA92998D290E971F00033C7E /* FinancialReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92998C290E971F00033C7E /* FinancialReportModel.swift */; };
-		FA92998F290E98BD00033C7E /* FinancialReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */; };
 		FA94E8782903B0FE00C5408D /* ColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8772903B0FE00C5408D /* ColoredView.swift */; };
 		FA94E87A2903B7F800C5408D /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8792903B7F800C5408D /* AttachmentView.swift */; };
 		FA94E87C2903C6A300C5408D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E87B2903C6A300C5408D /* ImagePicker.swift */; };
@@ -249,9 +253,9 @@
 		FAB4651129168AFD0092BBFB /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651029168AFD0092BBFB /* ForgotPasswordService.swift */; };
 		FAB46513291692670092BBFB /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46512291692670092BBFB /* NetworkingError.swift */; };
 		FAB46515291695770092BBFB /* ViewForServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46514291695770092BBFB /* ViewForServiceAPI.swift */; };
-		FAB4651E2916B1DD0092BBFB /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651D2916B1DD0092BBFB /* ServiceProtocol.swift */; };
+		FAB4651E2916B1DD0092BBFB /* TransactionServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */; };
 		FAB465232916B3F90092BBFB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465222916B3F90092BBFB /* Transaction.swift */; };
-		FAB465262916BAA70092BBFB /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465252916BAA70092BBFB /* FirestoreService.swift */; };
+		FAB465262916BAA70092BBFB /* FirestoreTransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */; };
 		FABF09CA28FBDF3E0072EB16 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF09C928FBDF3E0072EB16 /* Shape.swift */; };
 		FAC44564290B0354005757E8 /* BudgetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC44563290B0354005757E8 /* BudgetViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -261,6 +265,11 @@
 		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
+		5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanksServiceHandler.swift; sourceTree = "<group>"; };
+		5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreBankService.swift; sourceTree = "<group>"; };
+		5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankAccountViewModel.swift; sourceTree = "<group>"; };
+		5F18037A291E398A00E40E35 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountViewModel.swift; sourceTree = "<group>"; };
 		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
@@ -466,7 +475,6 @@
 		FA929988290E8A9400033C7E /* FinancialReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportView.swift; sourceTree = "<group>"; };
 		FA92998A290E941600033C7E /* FinancialReportCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportCellView.swift; sourceTree = "<group>"; };
 		FA92998C290E971F00033C7E /* FinancialReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportModel.swift; sourceTree = "<group>"; };
-		FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialReportViewModel.swift; sourceTree = "<group>"; };
 		FA94E8772903B0FE00C5408D /* ColoredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredView.swift; sourceTree = "<group>"; };
 		FA94E8792903B7F800C5408D /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
 		FA94E87B2903C6A300C5408D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -493,9 +501,9 @@
 		FAB4651029168AFD0092BBFB /* ForgotPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordService.swift; sourceTree = "<group>"; };
 		FAB46512291692670092BBFB /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		FAB46514291695770092BBFB /* ViewForServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForServiceAPI.swift; sourceTree = "<group>"; };
-		FAB4651D2916B1DD0092BBFB /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceHandler.swift; sourceTree = "<group>"; };
 		FAB465222916B3F90092BBFB /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		FAB465252916BAA70092BBFB /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreTransactionsService.swift; sourceTree = "<group>"; };
 		FABF09C928FBDF3E0072EB16 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		FAC44563290B0354005757E8 /* BudgetViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -532,17 +540,52 @@
 			isa = PBXGroup;
 			children = (
 				FA929988290E8A9400033C7E /* FinancialReportView.swift */,
-				FA92998E290E98BD00033C7E /* FinancialReportViewModel.swift */,
 				FA92998A290E941600033C7E /* FinancialReportCellView.swift */,
 			);
 			path = FinancialReport;
 			sourceTree = "<group>";
 		};
+		5F180370291E2B1000E40E35 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */,
+				FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		5F180371291E2B1E00E40E35 /* Banks */ = {
+			isa = PBXGroup;
+			children = (
+				5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */,
+				5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */,
+			);
+			path = Banks;
+			sourceTree = "<group>";
+		};
+		5F180376291E32A200E40E35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */,
+				FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F180377291E32CA00E40E35 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */,
+				5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		5F4040A529065E5000ECC069 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				FAB4651D2916B1DD0092BBFB /* ServiceProtocol.swift */,
-				FAB465252916BAA70092BBFB /* FirestoreService.swift */,
+				5F180371291E2B1E00E40E35 /* Banks */,
+				5F180370291E2B1000E40E35 /* Transactions */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1330,15 +1373,15 @@
 			path = Extras;
 			sourceTree = "<group>";
 		};
-		FA8BC156290EF8B00025BE0A /* AddBankAccount */ = {
+		FA8BC156290EF8B00025BE0A /* BankAccounts */ = {
 			isa = PBXGroup;
 			children = (
-				FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */,
-				FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */,
+				5F180376291E32A200E40E35 /* Views */,
+				5F180377291E32CA00E40E35 /* ViewModel */,
 				FA864277290F0A7D006902CB /* BankDetailsView.swift */,
 				FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */,
 			);
-			path = AddBankAccount;
+			path = BankAccounts;
 			sourceTree = "<group>";
 		};
 		FA8D88ED2909370400C70440 /* TransactionsFilter */ = {
@@ -1414,7 +1457,7 @@
 				FA8D88ED2909370400C70440 /* TransactionsFilter */,
 				FA8D88F029096ADE00C70440 /* Budget */,
 				FA24E66D29083835008CF65A /* Profile */,
-				FA8BC156290EF8B00025BE0A /* AddBankAccount */,
+				FA8BC156290EF8B00025BE0A /* BankAccounts */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1517,6 +1560,7 @@
 				FA86427B290F16A6006902CB /* Binding.swift */,
 				5FF15662290FD80A0005C224 /* CustomPadding.swift */,
 				5FAF883C2912493C00233A27 /* UIApplication.swift */,
+				5F18037A291E398A00E40E35 /* Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1768,6 +1812,7 @@
 				FA82B4EA28FC0F250038E099 /* Marker.swift in Sources */,
 				FA8FC8BB291447B8004AB1BF /* AlertView.swift in Sources */,
 				FA82B51028FC0F260038E099 /* LineChartProtocolsExtensions.swift in Sources */,
+				5F180375291E2BFA00E40E35 /* FirestoreBankService.swift in Sources */,
 				FA82B4B028FC0F240038E099 /* RangedBarChartData.swift in Sources */,
 				FA82B4AA28FC0F240038E099 /* GroupingData.swift in Sources */,
 				FA82B4AB28FC0F240038E099 /* BarChartProtocolsExtensions.swift in Sources */,
@@ -1817,7 +1862,6 @@
 				FA82B4D628FC0F250038E099 /* disableAnimation.swift in Sources */,
 				FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */,
 				FAB1E34628F746AA00667CF2 /* Constants.swift in Sources */,
-				FA92998F290E98BD00033C7E /* FinancialReportViewModel.swift in Sources */,
 				5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */,
 				FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */,
 				FAB1E34128F743E500667CF2 /* Utilities.swift in Sources */,
@@ -1842,6 +1886,7 @@
 				FA929989290E8A9400033C7E /* FinancialReportView.swift in Sources */,
 				FA82B50A28FC0F260038E099 /* MultiLineDataSet.swift in Sources */,
 				5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */,
+				5F18037B291E398A00E40E35 /* Color.swift in Sources */,
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
 				FA82B4CD28FC0F240038E099 /* API.swift in Sources */,
@@ -1878,7 +1923,7 @@
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
-				FAB4651E2916B1DD0092BBFB /* ServiceProtocol.swift in Sources */,
+				FAB4651E2916B1DD0092BBFB /* TransactionServiceHandler.swift in Sources */,
 				FA82B4B528FC0F240038E099 /* GroupedBarDataPoint.swift in Sources */,
 				FA82B4E928FC0F250038E099 /* DiamondShape.swift in Sources */,
 				FA82B4CA28FC0F240038E099 /* PublishableProtocol.swift in Sources */,
@@ -1892,7 +1937,7 @@
 				FA82B4F528FC0F250038E099 /* VerticalGridView.swift in Sources */,
 				FA82B4FC28FC0F260038E099 /* LinearTrendLine.swift in Sources */,
 				5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */,
-				FAB465262916BAA70092BBFB /* FirestoreService.swift in Sources */,
+				FAB465262916BAA70092BBFB /* FirestoreTransactionsService.swift in Sources */,
 				5F56E0912913924E006E8F25 /* SessionService.swift in Sources */,
 				5F56E08829139026006E8F25 /* NavigationBar.swift in Sources */,
 				5F7706D6290A5FD700CA68C4 /* SliderWidgetView.swift in Sources */,
@@ -1901,11 +1946,13 @@
 				FA82B4E728FC0F250038E099 /* ExtraLineShape.swift in Sources */,
 				FA82B4A428FC0F240038E099 /* StackedBarDataSet.swift in Sources */,
 				FA82B50E28FC0F260038E099 /* PointStyle.swift in Sources */,
+				5F18037D291E3B0E00E40E35 /* BankAccountViewModel.swift in Sources */,
 				5F56E08929139026006E8F25 /* PlusMenu.swift in Sources */,
 				5F4B7C0C28F6E30100EFC1F5 /* SignUpView.swift in Sources */,
 				FA82B51828FC0F270038E099 /* RangedLineChart.swift in Sources */,
 				FA82B4EF28FC0F250038E099 /* ChartViewData.swift in Sources */,
 				FA82B50C28FC0F260038E099 /* LineStyle.swift in Sources */,
+				5F180379291E32E400E40E35 /* AddBankAccountViewModel.swift in Sources */,
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				FAB4650929166EEB0092BBFB /* UserDefaults.swift in Sources */,
 				FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */,
@@ -1948,6 +1995,7 @@
 				5FBBC199291A1E840092937B /* View+Skeleton.swift in Sources */,
 				5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */,
 				FA2134882905CF31002EEBF4 /* SplashView.swift in Sources */,
+				5F180373291E2B4200E40E35 /* BanksServiceHandler.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
 				FA82B52028FC0F270038E099 /* FilledTopLine.swift in Sources */,
 				FA82B4B928FC0F240038E099 /* Bars.swift in Sources */,
