@@ -42,7 +42,7 @@ struct BankDetailsView: View {
             Spacer()
         }
         .fullScreenCover(isPresented: $editBankshown) {
-            AddBankAccount(category: $bank)
+            AddBankAccount()
         }
     }
 //    var transactions: some View {

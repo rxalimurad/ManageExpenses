@@ -77,17 +77,11 @@ enum TransactionCategory: String, CaseIterable {
     
     
 }
-
-enum FilterSortingBy: String, CaseIterable {
-    case hightest
-    case lowest
-    case newest
-    case oldest
-}
 enum PlusMenuAction: String, CaseIterable {
     case income
     case expense
     case convert
+    case all
 }
 
 enum FilterDuration: String, CaseIterable {

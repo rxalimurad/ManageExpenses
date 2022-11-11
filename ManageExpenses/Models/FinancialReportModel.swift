@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct FinanicalReportModel {
+struct FinanicalReportModel: Identifiable {
+    var id = UUID()
     var category: SelectDataModel
     var amount: Double
     var total: Double

@@ -11,12 +11,12 @@ import SwiftUI
 
 
 protocol HomeViewModelType {
-    var currentFilter: Int { get }
+    var currentFilter: String { get }
     var transactions: [DatedTransactions] { get }
     var lineChartData: LineChartData { get }
-    var dbHandler: ServiceHandlerType { get }
+    var dbHandler: TransactionServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: ServiceHandlerType)
+    init(dbHandler: TransactionServiceHandlerType)
     func getAccountBalance() -> String
     func getIncome() -> String
     func getExpense() -> String
@@ -24,16 +24,16 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: ObservableObject, HomeViewModelType {
-    @Published internal var currentFilter: Int = 2
+    @Published internal var currentFilter: String = TransactionDuration.thisMonth.rawValue
     @Published internal var isLoading: Bool = true
     @Published internal var options = ["Day","Week","Month", "Year"]
     @Published internal var graphXAxis = ["Hours (24 hour formate)","","", ""]
     var subscriptions =  Set<AnyCancellable>()
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
-    var dbHandler: ServiceHandlerType
+    var dbHandler: TransactionServiceHandlerType
     @Published var state: ServiceAPIState = .na
-    required init(dbHandler: ServiceHandlerType) {
+    required init(dbHandler: TransactionServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         observedFilter()
@@ -51,7 +51,8 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
     
     func observedFilter() {
         $currentFilter
-            .sink { filter in
+            .sink {[weak self] filter in
+                guard let self = self else { return }
                 self.fetchTransactions(filter: filter)
             }
             .store(in: &subscriptions)
@@ -60,7 +61,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
         self.fetchTransactions(filter: currentFilter)
     }
     
-    private func fetchTransactions(filter: Int? = nil) {
+    private func fetchTransactions(filter: String? = nil) {
         self.transactions = []
         state = .inprogress
         isLoading = true
@@ -86,8 +87,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
             .store(in: &subscriptions)
     }
     
-    
-    private func getDataPoint(trans: [Transaction], filter: Int?) -> [LineChartDataPoint] {
+    private func getDataPoint(trans: [Transaction], filter: String?) -> [LineChartDataPoint] {
         var dataPoints = [LineChartDataPoint]()
         let transaction = trans.filter({ $0.amount < 0})
         if let filter = filter, let filterType = TransactionDuration(rawValue: filter) {
@@ -165,13 +165,15 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
                     dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: "\(day)", description: ""))
                 }
                 return dataPoints.sorted(by: { Int($0.xAxisLabel!)! < Int($1.xAxisLabel!)!})
+            default:
+                return []
             }
              
         }
         return dataPoints
     }
     
-    private func getChartData(transaction: [DatedTransactions], filter: Int?) -> LineChartData {
+    private func getChartData(transaction: [DatedTransactions], filter: String?) -> LineChartData {
         let trans = transaction.flatMap { trans in
             return trans.transactions
         }

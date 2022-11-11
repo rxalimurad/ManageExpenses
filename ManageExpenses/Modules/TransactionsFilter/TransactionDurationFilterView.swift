@@ -10,13 +10,14 @@ import SwiftUI
 struct TransactionDurationFilterView: View {
     var safeAreaInsets: EdgeInsets
     @Binding var isfilterSheetShowing: Bool
-    @State var type: String = FilterDuration.thisMonth.rawValue
+    @Binding var type: String
     @State var customDateSeleced = false
-    
     @Binding var dateFrom: Date
     @Binding var dateTo: Date
     @State var showDatePickerFrom = false
     @State var showDatePickerTo = false
+    @ObservedObject var transViewModel: TransactionViewModel
+    
     var body: some View {
         VStack {
             VStack {
@@ -28,10 +29,18 @@ struct TransactionDurationFilterView: View {
                         .foregroundColor(CustomColor.baseDark)
                         .font(.system(size: 16, weight: .semibold))
                     Spacer()
-                    ButtonWidgetView(title: "Reset", style: .secondaryButtonSmall) {
+                    Button {
                         
+                    } label: {
+                        Text("Reset")
+                            .padding([.vertical], 7)
+                            .padding([.horizontal], 15)
+                            .font(.system(size: 14, weight:.medium))
+                            .foregroundColor(CustomColor.primaryColor)
+                            .background(CustomColor.primaryColor.opacity(0.2))
+                            .cornerRadius(16)
                     }
-                    .frame(width: 78, height: 32)
+                    .frame(height: 32)
                 }
                 .isShowing(!customDateSeleced)
                 HStack {
@@ -58,14 +67,19 @@ struct TransactionDurationFilterView: View {
                 
                 ButtonWidgetView(title: customDateSeleced ? "Ok" : "Apply", style: .primaryButton) {
                     if customDateSeleced {
-                        withAnimation {
-                            self.customDateSeleced.toggle()
+                        if customDateSeleced {
+                            customDateSeleced = false
+                            transViewModel.refresh()
+                            isfilterSheetShowing.toggle()
+                        } else {
+                            customDateSeleced = true
                         }
+                        
+                       
                     }
                     else {
-                        withAnimation {
-                            isfilterSheetShowing.toggle()
-                        }
+                        transViewModel.refresh()
+                        isfilterSheetShowing.toggle()
                     }
                     
                 }
@@ -81,14 +95,18 @@ struct TransactionDurationFilterView: View {
                     .font(.system(size: 16, weight: .bold))
                     .isShowing(showDatePickerFrom)
                 DatePicker("", selection: $dateFrom,
-                           displayedComponents: .date)
+                           in: ...dateTo,
+                           displayedComponents: [.date])
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden().isShowing(showDatePickerFrom)
+                .environment(\.timeZone, TimeZone(abbreviation: "UTC")!)
                 Text("To Date")
                     .font(.system(size: 16, weight: .bold))
                     .isShowing(showDatePickerTo)
                 DatePicker("", selection: $dateTo,
-                           displayedComponents: .date)
+                           in: dateFrom...Date(),
+                           displayedComponents: [.date])
+                .environment(\.timeZone, TimeZone(abbreviation: "UTC")!)
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden().isShowing(showDatePickerTo)
                 ButtonWidgetView(title: "Ok", style: .primaryButton) {

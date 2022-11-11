@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import FirebaseFirestore
-class FirestoreService: ServiceHandlerType {
+class FirestoreTransactionsService: TransactionServiceHandlerType {
     func getTotalBalance() -> String {
         "0"
     }
@@ -37,28 +37,18 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
-    
-    func getTransaction(with id: String) -> AnyPublisher<Transaction, NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
-                    .document(id)
-                    .setData([:]){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success((Transaction.new)))
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
-    func getTransactions(duration: TransactionDuration, sortBy: SortedBy) -> AnyPublisher<[Transaction], NetworkingError> {
+
+    func getTransactions(duration: String,
+                         sortBy: SortedBy,
+                         filterBy: PlusMenuAction,
+                         selectedCat: [String],
+                         fromDate: Date,
+                         toDate: Date
+    ) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
-                self.getCollectionPath(for: duration)
+                self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
                     .getDocuments(completion: { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -68,7 +58,22 @@ class FirestoreService: ServiceHandlerType {
                                 for document in documents {
                                     transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
                                 }
-                                promise(.success(transactions))
+                                switch sortBy {
+                                case .newest:
+                                    let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
+                                    promise(.success(sortedTrans))
+                                case .oldest:
+                                    let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
+                                    promise(.success(sortedTrans))
+                                case .lowest:
+                                    let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
+                                    promise(.success(sortedTrans))
+                                case .highest:
+                                    let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
+                                    promise(.success(sortedTrans))
+                                }
+                                
+                                
                             } else {
                                 promise(.failure(NetworkingError("No document found")))
                             }
@@ -107,7 +112,7 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-
+    
     func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
         Deferred {
             Future { promise in
@@ -144,6 +149,8 @@ class FirestoreService: ServiceHandlerType {
             let year = Calendar.current.component(.year, from: Date())
             let thisYear = Calendar.current.date(from: DateComponents(year: year, month: 1, day: 1))  ?? Date()
             return Timestamp(date: thisYear)
+        default:
+            return Timestamp(date: Date())
         }
         
     }
@@ -176,6 +183,66 @@ class FirestoreService: ServiceHandlerType {
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
             .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
         return collection
+    }
+    private func getCollectionPathForTrans(for duration: String,
+                                           filterBy: PlusMenuAction,
+                                           selectedCat: [String],
+                                           fromDate: Date,
+                                           toDate: Date
+    ) -> Query {
+        var collection = self.getCollectionWithFilterBy(filterBy: filterBy)
+        collection = self.getCollectionWithCategory(query: collection, selectedCat: selectedCat)
+        collection = self.getCollectionWithRange(query: collection, duration: duration, fromDate: fromDate, toDate: toDate)
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+        
+        return collection
+    }
+    
+    
+    private func getCollectionWithFilterBy(filterBy: PlusMenuAction) -> Query {
+        let db = Firestore.firestore()
+        if filterBy == .all {
+            return db.collection(Constants.firestoreCollection.transactions)
+        } else {
+            return db.collection(Constants.firestoreCollection.transactions)
+                .whereField("type", isEqualTo: filterBy.rawValue)
+        }
+    }
+    
+    private func getCollectionWithCategory(query: Query,  selectedCat: [String]) -> Query {
+        if selectedCat.isEmpty {
+            return query
+        } else {
+            return query.whereField("category", in: selectedCat)
+        }
+    }
+    
+    private func getCollectionWithRange(query: Query, duration: String, fromDate: Date, toDate: Date) -> Query {
+        if let durationFiler = FilterDuration(rawValue: duration), durationFiler == .custom {
+            return query
+                .whereField("date", isGreaterThanOrEqualTo: fromDate.startOfDay)
+                .whereField("date", isLessThanOrEqualTo: toDate.endOfDay)
+        }
+        return query.whereField("date", isGreaterThanOrEqualTo: getDateForTrans(duration: duration))
+    }
+    
+    private func getDateForTrans(duration: String) -> Timestamp {
+        if let filterDur = FilterDuration(rawValue: duration) {
+            switch filterDur {
+            case .today:
+                return self.getDate(for: .thisDay)
+            case .thisWeek:
+                return self.getDate(for: .thisWeek)
+            case .thisMonth:
+                return self.getDate(for: .thisMonth)
+            case .thisYear:
+                return self.getDate(for: .thisYear)
+            case .custom:
+                return Timestamp(date: Date())
+            }
+        }
+        
+        return Timestamp(date: Date())
     }
     
     

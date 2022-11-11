@@ -34,6 +34,7 @@ enum Constants {
     enum firestoreCollection {
         static let users = "Users"
         static let transactions = "Transactions"
+        static let banks = "Banks"
     }
     
     enum animationFile {

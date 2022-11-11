@@ -9,9 +9,9 @@ import Combine
 import SwiftUI
 
 protocol AddExpenseIncomeViewModelType {
-    var service: ServiceHandlerType { get }
+    var service: TransactionServiceHandlerType { get }
     var serviceStatus: ServiceAPIState { get }
-    init(service: ServiceHandlerType)
+    init(service: TransactionServiceHandlerType)
     func saveTransaction(transaction: Transaction)
     func deleteTransaction(id: String)
     
@@ -19,13 +19,13 @@ protocol AddExpenseIncomeViewModelType {
 
 
 class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType {
-    var service: ServiceHandlerType
+    var service: TransactionServiceHandlerType
     var subscription = Set<AnyCancellable>()
     @Published var serviceStatus: ServiceAPIState = .na
     @Published var categoryData = [SelectDataModel]()
-    required init(service: ServiceHandlerType) {
+    required init(service: TransactionServiceHandlerType) {
         self.service = service
-        self.populateCategories()
+        categoryData = Utilities.getCategories()
     }
     
     func saveTransaction(transaction: Transaction) {
@@ -42,20 +42,4 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
         
     }
     
-    
-    private func populateCategories() {
-        var casesArr = TransactionCategory.allCases
-        casesArr.removeAll(where: {$0 == .transfer})
-        for category in casesArr {
-            if TransactionCategory.eatingout == category {
-                self.categoryData.append(SelectDataModel(id: category.rawValue, desc: "Eating Out", Image: Image("ic_\(category.rawValue.lowercased())"), color: category.getColor()))
-            } else {
-                self.categoryData.append(SelectDataModel(id: category.rawValue, desc: category.rawValue.capitalized, Image: Image("ic_\(category.rawValue.lowercased())"), color: category.getColor()))
-            }
-            
-        }
-        
-        
-        
-    }
 }

@@ -10,14 +10,11 @@ import SwiftUI
 struct TransactionFilterView: View {
     var safeAreaInsets: EdgeInsets
     @Binding var isfilterSheetShowing: Bool
-    @State var type: String = PlusMenuAction.expense.rawValue
-    @State var sortBy: String = FilterSortingBy.newest.rawValue
-    @State var showCateogory = false
-    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
-                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
-                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
-                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
-                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
+    @Binding var sortedBy: String
+    @Binding var filterBy: String
+    @ObservedObject var transViewModel: TransactionViewModel
+    @State private var showCateogory = false
+    @Binding var categoryData: [SelectDataModel]
     
     var body: some View {
         VStack {
@@ -26,10 +23,23 @@ struct TransactionFilterView: View {
                     .foregroundColor(CustomColor.baseDark)
                     .font(.system(size: 16, weight: .semibold))
                 Spacer()
-                ButtonWidgetView(title: "Reset", style: .secondaryButtonSmall) {
+                
+                Button {
+                    sortedBy = SortedBy.newest.rawValue
+                    filterBy = PlusMenuAction.all.rawValue
+                    categoryData = Utilities.getCategories()
                     
+                } label: {
+                    Text("Reset")
+                        .padding([.vertical], 7)
+                        .padding([.horizontal], 15)
+                        .font(.system(size: 14, weight:.medium))
+                        .foregroundColor(CustomColor.primaryColor)
+                        .background(CustomColor.primaryColor.opacity(0.2))
+                        .cornerRadius(16)
                 }
-                .frame(width: 78, height: 32)
+                .frame(height: 32)
+                
             }
             HStack {
                 Text("Filter By")
@@ -40,7 +50,7 @@ struct TransactionFilterView: View {
             }
             .padding([.top], 22)
             
-            SingleFilterSelectionView(selectedOpts: $type, options: PlusMenuAction.allCases.map({$0.rawValue}))
+            SingleFilterSelectionView(selectedOpts: $filterBy, options: PlusMenuAction.allCases.map({$0.rawValue}))
                 .padding([.top], 16)
             HStack {
                 Text("Sort By")
@@ -50,7 +60,7 @@ struct TransactionFilterView: View {
                 
             }
             .padding([.top], 16)
-            SingleFilterSelectionView(selectedOpts: $sortBy, options: FilterSortingBy.allCases.map({$0.rawValue}))
+            SingleFilterSelectionView(selectedOpts: $sortedBy, options: SortedBy.allCases.map({$0.rawValue}))
                 .padding([.top], 16)
             
             HStack {
@@ -83,6 +93,7 @@ struct TransactionFilterView: View {
             
             ButtonWidgetView(title: "Apply", style: .primaryButton) {
                 isfilterSheetShowing.toggle()
+                transViewModel.fetchTransactions()
             }
             .padding([.top], 34)
             .padding([.bottom], 16)
@@ -93,39 +104,44 @@ struct TransactionFilterView: View {
     
     @ViewBuilder func getCategorySelectionView() -> some View {
         if showCateogory {
-                VStack {
-                    ForEach(0 ..< categoryData.count) { index in
-                        Button {
-                            withAnimation {
-                                categoryData[index].isSelected.toggle()
+            VStack {
+                ScrollView(.vertical) {
+                    VStack {
+                        ForEach(0 ..< categoryData.count) { index in
+                            Button {
+                                withAnimation {
+                                    categoryData[index].isSelected.toggle()
+                                }
+                            } label: {
+                                SelectionCell(title: categoryData[index].desc, color: categoryData[index].color, img: categoryData[index].Image, isSelected: categoryData[index].isSelected)
+                                    .padding([.horizontal], 0)
                             }
-                        } label: {
-                            SelectionCell(title: categoryData[index].desc, color: categoryData[index].color, img: categoryData[index].Image, isSelected: categoryData[index].isSelected)
-                                .padding([.horizontal], 16)
-                        }
 
+                        }
                     }
                     
-                    ButtonWidgetView(title: "Ok", style: .primaryButton) {
-                        withAnimation {
-                            showCateogory.toggle()
-                        }
-                    }
-                    .padding([.top], 30)
+                    .transition(.move(edge: .bottom))
+                    .padding([.vertical], 20)
+                    .padding([.horizontal], 10)
+                    
                 }
-                
-                .transition(.move(edge: .bottom))
-                .padding([.all], 20)
-                .frame(maxWidth: .infinity)
-                .background(ColoredView(color: .gray.opacity(0.15)))
-                .background(ColoredView(color: CustomColor.baseLight))
-                .cornerRadius(15)
+                ButtonWidgetView(title: "Ok", style: .primaryButton) {
+                    withAnimation {
+                        showCateogory.toggle()
+                    }
+                }
+                .padding([.top], 30)
+            }
+            .frame(maxWidth: .infinity)
+            .background(ColoredView(color: .gray.opacity(0.15)))
+            .background(ColoredView(color: CustomColor.baseLight))
+            .cornerRadius(15)
         }
     }
 }
 
-struct TransactionFilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionFilterView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), isfilterSheetShowing: .constant(true))
-    }
-}
+//struct TransactionFilterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TransactionFilterView(safeAreaInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), isfilterSheetShowing: .constant(true))
+//    }
+//}

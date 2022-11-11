@@ -151,6 +151,8 @@ struct TransactionDetailView: View {
             return  CustomColor.red
         case .convert:
             return  CustomColor.blue
+        case .all:
+                return .black
         }
     }
     

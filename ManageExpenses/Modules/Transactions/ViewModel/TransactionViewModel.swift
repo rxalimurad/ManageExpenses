@@ -8,89 +8,163 @@
 import Foundation
 import Combine
 
-enum SortedBy {
+enum SortedBy: String, CaseIterable {
     case newest
     case oldest
     case lowest
     case highest
 }
 
-enum TransFilters {
-    case thisDay
-    case thisWeek
-    case thisMonth
-    case thisYear
-    case customRange
-}
-
 protocol TransactionViewModelType {
-    var currentFilter: TransFilters { get }
-    var sortedBy: SortedBy { get }
+    var sortedBy: String { get }
+    var filterBy: String { get }
     var transactions: [Transaction] { get }
-    var dbHandler: ServiceHandlerType { get }
+    var pieChartPoints: [PieChartDataPoint] { get }
+    var financialReportList: [FinanicalReportModel] { get}
+    var dbHandler: TransactionServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: ServiceHandlerType)
+    init(dbHandler: TransactionServiceHandlerType)
 }
 
 
 
 class TransactionViewModel: ObservableObject, TransactionViewModelType {
+    
     //MARK: - States for Views
     @Published var isDurationFilterSheetShowing = false
     @Published var isfilterSheetShowing = false
     @Published var isfinancialReportShowing = false
     @Published var customDateSeleced = false
+    @Published var transDuration = FilterDuration.thisMonth.rawValue
     @Published var dateTo = Date()
     @Published var dateFrom = Date()
     @Published var selectedTrans: Transaction?
     var subscriptions =  Set<AnyCancellable>()
     //MARK: - Protocol Implementation
-    @Published var currentFilter: TransFilters = .thisMonth
-    @Published var sortedBy: SortedBy = .newest
+    @Published var sortedBy: String = SortedBy.newest.rawValue
+    @Published var filterBy: String = PlusMenuAction.all.rawValue
     @Published var transactions: [Transaction] = []
-    var dbHandler: ServiceHandlerType
+    var dbHandler: TransactionServiceHandlerType
     @Published var state: ServiceAPIState = .na
-    
-    required init(dbHandler: ServiceHandlerType) {
+    @Published var categoryData = Utilities.getCategories()
+    var selectedCategoties: [String] = []
+    @Published var pieChartPoints: [PieChartDataPoint] = []
+    @Published var financialReportList: [FinanicalReportModel] = []
+    @Published var selectedTab = "0"
+    required init(dbHandler: TransactionServiceHandlerType) {
         self.dbHandler = dbHandler
-        self.fetchTransactions(filter: currentFilter, sortedBy: sortedBy)
-        self.observedFilter()
+        self.fetchTransactions()
+        self.observedCategory()
     }
     
     //MARK: - Methods
     
-    func observedFilter() {
-        $currentFilter
-            .sink { filter in
-                self.fetchTransactions(filter: filter, sortedBy: self.sortedBy)
-            }
-            .store(in: &subscriptions)
-    }
     func refresh() {
-        self.fetchTransactions(filter: currentFilter, sortedBy: sortedBy)
+        self.fetchTransactions()
     }
     
-    private func fetchTransactions(filter: TransFilters, sortedBy: SortedBy) {
+    func fetchTransactions() {
         self.transactions = []
         state = .inprogress
-        self.dbHandler.getTransactions(duration: filter, sortBy: sortedBy)
-            .sink { error in
-                self.state = .successful
-                if case Subscribers.Completion.failure() = error {
-                    self.transactions = []
-                }
-            } receiveValue: { [weal self] transactions in
-                guard let self = self else { return }
-                if filter == self.currentFilter {
-                    self.transactions = transactions
-                    self.state = .successful
-                }
+        self.dbHandler.getTransactions(
+            duration: transDuration,
+            sortBy: SortedBy(rawValue: sortedBy) ?? .newest,
+            filterBy: (PlusMenuAction(rawValue: filterBy) ?? .all),
+            selectedCat: selectedCategoties,
+            fromDate: dateFrom,
+            toDate: dateTo
+        )
+        .sink { error in
+            self.state = .successful
+            if case Subscribers.Completion.failure(_) = error {
+                self.transactions = []
+                self.financialReportList = []
+                self.pieChartPoints = []
             }
-            .store(in: &subscriptions)
-
+        } receiveValue: { [weak self] transactions in
+            guard let self = self else { return }
+            self.transactions = transactions
+            self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData)
+            self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData)
+        }
+        .store(in: &subscriptions)
+        
     }
     
+    private func observedCategory() {
+        $categoryData
+            .sink { [weak self]  selectDataList in
+                self?.selectedCategoties = selectDataList.filter({ $0.isSelected }).map({$0.desc})
+            }
+            .store(in: &subscriptions)
+    }
     
+    internal func resetFilters() {
+        sortedBy = SortedBy.newest.rawValue
+        filterBy = PlusMenuAction.all.rawValue
+        selectedCategoties = []
+    }
+    internal func resetDurationFilters() {
+        transDuration = FilterDuration.thisMonth.rawValue
+        dateTo = Date()
+        dateFrom = Date()
+    }
+    
+    //MARK: - Methods for Financial Chart
+    private func getFinacialChartPoints(transactions: [Transaction],categoryData: [SelectDataModel]) -> [PieChartDataPoint] {
+        let list = getFinanicalChartData(transactions:transactions, categoryData: categoryData)
+        var points = [PieChartDataPoint]()
+        for data in list {
+            points.append(PieChartDataPoint(value: data.amount, description: "", colour: data.category.color))
+        }
+        return points
+      
+    }
+    
+    private func getFinanicalChartData(transactions: [Transaction], categoryData: [SelectDataModel]) -> [FinanicalReportModel] {
+        var total = 1.0
+        if selectedTab == "0" {
+            total = getTotalExpense(trans: transactions)
+        } else {
+            total = getTotalIncome(trans: transactions)
+        }
+        
+        var reportModel = categoryData.map({
+            return FinanicalReportModel(category: $0, amount: 0, total: total)
+        })
+        for i in 0 ..< transactions.count {
+            if transactions[i].amount < 0 {
+                for j in 0 ..< reportModel.count {
+                    if reportModel[j].category.desc == transactions[i].name {
+                        reportModel[j].amount += transactions[i].amount
+                        break
+                    }
+                }
+            }
+        }
+        return reportModel.sorted(by: {abs($0.amount) > abs($1.amount) }).filter({ $0.amount != 0.0})
+    }
+    
+    private func getTotalIncome(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount > 0 {
+            total += abs(t.amount)
+            }
+        }
+        return total
+    }
+    private func getTotalExpense(trans: [Transaction]) -> Double {
+        var total = 0.0
+        
+        for t in trans {
+            if t.amount < 0 {
+            total += abs(t.amount)
+            }
+        }
+        return total
+    }
     
     
 }
