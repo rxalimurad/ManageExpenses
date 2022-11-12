@@ -12,18 +12,22 @@ import SwiftUI
 
 protocol HomeViewModelType {
     var currentFilter: String { get }
+    var totalAmount: String { get }
+    var expense: String { get }
+    var income: String { get }
     var transactions: [DatedTransactions] { get }
     var lineChartData: LineChartData { get }
     var dbHandler: ServiceHandlerType { get }
     var state: ServiceAPIState { get }
     init(dbHandler: ServiceHandlerType)
-    func getAccountBalance() -> String
-    func getIncome() -> String
-    func getExpense() -> String
-    
 }
 
-class HomeViewModel: ObservableObject, HomeViewModelType, DeleteTransaction {
+class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
+    @Published var totalAmount: String = "0"
+    
+    @Published internal var expense: String = UserDefaults.standard.currency + "0"
+    @Published internal var income: String = UserDefaults.standard.currency + "0"
+    
     @Published internal var currentFilter: String = TransactionDuration.thisMonth.rawValue
     @Published internal var isLoading: Bool = true
     @Published internal var options = ["Day","Week","Month", "Year"]
@@ -38,16 +42,6 @@ class HomeViewModel: ObservableObject, HomeViewModelType, DeleteTransaction {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         observedFilter()
-    }
-    
-    func getAccountBalance() -> String {
-        return dbHandler.getTotalBalance()
-    }
-    func getIncome() -> String {
-        return dbHandler.getIncome()
-    }
-    func getExpense() -> String {
-        return dbHandler.getExpense()
     }
     
     func observedFilter() {
@@ -81,17 +75,27 @@ class HomeViewModel: ObservableObject, HomeViewModelType, DeleteTransaction {
                 if case Subscribers.Completion.failure(_) = error {
                     self.transactions = []
                     self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+                    self.income = UserDefaults.standard.currency + "0"
+                    self.expense = UserDefaults.standard.currency + "0"
+                    self.totalAmount = UserDefaults.standard.currency + "0"
                     self.isLoading = false
                 }
-            }, receiveValue: {[weak self] transactions in
+            }, receiveValue: {[weak self] (transactions, income, expense) in
                 guard let self = self else { return }
                 if filter == self.currentFilter {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0, execute: {
                         self.isLoading = false
                         self.transactions = transactions
+                        self.income = income
+                        self.expense = expense
+                    var bankBalance: Double = 0
+                    for bank in DataCache.shared.banks {
+                        bankBalance += Double(bank.balance ?? "0")!
+                    }
+                    
+                        self.totalAmount = UserDefaults.standard.currency + " \(bankBalance)"
                         self.lineChartData = self.getChartData(transaction: transactions, filter: filter)
                         self.state = .successful
-                    })
+                 
                 }
             })
             .store(in: &subscriptions)

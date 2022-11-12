@@ -96,7 +96,7 @@ struct HomeView: View {
             }
             
             .fullScreenCover(item: $selectedTrans, content: { trans in
-                TransactionDetailView(transaction: trans, viewModel: viewModel)
+                TransactionDetailView(transaction: trans, updateTransaction: viewModel)
             })
         }
     }
@@ -164,7 +164,7 @@ struct HomeView: View {
                     Text("Account Balance")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(CustomColor.baseLight_20)
-                    Text(viewModel.getAccountBalance())
+                    Text(viewModel.totalAmount)
                         .font(.system(size: 40, weight: .semibold))
                         .foregroundColor(CustomColor.baseDark_75)
                 }
@@ -200,7 +200,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Income")
                         .font(.system(size: 14, weight: .medium))
-                    Text(viewModel.getIncome())
+                    Text(viewModel.income)
                         .font(.system(size: 22, weight: .semibold))
                 }
                 .foregroundColor(CustomColor.baseLight_80)
@@ -215,7 +215,7 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Expenses")
                         .font(.system(size: 14, weight: .medium))
-                    Text(viewModel.getExpense())
+                    Text(viewModel.expense)
                         .font(.system(size: 22, weight: .semibold))
                 }.foregroundColor(CustomColor.baseLight_80)
             }

@@ -23,6 +23,8 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
     var subscription = Set<AnyCancellable>()
     @Published var serviceStatus: ServiceAPIState = .na
     @Published var categoryData = [SelectDataModel]()
+    @Published var fromWallet = DataCache.shared.banks
+    @Published var toWallet = DataCache.shared.banks
     required init(service: ServiceHandlerType) {
         self.service = service
         categoryData = Utilities.getCategories()
@@ -37,7 +39,15 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
             }.store(in: &subscription)
         
     }
-    
+    func transfer(transaction: Transaction) {
+        service.addTransfer(transaction: transaction)
+            .sink { error in
+                print(error)
+            } receiveValue: { _ in
+                
+            }.store(in: &subscription)
+        
+    }
     func deleteTransaction(id: String) {
         
     }

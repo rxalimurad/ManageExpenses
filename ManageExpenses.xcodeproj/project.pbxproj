@@ -70,8 +70,6 @@
 		FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869928F9ED6D00108E3A /* LoginView.swift */; };
 		FA7F869D28F9F03A00108E3A /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */; };
 		FA7F869F28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869E28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift */; };
-		FA7F86A528FA69AF00108E3A /* SetupAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */; };
-		FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */; };
 		FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FB34728FB08D800D0097D /* HomeView.swift */; };
 		FA82B3AB28FC01D00038E099 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B3AA28FC01D00038E099 /* PieChartView.swift */; };
 		FA82B3AD28FC01EC0038E099 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B3AC28FC01EC0038E099 /* PieSliceView.swift */; };
@@ -318,8 +316,6 @@
 		FA7F869928F9ED6D00108E3A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		FA7F869E28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordConfirmationView.swift; sourceTree = "<group>"; };
-		FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAccountView.swift; sourceTree = "<group>"; };
-		FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBankView.swift; sourceTree = "<group>"; };
 		FA7FB34728FB08D800D0097D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FA82B3AA28FC01D00038E099 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		FA82B3AC28FC01EC0038E099 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
@@ -807,15 +803,6 @@
 				FAA405BB291562E1007B3C07 /* Service */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		FA7F86A228FA695200108E3A /* SetupAccount */ = {
-			isa = PBXGroup;
-			children = (
-				FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */,
-				FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */,
-			);
-			path = SetupAccount;
 			sourceTree = "<group>";
 		};
 		FA7FB34628FB08BE00D0097D /* Home */ = {
@@ -1441,7 +1428,6 @@
 				FA7F869828F9ED3100108E3A /* Login */,
 				FAB4650A291684440092BBFB /* ForgotPassword */,
 				5F56E08029139025006E8F25 /* Base */,
-				FA7F86A228FA695200108E3A /* SetupAccount */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
 				5F18036F291D237D00E40E35 /* FinancialReport */,
@@ -1860,10 +1846,8 @@
 				FA82B4C728FC0F240038E099 /* ChartMetadata.swift in Sources */,
 				FA8BC15A290EF8E40025BE0A /* BankAccountsView.swift in Sources */,
 				FAB4650F291687C30092BBFB /* ForgotPasswordViewModel.swift in Sources */,
-				FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */,
 				FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */,
 				FA82B4BE28FC0F240038E099 /* BarLayout.swift in Sources */,
-				FA7F86A528FA69AF00108E3A /* SetupAccountView.swift in Sources */,
 				FAB465232916B3F90092BBFB /* Transaction.swift in Sources */,
 				FA82B4C828FC0F240038E099 /* ColourStyle.swift in Sources */,
 				FA82B51B28FC0F270038E099 /* PointsSubView.swift in Sources */,

@@ -20,7 +20,7 @@ struct TransactionTabView: View {
             transactions
         }
         .fullScreenCover(item: $viewModel.selectedTrans, content: { trans in
-            TransactionDetailView(transaction: trans, viewModel: viewModel)
+            TransactionDetailView(transaction: trans, updateTransaction: viewModel)
         })
         .fullScreenCover(isPresented: $viewModel.isfinancialReportShowing) {
             FinancialReportView(safeAreaInsets: safeAreaInsets, viewModel: viewModel)

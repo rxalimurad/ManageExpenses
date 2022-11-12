@@ -7,12 +7,12 @@
 
 import Foundation
 
-class DataCache {
+class DataCache{
     private init() {}
     static let shared = DataCache()
     var banks = [SelectDataModel]()
     
-    
+   
     
     func clear() {
         banks = [SelectDataModel]()

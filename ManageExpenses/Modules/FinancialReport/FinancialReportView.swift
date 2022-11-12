@@ -28,7 +28,7 @@ struct FinancialReportView: View {
             
         }
         .fullScreenCover(item: $viewModel.selectedTrans, content: { trans in
-            TransactionDetailView(transaction: trans, viewModel: viewModel)
+            TransactionDetailView(transaction: trans, updateTransaction: viewModel)
         })
         
         .fullScreenCover(isPresented: $viewModel.isDurationFilterSheetShowing) {

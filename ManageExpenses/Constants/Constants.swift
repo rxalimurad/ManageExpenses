@@ -35,6 +35,7 @@ enum Constants {
         static let users = "Users"
         static let transactions = "Transactions"
         static let banks = "Banks"
+        static let summary = "Summary"
     }
     
     enum animationFile {

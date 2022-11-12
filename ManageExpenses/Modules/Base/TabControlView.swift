@@ -82,11 +82,22 @@ struct TabControlView: View {
             
         } content: {
             if let newEntryType = newEntryType {
-                AddExpenseIncomeView(newEntryType: newEntryType, homeViewModel: homeViewModel, transViewModel: transViewModel)
+               AddExpenseIncomeView(newEntryType: newEntryType, updateViewModel: getUpdateVM())
+                }
             }
         }
-        
+    
+    private func getUpdateVM() -> UpdateTransaction? {
+        var updateVM: UpdateTransaction?
+        if viewRouter.currentPage == .home {
+            updateVM = homeViewModel
+        } else if viewRouter.currentPage == .tranactions {
+            updateVM = transViewModel  as? UpdateTransaction
+        }
+        return updateVM
     }
+        
+   
     
     @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
         if showPopUp {

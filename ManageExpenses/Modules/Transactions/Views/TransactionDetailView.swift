@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol DeleteTransaction {
+protocol UpdateTransaction: AnyObject {
     func deleteTransaction(id: String, completion: @escaping((Bool) -> Void))
     func refresh()
 }
@@ -15,7 +15,7 @@ protocol DeleteTransaction {
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var transaction: Transaction
-    var viewModel: DeleteTransaction
+    var updateTransaction: UpdateTransaction
     @State var attachmentImage = Image("")
     var body: some View {
         GeometryReader { geometry in
@@ -24,9 +24,9 @@ struct TransactionDetailView: View {
                         NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
                             mode.wrappedValue.dismiss()
                         }, rightBtnImage: .Custom.delete) {
-                            viewModel.deleteTransaction(id: transaction.id) { success in
+                            updateTransaction.deleteTransaction(id: transaction.id) { success in
                                 if success {
-                                    viewModel.refresh()
+                                    updateTransaction.refresh()
                                     mode.wrappedValue.dismiss()
                                 }
                                 

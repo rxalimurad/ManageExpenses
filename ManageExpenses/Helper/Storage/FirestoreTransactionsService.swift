@@ -10,38 +10,105 @@ import Combine
 import FirebaseFirestore
 class FirestoreService: ServiceHandlerType {
     
-    func getTotalBalance() -> String {
-        "0"
-    }
-    
-    func getExpense() -> String {
-        "0"
-    }
-    
-    func getIncome() -> String {
-        "0"
+    func addTransfer(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                let batch = db.batch()
+                let incomeTrans = Transaction(id: "\(UUID())", amount: transaction.amount, category: TransactionCategory.transfer.rawValue, desc: "Transfer from \(transaction.fromAcc)", name: "Transfer", wallet: transaction.toAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
+                
+                
+                
+                let expenseTrans = Transaction(id: "\(UUID())", amount: -transaction.amount, category: TransactionCategory.transfer.rawValue, desc: "Transfer to \(transaction.toAcc)", name: "Transfer", wallet: transaction.fromAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
+                
+                //add Transaction
+                let transRef = db.collection(Constants.firestoreCollection.transactions)
+                    .document(incomeTrans.id)
+                batch.setData(incomeTrans.toFireStoreData(), forDocument: transRef)
+                let transRef2 = db.collection(Constants.firestoreCollection.transactions)
+                    .document(expenseTrans.id)
+                batch.setData(expenseTrans.toFireStoreData(), forDocument: transRef2)
+                // Transfer Amount from Banks
+                var fromBankDoc = ""
+                var toBankDoc = ""
+                for (index, _) in DataCache.shared.banks.enumerated() {
+                    if DataCache.shared.banks[index].desc == incomeTrans.wallet {
+                        toBankDoc = DataCache.shared.banks[index].id
+                        DataCache.shared.banks[index].balance = "\(incomeTrans.amount + Double(DataCache.shared.banks[index].balance!)!)"
+                      
+                    }
+                    if DataCache.shared.banks[index].desc == expenseTrans.wallet {
+                        fromBankDoc = DataCache.shared.banks[index].id
+                        DataCache.shared.banks[index].balance = "\(expenseTrans.amount + Double(DataCache.shared.banks[index].balance!)!)"
+                    }
+                }
+                let banksRef = db.collection(Constants.firestoreCollection.banks)
+                    .document(fromBankDoc)
+                let banksRef2 = db.collection(Constants.firestoreCollection.banks)
+                    .document(fromBankDoc)
+                batch.deleteDocument(banksRef)
+                batch.deleteDocument(banksRef2)
+                
+                if let bank = DataCache.shared.banks.first(where: { $0.id == fromBankDoc }) {
+                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
+                }
+                if let bank = DataCache.shared.banks.first(where: { $0.id == toBankDoc }) {
+                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
+                }
+                batch.commit() { error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        promise(.success(()))
+                    }
+                }
+            }
+            
+        }
+        .eraseToAnyPublisher()
     }
     
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
+                let batch = db.batch()
+                //add Transaction
+                let transRef = db.collection(Constants.firestoreCollection.transactions)
                     .document(transaction.id)
-                    .setData(transaction.toFireStoreData()){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(()))
-                        }
+                batch.setData(transaction.toFireStoreData(), forDocument: transRef)
+                // Delete old bank and add with newValue
+                
+                var bankDoc = ""
+                for (index, _) in DataCache.shared.banks.enumerated() {
+                    if DataCache.shared.banks[index].desc == transaction.wallet {
+                        bankDoc = DataCache.shared.banks[index].id
+                        DataCache.shared.banks[index].balance = "\(transaction.amount + Double(DataCache.shared.banks[index].balance!)!)"
+                        break
                     }
+                }
+                
+                let banksRef = db.collection(Constants.firestoreCollection.banks)
+                    .document(bankDoc)
+                batch.deleteDocument(banksRef)
+                
+                if let bank = DataCache.shared.banks.first(where: { $0.id == bankDoc }) {
+                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
+                }
+                batch.commit() { error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        promise(.success(()))
+                    }
+                }
+                 
             }
         }.eraseToAnyPublisher()
     }
     func delteTransaction(id: String) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future {[weak self] promise in
-                guard let self = self else { return }
                 Firestore.firestore().collection(Constants.firestoreCollection.transactions)
                     .document(id)
                     .delete { error in
@@ -102,7 +169,7 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-    func getTransactions(for duration: TransactionDuration) -> AnyPublisher<[DatedTransactions], NetworkingError> {
+    func getTransactions(for duration: TransactionDuration) -> AnyPublisher<([DatedTransactions], String, String), NetworkingError> {
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
@@ -113,10 +180,19 @@ class FirestoreService: ServiceHandlerType {
                         } else {
                             if let documents = snapshot?.documents, !documents.isEmpty {
                                 var transactions = [Transaction]()
+                                var income = 0.0
+                                var expense = 0.0
                                 for document in documents {
-                                    transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
+                                    let trans = Transaction.new.fromFireStoreData(data: document.data())
+                                    if trans.amount > 0 {
+                                        income += trans.amount
+                                    }
+                                    if trans.amount < 0 {
+                                        expense += trans.amount
+                                    }
+                                    transactions.append(trans)
                                 }
-                                promise(.success(self.proccessTransactions(transactions)))
+                                promise(.success((self.proccessTransactions(transactions), "\(income)", "\(expense)")))
                             } else {
                                 promise(.failure(NetworkingError("No document found")))
                             }

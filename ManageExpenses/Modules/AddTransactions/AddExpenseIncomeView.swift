@@ -32,15 +32,10 @@ struct AddExpenseIncomeView: View {
     @State var isTransactionAdded = false
     @State private var phase = 0.0
     
-    @State var walletData = [SelectDataModel(id: "1", desc: "Pay Pal", balance: "23.3",color: .red),
-                             SelectDataModel(id: "2", desc: "Bank Al Habib", balance: "32.3", color: .green),
-                             SelectDataModel(id: "3", desc: "SadaaPay", balance: "23.3",color: .yellow),
-    ]
-    
+    @State var walletData = DataCache.shared.banks
     
     var newEntryType: PlusMenuAction
-    @ObservedObject var homeViewModel: HomeViewModel
-    @ObservedObject var transViewModel: TransactionViewModel
+    weak var updateViewModel: UpdateTransaction?
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -110,9 +105,9 @@ struct AddExpenseIncomeView: View {
             
             ZStack(alignment: .center) {
                 HStack(alignment: .center, spacing: 16) {
-                    SelectorWidgetView(hint: "From", text: $fromWallet, data: $viewModel.categoryData)
+                    SelectorWidgetView(hint: "From", text: $fromWallet, data: $viewModel.fromWallet)
                     
-                    SelectorWidgetView(hint: "To", text: $toWallet, data: $viewModel.categoryData)
+                    SelectorWidgetView(hint: "To", text: $toWallet, data: $viewModel.toWallet)
                     
                 }
                 Image.Custom.transferSign
@@ -122,52 +117,21 @@ struct AddExpenseIncomeView: View {
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
                 .padding([.top, .bottom], 16)
-//            if selectedImage == nil {
-//                HStack(alignment: .center) {
-//                    HStack(spacing: 10) {
-//                        Image.Custom.attachment
-//                        Text("Add Attachment")
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                    .padding([.vertical], 16)
-//
-//                }.onTapGesture {
-//                    withAnimation {
-//                        isAtchmntViewShown.toggle()
-//                    }
-//                }.background(
-//                    Rectangle()
-//                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
-//                        .foregroundColor(CustomColor.baseLight_20)
-//                        .cornerRadius(5)
-//                )
-//            } else {
-//                HStack {
-//                    ZStack(alignment: .topTrailing) {
-//                        selectedImage?
-//                            .resizable()
-//                            .frame(width: 100, height: 100)
-//                            .cornerRadius(10)
-//                        Button {
-//                            withAnimation {
-//                                selectedImage = nil
-//                            }
-//                        } label: {
-//                            Image.Custom.grayCross
-//                                .resizable()
-//                                .frame(width: 24, height: 24)
-//                                .offset(x: 12, y: -12)
-//                        }
-//
-//
-//                    }
-//                    Spacer()
-//                }
-//            }
-            
-            
+
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                
+                viewModel.transfer(transaction: Transaction(
+                    id: "\(UUID())",
+                    amount: (Double(amount) ?? 0.0),
+                    category: category.desc,
+                    desc: description,
+                    name: category.desc,
+                    wallet: wallet.desc,
+                    attachment: "",
+                    type: newEntryType.rawValue,
+                    fromAcc: toWallet.desc,
+                    toAcc: toWallet.desc,
+                    date: Date().secondsSince1970
+                ))
                 isTransactionAdded.toggle()
             }
             .padding([.top], 40)
@@ -231,8 +195,7 @@ struct AddExpenseIncomeView: View {
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
-                    homeViewModel.refresh()
-                    transViewModel.refresh()
+                    updateViewModel?.refresh()
                     mode.wrappedValue.dismiss()
                 }
             })
@@ -316,10 +279,4 @@ struct AddExpenseIncomeView: View {
     
     
 }
-
-//struct AddExpenseIncomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddExpenseIncomeView(newEntryType: .income, homeViewModel: <#HomeViewModel#>)
-//    }
-//}
 

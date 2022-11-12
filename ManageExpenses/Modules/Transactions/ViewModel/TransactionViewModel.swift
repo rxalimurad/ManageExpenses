@@ -29,7 +29,7 @@ protocol TransactionViewModelType {
 
 
 
-class TransactionViewModel: ObservableObject, TransactionViewModelType, DeleteTransaction {
+class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTransaction {
     
     //MARK: - States for Views
     @Published var isDurationFilterSheetShowing = false
