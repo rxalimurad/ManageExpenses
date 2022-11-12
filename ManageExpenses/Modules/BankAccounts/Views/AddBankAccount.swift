@@ -12,7 +12,7 @@ struct AddBankAccount: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     // Mark: - View Model
-    @ObservedObject var viewModel = AddBankAccountViewModel(service: FirestoreBankService())
+    @ObservedObject var viewModel = AddBankAccountViewModel(service: FirestoreService())
     
     
     var body: some View {

@@ -40,7 +40,7 @@ class SessionService:ObservableObject, SessionServiceType {
     func login(with userDetails: UserDetailsModel) {
         self.userDetails = SessionUserDetails(name: userDetails.name, email: userDetails.email)
         UserDefaults.standard.currentUser = self.userDetails
-        state = .loggedIn
+        self.state = .loggedIn
     }
     
     func checkForUser() {

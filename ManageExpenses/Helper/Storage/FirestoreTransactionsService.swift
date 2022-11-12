@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 import FirebaseFirestore
-class FirestoreTransactionsService: TransactionServiceHandlerType {
+class FirestoreService: ServiceHandlerType {
+    
     func getTotalBalance() -> String {
         "0"
     }
@@ -28,6 +29,22 @@ class FirestoreTransactionsService: TransactionServiceHandlerType {
                 db.collection(Constants.firestoreCollection.transactions)
                     .document(transaction.id)
                     .setData(transaction.toFireStoreData()){ error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    func delteTransaction(id: String) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future {[weak self] promise in
+                guard let self = self else { return }
+                Firestore.firestore().collection(Constants.firestoreCollection.transactions)
+                    .document(id)
+                    .delete { error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
                         } else {
@@ -129,6 +146,52 @@ class FirestoreTransactionsService: TransactionServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.banks)
+                    .getDocuments { snapshot, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let documents = snapshot?.documents, !documents.isEmpty {
+                                var banks = [SelectDataModel]()
+                                for document in documents {
+                                    banks.append(SelectDataModel.new.fromFireStoreData(data: document.data()))
+                                }
+                                promise(.success(banks))
+                                
+                            } else {
+                                promise(.failure(NetworkingError("No Bank Found")))
+                            }
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.banks)
+                    .document(bank.id)
+                    .setData(bank.toFireStoreData()){ error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    
+    
+    
     //MARK: - Private Helper methods
     
     private func getDate(for duration: TransactionDuration) -> Timestamp {

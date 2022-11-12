@@ -8,7 +8,7 @@
 import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
-    
+    @ObservedObject var rounter: TabControlViewRouter
     var safeAreaInsets: EdgeInsets
     
     @State private var isRecentTransactionShowing = true
@@ -68,7 +68,7 @@ struct HomeView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Spacer()
                                 Button {
-                                    
+                                    rounter.currentPage = .tranactions
                                 } label: {
                                     Text("View All")
                                         .padding([.vertical], 7)
@@ -91,8 +91,12 @@ struct HomeView: View {
                 }
                 
             }
+            .fullScreenCover(isPresented: $viewModel.isToShowAddBank) {
+                AddBankAccount()
+            }
+            
             .fullScreenCover(item: $selectedTrans, content: { trans in
-                TransactionDetailView(transaction: trans)
+                TransactionDetailView(transaction: trans, viewModel: viewModel)
             })
         }
     }

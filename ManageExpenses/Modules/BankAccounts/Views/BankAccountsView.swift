@@ -12,7 +12,7 @@ struct BankAccountsView: View {
     @State var selectedBank: SelectDataModel?
     @State var isAddBankShown = false
     
-    @ObservedObject var viewModel = BankAccountViewModel(service: FirestoreBankService())
+    @ObservedObject var viewModel = BankAccountViewModel(service: FirestoreService())
     
     var body: some View {
         VStack{

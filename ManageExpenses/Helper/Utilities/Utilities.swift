@@ -15,14 +15,14 @@ enum Utilities {
         Date(seconds: Int64(interval)!)
     }
     
-    static func getFormattedAmount(amount: Double) -> String {
+    static func getFormattedAmount(amount: Double, showSym: Bool = true) -> String {
         let FAmount = getAmountWith(amount: amount)
         let neg = (amount < 0) ? "-" : ""
-        return neg + UserDefaults.standard.currency + FAmount
+        return neg + (showSym ? UserDefaults.standard.currency : "") + FAmount
     }
-    static func getFormattedAmount(amount: String) -> String {
+    static func getFormattedAmount(amount: String, showSym: Bool = true) -> String {
         if let doubleAmount = Double(amount) {
-            return getFormattedAmount(amount: doubleAmount)
+            return getFormattedAmount(amount: doubleAmount, showSym: showSym)
         }
         return getFormattedAmount(amount: 0.0)
     }

@@ -9,9 +9,9 @@ import Combine
 import SwiftUI
 
 protocol AddExpenseIncomeViewModelType {
-    var service: TransactionServiceHandlerType { get }
+    var service: ServiceHandlerType { get }
     var serviceStatus: ServiceAPIState { get }
-    init(service: TransactionServiceHandlerType)
+    init(service: ServiceHandlerType)
     func saveTransaction(transaction: Transaction)
     func deleteTransaction(id: String)
     
@@ -19,11 +19,11 @@ protocol AddExpenseIncomeViewModelType {
 
 
 class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType {
-    var service: TransactionServiceHandlerType
+    var service: ServiceHandlerType
     var subscription = Set<AnyCancellable>()
     @Published var serviceStatus: ServiceAPIState = .na
     @Published var categoryData = [SelectDataModel]()
-    required init(service: TransactionServiceHandlerType) {
+    required init(service: ServiceHandlerType) {
         self.service = service
         categoryData = Utilities.getCategories()
     }

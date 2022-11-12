@@ -22,7 +22,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct ManageExpensesApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
     @StateObject var sessionService = SessionService()
-    @State private var isSplashShowing = true
+    @State private var isSplashShowing = true {
+        didSet {
+            print("set")
+        }
+    }
     
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(CustomColor.primaryColor)
@@ -40,7 +44,6 @@ struct ManageExpensesApp: App {
                 case .loggedOut:
                     LoginView()
                         .environmentObject(sessionService)
-
                         
                 }
             }

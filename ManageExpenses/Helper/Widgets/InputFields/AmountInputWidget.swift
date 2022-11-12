@@ -17,7 +17,7 @@ struct AmountInputWidget: View {
                 Text("0")
                     .isShowing(amount.isEmpty)
                     .foregroundColor(CustomColor.baseLight.opacity(0.7))
-                Text(getFormattedAmount(amount: amount))
+                Text(getFormattedAmount(amount: amount, showSym: false))
                     .isShowing(!amount.isEmpty)
                 
                    
@@ -27,7 +27,7 @@ struct AmountInputWidget: View {
         }
     }
     
-    private func getFormattedAmount(amount: String) -> String {
-        Utilities.getFormattedAmount(amount: Double(amount) ?? 0)
+    private func getFormattedAmount(amount: String, showSym: Bool) -> String {
+        Utilities.getFormattedAmount(amount: Double(amount) ?? 0, showSym: showSym)
     }
 }

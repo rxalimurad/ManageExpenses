@@ -10,7 +10,7 @@ import AlertX
 
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreTransactionsService())
+    @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreService())
     
     // Mark: - State Variables for User Input
     @State var amount = ""
@@ -122,48 +122,48 @@ struct AddExpenseIncomeView: View {
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
                 .padding([.top, .bottom], 16)
-            if selectedImage == nil {
-                HStack(alignment: .center) {
-                    HStack(spacing: 10) {
-                        Image.Custom.attachment
-                        Text("Add Attachment")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding([.vertical], 16)
-                    
-                }.onTapGesture {
-                    withAnimation {
-                        isAtchmntViewShown.toggle()
-                    }
-                }.background(
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
-                        .foregroundColor(CustomColor.baseLight_20)
-                        .cornerRadius(5)
-                )
-            } else {
-                HStack {
-                    ZStack(alignment: .topTrailing) {
-                        selectedImage?
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(10)
-                        Button {
-                            withAnimation {
-                                selectedImage = nil
-                            }
-                        } label: {
-                            Image.Custom.grayCross
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .offset(x: 12, y: -12)
-                        }
-                        
-                        
-                    }
-                    Spacer()
-                }
-            }
+//            if selectedImage == nil {
+//                HStack(alignment: .center) {
+//                    HStack(spacing: 10) {
+//                        Image.Custom.attachment
+//                        Text("Add Attachment")
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                    .padding([.vertical], 16)
+//
+//                }.onTapGesture {
+//                    withAnimation {
+//                        isAtchmntViewShown.toggle()
+//                    }
+//                }.background(
+//                    Rectangle()
+//                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
+//                        .foregroundColor(CustomColor.baseLight_20)
+//                        .cornerRadius(5)
+//                )
+//            } else {
+//                HStack {
+//                    ZStack(alignment: .topTrailing) {
+//                        selectedImage?
+//                            .resizable()
+//                            .frame(width: 100, height: 100)
+//                            .cornerRadius(10)
+//                        Button {
+//                            withAnimation {
+//                                selectedImage = nil
+//                            }
+//                        } label: {
+//                            Image.Custom.grayCross
+//                                .resizable()
+//                                .frame(width: 24, height: 24)
+//                                .offset(x: 12, y: -12)
+//                        }
+//
+//
+//                    }
+//                    Spacer()
+//                }
+//            }
             
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
@@ -199,52 +199,11 @@ struct AddExpenseIncomeView: View {
             BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000))
                 .padding([.top], 16)
                 .isShowing(category.desc.lowercased() == "shopping")
-            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 10), text: $description, isValidField: .constant(true))
+            InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
             SelectorWidgetView(hint: "Wallet", text: $wallet , data: $walletData)
                 .padding([.top, .bottom], 16)
-            if selectedImage == nil {
-                HStack(alignment: .center) {
-                    HStack(spacing: 10) {
-                        Image.Custom.attachment
-                        Text("Add Attachment")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding([.vertical], 16)
-                    
-                }.onTapGesture {
-                    withAnimation {
-                        isAtchmntViewShown.toggle()
-                    }
-                }.background(
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6], dashPhase: phase))
-                        .foregroundColor(CustomColor.baseLight_20)
-                        .cornerRadius(5)
-                )
-            } else {
-                HStack {
-                    ZStack(alignment: .topTrailing) {
-                        selectedImage?
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(10)
-                        Button {
-                            withAnimation {
-                                selectedImage = nil
-                            }
-                        } label: {
-                            Image.Custom.grayCross
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .offset(x: 12, y: -12)
-                        }
-                        
-                        
-                    }
-                    Spacer()
-                }
-            }
+           
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 viewModel.saveTransaction(transaction:
                                             Transaction(

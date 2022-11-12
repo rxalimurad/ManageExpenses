@@ -14,26 +14,27 @@ protocol HomeViewModelType {
     var currentFilter: String { get }
     var transactions: [DatedTransactions] { get }
     var lineChartData: LineChartData { get }
-    var dbHandler: TransactionServiceHandlerType { get }
+    var dbHandler: ServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: TransactionServiceHandlerType)
+    init(dbHandler: ServiceHandlerType)
     func getAccountBalance() -> String
     func getIncome() -> String
     func getExpense() -> String
     
 }
 
-class HomeViewModel: ObservableObject, HomeViewModelType {
+class HomeViewModel: ObservableObject, HomeViewModelType, DeleteTransaction {
     @Published internal var currentFilter: String = TransactionDuration.thisMonth.rawValue
     @Published internal var isLoading: Bool = true
     @Published internal var options = ["Day","Week","Month", "Year"]
     @Published internal var graphXAxis = ["Hours (24 hour formate)","","", ""]
     var subscriptions =  Set<AnyCancellable>()
+    @Published var isToShowAddBank =  DataCache.shared.banks.isEmpty
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
-    var dbHandler: TransactionServiceHandlerType
+    var dbHandler: ServiceHandlerType
     @Published var state: ServiceAPIState = .na
-    required init(dbHandler: TransactionServiceHandlerType) {
+    required init(dbHandler: ServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         observedFilter()
@@ -61,6 +62,15 @@ class HomeViewModel: ObservableObject, HomeViewModelType {
         self.fetchTransactions(filter: currentFilter)
     }
     
+    func deleteTransaction(id: String, completion: @escaping((Bool) -> Void)) {
+        dbHandler.delteTransaction(id: id)
+            .sink { _ in
+                completion(false)
+            } receiveValue: { _ in
+                completion(true)
+            }
+            .store(in: &subscriptions)
+    }
     private func fetchTransactions(filter: String? = nil) {
         self.transactions = []
         state = .inprogress
