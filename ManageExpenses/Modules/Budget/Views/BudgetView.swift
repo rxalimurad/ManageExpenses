@@ -10,7 +10,7 @@ import SwiftUI
 struct BudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var safeAreaInsets: EdgeInsets
-    var viewModel = BudgetViewModel()
+    @ObservedObject var viewModel = BudgetViewModel(service: FirestoreService())
     @State var showCreatBudget = false
     @State var selectedBudget: BudgetDetail?
     var body: some View {
@@ -21,8 +21,9 @@ struct BudgetView: View {
                         .renderingMode(.template)
                         .foregroundColor(CustomColor.baseLight)
                         .rotationEffect(Angle(degrees: 90))
+                        .hidden()
                     Spacer()
-                    Text("May")
+                    Text("Budget (\(Date().fullMonth))")
                         .font(.system(size: 24, weight: .medium))
                         .foregroundColor(CustomColor.baseLight)
                         .frame(maxWidth:. infinity)
@@ -31,25 +32,26 @@ struct BudgetView: View {
                         .renderingMode(.template)
                         .foregroundColor(CustomColor.baseLight)
                         .rotationEffect(Angle(degrees: 270))
+                        .hidden()
                 }
                 .padding([.top], safeAreaInsets.top)
                 .padding([.horizontal], 27)
-                if viewModel.monthlyBudgetList.isEmpty {
+                if viewModel.budgetList.isEmpty {
                     addNRFView(geometry)
                         .padding([.top], 20)
                 } else {
                     addDetailsView(geometry)
                 }
-                
+
             }
             .background(Rectangle().foregroundColor(getBgColor()))
             .frame(maxWidth: .infinity)
             .edgesIgnoringSafeArea([.all])
             .fullScreenCover(isPresented: $showCreatBudget) {
-                CreateBudgetView()
+                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: viewModel.budgetList.map({ $0.category.desc }), budget: nil), isEditMode: false, updateDelegate: viewModel)
             }
             .fullScreenCover(item: $selectedBudget, content: { budget in
-                BudgetDetailView(budget: budget, spending: 1000)
+                BudgetDetailView(budget: budget,updateDelegate: viewModel, spending: 1000)
             })
             
         }
@@ -62,12 +64,12 @@ struct BudgetView: View {
             
             ScrollView(.vertical) {
                 VStack {
-                    ForEach(0 ..<  viewModel.monthlyBudgetList[0].budget.count, id: \.self) { index in
-                        
+                    ForEach(viewModel.budgetList) { budget in
+                    
                         Button {
-                            selectedBudget = viewModel.monthlyBudgetList[0].budget[index]
+                            selectedBudget = budget
                         } label: {
-                            BudgetViewCell(budget: viewModel.monthlyBudgetList[0].budget[index])
+                            BudgetViewCell(budget: budget)
                         }
                         
                        

@@ -14,8 +14,8 @@ struct TabControlView: View {
     @State var showPopUp = false
     @State var showNewEntryScreen = false
     @State var newEntryType: PlusMenuAction?
-    @ObservedObject var homeViewModel = HomeViewModel(dbHandler: FirestoreTransactionsService())
-    @ObservedObject var transViewModel = TransactionViewModel(dbHandler: FirestoreTransactionsService())
+    @ObservedObject var homeViewModel = HomeViewModel(dbHandler: FirestoreService())
+    @ObservedObject var transViewModel = TransactionViewModel(dbHandler: FirestoreService())
     var body: some View {
         ZStack {
             if showPopUp {
@@ -31,7 +31,7 @@ struct TabControlView: View {
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            HomeView(viewModel: homeViewModel, safeAreaInsets: geometry.safeAreaInsets)
+                            HomeView(viewModel: homeViewModel, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
                             TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transViewModel)
                         case .budget:
@@ -82,11 +82,22 @@ struct TabControlView: View {
             
         } content: {
             if let newEntryType = newEntryType {
-                AddExpenseIncomeView(newEntryType: newEntryType, homeViewModel: homeViewModel, transViewModel: transViewModel)
+               AddExpenseIncomeView(newEntryType: newEntryType, updateViewModel: getUpdateVM())
+                }
             }
         }
-        
+    
+    private func getUpdateVM() -> UpdateTransaction? {
+        var updateVM: UpdateTransaction?
+        if viewRouter.currentPage == .home {
+            updateVM = homeViewModel
+        } else if viewRouter.currentPage == .tranactions {
+            updateVM = transViewModel  as? UpdateTransaction
+        }
+        return updateVM
     }
+        
+   
     
     @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
         if showPopUp {

@@ -35,6 +35,12 @@ extension Date {
         formatter.timeZone = TimeZone.current
         return formatter.string(from: self)
     }
+    var fullMonth: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: self)
+    }
     
     var year: String {
         let formatter = DateFormatter()

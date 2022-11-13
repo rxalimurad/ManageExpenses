@@ -50,12 +50,28 @@ class LoginViewModel: ObservableObject, LoginViewModelType {
                 }
             } receiveValue: {[weak self] in
                 guard let self = self else { return }
-                self.state = .successful
-                self.sessionService?.login(with: self.userDetails)
+                self.fetchBanks()
             }
             .store(in: &subscriptions)
     }
   
+    func fetchBanks() {
+        service.fetchBanks()
+            .sink {[weak self] res in
+            switch res {
+            case .failure(let error):
+                self?.state = .failed(error: error)
+            default: break
+            }
+        } receiveValue: {[weak self] in
+            guard let self = self else { return }
+            self.state = .successful
+            self.sessionService?.login(with: self.userDetails)
+        }
+        .store(in: &subscriptions)
+
+    }
+    
     func setupSession(session: SessionService) {
         self.sessionService = session
     }

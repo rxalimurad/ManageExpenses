@@ -11,8 +11,6 @@
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
 		5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */; };
-		5F180373291E2B4200E40E35 /* BanksServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */; };
-		5F180375291E2BFA00E40E35 /* FirestoreBankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */; };
 		5F180379291E32E400E40E35 /* AddBankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */; };
 		5F18037B291E398A00E40E35 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037A291E398A00E40E35 /* Color.swift */; };
 		5F18037D291E3B0E00E40E35 /* BankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */; };
@@ -59,6 +57,8 @@
 		FA21348D2905D2C0002EEBF4 /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */; };
 		FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E66B290836DA008CF65A /* MiscListOfData.swift */; };
 		FA24E67129083871008CF65A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E67029083871008CF65A /* ProfileView.swift */; };
+		FA4D35B3291F6E0D00D06B4D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */; };
+		FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */; };
 		FA54F5782910300F0015E40A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F5772910300F0015E40A /* FirebaseAnalytics */; };
 		FA54F57A2910300F0015E40A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F5792910300F0015E40A /* FirebaseAnalyticsSwift */; };
 		FA54F57C2910300F0015E40A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F57B2910300F0015E40A /* FirebaseFirestore */; };
@@ -71,8 +71,6 @@
 		FA7F869A28F9ED6D00108E3A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869928F9ED6D00108E3A /* LoginView.swift */; };
 		FA7F869D28F9F03A00108E3A /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */; };
 		FA7F869F28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F869E28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift */; };
-		FA7F86A528FA69AF00108E3A /* SetupAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */; };
-		FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */; };
 		FA7FB34828FB08D800D0097D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FB34728FB08D800D0097D /* HomeView.swift */; };
 		FA82B3AB28FC01D00038E099 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B3AA28FC01D00038E099 /* PieChartView.swift */; };
 		FA82B3AD28FC01EC0038E099 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B3AC28FC01EC0038E099 /* PieSliceView.swift */; };
@@ -209,6 +207,7 @@
 		FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */; };
 		FA86427C290F16A6006902CB /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86427B290F16A6006902CB /* Binding.swift */; };
 		FA8740EE290DAE6F00640EB5 /* ProgressBarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */; };
+		FA8995A629215FA100956D3A /* BudgetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
 		FA8BC153290EEC500025BE0A /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC152290EEC500025BE0A /* AboutUsView.swift */; };
 		FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */; };
@@ -234,6 +233,7 @@
 		FA94E8832904876100C5408D /* SelectorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E8822904876100C5408D /* SelectorModel.swift */; };
 		FA94E8862904997D00C5408D /* AlertX in Frameworks */ = {isa = PBXBuildFile; productRef = FA94E8852904997D00C5408D /* AlertX */; };
 		FA94E888290533E700C5408D /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA94E887290533E700C5408D /* TransactionDetailView.swift */; };
+		FA99D27D291ECC23009D11FF /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99D27C291ECC23009D11FF /* DataCache.swift */; };
 		FAA405BD291562FA007B3C07 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA405BC291562FA007B3C07 /* LoginService.swift */; };
 		FAA478E828F87FD300C06B31 /* LoginIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478E728F87FD300C06B31 /* LoginIntroView.swift */; };
 		FAA478F028F8849000C06B31 /* SignupConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA478EF28F8849000C06B31 /* SignupConfirmationView.swift */; };
@@ -253,7 +253,7 @@
 		FAB4651129168AFD0092BBFB /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651029168AFD0092BBFB /* ForgotPasswordService.swift */; };
 		FAB46513291692670092BBFB /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46512291692670092BBFB /* NetworkingError.swift */; };
 		FAB46515291695770092BBFB /* ViewForServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB46514291695770092BBFB /* ViewForServiceAPI.swift */; };
-		FAB4651E2916B1DD0092BBFB /* TransactionServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */; };
+		FAB4651E2916B1DD0092BBFB /* ServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB4651D2916B1DD0092BBFB /* ServiceHandler.swift */; };
 		FAB465232916B3F90092BBFB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465222916B3F90092BBFB /* Transaction.swift */; };
 		FAB465262916BAA70092BBFB /* FirestoreTransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */; };
 		FABF09CA28FBDF3E0072EB16 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF09C928FBDF3E0072EB16 /* Shape.swift */; };
@@ -265,8 +265,6 @@
 		5F062CE028FD4AC600BB97D7 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		5F0D72C428FFE8D800FB0843 /* KeyboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWidget.swift; sourceTree = "<group>"; };
-		5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanksServiceHandler.swift; sourceTree = "<group>"; };
-		5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreBankService.swift; sourceTree = "<group>"; };
 		5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankAccountViewModel.swift; sourceTree = "<group>"; };
 		5F18037A291E398A00E40E35 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountViewModel.swift; sourceTree = "<group>"; };
@@ -313,14 +311,14 @@
 		FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		FA24E66B290836DA008CF65A /* MiscListOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscListOfData.swift; sourceTree = "<group>"; };
 		FA24E67029083871008CF65A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBudgetViewModel.swift; sourceTree = "<group>"; };
 		FA54F58129117E960015E40A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA54F58329119D570015E40A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FA7F869628F9D43F00108E3A /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		FA7F869928F9ED6D00108E3A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA7F869C28F9F03A00108E3A /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		FA7F869E28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordConfirmationView.swift; sourceTree = "<group>"; };
-		FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAccountView.swift; sourceTree = "<group>"; };
-		FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBankView.swift; sourceTree = "<group>"; };
 		FA7FB34728FB08D800D0097D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FA82B3AA28FC01D00038E099 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		FA82B3AC28FC01EC0038E099 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
@@ -457,6 +455,7 @@
 		FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewModel.swift; sourceTree = "<group>"; };
 		FA86427B290F16A6006902CB /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarWidgetView.swift; sourceTree = "<group>"; };
+		FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewModel.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
 		FA8BC152290EEC500025BE0A /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		FA8BC155290EF0DD0025BE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -482,6 +481,7 @@
 		FA94E8802904704200C5408D /* SelectorWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorWidgetView.swift; sourceTree = "<group>"; };
 		FA94E8822904876100C5408D /* SelectorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorModel.swift; sourceTree = "<group>"; };
 		FA94E887290533E700C5408D /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		FA99D27C291ECC23009D11FF /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		FAA405BC291562FA007B3C07 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		FAA478E728F87FD300C06B31 /* LoginIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroView.swift; sourceTree = "<group>"; };
 		FAA478EF28F8849000C06B31 /* SignupConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupConfirmationView.swift; sourceTree = "<group>"; };
@@ -501,7 +501,7 @@
 		FAB4651029168AFD0092BBFB /* ForgotPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordService.swift; sourceTree = "<group>"; };
 		FAB46512291692670092BBFB /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		FAB46514291695770092BBFB /* ViewForServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForServiceAPI.swift; sourceTree = "<group>"; };
-		FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceHandler.swift; sourceTree = "<group>"; };
+		FAB4651D2916B1DD0092BBFB /* ServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHandler.swift; sourceTree = "<group>"; };
 		FAB465222916B3F90092BBFB /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreTransactionsService.swift; sourceTree = "<group>"; };
 		FABF09C928FBDF3E0072EB16 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
@@ -545,22 +545,12 @@
 			path = FinancialReport;
 			sourceTree = "<group>";
 		};
-		5F180370291E2B1000E40E35 /* Transactions */ = {
+		5F180370291E2B1000E40E35 /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				FAB4651D2916B1DD0092BBFB /* TransactionServiceHandler.swift */,
-				FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */,
+				FA99D27C291ECC23009D11FF /* DataCache.swift */,
 			);
-			path = Transactions;
-			sourceTree = "<group>";
-		};
-		5F180371291E2B1E00E40E35 /* Banks */ = {
-			isa = PBXGroup;
-			children = (
-				5F180372291E2B4200E40E35 /* BanksServiceHandler.swift */,
-				5F180374291E2BFA00E40E35 /* FirestoreBankService.swift */,
-			);
-			path = Banks;
+			path = Local;
 			sourceTree = "<group>";
 		};
 		5F180376291E32A200E40E35 /* Views */ = {
@@ -584,8 +574,9 @@
 		5F4040A529065E5000ECC069 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				5F180371291E2B1E00E40E35 /* Banks */,
-				5F180370291E2B1000E40E35 /* Transactions */,
+				FAB4651D2916B1DD0092BBFB /* ServiceHandler.swift */,
+				FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */,
+				5F180370291E2B1000E40E35 /* Local */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -698,6 +689,7 @@
 			children = (
 				5F56E09E29139C1E006E8F25 /* Launch Screen.storyboard */,
 				FA2134872905CF31002EEBF4 /* SplashView.swift */,
+				FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -800,6 +792,34 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		FA4D35B42920CAAE00D06B4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F129096AF700C70440 /* BudgetView.swift */,
+				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+				FA929986290E51D900033C7E /* BudgetDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA4D35B52920CABA00D06B4D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
+				FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */,
+				FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA4D35B82920D16900D06B4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F52909775400C70440 /* BudgetModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FA54F5852911A58C0015E40A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,15 +835,6 @@
 				FAA405BB291562E1007B3C07 /* Service */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		FA7F86A228FA695200108E3A /* SetupAccount */ = {
-			isa = PBXGroup;
-			children = (
-				FA7F86A428FA69AF00108E3A /* SetupAccountView.swift */,
-				FA7F86A628FA6AA000108E3A /* AddNewBankView.swift */,
-			);
-			path = SetupAccount;
 			sourceTree = "<group>";
 		};
 		FA7FB34628FB08BE00D0097D /* Home */ = {
@@ -1397,11 +1408,10 @@
 		FA8D88F029096ADE00C70440 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
-				FA8D88F129096AF700C70440 /* BudgetView.swift */,
-				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
-				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+				FA4D35B42920CAAE00D06B4D /* Views */,
+				FA4D35B52920CABA00D06B4D /* ViewModel */,
+				FA4D35B82920D16900D06B4D /* Model */,
 				FAC44563290B0354005757E8 /* BudgetViewCell.swift */,
-				FA929986290E51D900033C7E /* BudgetDetailView.swift */,
 			);
 			path = Budget;
 			sourceTree = "<group>";
@@ -1449,7 +1459,6 @@
 				FA7F869828F9ED3100108E3A /* Login */,
 				FAB4650A291684440092BBFB /* ForgotPassword */,
 				5F56E08029139025006E8F25 /* Base */,
-				FA7F86A228FA695200108E3A /* SetupAccount */,
 				FA7FB34628FB08BE00D0097D /* Home */,
 				5FB6ECA728FEA6AD00D74B68 /* Transactions */,
 				5F18036F291D237D00E40E35 /* FinancialReport */,
@@ -1477,7 +1486,6 @@
 			children = (
 				FA94E8822904876100C5408D /* SelectorModel.swift */,
 				FA24E66B290836DA008CF65A /* MiscListOfData.swift */,
-				FA8D88F52909775400C70440 /* BudgetModel.swift */,
 				FA92998C290E971F00033C7E /* FinancialReportModel.swift */,
 			);
 			path = Models;
@@ -1812,7 +1820,6 @@
 				FA82B4EA28FC0F250038E099 /* Marker.swift in Sources */,
 				FA8FC8BB291447B8004AB1BF /* AlertView.swift in Sources */,
 				FA82B51028FC0F260038E099 /* LineChartProtocolsExtensions.swift in Sources */,
-				5F180375291E2BFA00E40E35 /* FirestoreBankService.swift in Sources */,
 				FA82B4B028FC0F240038E099 /* RangedBarChartData.swift in Sources */,
 				FA82B4AA28FC0F240038E099 /* GroupingData.swift in Sources */,
 				FA82B4AB28FC0F240038E099 /* BarChartProtocolsExtensions.swift in Sources */,
@@ -1845,6 +1852,7 @@
 				FAC44564290B0354005757E8 /* BudgetViewCell.swift in Sources */,
 				FA94E87E29046D9700C5408D /* SelectionCell.swift in Sources */,
 				FA82B4A828FC0F240038E099 /* BarStyle.swift in Sources */,
+				FA4D35B3291F6E0D00D06B4D /* SplashViewModel.swift in Sources */,
 				FAB1E35828F7FCC300667CF2 /* Enums.swift in Sources */,
 				FA8D88EC2909310A00C70440 /* TransactionFilterView.swift in Sources */,
 				FA7F869F28F9F2EF00108E3A /* ForgotPasswordConfirmationView.swift in Sources */,
@@ -1868,10 +1876,8 @@
 				FA82B4C728FC0F240038E099 /* ChartMetadata.swift in Sources */,
 				FA8BC15A290EF8E40025BE0A /* BankAccountsView.swift in Sources */,
 				FAB4650F291687C30092BBFB /* ForgotPasswordViewModel.swift in Sources */,
-				FA7F86A728FA6AA000108E3A /* AddNewBankView.swift in Sources */,
 				FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */,
 				FA82B4BE28FC0F240038E099 /* BarLayout.swift in Sources */,
-				FA7F86A528FA69AF00108E3A /* SetupAccountView.swift in Sources */,
 				FAB465232916B3F90092BBFB /* Transaction.swift in Sources */,
 				FA82B4C828FC0F240038E099 /* ColourStyle.swift in Sources */,
 				FA82B51B28FC0F270038E099 /* PointsSubView.swift in Sources */,
@@ -1910,6 +1916,7 @@
 				FA864278290F0A7D006902CB /* BankDetailsView.swift in Sources */,
 				FA82B4FA28FC0F260038E099 /* XAxisLabels.swift in Sources */,
 				5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */,
+				FA8995A629215FA100956D3A /* BudgetDetailViewModel.swift in Sources */,
 				FAB1E34828F7E8FF00667CF2 /* View.swift in Sources */,
 				FA82B4C628FC0F240038E099 /* InfoViewData.swift in Sources */,
 				FA82B51328FC0F270038E099 /* LineChartData.swift in Sources */,
@@ -1923,7 +1930,7 @@
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
-				FAB4651E2916B1DD0092BBFB /* TransactionServiceHandler.swift in Sources */,
+				FAB4651E2916B1DD0092BBFB /* ServiceHandler.swift in Sources */,
 				FA82B4B528FC0F240038E099 /* GroupedBarDataPoint.swift in Sources */,
 				FA82B4E928FC0F250038E099 /* DiamondShape.swift in Sources */,
 				FA82B4CA28FC0F240038E099 /* PublishableProtocol.swift in Sources */,
@@ -1956,6 +1963,7 @@
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				FAB4650929166EEB0092BBFB /* UserDefaults.swift in Sources */,
 				FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */,
+				FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */,
 				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
 				FA82B4D528FC0F250038E099 /* Legends.swift in Sources */,
 				FA82B4C228FC0F240038E099 /* TouchOverlayMarker.swift in Sources */,
@@ -1995,7 +2003,6 @@
 				5FBBC199291A1E840092937B /* View+Skeleton.swift in Sources */,
 				5F0D72C528FFE8D800FB0843 /* KeyboardWidget.swift in Sources */,
 				FA2134882905CF31002EEBF4 /* SplashView.swift in Sources */,
-				5F180373291E2B4200E40E35 /* BanksServiceHandler.swift in Sources */,
 				FA82B50928FC0F260038E099 /* RangedLineDataSet.swift in Sources */,
 				FA82B52028FC0F270038E099 /* FilledTopLine.swift in Sources */,
 				FA82B4B928FC0F240038E099 /* Bars.swift in Sources */,
@@ -2017,6 +2024,7 @@
 				FA82B4F028FC0F250038E099 /* DataFunctionsProtocol.swift in Sources */,
 				FA82B4F428FC0F250038E099 /* HorizontalGridView.swift in Sources */,
 				FA82B4CB28FC0F240038E099 /* SharedProtocolsExtensions.swift in Sources */,
+				FA99D27D291ECC23009D11FF /* DataCache.swift in Sources */,
 				FA82B51C28FC0F270038E099 /* LineChartSubViews.swift in Sources */,
 				5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */,
 				5FFEA02029137AF50082745D /* UserDetailsModel.swift in Sources */,

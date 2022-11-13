@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     
     @Binding var isShowing: Bool
-    
+    var vm = SplashViewModel(service: FirestoreService())
     var body: some View {
         VStack {
             LottieView(lottieFile: Constants.animationFile.splashAnimation, speed: 2)
@@ -22,11 +22,19 @@ struct SplashView: View {
             
             
         }.onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation {
-                    self.isShowing.toggle()
+            vm.fetchBanks { success in
+                if success {
+                    withAnimation {
+                        self.isShowing = false
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            self.isShowing = false
+                        }
+                    }
                 }
             }
         }
-  }
+    }
 }

@@ -10,26 +10,13 @@ import SwiftUI
 struct CreateBudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    // Mark: - State Variables for User Input
-    
-    @State var showAmtKeybd = false
-    @State var recieveAlerts = false
-    @State var amount = ""
-    @State var isCategoryshown = false
-    @State var sliderValue = 50.0
-    @State var category = SelectDataModel(id: "", desc: "")
-    @State var categoryData = [SelectDataModel(id: "1", desc: "Food", Image: .Custom.camera, color: .red),
-                               SelectDataModel(id: "2", desc: "Fuel", Image: .Custom.bell, color: .green),
-                               SelectDataModel(id: "3", desc: "Shopping", Image: .Custom.bell, color: .yellow),
-                               SelectDataModel(id: "4", desc: "Clothes", Image: .Custom.bell, color: .blue),
-                               SelectDataModel(id: "5", desc: "Fee", Image: .Custom.bell, color: .black)]
-    
-    
-    
+    @ObservedObject var viewModel: CreateBudgetViewModel
+    var isEditMode: Bool
+    weak var updateDelegate: UpdateBudget?
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                NavigationBar(title: "Create Budget", top: geometry.safeAreaInsets.top) {
+                NavigationBar(title: (isEditMode ? "Edit Budget" : "Create Budget"), top: geometry.safeAreaInsets.top) {
                     mode.wrappedValue.dismiss()
                 }
                 Spacer()
@@ -37,20 +24,20 @@ struct CreateBudgetView: View {
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
                     .padding([.leading], 26)
-                AmountInputWidget(amount: amount)
+                AmountInputWidget(amount: viewModel.budget.limit)
                     .font(.system(size: 64, weight: .medium))
                     .foregroundColor(CustomColor.baseLight)
                     .padding([.top], 13)
                     .onTapGesture {
                         withAnimation {
-                            showAmtKeybd.toggle()
+                            viewModel.showAmtKeybd.toggle()
                         }
                     }
                 
                 addDetailsView(geometry)
                     .padding([.top], 18)
             }
-            .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
+            .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.budget.limit, isShowing: $viewModel.showAmtKeybd), alignment: .center)
             .background(Rectangle().foregroundColor(getBgColor()))
             .edgesIgnoringSafeArea([.all])
             
@@ -61,8 +48,8 @@ struct CreateBudgetView: View {
     
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-            SelectorWidgetView(hint: "Category", text: $category, data: $categoryData)
-                .padding([.top], 24)
+            SelectorWidgetView(hint: "Category", text: $viewModel.budget.category, data: $viewModel.categoryData)
+                .padding([.top], 24).allowsHitTesting(!isEditMode)
             
             
             HStack {
@@ -71,23 +58,27 @@ struct CreateBudgetView: View {
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(CustomColor.baseDark_25)
                         .padding([.bottom], 4)
-                    Text(getAlertDesc(sliderValue))
+                    Text(getAlertDesc(viewModel.budget.slider))
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(CustomColor.baseLight_20)
                 }
                 Spacer()
-                Toggle(isOn: $recieveAlerts.animation()) {}
+                Toggle(isOn: $viewModel.budget.recieveAlerts.animation()) {}
             }
             .padding([.top], 40)
             VStack {
                 
-                SliderWidgetView(percentage: $sliderValue, minLimit: 1, maxLimit: 100)
+                SliderWidgetView(percentage: $viewModel.budget.slider, minLimit: 1, maxLimit: 100)
                     .padding([.horizontal] , 20)
-                    .frame(height: recieveAlerts ? 30 : 0)
-                    .padding([.vertical] , 10).isHidden(!recieveAlerts)
+                    .frame(height: viewModel.budget.recieveAlerts ? 30 : 0)
+                    .padding([.vertical] , 10).isHidden(!viewModel.budget.recieveAlerts)
             }
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                viewModel.updateBudget {
+                    mode.wrappedValue.dismiss()
+                    updateDelegate?.refreshView()
+                }
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
@@ -104,7 +95,7 @@ struct CreateBudgetView: View {
     
     func getAlertDesc(_ value: Double) -> String {
         let intValue = Int(value)
-        let value = recieveAlerts ? "\(intValue)" : "some value"
+        let value = viewModel.budget.recieveAlerts ? "\(intValue)" : "some value"
         return "Receive alert when it reaches \(value) percent of your buget."
     }
     

@@ -7,6 +7,7 @@
 //
 import Foundation
 import Combine
+import UIKit
 
 enum SortedBy: String, CaseIterable {
     case newest
@@ -21,14 +22,14 @@ protocol TransactionViewModelType {
     var transactions: [Transaction] { get }
     var pieChartPoints: [PieChartDataPoint] { get }
     var financialReportList: [FinanicalReportModel] { get}
-    var dbHandler: TransactionServiceHandlerType { get }
+    var dbHandler: ServiceHandlerType { get }
     var state: ServiceAPIState { get }
-    init(dbHandler: TransactionServiceHandlerType)
+    init(dbHandler: ServiceHandlerType)
 }
 
 
 
-class TransactionViewModel: ObservableObject, TransactionViewModelType {
+class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTransaction {
     
     //MARK: - States for Views
     @Published var isDurationFilterSheetShowing = false
@@ -44,17 +45,18 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
     @Published var sortedBy: String = SortedBy.newest.rawValue
     @Published var filterBy: String = PlusMenuAction.all.rawValue
     @Published var transactions: [Transaction] = []
-    var dbHandler: TransactionServiceHandlerType
+    var dbHandler: ServiceHandlerType
     @Published var state: ServiceAPIState = .na
     @Published var categoryData = Utilities.getCategories()
     var selectedCategoties: [String] = []
     @Published var pieChartPoints: [PieChartDataPoint] = []
     @Published var financialReportList: [FinanicalReportModel] = []
     @Published var selectedTab = "0"
-    required init(dbHandler: TransactionServiceHandlerType) {
+    required init(dbHandler: ServiceHandlerType) {
         self.dbHandler = dbHandler
         self.fetchTransactions()
         self.observedCategory()
+        self.observeTab()
     }
     
     //MARK: - Methods
@@ -84,13 +86,22 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
         } receiveValue: { [weak self] transactions in
             guard let self = self else { return }
             self.transactions = transactions
-            self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData)
-            self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData)
+            self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)
+            self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)
         }
         .store(in: &subscriptions)
         
     }
     
+    private func observeTab() {
+        $selectedTab
+            .sink {[weak self] newTab in
+                guard let self = self else { return }
+                self.financialReportList = self.getFinanicalChartData(transactions: self.transactions, categoryData: self.categoryData, selectedTab: newTab)
+                self.pieChartPoints = self.getFinacialChartPoints(transactions: self.transactions, categoryData: self.categoryData, selectedTab: newTab)
+            }
+            .store(in: &subscriptions)
+    }
     private func observedCategory() {
         $categoryData
             .sink { [weak self]  selectDataList in
@@ -111,8 +122,8 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
     }
     
     //MARK: - Methods for Financial Chart
-    private func getFinacialChartPoints(transactions: [Transaction],categoryData: [SelectDataModel]) -> [PieChartDataPoint] {
-        let list = getFinanicalChartData(transactions:transactions, categoryData: categoryData)
+    private func getFinacialChartPoints(transactions: [Transaction],categoryData: [SelectDataModel], selectedTab: String) -> [PieChartDataPoint] {
+        let list = getFinanicalChartData(transactions:transactions, categoryData: categoryData, selectedTab: selectedTab)
         var points = [PieChartDataPoint]()
         for data in list {
             points.append(PieChartDataPoint(value: data.amount, description: "", colour: data.category.color))
@@ -121,7 +132,17 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
       
     }
     
-    private func getFinanicalChartData(transactions: [Transaction], categoryData: [SelectDataModel]) -> [FinanicalReportModel] {
+    func deleteTransaction(id: String, completion: @escaping((Bool) -> Void)) {
+        dbHandler.delteTransaction(id: id)
+            .sink { _ in
+                completion(false)
+            } receiveValue: { _ in
+                completion(true)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func getFinanicalChartData(transactions: [Transaction], categoryData: [SelectDataModel], selectedTab: String) -> [FinanicalReportModel] {
         var total = 1.0
         if selectedTab == "0" {
             total = getTotalExpense(trans: transactions)
@@ -133,11 +154,22 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType {
             return FinanicalReportModel(category: $0, amount: 0, total: total)
         })
         for i in 0 ..< transactions.count {
-            if transactions[i].amount < 0 {
-                for j in 0 ..< reportModel.count {
-                    if reportModel[j].category.desc == transactions[i].name {
-                        reportModel[j].amount += transactions[i].amount
-                        break
+            if selectedTab == "0" {
+                if transactions[i].amount < 0 {
+                    for j in 0 ..< reportModel.count {
+                        if reportModel[j].category.desc == transactions[i].name {
+                            reportModel[j].amount += transactions[i].amount
+                            break
+                        }
+                    }
+                }
+            } else {
+                if transactions[i].amount > 0 {
+                    for j in 0 ..< reportModel.count {
+                        if reportModel[j].category.desc == transactions[i].name {
+                            reportModel[j].amount += transactions[i].amount
+                            break
+                        }
                     }
                 }
             }

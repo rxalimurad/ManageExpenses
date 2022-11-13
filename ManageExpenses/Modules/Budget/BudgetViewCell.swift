@@ -13,14 +13,14 @@ struct BudgetViewCell: View {
     
     var percentage: Double {
         get {
-            if spending >= budget.limit {
+            if spending >= Double(budget.limit)! {
                 return 100
             }
-            return (spending / budget.limit) * 100
+            return (spending / Double(budget.limit)!) * 100
         }
     }
     var isLimitExceed: Bool {
-        spending > budget.limit
+        spending > Double(budget.limit)!
     }
     var body: some View {
             VStack {
@@ -31,7 +31,7 @@ struct BudgetViewCell: View {
                         .isShowing(isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
-                Text("Remaining $\(Utilities.getFormattedAmount(amount: budget.limit - spending))")
+                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(budget.limit)! - spending))")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .multilineTextAlignment(.leading)
@@ -84,8 +84,3 @@ struct BudgetViewCell: View {
     }
 }
 
-struct BudgetViewCell_Previews: PreviewProvider {
-    static var previews: some View {
-        BudgetViewCell(budget: BudgetDetail(category: SelectDataModel(id: "2", desc: "Food", Image: nil, color: .red, isSelected: false), limit: 200))
-    }
-}

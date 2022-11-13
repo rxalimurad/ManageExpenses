@@ -9,20 +9,20 @@ import Foundation
 import Combine
 protocol BankAccountViewModelType {
     var banks: [SelectDataModel] { get }
-    var service: BankServiceType  { get }
-    init(service: BankServiceType)
+    var service: ServiceHandlerType  { get }
+    init(service: ServiceHandlerType)
     func fetchBanks()
 }
 
 class BankAccountViewModel: BankAccountViewModelType, ObservableObject {
     @Published var banks: [SelectDataModel] = []
     
-    var service: BankServiceType
+    var service: ServiceHandlerType
     
     var subscription = Set<AnyCancellable>()
     
     
-    required init(service: BankServiceType) {
+    required init(service: ServiceHandlerType) {
         self.service = service
         fetchBanks()
     }

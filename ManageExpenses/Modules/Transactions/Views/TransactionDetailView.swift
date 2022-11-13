@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+protocol UpdateTransaction: AnyObject {
+    func deleteTransaction(id: String, completion: @escaping((Bool) -> Void))
+    func refresh()
+}
+
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var transaction: Transaction
+    var updateTransaction: UpdateTransaction
     @State var attachmentImage = Image("")
     var body: some View {
         GeometryReader { geometry in
@@ -18,28 +24,34 @@ struct TransactionDetailView: View {
                         NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
                             mode.wrappedValue.dismiss()
                         }, rightBtnImage: .Custom.delete) {
-                            
+                            updateTransaction.deleteTransaction(id: transaction.id) { success in
+                                if success {
+                                    updateTransaction.refresh()
+                                    mode.wrappedValue.dismiss()
+                                }
+                                
+                            }
                         }
-//                        AmountInputWidget(amount: "\(transaction.transAmount)", leading: 0)
-//                            .font(.system(size: 64, weight: .medium))
-//                            .foregroundColor(CustomColor.baseLight)
-//                            .padding([.top], 26)
+                        AmountInputWidget(amount: "\(transaction.amount)", leading: 0)
+                            .font(.system(size: 64, weight: .medium))
+                            .foregroundColor(CustomColor.baseLight)
+                            .padding([.top], 26)
                         
                         
-//                        Text(transaction.transName ?? "")
-//                            .foregroundColor(CustomColor.baseLight_80)
-//                            .font(.system(size: 16, weight: .medium))
-//                            .padding([.top], 0)
-//
-//                        Text(transaction.date!.dateToShow)
-//                            .foregroundColor(CustomColor.baseLight_80)
-//                            .font(.system(size: 13, weight: .medium))
-//                            .padding([.top], 8)
-//                            .padding([.bottom], 51)
+                        Text(transaction.name)
+                            .foregroundColor(CustomColor.baseLight_80)
+                            .font(.system(size: 16, weight: .medium))
+                            .padding([.top], 0)
+
+                        Text(transaction.date.dateToShow)
+                            .foregroundColor(CustomColor.baseLight_80)
+                            .font(.system(size: 13, weight: .medium))
+                            .padding([.top], 8)
+                            .padding([.bottom], 51)
                         
                     }.background(
                         Rectangle()
-//                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.transType ?? "") ?? .expense))
+                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.type) ?? .expense))
                         
                     ).cornerRadius(30, corners: [.bottomLeft, .bottomRight])
                     
@@ -50,9 +62,9 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                             
-//                            Text(transaction.transType ?? "")
-//                                .foregroundColor(CustomColor.baseDark)
-//                                .font(.system(size: 16, weight: .semibold))
+                            Text(transaction.type.capitalized)
+                                .foregroundColor(CustomColor.baseDark)
+                                .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
                             .frame(maxWidth: .infinity)
                         
@@ -61,7 +73,7 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                             
-                            Text(transaction.category ?? "")
+                            Text(transaction.category)
                                 .foregroundColor(CustomColor.baseDark)
                                 .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
@@ -96,29 +108,14 @@ struct TransactionDetailView: View {
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
-//                            Text(transaction.transDesc ?? "")
-//                                .foregroundColor(CustomColor.baseDark)
-//                                .font(.system(size: 16, weight: .medium))
-//                                .padding([.horizontal], 16)
-//                                .padding([.top], 15)
-//                                .multilineTextAlignment(.leading)
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-                            Text("Attachment")
-                                .foregroundColor(CustomColor.baseLight_20)
+                            Text(transaction.desc)
+                                .foregroundColor(CustomColor.baseDark)
                                 .font(.system(size: 16, weight: .medium))
                                 .padding([.horizontal], 16)
-                                .padding([.top], 16)
+                                .padding([.top], 15)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-//                                .isShowing(transaction.image != nil)
-                            
-                            attachmentImage
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .shadow(radius: 10)
-                                .padding([.horizontal], 16)
-//                                .padding([.top], 16).isShowing(transaction.image != nil)
-                                .cornerRadius(20)
+
                         }
                     }
                     .offset(x: 0, y: -35)
