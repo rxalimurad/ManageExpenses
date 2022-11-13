@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BudgetViewCell: View {
-    @Binding var budget: BudgetDetail
+    var budget: BudgetDetail
     var spending: Double = 1000
     
     var percentage: Double {
@@ -31,7 +31,7 @@ struct BudgetViewCell: View {
                         .isShowing(isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
-                Text("Remaining $\(Utilities.getFormattedAmount(amount: Double(budget.limit)! - spending))")
+                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(budget.limit)! - spending))")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .multilineTextAlignment(.leading)

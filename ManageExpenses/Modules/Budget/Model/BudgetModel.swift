@@ -16,11 +16,14 @@ struct BudgetDetail: Identifiable {
     var slider: Double
     var recieveAlerts: Bool
     
-    static var new = BudgetDetail(id: "\(UUID())", category: .new, limit: "", month: Date().month, slider: 50.0, recieveAlerts: false)
+    
+    static func getEmptyBudget() -> BudgetDetail {
+        BudgetDetail(id: "\(UUID())", category: .new, limit: "", month: Date().month, slider: 50.0, recieveAlerts: false)
+    }
     
     func fromFireStoreData(data: [String: Any]) -> BudgetDetail {
         if data.isEmpty {
-            return .new
+            return BudgetDetail.getEmptyBudget()
         }
         return BudgetDetail(
             id: data["id"] as! String,

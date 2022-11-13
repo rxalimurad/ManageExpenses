@@ -10,7 +10,7 @@ import SwiftUI
 struct BudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var safeAreaInsets: EdgeInsets
-    var viewModel = BudgetViewModel(service: FirestoreService())
+    @ObservedObject var viewModel = BudgetViewModel(service: FirestoreService())
     @State var showCreatBudget = false
     @State var selectedBudget: BudgetDetail?
     var body: some View {
@@ -48,10 +48,10 @@ struct BudgetView: View {
             .frame(maxWidth: .infinity)
             .edgesIgnoringSafeArea([.all])
             .fullScreenCover(isPresented: $showCreatBudget) {
-                CreateBudgetView()
+                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: viewModel.budgetList.map({ $0.category.desc }), budget: nil), isEditMode: false, updateDelegate: viewModel)
             }
             .fullScreenCover(item: $selectedBudget, content: { budget in
-                BudgetDetailView(budget: budget, spending: 1000)
+                BudgetDetailView(budget: budget,updateDelegate: viewModel, spending: 1000)
             })
             
         }
@@ -61,22 +61,22 @@ struct BudgetView: View {
     
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-//            
-//            ScrollView(.vertical) {
-//                VStack {
-//                    ForEach(0 ..<  viewModel.monthlyBudgetList.count, id: \.self) { index in
-//                        
-//                        Button {
-//                            selectedBudget = viewModel.monthlyBudgetList[index]
-//                        } label: {
-//                            BudgetViewCell(budget: viewModel.monthlyBudgetList[index])
-//                        }
-//                        
-//                       
-//                    }
-//                }
-//                .padding([.top], 10)
-//            }
+            
+            ScrollView(.vertical) {
+                VStack {
+                    ForEach(viewModel.budgetList) { budget in
+                    
+                        Button {
+                            selectedBudget = budget
+                        } label: {
+                            BudgetViewCell(budget: budget)
+                        }
+                        
+                       
+                    }
+                }
+                .padding([.top], 10)
+            }
             
             Spacer()
             ButtonWidgetView(title: "Create a budget", style: .primaryButton) {

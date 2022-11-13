@@ -9,8 +9,11 @@ import SwiftUI
 
 struct BudgetDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @State var isLogoutShown = false
+    @State var isDeleteConfirmationShown = false
     var budget: BudgetDetail
+    weak var updateDelegate: UpdateBudget?
+    @State var showCreatBudget = false
+    var viewModel = BudgetDetailViewModel(service: FirestoreService())
     var spending: Double
     var percentage: Double {
         get {
@@ -29,7 +32,7 @@ struct BudgetDetailView: View {
                 NavigationBar(title: "Detail Budget", top: 0, titleColor: CustomColor.baseDark, action: {
                     mode.wrappedValue.dismiss()
                 }, rightBtnImage: .Custom.delete) {
-                    isLogoutShown.toggle()
+                        isDeleteConfirmationShown.toggle()
                 }
                 
                 HStack(spacing: 8) {
@@ -82,20 +85,24 @@ struct BudgetDetailView: View {
                 
                 Spacer()
                 ButtonWidgetView(title: "Edit", style: .primaryButton) {
-                    
+                    showCreatBudget.toggle()
                 }
                 .padding([.bottom, .horizontal], 16)
             }
-            .fullScreenCover(isPresented: $isLogoutShown) {
+            .fullScreenCover(isPresented: $isDeleteConfirmationShown) {
                 ZStack (alignment: .bottom) {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            isLogoutShown.toggle()
+                            isDeleteConfirmationShown.toggle()
                         }
                     logoutSheet(geometry)
                 }
                 .background(ColoredView(color: .clear))
                 .edgesIgnoringSafeArea(.all)
+            }
+            .fullScreenCover(isPresented: $showCreatBudget) {
+                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: [], budget: budget), isEditMode: false, updateDelegate: updateDelegate)
+               
             }
         }
     }
@@ -116,7 +123,7 @@ struct BudgetDetailView: View {
     private func logoutSheet(_ geometry: GeometryProxy) ->  some View {
         VStack {
             Button {
-                isLogoutShown.toggle()
+                isDeleteConfirmationShown.toggle()
             } label: {
                 indicator
                     .padding([.top], 16)
@@ -137,7 +144,11 @@ struct BudgetDetailView: View {
                     
                 }
                 ButtonWidgetView(title: "Yes", style: .primaryButton) {
-                    
+                    viewModel.deleteBudget(budget: budget) {
+                        isDeleteConfirmationShown.toggle()
+                        mode.wrappedValue.dismiss()
+                        updateDelegate?.refreshView()
+                    }
                 }
                 
             }

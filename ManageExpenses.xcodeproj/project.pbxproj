@@ -207,6 +207,7 @@
 		FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */; };
 		FA86427C290F16A6006902CB /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86427B290F16A6006902CB /* Binding.swift */; };
 		FA8740EE290DAE6F00640EB5 /* ProgressBarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */; };
+		FA8995A629215FA100956D3A /* BudgetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */; };
 		FA8A363228FF320200129051 /* AmountInputWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A363128FF320200129051 /* AmountInputWidget.swift */; };
 		FA8BC153290EEC500025BE0A /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC152290EEC500025BE0A /* AboutUsView.swift */; };
 		FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */; };
@@ -454,6 +455,7 @@
 		FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewModel.swift; sourceTree = "<group>"; };
 		FA86427B290F16A6006902CB /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarWidgetView.swift; sourceTree = "<group>"; };
+		FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewModel.swift; sourceTree = "<group>"; };
 		FA8A363128FF320200129051 /* AmountInputWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputWidget.swift; sourceTree = "<group>"; };
 		FA8BC152290EEC500025BE0A /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		FA8BC155290EF0DD0025BE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -793,7 +795,9 @@
 		FA4D35B42920CAAE00D06B4D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA8D88F129096AF700C70440 /* BudgetView.swift */,
 				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+				FA929986290E51D900033C7E /* BudgetDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -801,7 +805,9 @@
 		FA4D35B52920CABA00D06B4D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
 				FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */,
+				FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1405,10 +1411,7 @@
 				FA4D35B42920CAAE00D06B4D /* Views */,
 				FA4D35B52920CABA00D06B4D /* ViewModel */,
 				FA4D35B82920D16900D06B4D /* Model */,
-				FA8D88F129096AF700C70440 /* BudgetView.swift */,
-				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
 				FAC44563290B0354005757E8 /* BudgetViewCell.swift */,
-				FA929986290E51D900033C7E /* BudgetDetailView.swift */,
 			);
 			path = Budget;
 			sourceTree = "<group>";
@@ -1913,6 +1916,7 @@
 				FA864278290F0A7D006902CB /* BankDetailsView.swift in Sources */,
 				FA82B4FA28FC0F260038E099 /* XAxisLabels.swift in Sources */,
 				5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */,
+				FA8995A629215FA100956D3A /* BudgetDetailViewModel.swift in Sources */,
 				FAB1E34828F7E8FF00667CF2 /* View.swift in Sources */,
 				FA82B4C628FC0F240038E099 /* InfoViewData.swift in Sources */,
 				FA82B51328FC0F270038E099 /* LineChartData.swift in Sources */,

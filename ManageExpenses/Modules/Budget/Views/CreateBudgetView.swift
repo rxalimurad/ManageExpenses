@@ -9,12 +9,14 @@ import SwiftUI
 
 struct CreateBudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @ObservedObject var viewModel = CreateBudgetViewModel(service: FirestoreService())
-  
+    
+    @ObservedObject var viewModel: CreateBudgetViewModel
+    var isEditMode: Bool
+    weak var updateDelegate: UpdateBudget?
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                NavigationBar(title: "Create Budget", top: geometry.safeAreaInsets.top) {
+                NavigationBar(title: (isEditMode ? "Edit Budget" : "Create Budget"), top: geometry.safeAreaInsets.top) {
                     mode.wrappedValue.dismiss()
                 }
                 Spacer()
@@ -47,7 +49,7 @@ struct CreateBudgetView: View {
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
             SelectorWidgetView(hint: "Category", text: $viewModel.budget.category, data: $viewModel.categoryData)
-                .padding([.top], 24)
+                .padding([.top], 24).allowsHitTesting(!isEditMode)
             
             
             HStack {
@@ -75,6 +77,7 @@ struct CreateBudgetView: View {
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 viewModel.updateBudget {
                     mode.wrappedValue.dismiss()
+                    updateDelegate?.refreshView()
                 }
             }
             .padding([.top], 40)

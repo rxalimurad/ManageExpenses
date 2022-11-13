@@ -9,6 +9,54 @@ import Foundation
 import Combine
 import FirebaseFirestore
 class FirestoreService: ServiceHandlerType {
+    func deleteBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.budget)
+                    .document(budget.id)
+                    .delete { error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func fetchBudgetList() -> AnyPublisher<[BudgetDetail], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.budget)
+                    .getDocuments { snap, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let docs = snap?.documents, !docs.isEmpty {
+                                var buds = [BudgetDetail]()
+                                for doc in docs {
+                                    buds.append(BudgetDetail.getEmptyBudget().fromFireStoreData(data: doc.data()))
+                                }
+                                promise(.success(buds))
+                                
+                            } else {
+                                promise(.failure(NetworkingError("No documents found")))
+
+                            }
+                        }
+                    }
+                
+                    
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    
+    
     
     func updateBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
