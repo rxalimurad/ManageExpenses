@@ -14,14 +14,14 @@ struct BudgetDetailView: View {
     var spending: Double
     var percentage: Double {
         get {
-            if spending >= budget.limit {
+            if spending >= Double(budget.limit)! {
                 return 100
             }
-            return (spending / budget.limit) * 100
+            return (spending / Double(budget.limit)!) * 100
         }
     }
     var isLimitExceed: Bool {
-        spending > budget.limit
+        spending > Double(budget.limit)!
     }
     var body: some View {
         GeometryReader { geometry in
@@ -51,7 +51,7 @@ struct BudgetDetailView: View {
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 32)
                 
-                Text("\(Utilities.getFormattedAmount(amount: (budget.limit - spending)))")
+                Text("\(Utilities.getFormattedAmount(amount: (Double(budget.limit)!  - spending)))")
                     .font(.system(size: 64, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 3)

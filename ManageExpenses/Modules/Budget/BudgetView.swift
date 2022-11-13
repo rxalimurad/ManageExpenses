@@ -10,7 +10,7 @@ import SwiftUI
 struct BudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var safeAreaInsets: EdgeInsets
-    var viewModel = BudgetViewModel()
+    var viewModel = BudgetViewModel(service: FirestoreService())
     @State var showCreatBudget = false
     @State var selectedBudget: BudgetDetail?
     var body: some View {
@@ -21,8 +21,9 @@ struct BudgetView: View {
                         .renderingMode(.template)
                         .foregroundColor(CustomColor.baseLight)
                         .rotationEffect(Angle(degrees: 90))
+                        .hidden()
                     Spacer()
-                    Text("May")
+                    Text("Budget (\(Date().fullMonth))")
                         .font(.system(size: 24, weight: .medium))
                         .foregroundColor(CustomColor.baseLight)
                         .frame(maxWidth:. infinity)
@@ -31,16 +32,17 @@ struct BudgetView: View {
                         .renderingMode(.template)
                         .foregroundColor(CustomColor.baseLight)
                         .rotationEffect(Angle(degrees: 270))
+                        .hidden()
                 }
                 .padding([.top], safeAreaInsets.top)
                 .padding([.horizontal], 27)
-                if viewModel.monthlyBudgetList.isEmpty {
+                if viewModel.budgetList.isEmpty {
                     addNRFView(geometry)
                         .padding([.top], 20)
                 } else {
                     addDetailsView(geometry)
                 }
-                
+
             }
             .background(Rectangle().foregroundColor(getBgColor()))
             .frame(maxWidth: .infinity)
@@ -59,22 +61,22 @@ struct BudgetView: View {
     
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-            
-            ScrollView(.vertical) {
-                VStack {
-                    ForEach(0 ..<  viewModel.monthlyBudgetList[0].budget.count, id: \.self) { index in
-                        
-                        Button {
-                            selectedBudget = viewModel.monthlyBudgetList[0].budget[index]
-                        } label: {
-                            BudgetViewCell(budget: viewModel.monthlyBudgetList[0].budget[index])
-                        }
-                        
-                       
-                    }
-                }
-                .padding([.top], 10)
-            }
+//            
+//            ScrollView(.vertical) {
+//                VStack {
+//                    ForEach(0 ..<  viewModel.monthlyBudgetList.count, id: \.self) { index in
+//                        
+//                        Button {
+//                            selectedBudget = viewModel.monthlyBudgetList[index]
+//                        } label: {
+//                            BudgetViewCell(budget: viewModel.monthlyBudgetList[index])
+//                        }
+//                        
+//                       
+//                    }
+//                }
+//                .padding([.top], 10)
+//            }
             
             Spacer()
             ButtonWidgetView(title: "Create a budget", style: .primaryButton) {

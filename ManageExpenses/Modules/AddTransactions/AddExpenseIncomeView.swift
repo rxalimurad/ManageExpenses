@@ -128,7 +128,7 @@ struct AddExpenseIncomeView: View {
                     wallet: wallet.desc,
                     attachment: "",
                     type: newEntryType.rawValue,
-                    fromAcc: toWallet.desc,
+                    fromAcc: fromWallet.desc,
                     toAcc: toWallet.desc,
                     date: Date().secondsSince1970
                 ))
@@ -160,7 +160,7 @@ struct AddExpenseIncomeView: View {
         VStack {
             SelectorWidgetView(hint: "Category", text: $category, data: $viewModel.categoryData)
                 .padding([.top], 24)
-            BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000))
+            //,,..BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000, month: "May"))
                 .padding([.top], 16)
                 .isShowing(category.desc.lowercased() == "shopping")
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))

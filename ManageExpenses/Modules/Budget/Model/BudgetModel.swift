@@ -1,0 +1,51 @@
+//
+//  BudgetModel.swift
+//  ManageExpenses
+//
+//  Created by murad on 26/10/2022.
+//
+
+import Foundation
+
+
+struct BudgetDetail: Identifiable {
+    var id: String
+    var category: SelectDataModel
+    var limit: String
+    var month: String
+    var slider: Double
+    var recieveAlerts: Bool
+    
+    static var new = BudgetDetail(id: "\(UUID())", category: .new, limit: "", month: Date().month, slider: 50.0, recieveAlerts: false)
+    
+    func fromFireStoreData(data: [String: Any]) -> BudgetDetail {
+        if data.isEmpty {
+            return .new
+        }
+        return BudgetDetail(
+            id: data["id"] as! String,
+            category: SelectDataModel.new.fromFireStoreData(data: data["category"] as! [String : Any]),
+            limit: data["limit"] as! String,
+            month: data["month"] as! String,
+            slider: data["slider"] as! Double,
+            recieveAlerts: data["recieveAlerts"] as! Bool
+        )
+    }
+    
+    func toFireStoreData() -> [String: Any] {
+        return [
+            "id": id,
+            "category": category.toFireStoreData(),
+            "limit": limit,
+            "month" : month,
+            "slider" : slider,
+            "recieveAlerts" : recieveAlerts,
+            "user" : UserDefaults.standard.currentUser?.email ?? ""
+            
+            
+        ]
+    }
+
+    
+    
+}

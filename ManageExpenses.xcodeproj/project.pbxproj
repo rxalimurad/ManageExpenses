@@ -58,6 +58,7 @@
 		FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E66B290836DA008CF65A /* MiscListOfData.swift */; };
 		FA24E67129083871008CF65A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E67029083871008CF65A /* ProfileView.swift */; };
 		FA4D35B3291F6E0D00D06B4D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */; };
+		FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */; };
 		FA54F5782910300F0015E40A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F5772910300F0015E40A /* FirebaseAnalytics */; };
 		FA54F57A2910300F0015E40A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F5792910300F0015E40A /* FirebaseAnalyticsSwift */; };
 		FA54F57C2910300F0015E40A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F57B2910300F0015E40A /* FirebaseFirestore */; };
@@ -310,6 +311,7 @@
 		FA24E66B290836DA008CF65A /* MiscListOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscListOfData.swift; sourceTree = "<group>"; };
 		FA24E67029083871008CF65A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBudgetViewModel.swift; sourceTree = "<group>"; };
 		FA54F58129117E960015E40A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA54F58329119D570015E40A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FA7F869628F9D43F00108E3A /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
@@ -786,6 +788,30 @@
 				FA8BC152290EEC500025BE0A /* AboutUsView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		FA4D35B42920CAAE00D06B4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA4D35B52920CABA00D06B4D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA4D35B82920D16900D06B4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D88F52909775400C70440 /* BudgetModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FA54F5852911A58C0015E40A /* Frameworks */ = {
@@ -1376,9 +1402,11 @@
 		FA8D88F029096ADE00C70440 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				FA4D35B42920CAAE00D06B4D /* Views */,
+				FA4D35B52920CABA00D06B4D /* ViewModel */,
+				FA4D35B82920D16900D06B4D /* Model */,
 				FA8D88F129096AF700C70440 /* BudgetView.swift */,
 				FA8D88F32909740900C70440 /* BudgetViewModel.swift */,
-				FA8D88F729097AAE00C70440 /* CreateBudgetView.swift */,
 				FAC44563290B0354005757E8 /* BudgetViewCell.swift */,
 				FA929986290E51D900033C7E /* BudgetDetailView.swift */,
 			);
@@ -1455,7 +1483,6 @@
 			children = (
 				FA94E8822904876100C5408D /* SelectorModel.swift */,
 				FA24E66B290836DA008CF65A /* MiscListOfData.swift */,
-				FA8D88F52909775400C70440 /* BudgetModel.swift */,
 				FA92998C290E971F00033C7E /* FinancialReportModel.swift */,
 			);
 			path = Models;
@@ -1932,6 +1959,7 @@
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				FAB4650929166EEB0092BBFB /* UserDefaults.swift in Sources */,
 				FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */,
+				FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */,
 				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
 				FA82B4D528FC0F250038E099 /* Legends.swift in Sources */,
 				FA82B4C228FC0F240038E099 /* TouchOverlayMarker.swift in Sources */,

@@ -10,16 +10,32 @@ import Combine
 import FirebaseFirestore
 class FirestoreService: ServiceHandlerType {
     
+    func updateBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.budget)
+                    .document(budget.id)
+                    .setData(budget.toFireStoreData()) {error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }
+        .eraseToAnyPublisher()
+        
+    }
+    
     func addTransfer(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
                 let batch = db.batch()
-                let incomeTrans = Transaction(id: "\(UUID())", amount: transaction.amount, category: TransactionCategory.transfer.rawValue, desc: "Transfer from \(transaction.fromAcc)", name: "Transfer", wallet: transaction.toAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
-                
-                
-                
-                let expenseTrans = Transaction(id: "\(UUID())", amount: -transaction.amount, category: TransactionCategory.transfer.rawValue, desc: "Transfer to \(transaction.toAcc)", name: "Transfer", wallet: transaction.fromAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
+                let incomeTrans = Transaction(id: "\(UUID())", amount: transaction.amount, category: TransactionCategory.transfer.rawValue, desc: transaction.desc, name: "Transfer from \(transaction.fromAcc)", wallet: transaction.toAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
+                let expenseTrans = Transaction(id: "\(UUID())", amount: -transaction.amount, category: TransactionCategory.transfer.rawValue, desc: transaction.desc, name: "Transfer to \(transaction.toAcc)", wallet: transaction.fromAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
                 
                 //add Transaction
                 let transRef = db.collection(Constants.firestoreCollection.transactions)
@@ -108,7 +124,7 @@ class FirestoreService: ServiceHandlerType {
     }
     func delteTransaction(id: String) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
-            Future {[weak self] promise in
+            Future {promise in
                 Firestore.firestore().collection(Constants.firestoreCollection.transactions)
                     .document(id)
                     .delete { error in
