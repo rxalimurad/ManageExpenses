@@ -45,10 +45,10 @@ struct HomeView: View {
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
                                 .padding([.trailing], 16)
                                 .padding([.top], 15)
-                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count < 2)
+                                .isGone(viewModel.lineChartData.dataSets.dataPoints.count < 2)
                             Text("Not enough data to show")
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
-                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
+                                .isGone(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
                             Text(viewModel.graphXAxis[Int(viewModel.currentFilter)!])
                                 .foregroundColor(CustomColor.primaryColor).font(.caption)
                                 .padding([.horizontal], 5)
@@ -92,7 +92,7 @@ struct HomeView: View {
                 
             }
             .fullScreenCover(isPresented: $viewModel.isToShowAddBank) {
-                AddBankAccount()
+                AddBankAccount(delegate: viewModel, isFirstBank: true)
             }
             
             .fullScreenCover(item: $selectedTrans, content: { trans in

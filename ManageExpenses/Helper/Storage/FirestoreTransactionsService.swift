@@ -31,6 +31,7 @@ class FirestoreService: ServiceHandlerType {
             Future { promise in
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.budget)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
                     .getDocuments { snap, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -43,13 +44,13 @@ class FirestoreService: ServiceHandlerType {
                                 promise(.success(buds))
                                 
                             } else {
-                                promise(.failure(NetworkingError("No documents found")))
-
+                                promise(.success([]))
+                                
                             }
                         }
                     }
                 
-                    
+                
             }
         }
         .eraseToAnyPublisher()
@@ -99,7 +100,7 @@ class FirestoreService: ServiceHandlerType {
                     if DataCache.shared.banks[index].desc == incomeTrans.wallet {
                         toBankDoc = DataCache.shared.banks[index].id
                         DataCache.shared.banks[index].balance = "\(incomeTrans.amount + Double(DataCache.shared.banks[index].balance!)!)"
-                      
+                        
                     }
                     if DataCache.shared.banks[index].desc == expenseTrans.wallet {
                         fromBankDoc = DataCache.shared.banks[index].id
@@ -166,7 +167,7 @@ class FirestoreService: ServiceHandlerType {
                         promise(.success(()))
                     }
                 }
-                 
+                
             }
         }.eraseToAnyPublisher()
     }
@@ -185,7 +186,7 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
-
+    
     func getTransactions(duration: String,
                          sortBy: SortedBy,
                          filterBy: PlusMenuAction,
@@ -304,7 +305,7 @@ class FirestoreService: ServiceHandlerType {
                                 promise(.success(banks))
                                 
                             } else {
-                                promise(.failure(NetworkingError("No Bank Found")))
+                                promise(.success([]))
                             }
                         }
                     }
@@ -315,16 +316,28 @@ class FirestoreService: ServiceHandlerType {
     func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
+                
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.banks)
+                let batch = db.batch()
+                let bankRef = db.collection(Constants.firestoreCollection.banks)
                     .document(bank.id)
-                    .setData(bank.toFireStoreData()){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(()))
-                        }
+                batch.setData(bank.toFireStoreData(), forDocument: bankRef)
+                let transId = "\(UUID())"
+                let transRef = db.collection(Constants.firestoreCollection.transactions)
+                    .document(transId)
+                let sym = UserDefaults.standard.currency
+                let transaction = Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0")", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+                batch.setData(transaction.toFireStoreData(), forDocument: transRef)
+                
+                batch.commit() { error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        DataCache.shared.banks.append(bank)
+                        promise(.success(()))
+                        
                     }
+                }
             }
         }.eraseToAnyPublisher()
     }

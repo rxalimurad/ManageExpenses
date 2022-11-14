@@ -11,6 +11,7 @@ class DataCache{
     private init() {}
     static let shared = DataCache()
     var banks = [SelectDataModel]()
+    var budget = [BudgetDetail]()
     
    
     

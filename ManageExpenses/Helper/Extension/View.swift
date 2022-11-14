@@ -49,8 +49,15 @@ extension View {
             self
         }
     }
-    @ViewBuilder func isHidden(_ isHidden: Bool) -> some View {
+    @ViewBuilder func isGone(_ isHidden: Bool) -> some View {
         if !isHidden {
+            self
+        }
+    }
+    @ViewBuilder func isHidden(_ isHidden: Bool) -> some View {
+        if isHidden {
+            self.hidden()
+        } else {
             self
         }
     }

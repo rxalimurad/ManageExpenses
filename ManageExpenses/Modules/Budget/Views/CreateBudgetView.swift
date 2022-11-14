@@ -71,7 +71,7 @@ struct CreateBudgetView: View {
                 SliderWidgetView(percentage: $viewModel.budget.slider, minLimit: 1, maxLimit: 100)
                     .padding([.horizontal] , 20)
                     .frame(height: viewModel.budget.recieveAlerts ? 30 : 0)
-                    .padding([.vertical] , 10).isHidden(!viewModel.budget.recieveAlerts)
+                    .padding([.vertical] , 10).isGone(!viewModel.budget.recieveAlerts)
             }
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {

@@ -13,20 +13,29 @@ struct AddBankAccount: View {
     
     // Mark: - View Model
     @ObservedObject var viewModel = AddBankAccountViewModel(service: FirestoreService())
-    
+    weak var delegate: UpdateTransaction?
+    var isFirstBank = false
+    @State var isFirstBankState = false
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                NavigationBar(title: "Add Account", top: geometry.safeAreaInsets.top) {
+                NavigationBar(title: "Add Account", top: geometry.safeAreaInsets.top, showBackBtn: !isFirstBank) {
                     mode.wrappedValue.dismiss()
                 }
-                
+                if isFirstBankState {
+                        Text("Let's setup your account by adding a Bank Acount")
+                            .foregroundColor(CustomColor.baseLight_80)
+                            .font(.system(size: 40, weight: .medium))
+                            .padding([.leading], 26)
+                            .padding([.bottom], 40)
+                            .transition(.scale)
+                }
                 Text("Balance")
                     .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
                     .font(.system(size: 18, weight: .medium))
                     .padding([.leading], 26)
-                AmountInputWidget(amount: viewModel.bank.balance ?? "0")
+                AmountInputWidget(amount: viewModel.bank.balance ?? "")
                     .font(.system(size: 64, weight: .medium))
                     .foregroundColor(CustomColor.baseLight)
                     .padding([.top], 13)
@@ -48,6 +57,11 @@ struct AddBankAccount: View {
             .edgesIgnoringSafeArea([.all])
             
         }
+        .onAppear() {
+            withAnimation {
+                isFirstBankState = isFirstBank
+            }
+        }
     }
     
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
@@ -61,8 +75,13 @@ struct AddBankAccount: View {
                 .padding([.horizontal], 16)
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                viewModel.addBankAccount()
-                viewModel.isBankAdded.toggle()
+                viewModel.addBankAccount() { success in
+                    if success {
+                        viewModel.isBankAdded.toggle()
+                        delegate?.refresh()
+                    }
+                }
+                
                
             }
             .padding([.top], 40)
@@ -85,9 +104,3 @@ struct AddBankAccount: View {
     
     
 }
-
-//struct AddBankAccount_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddBankAccount(, category: <#Binding<SelectDataModel>#>)
-//    }
-//}

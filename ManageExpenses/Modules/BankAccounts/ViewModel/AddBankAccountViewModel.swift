@@ -12,7 +12,7 @@ protocol AddBankAccountViewModelType {
     var bank: SelectDataModel { get }
     var service: ServiceHandlerType  { get }
     init(service: ServiceHandlerType)
-    func addBankAccount()
+    func addBankAccount(complete: @escaping ((Bool) -> Void))
 }
 
 class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
@@ -25,12 +25,14 @@ class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
         self.service = service
     }
     
-    func addBankAccount() {
+    func addBankAccount(complete: @escaping ((Bool) -> Void)) {
         service.saveBank(bank: self.bank)
-            .sink { err in
-                print(err)
+            .sink { error in
+                if case Subscribers.Completion.failure(_) = error {
+                    complete(false)
+                }
             } receiveValue: {_  in
-                
+                complete(true)
             }
             .store(in: &subscription)
         
