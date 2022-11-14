@@ -15,6 +15,7 @@ protocol UpdateTransaction: AnyObject {
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var transaction: Transaction
+    
     var updateTransaction: UpdateTransaction
     @State var attachmentImage = Image("")
     var body: some View {

@@ -23,6 +23,7 @@ protocol TransactionViewModelType {
     var pieChartPoints: [PieChartDataPoint] { get }
     var financialReportList: [FinanicalReportModel] { get}
     var dbHandler: ServiceHandlerType { get }
+    var isLoading: Bool { get }
     var state: ServiceAPIState { get }
     init(dbHandler: ServiceHandlerType)
 }
@@ -40,6 +41,7 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
     @Published var dateTo = Date()
     @Published var dateFrom = Date()
     @Published var selectedTrans: Transaction?
+    var isLoading = false
     var subscriptions =  Set<AnyCancellable>()
     //MARK: - Protocol Implementation
     @Published var sortedBy: String = SortedBy.newest.rawValue
@@ -67,6 +69,7 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
     
     func fetchTransactions() {
         self.transactions = []
+        self.isLoading = true
         state = .inprogress
         self.dbHandler.getTransactions(
             duration: transDuration,
@@ -85,6 +88,7 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
             }
         } receiveValue: { [weak self] transactions in
             guard let self = self else { return }
+            self.isLoading = false
             self.transactions = transactions
             self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)
             self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)

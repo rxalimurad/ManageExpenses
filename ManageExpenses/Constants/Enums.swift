@@ -20,10 +20,12 @@ enum HTMLType: String {
 }
 
 enum TransactionCategory: String, CaseIterable {
+    case salary
     case shopping
     case subscription
     case gift
     case car
+    case tax
     case entertainment
     case pets
     case transfer
@@ -36,6 +38,7 @@ enum TransactionCategory: String, CaseIterable {
     case communication
     case sports
     case clothes
+    case other
     
     func getColor() -> Color {
         switch self {
@@ -70,8 +73,14 @@ enum TransactionCategory: String, CaseIterable {
             return Color(red: 35/255, green: 141/255, blue: 45/255)
         case .sports:
             return Color(red: 68/255, green: 141/255, blue: 69/255)
+        case .tax:
+            return Color(red: 168/255, green: 41/255, blue: 9/255)
         case .clothes:
             return Color(red: 135/255, green: 41/255, blue: 145/255)
+        case .salary:
+            return Color(red: 13/255, green: 132/255, blue: 15/255)
+        case .other:
+            return Color(red: 13/255, green: 221/255, blue: 150/255)
         }
     }
     

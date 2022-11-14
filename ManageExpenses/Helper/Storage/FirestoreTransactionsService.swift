@@ -326,7 +326,7 @@ class FirestoreService: ServiceHandlerType {
                 let transRef = db.collection(Constants.firestoreCollection.transactions)
                     .document(transId)
                 let sym = UserDefaults.standard.currency
-                let transaction = Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0")", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+                let transaction = Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
                 batch.setData(transaction.toFireStoreData(), forDocument: transRef)
                 
                 batch.commit() { error in

@@ -28,14 +28,8 @@ class BankAccountViewModel: BankAccountViewModelType, ObservableObject {
     }
     
     func fetchBanks() {
-        service.getBanksList()
-            .sink { error in
-                print(error)
-            } receiveValue: { banks in
-                self.banks = banks
-            }
-            .store(in: &subscription)
-}
+        self.banks = DataCache.shared.banks
+    }
     
     
 }

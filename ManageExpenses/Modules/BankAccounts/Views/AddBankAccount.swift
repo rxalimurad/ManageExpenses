@@ -16,6 +16,7 @@ struct AddBankAccount: View {
     weak var delegate: UpdateTransaction?
     var isFirstBank = false
     @State var isFirstBankState = false
+    @State var isBankNameValid = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -48,7 +49,7 @@ struct AddBankAccount: View {
                 Spacer()
             }
             .overlay(getAddDetailsView(geometry),alignment: .bottom)
-            .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.bank.balance.toUnwrapped(defaultValue: "0"), isShowing: $viewModel.showAmtKeybd), alignment: .center)
+            .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.bank.balance.toUnwrapped(defaultValue: ""), isShowing: $viewModel.showAmtKeybd), alignment: .center)
             .background(
                 Rectangle()
                     .foregroundColor(CustomColor.primaryColor)
@@ -67,7 +68,7 @@ struct AddBankAccount: View {
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
           
-            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 10), text: $viewModel.bank.desc, isValidField: .constant(true))
+            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 20, minLength: 3), text: $viewModel.bank.desc, isValidField: $isBankNameValid)
                 .padding([.top],24)
                 .padding([.horizontal], 16)
             ColorPicker("Set the bank color", selection: $viewModel.bank.color)
@@ -78,16 +79,17 @@ struct AddBankAccount: View {
                 viewModel.addBankAccount() { success in
                     if success {
                         viewModel.isBankAdded.toggle()
-                        delegate?.refresh()
                     }
                 }
                 
                
             }
+            .disabled(!validate())
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $viewModel.isBankAdded, content: {
                 AlertX(title: Text("Bank has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
+                    delegate?.refresh()
                     mode.wrappedValue.dismiss()
                 })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
             })
@@ -101,6 +103,10 @@ struct AddBankAccount: View {
         
     }
 
+    private func validate() -> Bool {
+    isBankNameValid && viewModel.bank.balance != nil &&
+                  Double(viewModel.bank.balance ?? "0") != 0.0
+    }
     
     
 }
