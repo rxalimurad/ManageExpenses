@@ -57,7 +57,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
     }
     
     func deleteTransaction(id: String, completion: @escaping((Bool) -> Void)) {
-        dbHandler.delteTransaction(id: id)
+        dbHandler.deleteTransaction(id: id)
             .sink { _ in
                 completion(false)
             } receiveValue: { _ in
@@ -69,7 +69,8 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
         self.transactions = []
         state = .inprogress
         isLoading = true
-        self.dbHandler.getTransactions(for: TransactionDuration(rawValue: filter ?? currentFilter) ?? TransactionDuration.thisMonth)
+        let transDur = TransactionDuration(rawValue: filter ?? currentFilter) ?? TransactionDuration.thisMonth
+        self.dbHandler.getTransactions(duration: getTransactionFilter(duration: transDur), sortBy: .newest, filterBy: .all, selectedCat: [], fromDate: Date(), toDate: Date())
             .sink(receiveCompletion: { error in
                 self.state = .successful
                 if case Subscribers.Completion.failure(_) = error {
@@ -80,22 +81,23 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
                     self.totalAmount = UserDefaults.standard.currency + "0"
                     self.isLoading = false
                 }
-            }, receiveValue: {[weak self] (transactions, income, expense) in
+            }, receiveValue: {[weak self] transactions in
                 guard let self = self else { return }
                 if filter == self.currentFilter {
-                        self.isLoading = false
-                        self.transactions = transactions
-                        self.income = income
-                        self.expense = expense
+                    self.isLoading = false
+                    self.transactions = self.proccessTransactions(transactions)
+                    let amounts = transactions.map({ $0.amount })
+                    self.income = Utilities.getFormattedAmount(amount: amounts.filter({ $0 > 0}).reduce(0, +))
+                    self.expense = Utilities.getFormattedAmount(amount: amounts.filter({ $0 < 0}).reduce(0, +))
                     var bankBalance: Double = 0
                     for bank in DataCache.shared.banks {
                         bankBalance += Double(bank.balance ?? "0")!
                     }
                     
-                        self.totalAmount = UserDefaults.standard.currency + " \(bankBalance)"
-                        self.lineChartData = self.getChartData(transaction: transactions, filter: filter)
-                        self.state = .successful
-                 
+                    self.totalAmount = UserDefaults.standard.currency + " \(bankBalance)"
+                    self.lineChartData = self.getChartData(transaction: self.transactions, filter: filter)
+                    self.state = .successful
+                    
                 }
             })
             .store(in: &subscriptions)
@@ -162,7 +164,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
                     dataPoints.append(LineChartDataPoint(value: amount, xAxisLabel: xLabel, description: "\(day)"))
                     i += 1
                 }
-
+                
                 return dataPoints.sorted(by: { Int($0.description!)! < Int($1.description!)!})
                 
             case .thisYear:
@@ -182,7 +184,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             default:
                 return []
             }
-             
+            
         }
         return dataPoints
     }
@@ -196,7 +198,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             dataPoints: dataPoints,
             pointStyle: PointStyle(pointSize: 10, borderColour:.yellow, fillColour: .red, lineWidth: 8, pointType: .filled, pointShape: .circle),
             style: LineStyle(lineColour: ColourStyle(colour: CustomColor.primaryColor), lineType: .curvedLine, strokeStyle: Stroke(lineWidth: 8)))
-            
+        
         
         let chartStyle = LineChartStyle(
             markerType: LineMarkerType.full(attachment: MarkerAttachment.point,
@@ -211,6 +213,45 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             yAxisTitleColour: .black)
         return LineChartData(dataSets: data, chartStyle: chartStyle)
         
+    }
+    
+    // MARK: - Helper
+    
+    func getTransactionFilter(duration: TransactionDuration) -> String {
+        switch duration {
+        case .thisDay:
+            return FilterDuration.today.rawValue
+        case .thisMonth:
+            return FilterDuration.thisMonth.rawValue
+        case .thisWeek:
+            return FilterDuration.thisWeek.rawValue
+        case .thisYear:
+            return FilterDuration.thisYear.rawValue
+        case .customRange:
+            return FilterDuration.thisMonth.rawValue
+        }
+    }
+    
+    private func proccessTransactions(_ transactions: [Transaction]) -> [DatedTransactions] {
+        var recentTransactionsKeys: [String] = []
+        let sortedTrans = transactions.sorted(by: { $0.date > $1.date })
+        var dict = [String: [Transaction]]()
+        for trans in sortedTrans {
+            if dict[trans.date.dateToShow] == nil {
+                dict[trans.date.dateToShow] = [trans]
+                recentTransactionsKeys.append(trans.date.dateToShow)
+            } else {
+                dict[trans.date.dateToShow] = dict[trans.date.dateToShow]! + [trans]
+            }
+        }
+        var list = [DatedTransactions]()
+        for key in recentTransactionsKeys {
+            let obj = dict[key]!
+            list.append(DatedTransactions(date: key, transactions: obj))
+        }
+        
+        
+        return list
     }
     
 }

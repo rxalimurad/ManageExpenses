@@ -22,10 +22,9 @@ protocol ServiceHandlerType {
     func updateBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError>
     func deleteBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError>
     func fetchBudgetList() -> AnyPublisher<[BudgetDetail], NetworkingError>
-    func delteTransaction(id: String) -> AnyPublisher<Void, NetworkingError>
+    func deleteTransaction(id: String) -> AnyPublisher<Void, NetworkingError>
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
     func addTransfer(transaction: Transaction) -> AnyPublisher<Void, NetworkingError>
-    func getTransactions(for duration: TransactionDuration) -> AnyPublisher<([DatedTransactions], String, String), NetworkingError>
     func getTransactions(duration: String, sortBy: SortedBy, filterBy: PlusMenuAction, selectedCat: [String], fromDate: Date, toDate: Date) -> AnyPublisher<[Transaction], NetworkingError>
 }
 
