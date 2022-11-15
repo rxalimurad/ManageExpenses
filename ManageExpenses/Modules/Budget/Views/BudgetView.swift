@@ -69,7 +69,7 @@ struct BudgetView: View {
                         Button {
                             selectedBudget = budget
                         } label: {
-                            BudgetViewCell(budget: budget)
+                            BudgetViewCell(vm: BudgetCellVM(budget: budget))
                         }
                         
                        

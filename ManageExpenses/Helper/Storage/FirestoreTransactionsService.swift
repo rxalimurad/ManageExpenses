@@ -168,6 +168,13 @@ class FirestoreService: ServiceHandlerType {
                     if let err = error {
                         promise(.failure(NetworkingError(err.localizedDescription)))
                     } else {
+                        if transaction.amount < 0 {
+                            if DataCache.shared.catSpendingDict[transaction.category.lowercased()] == nil {
+                                DataCache.shared.catSpendingDict[transaction.category.lowercased()] = abs(transaction.amount)
+                            } else {
+                                DataCache.shared.catSpendingDict[transaction.category.lowercased()]! += abs(transaction.amount)
+                            }
+                        }
                         promise(.success(()))
                     }
                 }
@@ -175,15 +182,22 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
-    func deleteTransaction(id: String) -> AnyPublisher<Void, NetworkingError> {
+    func deleteTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future {promise in
                 Firestore.firestore().collection(Constants.firestoreCollection.transactions)
-                    .document(id)
+                    .document(transaction.id)
                     .delete { error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
                         } else {
+                            if transaction.amount < 0 {
+                                if transaction.date >= Date().startOfMonth {
+                                    if DataCache.shared.catSpendingDict[transaction.category.lowercased()] != nil {
+                                        DataCache.shared.catSpendingDict[transaction.category.lowercased()]! -= abs(transaction.amount)
+                                    }
+                                }
+                            }
                             promise(.success(()))
                         }
                     }
@@ -287,10 +301,7 @@ extension FirestoreService {
             let start = Calendar.current.date(from: components) ?? Date()
             return Timestamp(date: start)
         case .thisMonth:
-            let year = Calendar.current.component(.year, from: Date())
-            let month = Calendar.current.component(.month, from: Date())
-            let thisMonth = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1)) ?? Date()
-            return Timestamp(date: thisMonth)
+            return Timestamp(date: Date().startOfMonth)
         case .thisWeek:
             let thisWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
             return Timestamp(date: thisWeek)

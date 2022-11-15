@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol UpdateTransaction: AnyObject {
-    func deleteTransaction(id: String, completion: @escaping((Bool) -> Void))
+    func deleteTransaction(transaction: Transaction, completion: @escaping((Bool) -> Void))
     func refresh()
 }
 
@@ -25,7 +25,7 @@ struct TransactionDetailView: View {
                         NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
                             mode.wrappedValue.dismiss()
                         }, rightBtnImage: .Custom.delete) {
-                            updateTransaction.deleteTransaction(id: transaction.id) { success in
+                            updateTransaction.deleteTransaction(transaction: transaction) { success in
                                 if success {
                                     updateTransaction.refresh()
                                     mode.wrappedValue.dismiss()

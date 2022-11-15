@@ -12,6 +12,8 @@ class DataCache{
     static let shared = DataCache()
     @Published var banks = [SelectDataModel]()
     @Published var budget = [BudgetDetail]()
+    @Published var catSpendingDict = [String: Double]()
+    
     
    
     

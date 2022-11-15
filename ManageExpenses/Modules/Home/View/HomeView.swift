@@ -192,32 +192,37 @@ struct HomeView: View {
     }
     
     var totalIncomeView: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
             Color.green
             HStack  {
                 
                 Image.Custom.inflow
+                    .padding([.leading], 10)
                 VStack(alignment: .leading) {
                     Text("Income")
                         .font(.system(size: 14, weight: .medium))
                     Text(viewModel.income)
                         .font(.system(size: 22, weight: .semibold))
                 }
+                .padding([.trailing], 10)
                 .foregroundColor(CustomColor.baseLight_80)
             }
         }
     }
     var totalExpensesView: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
             Color.red
             HStack  {
                 Image.Custom.outflow
+                    .padding([.leading], 10)
                 VStack(alignment: .leading) {
                     Text("Expenses")
                         .font(.system(size: 14, weight: .medium))
                     Text(viewModel.expense)
                         .font(.system(size: 22, weight: .semibold))
-                }.foregroundColor(CustomColor.baseLight_80)
+                }
+                .padding([.trailing], 10)
+                .foregroundColor(CustomColor.baseLight_80)
             }
         }
     }

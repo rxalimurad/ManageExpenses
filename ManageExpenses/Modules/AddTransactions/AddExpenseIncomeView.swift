@@ -68,7 +68,7 @@ struct AddExpenseIncomeView: View {
                 )
                 
                 .edgesIgnoringSafeArea([.all])
-               // ViewForServiceAPI(state: $viewModel.serviceStatus)
+                ViewForServiceAPI(state: $viewModel.serviceStatus)
             }
             .sheet(isPresented: $isImgPkrShown, content: {
                 ImagePicker(image: $selectedImage, type: .photoLibrary)
@@ -120,7 +120,9 @@ struct AddExpenseIncomeView: View {
                     toAcc: toWallet.desc,
                     date: Date().secondsSince1970
                 ))
-                isTransactionAdded.toggle()
+                {
+                    self.isTransactionAdded.toggle()
+            }
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
@@ -143,36 +145,48 @@ struct AddExpenseIncomeView: View {
         return !(amount.isEmpty || category.desc.isEmpty || description.isEmpty || wallet.desc.isEmpty)
     }
     
+    //,,.. move to vm
+    
+    func isBudgetExist(category: String) -> Bool {
+        return DataCache.shared.budget.contains(where: {$0.category.desc == category})
+    }
+    func getBudget(category: String) -> BudgetDetail {
+        return DataCache.shared.budget.filter({$0.category.desc == category}).first ?? BudgetDetail.getEmptyBudget()
+    }
+    
+    
     
     @ViewBuilder private func addDetailsViewExpenseIncome(_ geometry: GeometryProxy) -> some View {
         VStack {
             SelectorWidgetView(hint: "Category", text: $category, data: $viewModel.categoryData)
                 .padding([.top], 24)
-            //,,..BudgetViewCell(budget: BudgetDetail(category: category, limit: 20000, month: "May"))
-              //  .padding([.top], 16)
-                //.isShowing(category.desc.lowercased() == "shopping")
+            BudgetViewCell(vm: BudgetCellVM(budget: getBudget(category: category.desc.lowercased())))
+                .padding([.top], 16)
+                .isShowing(isBudgetExist(category: category.desc.lowercased()))
             InputWidgetView(hint: "Description", properties: InputProperties(maxLength: 225), text: $description, isValidField: .constant(true))
                 .padding([.top], 16)
             SelectorWidgetView(hint: "Wallet", text: $wallet , data: $walletData)
                 .padding([.top, .bottom], 16)
            
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-//                viewModel.saveTransaction(transaction:
-//                                            Transaction(
-//                                                id: "\(UUID())",
-//                                                amount: newEntryType == .expense ? -(Double(amount) ?? 0.0) : (Double(amount) ?? 0.0),
-//                                                category: category.desc,
-//                                                desc: description,
-//                                                name: category.desc,
-//                                                wallet: wallet.desc,
-//                                                attachment: "",
-//                                                type: newEntryType.rawValue,
-//                                                fromAcc: "",
-//                                                toAcc: "",
-//                                                date: Date().secondsSince1970
-//                                            )
-//                )
-                isTransactionAdded.toggle()
+                viewModel.saveTransaction(transaction:
+                                            Transaction(
+                                                id: "\(UUID())",
+                                                amount: newEntryType == .expense ? -(Double(amount) ?? 0.0) : (Double(amount) ?? 0.0),
+                                                category: category.desc,
+                                                desc: description,
+                                                name: category.desc,
+                                                wallet: wallet.desc,
+                                                attachment: "",
+                                                type: newEntryType.rawValue,
+                                                fromAcc: "",
+                                                toAcc: "",
+                                                date: Date().secondsSince1970
+                                            )
+                ) {
+                    self.isTransactionAdded.toggle()
+                }
+                
                 
                 
             }

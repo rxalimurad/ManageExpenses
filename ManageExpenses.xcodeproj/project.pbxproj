@@ -57,6 +57,7 @@
 		FA21348D2905D2C0002EEBF4 /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */; };
 		FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E66B290836DA008CF65A /* MiscListOfData.swift */; };
 		FA24E67129083871008CF65A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24E67029083871008CF65A /* ProfileView.swift */; };
+		FA3613C72924123100FAB6DB /* BudgetCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3613C62924123100FAB6DB /* BudgetCellVM.swift */; };
 		FA4D35B3291F6E0D00D06B4D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */; };
 		FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */; };
 		FA54F5782910300F0015E40A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FA54F5772910300F0015E40A /* FirebaseAnalytics */; };
@@ -311,6 +312,7 @@
 		FA21348C2905D2C0002EEBF4 /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		FA24E66B290836DA008CF65A /* MiscListOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscListOfData.swift; sourceTree = "<group>"; };
 		FA24E67029083871008CF65A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FA3613C62924123100FAB6DB /* BudgetCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCellVM.swift; sourceTree = "<group>"; };
 		FA4D35B2291F6E0D00D06B4D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		FA4D35B62920CAFC00D06B4D /* CreateBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBudgetViewModel.swift; sourceTree = "<group>"; };
 		FA54F58129117E960015E40A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1412,6 +1414,7 @@
 				FA4D35B52920CABA00D06B4D /* ViewModel */,
 				FA4D35B82920D16900D06B4D /* Model */,
 				FAC44563290B0354005757E8 /* BudgetViewCell.swift */,
+				FA3613C62924123100FAB6DB /* BudgetCellVM.swift */,
 			);
 			path = Budget;
 			sourceTree = "<group>";
@@ -1804,6 +1807,7 @@
 				FA82B50228FC0F260038E099 /* YAxisGrid.swift in Sources */,
 				FAA478F228F8AEF300C06B31 /* PasscodeWidgetView.swift in Sources */,
 				FA82B4B228FC0F240038E099 /* RangedBarDataPoint.swift in Sources */,
+				FA3613C72924123100FAB6DB /* BudgetCellVM.swift in Sources */,
 				FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */,
 				FA82B58628FC1D7F0038E099 /* DoughnutSegmentShape.swift in Sources */,
 				FA82B4F928FC0F250038E099 /* LineAndBarEnums.swift in Sources */,

@@ -12,7 +12,7 @@ protocol AddExpenseIncomeViewModelType {
     var service: ServiceHandlerType { get }
     var serviceStatus: ServiceAPIState { get }
     init(service: ServiceHandlerType)
-    func saveTransaction(transaction: Transaction)
+    func saveTransaction(transaction: Transaction, completion: @escaping(() -> Void)) 
     
 }
 
@@ -29,7 +29,7 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
         categoryData = Utilities.getCategories()
     }
     
-    func saveTransaction(transaction: Transaction) {
+    func saveTransaction(transaction: Transaction, completion: @escaping(() -> Void)) {
         serviceStatus = .inprogress
         service.addTransaction(transaction: transaction)
             .sink {[weak self] res in
@@ -41,10 +41,11 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
                 
             } receiveValue: {[weak self] _ in
                 self?.serviceStatus = .successful
+                completion()
             }.store(in: &subscription)
         
     }
-    func transfer(transaction: Transaction) {
+    func transfer(transaction: Transaction, completion: @escaping(() -> Void)) {
         serviceStatus = .inprogress
         service.addTransfer(transaction: transaction)
             .sink {[weak self] res in
@@ -56,6 +57,7 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
                 
             } receiveValue: {[weak self] _ in
                 self?.serviceStatus = .successful
+                completion()
             }.store(in: &subscription)
         
     }
