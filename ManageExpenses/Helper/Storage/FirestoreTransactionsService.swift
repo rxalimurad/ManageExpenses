@@ -9,6 +9,12 @@ import Foundation
 import Combine
 import FirebaseFirestore
 class FirestoreService: ServiceHandlerType {
+    
+    
+    
+    
+    
+    
     func deleteBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
@@ -270,23 +276,6 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-    
-    func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
-                    .document("id")
-                    .setData([:]){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(([DatedTransactions]())))
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
     
     func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
         Deferred {

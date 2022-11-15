@@ -82,8 +82,4 @@ struct BankAccountsView: View {
     }
 }
 
-struct BankAccountsView_Previews: PreviewProvider {
-    static var previews: some View {
-        BankAccountsView()
-    }
-}
+

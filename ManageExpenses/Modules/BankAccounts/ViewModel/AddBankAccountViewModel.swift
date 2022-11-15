@@ -19,6 +19,7 @@ class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
     @Published var showAmtKeybd = false
     @Published var isBankAdded = false
     @Published var bank: SelectDataModel = .new
+    @Published var state: ServiceAPIState = .na
     var subscription = Set<AnyCancellable>()
     var service: ServiceHandlerType
     required init(service: ServiceHandlerType) {
@@ -26,12 +27,15 @@ class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
     }
     
     func addBankAccount(complete: @escaping ((Bool) -> Void)) {
+        state = .inprogress
         service.saveBank(bank: self.bank)
-            .sink { error in
+            .sink { [weak self] error in
                 if case Subscribers.Completion.failure(_) = error {
+                    self?.state = .failed(error: NetworkingError("Some error occured.\nPlease try again."))
                     complete(false)
                 }
-            } receiveValue: {_  in
+            } receiveValue: {[weak self] _  in
+                self?.state = .successful
                 complete(true)
             }
             .store(in: &subscription)

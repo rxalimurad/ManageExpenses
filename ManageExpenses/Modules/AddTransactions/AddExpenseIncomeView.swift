@@ -35,7 +35,7 @@ struct AddExpenseIncomeView: View {
     @State var walletData = DataCache.shared.banks
     
     var newEntryType: PlusMenuAction
-    weak var updateViewModel: UpdateTransaction?
+//    weak var updateViewModel: UpdateTransaction?
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -195,7 +195,7 @@ struct AddExpenseIncomeView: View {
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
-                    updateViewModel?.refresh()
+//                    updateViewModel?.refresh()
                     mode.wrappedValue.dismiss()
                 }
             })

@@ -10,8 +10,8 @@ import Foundation
 class DataCache{
     private init() {}
     static let shared = DataCache()
-    var banks = [SelectDataModel]()
-    var budget = [BudgetDetail]()
+    @Published var banks = [SelectDataModel]()
+    @Published var budget = [BudgetDetail]()
     
    
     

@@ -20,42 +20,45 @@ struct AddBankAccount: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                NavigationBar(title: "Add Account", top: geometry.safeAreaInsets.top, showBackBtn: !isFirstBank) {
-                    mode.wrappedValue.dismiss()
-                }
-                if isFirstBankState {
+            ZStack {
+                VStack(alignment: .leading) {
+                    NavigationBar(title: "Add Account", top: geometry.safeAreaInsets.top, showBackBtn: !isFirstBank) {
+                        mode.wrappedValue.dismiss()
+                    }
+                    if isFirstBankState {
                         Text("Let's setup your account by adding a Bank Acount")
                             .foregroundColor(CustomColor.baseLight_80)
                             .font(.system(size: 40, weight: .medium))
                             .padding([.leading], 26)
                             .padding([.bottom], 40)
                             .transition(.scale)
-                }
-                Text("Balance")
-                    .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
-                    .font(.system(size: 18, weight: .medium))
-                    .padding([.leading], 26)
-                AmountInputWidget(amount: viewModel.bank.balance ?? "")
-                    .font(.system(size: 64, weight: .medium))
-                    .foregroundColor(CustomColor.baseLight)
-                    .padding([.top], 13)
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.showAmtKeybd.toggle()
-                        }
                     }
-                
-                Spacer()
+                    Text("Balance")
+                        .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
+                        .font(.system(size: 18, weight: .medium))
+                        .padding([.leading], 26)
+                    AmountInputWidget(amount: viewModel.bank.balance ?? "")
+                        .font(.system(size: 64, weight: .medium))
+                        .foregroundColor(CustomColor.baseLight)
+                        .padding([.top], 13)
+                        .onTapGesture {
+                            withAnimation {
+                                viewModel.showAmtKeybd.toggle()
+                            }
+                        }
+                    
+                    Spacer()
+                }
+                .overlay(getAddDetailsView(geometry),alignment: .bottom)
+                .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.bank.balance.toUnwrapped(defaultValue: ""), isShowing: $viewModel.showAmtKeybd), alignment: .center)
+                .background(
+                    Rectangle()
+                        .foregroundColor(CustomColor.primaryColor)
+                    
+                )
+                .edgesIgnoringSafeArea([.all])
+                ViewForServiceAPI(state: $viewModel.state)
             }
-            .overlay(getAddDetailsView(geometry),alignment: .bottom)
-            .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.bank.balance.toUnwrapped(defaultValue: ""), isShowing: $viewModel.showAmtKeybd), alignment: .center)
-            .background(
-                Rectangle()
-                    .foregroundColor(CustomColor.primaryColor)
-                
-            )
-            .edgesIgnoringSafeArea([.all])
             
         }
         .onAppear() {
@@ -67,7 +70,7 @@ struct AddBankAccount: View {
     
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-          
+            
             InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 20, minLength: 3), text: $viewModel.bank.desc, isValidField: $isBankNameValid)
                 .padding([.top],24)
                 .padding([.horizontal], 16)
@@ -81,8 +84,6 @@ struct AddBankAccount: View {
                         viewModel.isBankAdded.toggle()
                     }
                 }
-                
-               
             }
             .disabled(!validate())
             .padding([.top], 40)
@@ -102,10 +103,10 @@ struct AddBankAccount: View {
         )
         
     }
-
+    
     private func validate() -> Bool {
-    isBankNameValid && viewModel.bank.balance != nil &&
-                  Double(viewModel.bank.balance ?? "0") != 0.0
+        isBankNameValid && viewModel.bank.balance != nil &&
+        Double(viewModel.bank.balance ?? "0") != 0.0
     }
     
     

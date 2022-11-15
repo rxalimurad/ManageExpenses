@@ -558,6 +558,7 @@
 			children = (
 				FA8BC157290EF8D10025BE0A /* AddBankAccount.swift */,
 				FA8BC159290EF8E40025BE0A /* BankAccountsView.swift */,
+				FA864277290F0A7D006902CB /* BankDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -567,6 +568,7 @@
 			children = (
 				5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */,
 				5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */,
+				FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1389,8 +1391,6 @@
 			children = (
 				5F180376291E32A200E40E35 /* Views */,
 				5F180377291E32CA00E40E35 /* ViewModel */,
-				FA864277290F0A7D006902CB /* BankDetailsView.swift */,
-				FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */,
 			);
 			path = BankAccounts;
 			sourceTree = "<group>";

@@ -16,19 +16,19 @@ protocol BankAccountViewModelType {
 
 class BankAccountViewModel: BankAccountViewModelType, ObservableObject {
     @Published var banks: [SelectDataModel] = []
-    
-    var service: ServiceHandlerType
-    
     var subscription = Set<AnyCancellable>()
-    
-    
+    var service: ServiceHandlerType
     required init(service: ServiceHandlerType) {
         self.service = service
         fetchBanks()
     }
     
     func fetchBanks() {
-        self.banks = DataCache.shared.banks
+        DataCache.shared.$banks
+            .sink { banks in
+                self.banks = banks
+            }
+            .store(in: &subscription)
     }
     
     
