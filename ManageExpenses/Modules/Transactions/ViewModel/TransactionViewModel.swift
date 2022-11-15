@@ -78,22 +78,20 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
             selectedCat: selectedCategoties,
             fromDate: dateFrom,
             toDate: dateTo
-        )
-        .sink { error in
-            self.state = .successful
-            if case Subscribers.Completion.failure(_) = error {
+        ) {[weak self] error, trans in
+            guard let self = self else { return }
+            if let _ = error {
                 self.transactions = []
                 self.financialReportList = []
                 self.pieChartPoints = []
+            } else {
+                self.isLoading = false
+                self.transactions = trans ?? []
+                self.financialReportList = self.getFinanicalChartData(transactions: trans ?? [], categoryData: self.categoryData, selectedTab: self.selectedTab)
+                self.pieChartPoints = self.getFinacialChartPoints(transactions: trans ?? [], categoryData: self.categoryData, selectedTab: self.selectedTab)
             }
-        } receiveValue: { [weak self] transactions in
-            guard let self = self else { return }
-            self.isLoading = false
-            self.transactions = transactions
-            self.financialReportList = self.getFinanicalChartData(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)
-            self.pieChartPoints = self.getFinacialChartPoints(transactions: transactions, categoryData: self.categoryData, selectedTab: self.selectedTab)
+            
         }
-        .store(in: &subscriptions)
         
     }
     

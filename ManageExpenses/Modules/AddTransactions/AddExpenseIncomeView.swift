@@ -35,7 +35,6 @@ struct AddExpenseIncomeView: View {
     @State var walletData = DataCache.shared.banks
     
     var newEntryType: PlusMenuAction
-//    weak var updateViewModel: UpdateTransaction?
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -62,32 +61,21 @@ struct AddExpenseIncomeView: View {
                 }
                 .overlay(getAddDetailsView(type: newEntryType, geometry),alignment: .bottom)
                 .overlay(KeyboardWidget(geometry: geometry, amount: $amount, isShowing: $showAmtKeybd), alignment: .center)
-                .fullScreenCover(isPresented: $isAtchmntViewShown) {
-                    ZStack (alignment: .bottom) {
-                        Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                isAtchmntViewShown.toggle()
-                            }
-                        attachmentSheet(geometry)
-                    }
-                    .background(ColoredView(color: .clear))
-                    .edgesIgnoringSafeArea(.all)
-                }
-                
                 .background(
                     Rectangle()
                         .foregroundColor(getBgColor(type: newEntryType))
                     
                 )
-                .sheet(isPresented: $isImgPkrShown, content: {
-                    ImagePicker(image: $selectedImage, type: .photoLibrary)
-                })
-                .sheet(isPresented: $isCamerPkrShown, content: {
-                    ImagePicker(image: $selectedImage, type: .camera)
-                })
+                
                 .edgesIgnoringSafeArea([.all])
-                ViewForServiceAPI(state: $viewModel.serviceStatus)
+               // ViewForServiceAPI(state: $viewModel.serviceStatus)
             }
+            .sheet(isPresented: $isImgPkrShown, content: {
+                ImagePicker(image: $selectedImage, type: .photoLibrary)
+            })
+            .sheet(isPresented: $isCamerPkrShown, content: {
+                ImagePicker(image: $selectedImage, type: .camera)
+            })
             
         }
     }
@@ -169,21 +157,21 @@ struct AddExpenseIncomeView: View {
                 .padding([.top, .bottom], 16)
            
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
-                viewModel.saveTransaction(transaction:
-                                            Transaction(
-                                                id: "\(UUID())",
-                                                amount: newEntryType == .expense ? -(Double(amount) ?? 0.0) : (Double(amount) ?? 0.0),
-                                                category: category.desc,
-                                                desc: description,
-                                                name: category.desc,
-                                                wallet: wallet.desc,
-                                                attachment: "",
-                                                type: newEntryType.rawValue,
-                                                fromAcc: "",
-                                                toAcc: "",
-                                                date: Date().secondsSince1970
-                                            )
-                )
+//                viewModel.saveTransaction(transaction:
+//                                            Transaction(
+//                                                id: "\(UUID())",
+//                                                amount: newEntryType == .expense ? -(Double(amount) ?? 0.0) : (Double(amount) ?? 0.0),
+//                                                category: category.desc,
+//                                                desc: description,
+//                                                name: category.desc,
+//                                                wallet: wallet.desc,
+//                                                attachment: "",
+//                                                type: newEntryType.rawValue,
+//                                                fromAcc: "",
+//                                                toAcc: "",
+//                                                date: Date().secondsSince1970
+//                                            )
+//                )
                 isTransactionAdded.toggle()
                 
                 
@@ -195,7 +183,6 @@ struct AddExpenseIncomeView: View {
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
-//                    updateViewModel?.refresh()
                     mode.wrappedValue.dismiss()
                 }
             })
@@ -208,39 +195,7 @@ struct AddExpenseIncomeView: View {
         )
         
     }
-    private func attachmentSheet(_ geometry: GeometryProxy) ->  some View {
-        VStack {
-            Button {
-                isAtchmntViewShown.toggle()
-            } label: {
-                indicator
-                    .padding([.top], 16)
-                    .padding([.bottom], 48)
-            }
-            
-            
-            HStack(spacing: 8) {
-                AttachmentView(image: .Custom.camera, title: "Camera") {
-                    isAtchmntViewShown.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        self.isCamerPkrShown.toggle()
-                    }
-                }
-                AttachmentView(image: .Custom.gallery, title: "Image") {
-                    isAtchmntViewShown.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        self.isImgPkrShown.toggle()
-                    }
-                }
-                
-            }
-            .padding([.horizontal], 16)
-            .padding([.bottom], 16 + geometry.safeAreaInsets.bottom)
-        }
-        
-        .background(ColoredView(color: .white))
-        .cornerRadius(15, corners: [.topLeft, .topRight])
-    }
+    
     
     private var indicator: some View {
         Rectangle()

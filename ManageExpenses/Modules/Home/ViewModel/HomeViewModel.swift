@@ -70,23 +70,19 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
         state = .inprogress
         isLoading = true
         let transDur = TransactionDuration(rawValue: filter ?? currentFilter) ?? TransactionDuration.thisMonth
-        self.dbHandler.getTransactions(duration: getTransactionFilter(duration: transDur), sortBy: .newest, filterBy: .all, selectedCat: [], fromDate: Date(), toDate: Date())
-            .sink(receiveCompletion: { error in
-                self.state = .successful
-                if case Subscribers.Completion.failure(_) = error {
-                    self.transactions = []
-                    self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
-                    self.income = UserDefaults.standard.currency + "0"
-                    self.expense = UserDefaults.standard.currency + "0"
-                    self.totalAmount = UserDefaults.standard.currency + "0"
-                    self.isLoading = false
-                }
-            }, receiveValue: {[weak self] transactions in
-                guard let self = self else { return }
+        self.dbHandler.getTransactions(duration: getTransactionFilter(duration: transDur), sortBy: .newest, filterBy: .all, selectedCat: [], fromDate: Date(), toDate: Date()) {error, trans in
+            if let _ = error {
+                self.transactions = []
+                self.lineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+                self.income = UserDefaults.standard.currency + "0"
+                self.expense = UserDefaults.standard.currency + "0"
+                self.totalAmount = UserDefaults.standard.currency + "0"
+                self.isLoading = false
+            } else {
                 if filter == self.currentFilter {
                     self.isLoading = false
-                    self.transactions = self.proccessTransactions(transactions)
-                    let amounts = transactions.map({ $0.amount })
+                    self.transactions = self.proccessTransactions(trans ?? [])
+                    let amounts = (trans ?? []).map({ $0.amount })
                     self.income = Utilities.getFormattedAmount(amount: amounts.filter({ $0 > 0}).reduce(0, +))
                     self.expense = Utilities.getFormattedAmount(amount: amounts.filter({ $0 < 0}).reduce(0, +))
                     var bankBalance: Double = 0
@@ -99,8 +95,12 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
                     self.state = .successful
                     
                 }
-            })
-            .store(in: &subscriptions)
+            }
+            
+            
+            
+        }
+
     }
     
     private func getDataPoint(trans: [Transaction], filter: String?) -> [LineChartDataPoint] {

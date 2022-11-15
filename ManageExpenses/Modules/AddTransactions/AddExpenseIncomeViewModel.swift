@@ -13,7 +13,6 @@ protocol AddExpenseIncomeViewModelType {
     var serviceStatus: ServiceAPIState { get }
     init(service: ServiceHandlerType)
     func saveTransaction(transaction: Transaction)
-    func deleteTransaction(id: String)
     
 }
 
@@ -31,25 +30,34 @@ class AddExpenseIncomeViewModel: ObservableObject, AddExpenseIncomeViewModelType
     }
     
     func saveTransaction(transaction: Transaction) {
+        serviceStatus = .inprogress
         service.addTransaction(transaction: transaction)
-            .sink { error in
-                print(error)
-            } receiveValue: { _ in
+            .sink {[weak self] res in
+                switch res {
+                case .failure(let error):
+                    self?.serviceStatus = .failed(error: error)
+                default: break
+                }
                 
+            } receiveValue: {[weak self] _ in
+                self?.serviceStatus = .successful
             }.store(in: &subscription)
         
     }
     func transfer(transaction: Transaction) {
+        serviceStatus = .inprogress
         service.addTransfer(transaction: transaction)
-            .sink { error in
-                print(error)
-            } receiveValue: { _ in
+            .sink {[weak self] res in
+                switch res {
+                case .failure(let error):
+                    self?.serviceStatus = .failed(error: error)
+                default: break
+                }
                 
+            } receiveValue: {[weak self] _ in
+                self?.serviceStatus = .successful
             }.store(in: &subscription)
         
     }
-    func deleteTransaction(id: String) {
-        
-    }
-    
+  
 }

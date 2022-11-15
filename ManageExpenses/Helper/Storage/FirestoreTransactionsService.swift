@@ -250,46 +250,27 @@ class FirestoreService: ServiceHandlerType {
                          filterBy: PlusMenuAction,
                          selectedCat: [String],
                          fromDate: Date,
-                         toDate: Date
-    ) -> AnyPublisher<[Transaction], NetworkingError> {
-        Deferred {
-            Future {[weak self] promise in
-                guard let self = self else { return }
+                         toDate: Date,
+                         completion: @escaping (NetworkingError?, [Transaction]?) -> Void) {
+        
                 self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
-                    .getDocuments(completion: { snapshot, error in
+                    .addSnapshotListener { snapshot, error in
                         if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
+                            completion(NetworkingError(err.localizedDescription), nil)
                         } else {
                             if let documents = snapshot?.documents, !documents.isEmpty {
                                 var transactions = [Transaction]()
                                 for document in documents {
                                     transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
                                 }
-                                switch sortBy {
-                                case .newest:
-                                    let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
-                                    promise(.success(sortedTrans))
-                                case .oldest:
-                                    let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
-                                    promise(.success(sortedTrans))
-                                case .lowest:
-                                    let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
-                                    promise(.success(sortedTrans))
-                                case .highest:
-                                    let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
-                                    promise(.success(sortedTrans))
-                                }
-                                
-                                
+                                completion(nil, self.getSortedTransactions(sortBy: sortBy, transactions: transactions))
                             } else {
-                                promise(.failure(NetworkingError("No document found")))
+                                completion(NetworkingError("No document found"), nil)
                             }
                         }
                         
                         
-                    })
-            }
-        }.eraseToAnyPublisher()
+                    }
     }
     
 }
@@ -389,6 +370,23 @@ extension FirestoreService {
         }
         
         return Timestamp(date: Date())
+    }
+    
+    private func getSortedTransactions(sortBy: SortedBy, transactions: [Transaction]) -> [Transaction] {
+        switch sortBy {
+        case .newest:
+            let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
+            return sortedTrans
+        case .oldest:
+            let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
+            return sortedTrans
+        case .lowest:
+            let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
+            return sortedTrans
+        case .highest:
+            let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
+            return sortedTrans
+        }
     }
     
 }

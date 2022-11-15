@@ -14,6 +14,8 @@ struct TabControlView: View {
     @State var showPopUp = false
     @State var showNewEntryScreen = false
     @State var newEntryType: PlusMenuAction?
+    let homeVM = HomeViewModel(dbHandler: FirestoreService())
+    let transVM = TransactionViewModel(dbHandler: FirestoreService())
     var body: some View {
         ZStack {
             if showPopUp {
@@ -29,9 +31,9 @@ struct TabControlView: View {
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            HomeView(viewModel: HomeViewModel(dbHandler: FirestoreService()), rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
+                            HomeView(viewModel: homeVM, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
-                            TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: TransactionViewModel(dbHandler: FirestoreService()))
+                            TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transVM)
                         case .budget:
                             BudgetView(safeAreaInsets: geometry.safeAreaInsets)
                         case .user:
