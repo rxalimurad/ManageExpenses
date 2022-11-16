@@ -19,7 +19,7 @@ class BudgetCellVM: ObservableObject {
         self.budget = budget
         DataCache.shared.$catSpendingDict
             .sink { cate in
-                self.spending = cate[budget.category.desc] ?? 0
+                self.spending = cate[budget.category.desc.lowercased()] ?? 0
                 self.percentage = self.getPercentage()
                 self.isLimitExceed = self.checkLimit()
             }
