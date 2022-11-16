@@ -148,10 +148,10 @@ struct AddExpenseIncomeView: View {
     //,,.. move to vm
     
     func isBudgetExist(category: String) -> Bool {
-        return DataCache.shared.budget.contains(where: {$0.category.desc == category})
+        return DataCache.shared.budget.contains(where: {$0.category.desc.lowercased() == category})
     }
     func getBudget(category: String) -> BudgetDetail {
-        return DataCache.shared.budget.filter({$0.category.desc == category}).first ?? BudgetDetail.getEmptyBudget()
+        return DataCache.shared.budget.filter({$0.category.desc.lowercased() == category}).first ?? BudgetDetail.getEmptyBudget()
     }
     
     

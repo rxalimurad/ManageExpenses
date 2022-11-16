@@ -26,12 +26,12 @@ class BudgetCellVM: ObservableObject {
             .store(in: &subscription)
     }
     private func getPercentage() -> Double {
-        if spending >= Double(budget.limit)! {
+        if spending >= Double(budget.limit) ?? 0 {
             return 100
         }
-        return (spending / Double(budget.limit)!) * 100
+        return (spending / (Double(budget.limit) ?? 0.0)) * 100
     }
     private func checkLimit() -> Bool {
-        spending > Double(budget.limit)!
+        spending > Double(budget.limit) ?? 0.0
     }
 }
