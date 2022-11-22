@@ -66,6 +66,9 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             .store(in: &subscriptions)
     }
     private func fetchTransactions(filter: String? = nil) {
+        if DataCache.shared.banks.isEmpty {
+            return 
+        }
         self.transactions = []
         state = .inprogress
         isLoading = true
@@ -115,7 +118,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             
             
         }
-
+        
     }
     
     private func getDataPoint(trans: [Transaction], filter: String?) -> [LineChartDataPoint] {

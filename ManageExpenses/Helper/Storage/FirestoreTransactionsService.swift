@@ -17,6 +17,7 @@ class FirestoreService: ServiceHandlerType {
             Future { promise in
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.banks)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))

@@ -17,13 +17,18 @@ struct FinancialReportView: View {
                 mode.wrappedValue.dismiss()
             }
             headerView
-            PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: viewModel.pieChartPoints
-                                                                  , legendTitle: ""), metadata: ChartMetadata()))
-            .frame(height: 200)
-            SegmentedControlWidgetView(items: ["\nExpense\n", "\nIncome\n"], selectedIndex: $viewModel.selectedTab, padding: 1, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
-                .padding([.top], 25)
-                .padding([.leading, .trailing], 16)
-            FinancialDetailView()
+            if !viewModel.financialReportList.isEmpty {
+                PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: viewModel.pieChartPoints
+                                                                      , legendTitle: ""), metadata: ChartMetadata()))
+                .frame(height: 200)
+                SegmentedControlWidgetView(items: ["Expense", "Income"], selectedIndex: $viewModel.selectedTab, padding: 8, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
+                    .padding([.top], 25)
+                    .padding([.leading, .trailing], 16)
+                FinancialDetailView()
+            } else {
+                Text("No record found")
+                Spacer()
+            }
             
             
         }
