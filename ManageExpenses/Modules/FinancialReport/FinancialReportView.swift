@@ -17,20 +17,14 @@ struct FinancialReportView: View {
                 mode.wrappedValue.dismiss()
             }
             headerView
-            if !viewModel.financialReportList.isEmpty {
                 PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: viewModel.pieChartPoints
                                                                       , legendTitle: ""), metadata: ChartMetadata()))
                 .frame(height: 200)
+                .isShowing(!viewModel.financialReportList.isEmpty)
                 SegmentedControlWidgetView(items: ["Expense", "Income"], selectedIndex: $viewModel.selectedTab, padding: 8, fontSize: 16, textColor: CustomColor.primaryColor, bgColor: CustomColor.primaryColor_20)
                     .padding([.top], 25)
                     .padding([.leading, .trailing], 16)
                 FinancialDetailView()
-            } else {
-                Text("No record found")
-                Spacer()
-            }
-            
-            
         }
         .fullScreenCover(item: $viewModel.selectedTrans, content: { trans in
             TransactionDetailView(transaction: trans, updateTransaction: viewModel)
@@ -95,13 +89,17 @@ struct FinancialReportView: View {
     @ViewBuilder func FinancialDetailView() -> some View {
         
         ScrollView(.vertical) {
-            VStack {
-                ForEach(viewModel.financialReportList) { financialReport in
-                    FinancialReportCellView(analyingData: financialReport)
+            if !viewModel.financialReportList.isEmpty {
+                VStack {
+                    ForEach(viewModel.financialReportList) { financialReport in
+                        FinancialReportCellView(analyingData: financialReport)
+                    }
                 }
+                .padding([.horizontal], 32)
+                .padding([.vertical], 10)
+            } else {
+                Text("No Record Found")
             }
-            .padding([.horizontal], 32)
-            .padding([.vertical], 10)
         }
     }
     private var indicator: some View {
