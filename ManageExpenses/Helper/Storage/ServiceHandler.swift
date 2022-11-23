@@ -32,6 +32,7 @@ protocol ServiceHandlerType {
                          fromDate: Date,
                          toDate: Date,
                          completion: @escaping (NetworkingError?, [Transaction]?) -> Void)
+    func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError>
 }
 
 

@@ -35,7 +35,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         content.title = "Feed the cat"
         content.subtitle = "It looks hungry"
         content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
     }

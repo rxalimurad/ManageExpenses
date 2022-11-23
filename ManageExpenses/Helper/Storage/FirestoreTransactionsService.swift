@@ -11,6 +11,36 @@ import FirebaseFirestore
 
 
 class FirestoreService: ServiceHandlerType {
+
+    func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                let collection = db.collection(Constants.firestoreCollection.transactions)
+                    .whereField("bank", isEqualTo: bankId)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+                    .getDocuments { snapshot, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let documents = snapshot?.documents, !documents.isEmpty {
+                                var trans = [Transaction]()
+                                for document in documents {
+                                    trans.append(Transaction.new.fromFireStoreData(data: document.data()))
+                                }
+                                promise(.success(trans))
+                                
+                            } else {
+                                promise(.success([]))
+                            }
+                        }
+                    }
+                
+                
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     //MARK: - Banks Service
     func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
         Deferred {
@@ -123,10 +153,11 @@ class FirestoreService: ServiceHandlerType {
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.budget)
                     .document(budget.id)
-                    .setData(budget.toFireStoreData()) {error in
+                    .setData(budget.toFireStoreData()) {[weak self] error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
                         } else {
+                            self?.saveBudget(budget: budget)
                             promise(.success(()))
                         }
                     }
@@ -401,4 +432,13 @@ extension FirestoreService {
         }
     }
     
+    private func saveBudget(budget: BudgetDetail) {
+        for i in 0 ..< DataCache.shared.budget.count {
+            if DataCache.shared.budget[i].id == budget.id {
+                DataCache.shared.budget[i] = budget
+                return
+            }
+        }
+        DataCache.shared.budget.append(budget)
+    }
 }

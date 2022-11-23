@@ -45,6 +45,7 @@
 		5FBBC19A291A1E840092937B /* ForEach+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */; };
 		5FBBC19B291A1E840092937B /* EasySkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC197291A1E840092937B /* EasySkeleton.swift */; };
 		5FC0E84329152CCE00D7E00C /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0E84229152CCE00D7E00C /* NavigationUtil.swift */; };
+		5FD03EDF292E2A0D003F4814 /* BankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD03EDE292E2A0D003F4814 /* BankDetailsViewModel.swift */; };
 		5FF1565F290F89660005C224 /* TransactionDurationFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF1565E290F89660005C224 /* TransactionDurationFilterView.swift */; };
 		5FF15663290FD80A0005C224 /* CustomPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF15662290FD80A0005C224 /* CustomPadding.swift */; };
 		5FFEA02029137AF50082745D /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFEA01F29137AF50082745D /* UserDetailsModel.swift */; };
@@ -205,7 +206,6 @@
 		FA82B59428FDD93E0038E099 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59328FDD93E0038E099 /* Date.swift */; };
 		FA82B59828FDDF980038E099 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B59728FDDF980038E099 /* HomeViewModel.swift */; };
 		FA864278290F0A7D006902CB /* BankDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864277290F0A7D006902CB /* BankDetailsView.swift */; };
-		FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */; };
 		FA86427C290F16A6006902CB /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86427B290F16A6006902CB /* Binding.swift */; };
 		FA8740EE290DAE6F00640EB5 /* ProgressBarWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */; };
 		FA8995A629215FA100956D3A /* BudgetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */; };
@@ -301,6 +301,7 @@
 		5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ForEach+Skeleton.swift"; sourceTree = "<group>"; };
 		5FBBC197291A1E840092937B /* EasySkeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasySkeleton.swift; sourceTree = "<group>"; };
 		5FC0E84229152CCE00D7E00C /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
+		5FD03EDE292E2A0D003F4814 /* BankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewModel.swift; sourceTree = "<group>"; };
 		5FF1565E290F89660005C224 /* TransactionDurationFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDurationFilterView.swift; sourceTree = "<group>"; };
 		5FF15662290FD80A0005C224 /* CustomPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPadding.swift; sourceTree = "<group>"; };
 		5FFEA01F29137AF50082745D /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
@@ -454,7 +455,6 @@
 		FA82B59328FDD93E0038E099 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FA82B59728FDDF980038E099 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA864277290F0A7D006902CB /* BankDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsView.swift; sourceTree = "<group>"; };
-		FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewModel.swift; sourceTree = "<group>"; };
 		FA86427B290F16A6006902CB /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		FA8740ED290DAE6F00640EB5 /* ProgressBarWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarWidgetView.swift; sourceTree = "<group>"; };
 		FA8995A529215FA100956D3A /* BudgetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewModel.swift; sourceTree = "<group>"; };
@@ -569,8 +569,8 @@
 			isa = PBXGroup;
 			children = (
 				5F180378291E32E400E40E35 /* AddBankAccountViewModel.swift */,
+				5FD03EDE292E2A0D003F4814 /* BankDetailsViewModel.swift */,
 				5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */,
-				FA864279290F0F6D006902CB /* BankDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1966,11 +1966,11 @@
 				5F180379291E32E400E40E35 /* AddBankAccountViewModel.swift in Sources */,
 				FAB1E33C28F735A600667CF2 /* InputWidgetView.swift in Sources */,
 				FAB4650929166EEB0092BBFB /* UserDefaults.swift in Sources */,
-				FA86427A290F0F6D006902CB /* BankDetailsViewModel.swift in Sources */,
 				FA4D35B72920CAFC00D06B4D /* CreateBudgetViewModel.swift in Sources */,
 				5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */,
 				FA82B4D528FC0F250038E099 /* Legends.swift in Sources */,
 				FA82B4C228FC0F240038E099 /* TouchOverlayMarker.swift in Sources */,
+				5FD03EDF292E2A0D003F4814 /* BankDetailsViewModel.swift in Sources */,
 				5FF1565F290F89660005C224 /* TransactionDurationFilterView.swift in Sources */,
 				FA82B4BA28FC0F240038E099 /* BarChartSubViews.swift in Sources */,
 				5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */,
@@ -2170,6 +2170,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
+				DEVELOPMENT_TEAM = 46M7YG6X28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
@@ -2188,7 +2189,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.ManageExpenses;
+				PRODUCT_BUNDLE_IDENTIFIER = com.i2cinc.cmatestuat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2204,6 +2205,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
+				DEVELOPMENT_TEAM = 46M7YG6X28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
@@ -2222,7 +2224,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.ManageExpenses;
+				PRODUCT_BUNDLE_IDENTIFIER = com.i2cinc.cmatestuat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

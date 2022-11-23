@@ -107,6 +107,7 @@ struct AddExpenseIncomeView: View {
                 .padding([.top, .bottom], 16)
 
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                UIApplication.shared.endEditing()
                 viewModel.transfer(transaction: Transaction(
                     id: "\(UUID())",
                     amount: (Double(amount) ?? 0.0),
@@ -173,6 +174,7 @@ struct AddExpenseIncomeView: View {
                 .padding([.top, .bottom], 16)
            
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
+                UIApplication.shared.endEditing()
                 viewModel.saveTransaction(transaction:
                                             Transaction(
                                                 id: "\(UUID())",
@@ -180,7 +182,7 @@ struct AddExpenseIncomeView: View {
                                                 category: category.desc,
                                                 desc: description,
                                                 name: category.desc,
-                                                wallet: wallet.desc,
+                                                wallet: wallet.id,
                                                 attachment: "",
                                                 type: newEntryType.rawValue,
                                                 fromAcc: "",
