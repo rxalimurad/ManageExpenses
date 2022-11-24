@@ -46,6 +46,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct ManageExpensesApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
     @StateObject var sessionService = SessionService()
+    @StateObject var network = NetworkMonitor()
+
     @State private var isSplashShowing = true {
         didSet {
             print("set")
@@ -64,7 +66,11 @@ struct ManageExpensesApp: App {
                 switch sessionService.state {
                 case .loggedIn:
                     TabControlView(viewRouter: TabControlViewRouter())
+                        .fullScreenCover(isPresented: $network.disconnected, content: {
+                            Text("No Internet")
+                        })
                         .environmentObject(sessionService)
+                    
                 case .loggedOut:
                     LoginView()
                         .environmentObject(sessionService)

@@ -33,6 +33,7 @@
 		5F56E09C291397AE006E8F25 /* LoginIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E09B291397AD006E8F25 /* LoginIntroViewModel.swift */; };
 		5F56E09F29139C1E006E8F25 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F56E09E29139C1E006E8F25 /* Launch Screen.storyboard */; };
 		5F56E0A12914DA1D006E8F25 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56E0A02914DA1D006E8F25 /* CustomAlert.swift */; };
+		5F66D714292F8B33006F3DBC /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F66D713292F8B33006F3DBC /* Network.swift */; };
 		5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */; };
 		5F7706D6290A5FD700CA68C4 /* SliderWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */; };
 		5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883C2912493C00233A27 /* UIApplication.swift */; };
@@ -289,6 +290,7 @@
 		5F56E09B291397AD006E8F25 /* LoginIntroViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginIntroViewModel.swift; sourceTree = "<group>"; };
 		5F56E09E29139C1E006E8F25 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		5F56E0A02914DA1D006E8F25 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		5F66D713292F8B33006F3DBC /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeViewModel.swift; sourceTree = "<group>"; };
 		5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWidgetView.swift; sourceTree = "<group>"; };
 		5FAF883C2912493C00233A27 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -1530,6 +1532,7 @@
 				FAB1E34028F743E500667CF2 /* Utilities.swift */,
 				FAB4650829166EEB0092BBFB /* UserDefaults.swift */,
 				FAB46512291692670092BBFB /* NetworkingError.swift */,
+				5F66D713292F8B33006F3DBC /* Network.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1809,6 +1812,7 @@
 				FA82B4B228FC0F240038E099 /* RangedBarDataPoint.swift in Sources */,
 				FA3613C72924123100FAB6DB /* BudgetCellVM.swift in Sources */,
 				FA24E66C290836DA008CF65A /* MiscListOfData.swift in Sources */,
+				5F66D714292F8B33006F3DBC /* Network.swift in Sources */,
 				FA82B58628FC1D7F0038E099 /* DoughnutSegmentShape.swift in Sources */,
 				FA82B4F928FC0F250038E099 /* LineAndBarEnums.swift in Sources */,
 				FA82B4FB28FC0F260038E099 /* XAxisGrid.swift in Sources */,

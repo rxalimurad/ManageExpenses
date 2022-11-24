@@ -42,6 +42,23 @@ class FirestoreService: ServiceHandlerType {
     }
     
     //MARK: - Banks Service
+    func deleteBank(bank: String) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.banks)
+                    .document(bank)
+                    .delete { error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
         Deferred {
             Future { promise in
@@ -77,16 +94,16 @@ class FirestoreService: ServiceHandlerType {
                 let bankRef = db.collection(Constants.firestoreCollection.banks)
                     .document(bank.id)
                 batch.setData(bank.toFireStoreData(), forDocument: bankRef)
-                let transaction = self.getTransactionForSavingBank(bank: bank)
-                let transRef = db.collection(Constants.firestoreCollection.transactions)
-                    .document(transaction.id)
-                batch.setData(transaction.toFireStoreData(), forDocument: transRef)
-                
+                if let transaction = self.getTransactionForSavingBank(bank: bank) {
+                    let transRef = db.collection(Constants.firestoreCollection.transactions)
+                        .document(transaction.id)
+                    batch.setData(transaction.toFireStoreData(), forDocument: transRef)
+                }
                 batch.commit() { error in
                     if let err = error {
                         promise(.failure(NetworkingError(err.localizedDescription)))
                     } else {
-                        if let existingBank = DataCache.shared.banks.first(where: {$0.id == bank.id}) {
+                        if DataCache.shared.banks.first(where: {$0.id == bank.id}) != nil {
                             for (i, oldBank) in DataCache.shared.banks.enumerated() {
                                 if oldBank.id == bank.id {
                                     DataCache.shared.banks[i] = bank
@@ -338,13 +355,17 @@ class FirestoreService: ServiceHandlerType {
 
 extension FirestoreService {
     
-    private func getTransactionForSavingBank(bank: SelectDataModel) -> Transaction {
+    private func getTransactionForSavingBank(bank: SelectDataModel) -> Transaction? {
         let transId = "\(UUID())"
         let sym = UserDefaults.standard.currency
         if let existingBank = DataCache.shared.banks.first(where: {$0.id == bank.id}) {
-            return Transaction(id: transId, amount: Double(bank.balance ?? "0")! - Double(existingBank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+            if existingBank.balance == bank.balance {
+                return nil
+            } else {
+                return Transaction(id: transId, amount: Double(bank.balance ?? "0")! - Double(existingBank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account edited with \(sym)\(bank.balance ?? "0") new balance.", name: "Bank Edited", wallet: bank.desc, attachment: "", type: "Bank Edited", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+            }
         } else {
-            return Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account edited with \(sym)\(bank.balance ?? "0") new balance.", name: "Bank Edited", wallet: bank.desc, attachment: "", type: "Bank Edited", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+            return Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
         }
     }
     

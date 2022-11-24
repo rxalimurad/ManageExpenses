@@ -13,6 +13,7 @@ struct NavigationBar: View {
     let top: CGFloat
     let titleColor: Color
     let showBackBtn: Bool
+    let showRightBtn: Bool
     let action: () -> Void
     let rightBtnImage: Image?
     let rightBtnAction: (() -> Void)?
@@ -21,6 +22,7 @@ struct NavigationBar: View {
          top: CGFloat,
          titleColor: Color = CustomColor.baseLight,
          showBackBtn: Bool = true,
+         showRightBtn: Bool = false,
          action: @escaping () -> Void,
          rightBtnImage: Image? = nil,
          rightBtnAction: (() -> Void)? = nil
@@ -33,6 +35,7 @@ struct NavigationBar: View {
         self.action = action
         self.rightBtnImage = rightBtnImage
         self.rightBtnAction = rightBtnAction
+        self.showRightBtn = showRightBtn
     }
     
     var body: some View {
@@ -69,7 +72,7 @@ struct NavigationBar: View {
                     .frame(width: 52, height: 52)
                 }
                     
-            }
+            }.isShowing(showRightBtn)
         }.padding([.top], top)
     }
 }

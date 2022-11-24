@@ -17,6 +17,7 @@ enum TransactionDuration: String {
 }
 
 protocol ServiceHandlerType {
+    func deleteBank(bank: String) -> AnyPublisher<Void, NetworkingError>
     func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError>
     func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError>
     func updateBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError>

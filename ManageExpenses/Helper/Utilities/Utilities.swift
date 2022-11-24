@@ -50,4 +50,10 @@ enum Utilities {
         return categories
     }
     
+    internal static func getBankName(bankId: String) -> String {
+        DataCache.shared.banks.first { bank in
+            return bank.id == bankId
+        }?.desc ?? ""
+    }
+    
 }
