@@ -42,7 +42,7 @@ struct BankDetailsView: View {
             Spacer()
         }
         .fullScreenCover(isPresented: $editBankshown) {
-            AddBankAccount()
+            AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService(), bank: bank))
         }
     }
     var transactions: some View {

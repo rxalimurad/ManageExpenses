@@ -77,7 +77,7 @@ struct BankAccountsView: View {
             )
         })
         .fullScreenCover(isPresented: $isAddBankShown) {
-            AddBankAccount()
+            AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService()))
         }
         
     }

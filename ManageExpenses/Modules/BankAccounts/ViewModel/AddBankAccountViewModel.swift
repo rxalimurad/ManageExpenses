@@ -11,7 +11,7 @@ import Combine
 protocol AddBankAccountViewModelType {
     var bank: SelectDataModel { get }
     var service: ServiceHandlerType  { get }
-    init(service: ServiceHandlerType)
+    init(service: ServiceHandlerType,  bank: SelectDataModel?)
     func addBankAccount(complete: @escaping ((Bool) -> Void))
 }
 
@@ -20,10 +20,16 @@ class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
     @Published var isBankAdded = false
     @Published var bank: SelectDataModel = .new
     @Published var state: ServiceAPIState = .na
+    @Published var isFirstBankState = false
+    @Published var isBankNameValid = false
     var subscription = Set<AnyCancellable>()
     var service: ServiceHandlerType
-    required init(service: ServiceHandlerType) {
+    required init(service: ServiceHandlerType, bank: SelectDataModel? = nil) {
         self.service = service
+        if let bank = bank {
+            self.bank = bank
+            isBankNameValid = true
+        }
     }
     
     func addBankAccount(complete: @escaping ((Bool) -> Void)) {

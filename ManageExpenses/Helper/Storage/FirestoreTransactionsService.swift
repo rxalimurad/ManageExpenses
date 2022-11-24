@@ -11,13 +11,13 @@ import FirebaseFirestore
 
 
 class FirestoreService: ServiceHandlerType {
-
+    
     func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                let collection = db.collection(Constants.firestoreCollection.transactions)
-                    .whereField("bank", isEqualTo: bankId)
+                db.collection(Constants.firestoreCollection.transactions)
+                    .whereField("wallet", isEqualTo: bankId)
                     .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
@@ -70,25 +70,33 @@ class FirestoreService: ServiceHandlerType {
     
     func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
-            Future { promise in
-                
+            Future {[weak self] promise in
+                guard let self = self else { return }
                 let db = Firestore.firestore()
                 let batch = db.batch()
                 let bankRef = db.collection(Constants.firestoreCollection.banks)
                     .document(bank.id)
                 batch.setData(bank.toFireStoreData(), forDocument: bankRef)
-                let transId = "\(UUID())"
+                let transaction = self.getTransactionForSavingBank(bank: bank)
                 let transRef = db.collection(Constants.firestoreCollection.transactions)
-                    .document(transId)
-                let sym = UserDefaults.standard.currency
-                let transaction = Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+                    .document(transaction.id)
                 batch.setData(transaction.toFireStoreData(), forDocument: transRef)
                 
                 batch.commit() { error in
                     if let err = error {
                         promise(.failure(NetworkingError(err.localizedDescription)))
                     } else {
-                        DataCache.shared.banks.append(bank)
+                        if let existingBank = DataCache.shared.banks.first(where: {$0.id == bank.id}) {
+                            for (i, oldBank) in DataCache.shared.banks.enumerated() {
+                                if oldBank.id == bank.id {
+                                    DataCache.shared.banks[i] = bank
+                                    break
+                                }
+                            }
+                            
+                        } else {
+                            DataCache.shared.banks.append(bank)
+                        }
                         promise(.success(()))
                         
                     }
@@ -96,6 +104,7 @@ class FirestoreService: ServiceHandlerType {
             }
         }.eraseToAnyPublisher()
     }
+    
     
     
     //MARK: - Budgets Service
@@ -172,6 +181,8 @@ class FirestoreService: ServiceHandlerType {
     func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
+                
+                
                 let db = Firestore.firestore()
                 let batch = db.batch()
                 //add Transaction
@@ -182,7 +193,7 @@ class FirestoreService: ServiceHandlerType {
                 
                 var bankDoc = ""
                 for (index, _) in DataCache.shared.banks.enumerated() {
-                    if DataCache.shared.banks[index].desc == transaction.wallet {
+                    if DataCache.shared.banks[index].id == transaction.wallet {
                         bankDoc = DataCache.shared.banks[index].id
                         DataCache.shared.banks[index].balance = "\(transaction.amount + Double(DataCache.shared.banks[index].balance!)!)"
                         break
@@ -299,24 +310,24 @@ class FirestoreService: ServiceHandlerType {
                          toDate: Date,
                          completion: @escaping (NetworkingError?, [Transaction]?) -> Void) {
         
-                self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
-                    .addSnapshotListener { snapshot, error in
-                        if let err = error {
-                            completion(NetworkingError(err.localizedDescription), nil)
-                        } else {
-                            if let documents = snapshot?.documents, !documents.isEmpty {
-                                var transactions = [Transaction]()
-                                for document in documents {
-                                    transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
-                                }
-                                completion(nil, self.getSortedTransactions(sortBy: sortBy, transactions: transactions))
-                            } else {
-                                completion(NetworkingError("No document found"), nil)
-                            }
+        self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
+            .addSnapshotListener { snapshot, error in
+                if let err = error {
+                    completion(NetworkingError(err.localizedDescription), nil)
+                } else {
+                    if let documents = snapshot?.documents, !documents.isEmpty {
+                        var transactions = [Transaction]()
+                        for document in documents {
+                            transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
                         }
-                        
-                        
+                        completion(nil, self.getSortedTransactions(sortBy: sortBy, transactions: transactions))
+                    } else {
+                        completion(NetworkingError("No document found"), nil)
                     }
+                }
+                
+                
+            }
     }
     
 }
@@ -326,6 +337,18 @@ class FirestoreService: ServiceHandlerType {
 //MARK: - Private Helper methods
 
 extension FirestoreService {
+    
+    private func getTransactionForSavingBank(bank: SelectDataModel) -> Transaction {
+        let transId = "\(UUID())"
+        let sym = UserDefaults.standard.currency
+        if let existingBank = DataCache.shared.banks.first(where: {$0.id == bank.id}) {
+            return Transaction(id: transId, amount: Double(bank.balance ?? "0")! - Double(existingBank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+        } else {
+            return Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account edited with \(sym)\(bank.balance ?? "0") new balance.", name: "Bank Edited", wallet: bank.desc, attachment: "", type: "Bank Edited", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+        }
+    }
+    
+    
     private func getDate(for duration: TransactionDuration) -> Timestamp {
         switch duration {
         case .thisDay:

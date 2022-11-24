@@ -12,11 +12,9 @@ struct AddBankAccount: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     // Mark: - View Model
-    @ObservedObject var viewModel = AddBankAccountViewModel(service: FirestoreService())
+    @ObservedObject var viewModel: AddBankAccountViewModel
     weak var delegate: UpdateTransaction?
     var isFirstBank = false
-    @State var isFirstBankState = false
-    @State var isBankNameValid = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -25,7 +23,7 @@ struct AddBankAccount: View {
                     NavigationBar(title: "Add Account", top: geometry.safeAreaInsets.top, showBackBtn: !isFirstBank) {
                         mode.wrappedValue.dismiss()
                     }
-                    if isFirstBankState {
+                    if viewModel.isFirstBankState {
                         Text("Let's setup your account by adding a Bank Acount")
                             .foregroundColor(CustomColor.baseLight_80)
                             .font(.system(size: 40, weight: .medium))
@@ -63,7 +61,7 @@ struct AddBankAccount: View {
         }
         .onAppear() {
             withAnimation {
-                isFirstBankState = isFirstBank
+                viewModel.isFirstBankState = isFirstBank
             }
         }
     }
@@ -71,7 +69,7 @@ struct AddBankAccount: View {
     @ViewBuilder private func getAddDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
             
-            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 20, minLength: 3), text: $viewModel.bank.desc, isValidField: $isBankNameValid)
+            InputWidgetView(hint: "Bank Name", properties: InputProperties(maxLength: 20, minLength: 3), text: $viewModel.bank.desc, isValidField: $viewModel.isBankNameValid)
                 .padding([.top],24)
                 .padding([.horizontal], 16)
             ColorPicker("Set the bank color", selection: $viewModel.bank.color)
@@ -105,7 +103,7 @@ struct AddBankAccount: View {
     }
     
     private func validate() -> Bool {
-        isBankNameValid && viewModel.bank.balance != nil &&
+        viewModel.isBankNameValid && viewModel.bank.balance != nil &&
         Double(viewModel.bank.balance ?? "0") != 0.0
     }
     

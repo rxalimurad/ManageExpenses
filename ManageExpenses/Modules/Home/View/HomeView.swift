@@ -92,7 +92,7 @@ struct HomeView: View {
                 
             }
             .fullScreenCover(isPresented: $viewModel.isToShowAddBank) {
-                AddBankAccount(delegate: viewModel, isFirstBank: true)
+                AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService()), delegate: viewModel, isFirstBank: true)
             }
             
             .fullScreenCover(item: $selectedTrans, content: { trans in
