@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State var isAboutusShown = false
     @State var isCurrencyShown = false
     @State var isAccountsShown = false
-    @State var currencySymbol = "$"
+    @State var currencySymbol = UserDefaults.standard.currency
     @EnvironmentObject var sessionService: SessionService
     var safeAreaInsets: EdgeInsets
     var body: some View {
@@ -20,22 +20,13 @@ struct ProfileView: View {
             CustomColor.baseLight_60.edgesIgnoringSafeArea([.all])
             VStack {
                 HStack {
-                    ZStack {
-                        Circle()
-                            .strokeBorder(CustomColor.baseLight, lineWidth: 5)
-                        Circle()
-                            .strokeBorder(CustomColor.primaryColor, lineWidth: 2)
-                        Image.Custom.google
-                            .resizable()
-                            .frame(width: 76, height: 76)
-                    }
-                    .frame(width: 80, height: 80)
+                    ProfilePictureView(name: UserDefaults.standard.currentUser?.name ?? "", size: 70)
                     
                     VStack(alignment: .leading ,spacing: 8) {
                         Text("Username")
                             .foregroundColor(CustomColor.baseLight_20)
                             .font(.system(size: 14, weight: .medium))
-                        Text("Ali Murad")
+                        Text(UserDefaults.standard.currentUser?.name ?? "")
                             .foregroundColor(CustomColor.baseDark_75)
                             .font(.system(size: 24, weight: .semibold))
                     }
@@ -216,6 +207,7 @@ struct ProfileView: View {
                 .padding([.vertical], 16)
             HStack(spacing: 16) {
                ButtonWidgetView(title: "Done", style: .primaryButton) {
+                   UserDefaults.standard.currency = currencySymbol
                    isCurrencyShown.toggle()
                 }
                 

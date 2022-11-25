@@ -6,43 +6,32 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BudgetViewCell: View {
-    var budget: BudgetDetail
-    var spending: Double = 1000
+    var vm: BudgetCellVM
     
-    var percentage: Double {
-        get {
-            if spending >= Double(budget.limit)! {
-                return 100
-            }
-            return (spending / Double(budget.limit)!) * 100
-        }
-    }
-    var isLimitExceed: Bool {
-        spending > Double(budget.limit)!
-    }
     var body: some View {
             VStack {
                 HStack {
                     getCategoryTag()
                     Spacer()
                     Image.Custom.warning
-                        .isShowing(isLimitExceed)
+                        .isShowing(vm.isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
-                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(budget.limit)! - spending))")
+                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(vm.budget.limit)! - vm.spending))")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.horizontal], 16)
                     .padding([.top], 8)
-                ProgressBarWidgetView(percentage: percentage, color: budget.category.color)
+                ProgressBarWidgetView(percentage: vm.percentage, color: vm.budget.category.color)
                     .padding([.horizontal], 16)
                     .padding([.top, .bottom], 8)
                     .frame(height: 20)
-                Text("\(Utilities.getFormattedAmount(amount: spending)) of \(Utilities.getFormattedAmount(amount: budget.limit))")
+                Text("\(Utilities.getFormattedAmount(amount: vm.spending)) of \(Utilities.getFormattedAmount(amount: vm.budget.limit))")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(CustomColor.baseLight_20)
                     .multilineTextAlignment(.leading)
@@ -56,11 +45,12 @@ struct BudgetViewCell: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.horizontal], 16)
                     .padding([.bottom], 8)
-                    .isShowing(isLimitExceed)
+                    .isShowing(vm.isLimitExceed)
                 
             }
             .background(ColoredView(color: CustomColor.baseLight))
         .cornerRadius(15)
+        
         
     }
     
@@ -70,8 +60,8 @@ struct BudgetViewCell: View {
             HStack(spacing: 7) {
                 Circle()
                     .frame(width: 14, height: 14)
-                    .foregroundColor(budget.category.color)
-                Text(budget.category.desc)
+                    .foregroundColor(vm.budget.category.color)
+                Text(vm.budget.category.desc)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.trailing], 16)

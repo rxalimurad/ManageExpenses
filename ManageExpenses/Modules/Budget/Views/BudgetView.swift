@@ -10,7 +10,7 @@ import SwiftUI
 struct BudgetView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var safeAreaInsets: EdgeInsets
-    @ObservedObject var viewModel = BudgetViewModel(service: FirestoreService())
+    @ObservedObject var viewModel: BudgetViewModel
     @State var showCreatBudget = false
     @State var selectedBudget: BudgetDetail?
     var body: some View {
@@ -51,7 +51,7 @@ struct BudgetView: View {
                 CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: viewModel.budgetList.map({ $0.category.desc }), budget: nil), isEditMode: false, updateDelegate: viewModel)
             }
             .fullScreenCover(item: $selectedBudget, content: { budget in
-                BudgetDetailView(budget: budget,updateDelegate: viewModel, spending: 1000)
+                BudgetDetailView(updateDelegate: viewModel, viewModel: BudgetDetailViewModel(service: FirestoreService(), budget: budget))
             })
             
         }
@@ -69,7 +69,7 @@ struct BudgetView: View {
                         Button {
                             selectedBudget = budget
                         } label: {
-                            BudgetViewCell(budget: budget)
+                            BudgetViewCell(vm: BudgetCellVM(budget: budget))
                         }
                         
                        
@@ -140,6 +140,6 @@ struct BudgetView: View {
 
 struct BudgetView_Previews: PreviewProvider {
     static var previews: some View {
-        BudgetView( safeAreaInsets: EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        BudgetView( safeAreaInsets: EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0), viewModel: BudgetViewModel(service: FirestoreService()))
     }
 }

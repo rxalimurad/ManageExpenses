@@ -8,7 +8,154 @@
 import Foundation
 import Combine
 import FirebaseFirestore
+
+
 class FirestoreService: ServiceHandlerType {
+    
+    func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.transactions)
+                    .whereField("wallet", isEqualTo: bankId)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
+                    .getDocuments { snapshot, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let documents = snapshot?.documents, !documents.isEmpty {
+                                var trans = [Transaction]()
+                                for document in documents {
+                                    trans.append(Transaction.new.fromFireStoreData(data: document.data()))
+                                }
+                                promise(.success(trans))
+                                
+                            } else {
+                                promise(.success([]))
+                            }
+                        }
+                    }
+                
+                
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    //MARK: - Banks Service
+    func deleteBank(bank: String) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.banks)
+                    .document(bank)
+                    .delete { error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.banks)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
+                    .getDocuments { snapshot, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let documents = snapshot?.documents, !documents.isEmpty {
+                                var banks = [SelectDataModel]()
+                                for document in documents {
+                                    banks.append(SelectDataModel.new.fromFireStoreData(data: document.data()))
+                                }
+                                promise(.success(banks))
+                                
+                            } else {
+                                promise(.success([]))
+                            }
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future {[weak self] promise in
+                guard let self = self else { return }
+                let db = Firestore.firestore()
+                let batch = db.batch()
+                let bankRef = db.collection(Constants.firestoreCollection.banks)
+                    .document(bank.id)
+                batch.setData(bank.toFireStoreData(), forDocument: bankRef)
+                if let transaction = self.getTransactionForSavingBank(bank: bank) {
+                    let transRef = db.collection(Constants.firestoreCollection.transactions)
+                        .document(transaction.id)
+                    batch.setData(transaction.toFireStoreData(), forDocument: transRef)
+                }
+                batch.commit() { error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        if DataCache.shared.banks.first(where: {$0.id == bank.id}) != nil {
+                            for (i, oldBank) in DataCache.shared.banks.enumerated() {
+                                if oldBank.id == bank.id {
+                                    DataCache.shared.banks[i] = bank
+                                    break
+                                }
+                            }
+                            
+                        } else {
+                            DataCache.shared.banks.append(bank)
+                        }
+                        promise(.success(()))
+                        
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    
+    
+    //MARK: - Budgets Service
+    
+    func fetchBudgetList() -> AnyPublisher<[BudgetDetail], NetworkingError> {
+        Deferred {
+            Future { promise in
+                let db = Firestore.firestore()
+                db.collection(Constants.firestoreCollection.budget)
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
+                    .getDocuments { snap, error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if let docs = snap?.documents, !docs.isEmpty {
+                                var buds = [BudgetDetail]()
+                                for doc in docs {
+                                    buds.append(BudgetDetail.getEmptyBudget().fromFireStoreData(data: doc.data()))
+                                }
+                                promise(.success(buds))
+                                
+                            } else {
+                                promise(.success([]))
+                                
+                            }
+                        }
+                    }
+                
+                
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
     func deleteBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
@@ -26,48 +173,17 @@ class FirestoreService: ServiceHandlerType {
         }.eraseToAnyPublisher()
     }
     
-    func fetchBudgetList() -> AnyPublisher<[BudgetDetail], NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.budget)
-                    .getDocuments { snap, error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if let docs = snap?.documents, !docs.isEmpty {
-                                var buds = [BudgetDetail]()
-                                for doc in docs {
-                                    buds.append(BudgetDetail.getEmptyBudget().fromFireStoreData(data: doc.data()))
-                                }
-                                promise(.success(buds))
-                                
-                            } else {
-                                promise(.failure(NetworkingError("No documents found")))
-
-                            }
-                        }
-                    }
-                
-                    
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    
-    
-    
     func updateBudget(budget: BudgetDetail) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.budget)
                     .document(budget.id)
-                    .setData(budget.toFireStoreData()) {error in
+                    .setData(budget.toFireStoreData()) {[weak self] error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
                         } else {
+                            self?.saveBudget(budget: budget)
                             promise(.success(()))
                         }
                     }
@@ -75,6 +191,78 @@ class FirestoreService: ServiceHandlerType {
         }
         .eraseToAnyPublisher()
         
+    }
+    
+    
+    //MARK: - Transaction Service
+    func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                
+                
+                let db = Firestore.firestore()
+                let batch = db.batch()
+                //add Transaction
+                let transRef = db.collection(Constants.firestoreCollection.transactions)
+                    .document(transaction.id)
+                batch.setData(transaction.toFireStoreData(), forDocument: transRef)
+                // Delete old bank and add with newValue
+                
+                var bankDoc = ""
+                for (index, _) in DataCache.shared.banks.enumerated() {
+                    if DataCache.shared.banks[index].id == transaction.wallet {
+                        bankDoc = DataCache.shared.banks[index].id
+                        DataCache.shared.banks[index].balance = "\(transaction.amount + Double(DataCache.shared.banks[index].balance!)!)"
+                        break
+                    }
+                }
+                
+                let banksRef = db.collection(Constants.firestoreCollection.banks)
+                    .document(bankDoc)
+                batch.deleteDocument(banksRef)
+                
+                if let bank = DataCache.shared.banks.first(where: { $0.id == bankDoc }) {
+                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
+                }
+                batch.commit() { error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        if transaction.amount < 0 {
+                            if DataCache.shared.catSpendingDict[transaction.category.lowercased()] == nil {
+                                DataCache.shared.catSpendingDict[transaction.category.lowercased()] = abs(transaction.amount)
+                            } else {
+                                DataCache.shared.catSpendingDict[transaction.category.lowercased()]! += abs(transaction.amount)
+                            }
+                        }
+                        promise(.success(()))
+                    }
+                }
+                
+            }
+        }.eraseToAnyPublisher()
+    }
+    func deleteTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future {promise in
+                Firestore.firestore().collection(Constants.firestoreCollection.transactions)
+                    .document(transaction.id)
+                    .delete { error in
+                        if let err = error {
+                            promise(.failure(NetworkingError(err.localizedDescription)))
+                        } else {
+                            if transaction.amount < 0 {
+                                if transaction.date >= Date().startOfMonth {
+                                    if DataCache.shared.catSpendingDict[transaction.category.lowercased()] != nil {
+                                        DataCache.shared.catSpendingDict[transaction.category.lowercased()]! -= abs(transaction.amount)
+                                    }
+                                }
+                            }
+                            promise(.success(()))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
     }
     
     func addTransfer(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
@@ -99,7 +287,7 @@ class FirestoreService: ServiceHandlerType {
                     if DataCache.shared.banks[index].desc == incomeTrans.wallet {
                         toBankDoc = DataCache.shared.banks[index].id
                         DataCache.shared.banks[index].balance = "\(incomeTrans.amount + Double(DataCache.shared.banks[index].balance!)!)"
-                      
+                        
                     }
                     if DataCache.shared.banks[index].desc == expenseTrans.wallet {
                         fromBankDoc = DataCache.shared.banks[index].id
@@ -131,208 +319,56 @@ class FirestoreService: ServiceHandlerType {
         }
         .eraseToAnyPublisher()
     }
-    
-    func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                let batch = db.batch()
-                //add Transaction
-                let transRef = db.collection(Constants.firestoreCollection.transactions)
-                    .document(transaction.id)
-                batch.setData(transaction.toFireStoreData(), forDocument: transRef)
-                // Delete old bank and add with newValue
-                
-                var bankDoc = ""
-                for (index, _) in DataCache.shared.banks.enumerated() {
-                    if DataCache.shared.banks[index].desc == transaction.wallet {
-                        bankDoc = DataCache.shared.banks[index].id
-                        DataCache.shared.banks[index].balance = "\(transaction.amount + Double(DataCache.shared.banks[index].balance!)!)"
-                        break
-                    }
-                }
-                
-                let banksRef = db.collection(Constants.firestoreCollection.banks)
-                    .document(bankDoc)
-                batch.deleteDocument(banksRef)
-                
-                if let bank = DataCache.shared.banks.first(where: { $0.id == bankDoc }) {
-                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
-                }
-                batch.commit() { error in
-                    if let err = error {
-                        promise(.failure(NetworkingError(err.localizedDescription)))
-                    } else {
-                        promise(.success(()))
-                    }
-                }
-                 
-            }
-        }.eraseToAnyPublisher()
-    }
-    func delteTransaction(id: String) -> AnyPublisher<Void, NetworkingError> {
-        Deferred {
-            Future {promise in
-                Firestore.firestore().collection(Constants.firestoreCollection.transactions)
-                    .document(id)
-                    .delete { error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(()))
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
-
     func getTransactions(duration: String,
                          sortBy: SortedBy,
                          filterBy: PlusMenuAction,
                          selectedCat: [String],
                          fromDate: Date,
-                         toDate: Date
-    ) -> AnyPublisher<[Transaction], NetworkingError> {
-        Deferred {
-            Future {[weak self] promise in
-                guard let self = self else { return }
-                self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
-                    .getDocuments(completion: { snapshot, error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if let documents = snapshot?.documents, !documents.isEmpty {
-                                var transactions = [Transaction]()
-                                for document in documents {
-                                    transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
-                                }
-                                switch sortBy {
-                                case .newest:
-                                    let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
-                                    promise(.success(sortedTrans))
-                                case .oldest:
-                                    let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
-                                    promise(.success(sortedTrans))
-                                case .lowest:
-                                    let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
-                                    promise(.success(sortedTrans))
-                                case .highest:
-                                    let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
-                                    promise(.success(sortedTrans))
-                                }
-                                
-                                
-                            } else {
-                                promise(.failure(NetworkingError("No document found")))
-                            }
+                         toDate: Date,
+                         completion: @escaping (NetworkingError?, [Transaction]?) -> Void) {
+        
+        self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
+            .addSnapshotListener { snapshot, error in
+                if let err = error {
+                    completion(NetworkingError(err.localizedDescription), nil)
+                } else {
+                    if let documents = snapshot?.documents, !documents.isEmpty {
+                        var transactions = [Transaction]()
+                        for document in documents {
+                            transactions.append(Transaction.new.fromFireStoreData(data: document.data()))
                         }
-                        
-                        
-                    })
-            }
-        }.eraseToAnyPublisher()
-    }
-    
-    func getTransactions(for duration: TransactionDuration) -> AnyPublisher<([DatedTransactions], String, String), NetworkingError> {
-        Deferred {
-            Future {[weak self] promise in
-                guard let self = self else { return }
-                self.getCollectionPath(for: duration)
-                    .getDocuments(completion: { snapshot, error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if let documents = snapshot?.documents, !documents.isEmpty {
-                                var transactions = [Transaction]()
-                                var income = 0.0
-                                var expense = 0.0
-                                for document in documents {
-                                    let trans = Transaction.new.fromFireStoreData(data: document.data())
-                                    if trans.amount > 0 {
-                                        income += trans.amount
-                                    }
-                                    if trans.amount < 0 {
-                                        expense += trans.amount
-                                    }
-                                    transactions.append(trans)
-                                }
-                                promise(.success((self.proccessTransactions(transactions), "\(income)", "\(expense)")))
-                            } else {
-                                promise(.failure(NetworkingError("No document found")))
-                            }
-                        }
-                        
-                        
-                    })
+                        completion(nil, self.getSortedTransactions(sortBy: sortBy, transactions: transactions))
+                    } else {
+                        completion(NetworkingError("No document found"), nil)
+                    }
+                }
+                
                 
             }
-        }.eraseToAnyPublisher()
     }
     
+}
+
+
+
+//MARK: - Private Helper methods
+
+extension FirestoreService {
     
-    func getTransactions(fromDate: Date, toDate: Date) -> AnyPublisher<[DatedTransactions], NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
-                    .document("id")
-                    .setData([:]){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(([DatedTransactions]())))
-                        }
-                    }
+    private func getTransactionForSavingBank(bank: SelectDataModel) -> Transaction? {
+        let transId = "\(UUID())"
+        let sym = UserDefaults.standard.currency
+        if let existingBank = DataCache.shared.banks.first(where: {$0.id == bank.id}) {
+            if existingBank.balance == bank.balance {
+                return nil
+            } else {
+                return Transaction(id: transId, amount: Double(bank.balance ?? "0")! - Double(existingBank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account edited with \(sym)\(bank.balance ?? "0") new balance.", name: "Bank Edited", wallet: bank.desc, attachment: "", type: "Bank Edited", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
             }
-        }.eraseToAnyPublisher()
+        } else {
+            return Transaction(id: transId, amount: Double(bank.balance ?? "0")!, category: TransactionCategory.transfer.rawValue, desc: "Bank Account added with \(sym)\(bank.balance ?? "0") balance.", name: "Bank Added", wallet: bank.desc, attachment: "", type: "Bank Added", fromAcc: "", toAcc: "", date: Date().secondsSince1970)
+        }
     }
     
-    func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.banks)
-                    .getDocuments { snapshot, error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if let documents = snapshot?.documents, !documents.isEmpty {
-                                var banks = [SelectDataModel]()
-                                for document in documents {
-                                    banks.append(SelectDataModel.new.fromFireStoreData(data: document.data()))
-                                }
-                                promise(.success(banks))
-                                
-                            } else {
-                                promise(.failure(NetworkingError("No Bank Found")))
-                            }
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
-    
-    func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
-        Deferred {
-            Future { promise in
-                let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.banks)
-                    .document(bank.id)
-                    .setData(bank.toFireStoreData()){ error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            promise(.success(()))
-                        }
-                    }
-            }
-        }.eraseToAnyPublisher()
-    }
-    
-    
-    
-    
-    //MARK: - Private Helper methods
     
     private func getDate(for duration: TransactionDuration) -> Timestamp {
         switch duration {
@@ -341,10 +377,7 @@ class FirestoreService: ServiceHandlerType {
             let start = Calendar.current.date(from: components) ?? Date()
             return Timestamp(date: start)
         case .thisMonth:
-            let year = Calendar.current.component(.year, from: Date())
-            let month = Calendar.current.component(.month, from: Date())
-            let thisMonth = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1)) ?? Date()
-            return Timestamp(date: thisMonth)
+            return Timestamp(date: Date().startOfMonth)
         case .thisWeek:
             let thisWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
             return Timestamp(date: thisWeek)
@@ -358,33 +391,11 @@ class FirestoreService: ServiceHandlerType {
         
     }
     
-    private func proccessTransactions(_ transactions: [Transaction]) -> [DatedTransactions] {
-        var recentTransactionsKeys: [String] = []
-        let sortedTrans = transactions.sorted(by: { $0.date > $1.date })
-        var dict = [String: [Transaction]]()
-        for trans in sortedTrans {
-            if dict[trans.date.dateToShow] == nil {
-                dict[trans.date.dateToShow] = [trans]
-                recentTransactionsKeys.append(trans.date.dateToShow)
-            } else {
-                dict[trans.date.dateToShow] = dict[trans.date.dateToShow]! + [trans]
-            }
-        }
-        var list = [DatedTransactions]()
-        for key in recentTransactionsKeys {
-            let obj = dict[key]!
-            list.append(DatedTransactions(date: key, transactions: obj))
-        }
-        
-        
-        return list
-    }
-    
     private func getCollectionPath(for duration: TransactionDuration) -> Query {
         let db = Firestore.firestore()
         let collection = db.collection(Constants.firestoreCollection.transactions)
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         return collection
     }
     private func getCollectionPathForTrans(for duration: String,
@@ -396,7 +407,7 @@ class FirestoreService: ServiceHandlerType {
         var collection = self.getCollectionWithFilterBy(filterBy: filterBy)
         collection = self.getCollectionWithCategory(query: collection, selectedCat: selectedCat)
         collection = self.getCollectionWithRange(query: collection, duration: duration, fromDate: fromDate, toDate: toDate)
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         
         return collection
     }
@@ -448,7 +459,30 @@ class FirestoreService: ServiceHandlerType {
         return Timestamp(date: Date())
     }
     
+    private func getSortedTransactions(sortBy: SortedBy, transactions: [Transaction]) -> [Transaction] {
+        switch sortBy {
+        case .newest:
+            let sortedTrans = transactions.sorted(by: {$0.date > $1.date })
+            return sortedTrans
+        case .oldest:
+            let sortedTrans = transactions.sorted(by: {$0.date < $1.date })
+            return sortedTrans
+        case .lowest:
+            let sortedTrans = transactions.sorted(by: {$0.amount > $1.amount })
+            return sortedTrans
+        case .highest:
+            let sortedTrans = transactions.sorted(by: {$0.amount < $1.amount })
+            return sortedTrans
+        }
+    }
     
-    
-    
+    private func saveBudget(budget: BudgetDetail) {
+        for i in 0 ..< DataCache.shared.budget.count {
+            if DataCache.shared.budget[i].id == budget.id {
+                DataCache.shared.budget[i] = budget
+                return
+            }
+        }
+        DataCache.shared.budget.append(budget)
+    }
 }

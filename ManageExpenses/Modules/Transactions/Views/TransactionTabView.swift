@@ -72,14 +72,24 @@ struct TransactionTabView: View {
     
     var transactions: some View {
         ScrollView {
-            ForEach(viewModel.transactions, id: \.self) { transaction in
-                Button {
-                    viewModel.selectedTrans = transaction
-                } label: {
-                    TransactionView(transaction: transaction, showDate: true)
+            VStack {
+                ForEach(viewModel.transactions, id: \.self) { transaction in
+                    Button {
+                        viewModel.selectedTrans = transaction
+                    } label: {
+                        TransactionView(transaction: transaction, showDate: true)
+                    }
                 }
+                .skeletonForEach(itemsCount: 10) { _ in
+                    TransactionView(transaction: Transaction.new)
+                }
+                .setSkeleton(
+                    $viewModel.isLoading,
+                    animationType: .solid(Color.gray.opacity(0.4)),
+                    animation: Animation.default,
+                    transition: AnyTransition.identity
+                )
             }
-            
         }
     }
     

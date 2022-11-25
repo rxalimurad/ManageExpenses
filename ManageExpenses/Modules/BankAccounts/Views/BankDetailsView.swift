@@ -10,7 +10,7 @@ import SwiftUI
 struct BankDetailsView: View {
 //    private var recentTransactions: FetchedResults<Transaction>
     @Binding var bank: SelectDataModel
-    var viewModel = BankDetailsViewModel()
+    var viewModel: BankDetailsViewModel
     @State var editBankshown = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -35,31 +35,24 @@ struct BankDetailsView: View {
                 .foregroundColor(CustomColor.baseDark)
                 .padding([.top], 12)
             
-//            transactions
-//                .padding([.top], 30)
+            transactions
+                .padding([.top], 30)
             
             
             Spacer()
         }
         .fullScreenCover(isPresented: $editBankshown) {
-            AddBankAccount()
+            AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService(), bank: bank))
         }
     }
-//    var transactions: some View {
-//        ScrollView {
-//            ForEach(viewModel.getTransactionDict(transactions: recentTransactions), id: \.self) { headerTransDate in
-//                Text(headerTransDate)
-//                    .font(.system(size: 16, weight: .medium))
-//                    .foregroundColor(CustomColor.baseDark)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .padding([.horizontal], 19)
-//                ForEach(viewModel.recentTransactionsDict[headerTransDate]!, id: \.self) { transaction in
-//                    TransactionView(transaction: transaction)
-//                }
-//            }
-//
-//        }
-//    }
+    var transactions: some View {
+        ScrollView {
+            ForEach(viewModel.transaction, id: \.self) { tran in
+                TransactionView(transaction: tran, showDate: true)
+            }
+
+        }
+    }
 }
 //
 //struct BankDetails_Previews: PreviewProvider {

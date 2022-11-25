@@ -8,23 +8,24 @@
 import SwiftUI
 
 protocol UpdateTransaction: AnyObject {
-    func deleteTransaction(id: String, completion: @escaping((Bool) -> Void))
+    func deleteTransaction(transaction: Transaction, completion: @escaping((Bool) -> Void))
     func refresh()
 }
 
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var transaction: Transaction
+    
     var updateTransaction: UpdateTransaction
     @State var attachmentImage = Image("")
     var body: some View {
         GeometryReader { geometry in
                 VStack {
                     VStack(alignment: .center) {
-                        NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, action: {
+                        NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, showRightBtn: TransactionCategory(rawValue: transaction.category) != .transfer, action: {
                             mode.wrappedValue.dismiss()
                         }, rightBtnImage: .Custom.delete) {
-                            updateTransaction.deleteTransaction(id: transaction.id) { success in
+                            updateTransaction.deleteTransaction(transaction: transaction) { success in
                                 if success {
                                     updateTransaction.refresh()
                                     mode.wrappedValue.dismiss()
@@ -51,7 +52,7 @@ struct TransactionDetailView: View {
                         
                     }.background(
                         Rectangle()
-                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.type) ?? .expense))
+                            .foregroundColor(getBgColor(type: PlusMenuAction(rawValue: transaction.type) ?? .convert))
                         
                     ).cornerRadius(30, corners: [.bottomLeft, .bottomRight])
                     
@@ -83,7 +84,7 @@ struct TransactionDetailView: View {
                                 .foregroundColor(CustomColor.baseLight_20)
                                 .font(.system(size: 14, weight: .medium))
                             
-                            Text("Bank")
+                            Text(Utilities.getBankName(bankId: transaction.wallet))
                                 .foregroundColor(CustomColor.baseDark)
                                 .font(.system(size: 16, weight: .semibold))
                         }.padding([.vertical], 12)
@@ -121,9 +122,9 @@ struct TransactionDetailView: View {
                     .offset(x: 0, y: -35)
                     Spacer()
                     
-                    ButtonWidgetView(title: "Edit", style: .primaryButton) {
-                        
-                    }
+//                    ButtonWidgetView(title: "Edit", style: .primaryButton) {
+//
+//                    }
                     .padding([.horizontal], 16)
                     .padding([.bottom], geometry.safeAreaInsets.bottom + 20)
                     

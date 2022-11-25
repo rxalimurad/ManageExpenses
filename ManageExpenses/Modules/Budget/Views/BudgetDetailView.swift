@@ -10,22 +10,10 @@ import SwiftUI
 struct BudgetDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State var isDeleteConfirmationShown = false
-    var budget: BudgetDetail
     weak var updateDelegate: UpdateBudget?
     @State var showCreatBudget = false
-    var viewModel = BudgetDetailViewModel(service: FirestoreService())
-    var spending: Double
-    var percentage: Double {
-        get {
-            if spending >= Double(budget.limit)! {
-                return 100
-            }
-            return (spending / Double(budget.limit)!) * 100
-        }
-    }
-    var isLimitExceed: Bool {
-        spending > Double(budget.limit)!
-    }
+    var viewModel: BudgetDetailViewModel
+ 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
@@ -40,7 +28,7 @@ struct BudgetDetailView: View {
                         .frame(width: 32, height: 32)
                         .padding([.leading], 16)
                         .padding([.vertical], 16)
-                    Text(budget.category.desc.capitalized)
+                    Text(viewModel.budget.category.desc.capitalized)
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(CustomColor.baseDark)
                         .padding([.trailing], 16)
@@ -54,12 +42,12 @@ struct BudgetDetailView: View {
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 32)
                 
-                Text("\(Utilities.getFormattedAmount(amount: (Double(budget.limit)!  - spending)))")
+                Text("\(Utilities.getFormattedAmount(amount: (Double(viewModel.budget.limit)!  -  viewModel.spending)))")
                     .font(.system(size: 64, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .padding([.top], 3)
                 
-                ProgressBarWidgetView(percentage: percentage, color: budget.category.color)
+                ProgressBarWidgetView(percentage: viewModel.percentage, color: viewModel.budget.category.color)
                     .padding([.top, .horizontal], 32)
                 
                 VStack {
@@ -79,15 +67,17 @@ struct BudgetDetailView: View {
                     .padding([.top], 32)
                     .padding([.horizontal], 78)
                     .padding([.bottom], 100)
-                }.isShowing(isLimitExceed)
+                }.isShowing(viewModel.isLimitExceed)
 
               
                 
                 Spacer()
-                ButtonWidgetView(title: "Edit", style: .primaryButton) {
+                
+                ButtonWidgetView(title: "Edit", style: .secondaryButton) {
                     showCreatBudget.toggle()
                 }
                 .padding([.bottom, .horizontal], 16)
+              
             }
             .fullScreenCover(isPresented: $isDeleteConfirmationShown) {
                 ZStack (alignment: .bottom) {
@@ -101,7 +91,7 @@ struct BudgetDetailView: View {
                 .edgesIgnoringSafeArea(.all)
             }
             .fullScreenCover(isPresented: $showCreatBudget) {
-                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: [], budget: budget), isEditMode: false, updateDelegate: updateDelegate)
+                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: [], budget: viewModel.budget), isEditMode: false, updateDelegate: updateDelegate)
                
             }
         }
@@ -144,7 +134,7 @@ struct BudgetDetailView: View {
                     
                 }
                 ButtonWidgetView(title: "Yes", style: .primaryButton) {
-                    viewModel.deleteBudget(budget: budget) {
+                    viewModel.deleteBudget(budget: viewModel.budget) {
                         isDeleteConfirmationShown.toggle()
                         mode.wrappedValue.dismiss()
                         updateDelegate?.refreshView()

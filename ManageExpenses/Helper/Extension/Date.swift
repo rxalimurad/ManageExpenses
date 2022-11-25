@@ -65,6 +65,11 @@ extension Date {
         components.second = -1
         return Calendar.current.date(byAdding: components, to: startOfDay)!
     }
+    var startOfMonth: Date {
+        let year = Calendar.current.component(.year, from: self)
+        let month = Calendar.current.component(.month, from: self)
+        return Calendar.current.date(from: DateComponents(year: year, month: month, day: 1)) ?? self
+    }
     
     
     

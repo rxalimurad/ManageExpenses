@@ -45,10 +45,10 @@ struct HomeView: View {
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
                                 .padding([.trailing], 16)
                                 .padding([.top], 15)
-                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count < 2)
+                                .isGone(viewModel.lineChartData.dataSets.dataPoints.count < 2)
                             Text("Not enough data to show")
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
-                                .isHidden(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
+                                .isGone(viewModel.lineChartData.dataSets.dataPoints.count >= 2)
                             Text(viewModel.graphXAxis[Int(viewModel.currentFilter)!])
                                 .foregroundColor(CustomColor.primaryColor).font(.caption)
                                 .padding([.horizontal], 5)
@@ -92,7 +92,7 @@ struct HomeView: View {
                 
             }
             .fullScreenCover(isPresented: $viewModel.isToShowAddBank) {
-                AddBankAccount()
+                AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService()), delegate: viewModel, isFirstBank: true)
             }
             
             .fullScreenCover(item: $selectedTrans, content: { trans in
@@ -132,6 +132,8 @@ struct HomeView: View {
                 case .successful:
                 if viewModel.transactions.isEmpty {
                     Text("No record found\n\nPlease add new transactions using button below")
+                        .foregroundColor(CustomColor.baseLight_20)
+                        .font(.system(size: 16, weight: .medium))
                         .multilineTextAlignment(.center)
                 } else {
                     EmptyView()
@@ -147,17 +149,9 @@ struct HomeView: View {
     var summaryView: some View {
         VStack {
             HStack(alignment: .center) {
-                ZStack {
-                    Circle()
-                        .strokeBorder(CustomColor.baseLight, lineWidth: 5)
-                    Circle()
-                        .strokeBorder(CustomColor.primaryColor, lineWidth: 2)
-                    Image.Custom.apple
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-                .frame(width: 38, height: 38)
+                ProfilePictureView(name: UserDefaults.standard.currentUser?.name ?? "", size: 32)
                 .padding([.leading], 16)
+                .hidden()
                 
                 Spacer()
                 VStack {
@@ -192,32 +186,37 @@ struct HomeView: View {
     }
     
     var totalIncomeView: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
             Color.green
             HStack  {
                 
                 Image.Custom.inflow
+                    .padding([.leading], 10)
                 VStack(alignment: .leading) {
                     Text("Income")
                         .font(.system(size: 14, weight: .medium))
                     Text(viewModel.income)
                         .font(.system(size: 22, weight: .semibold))
                 }
+                .padding([.trailing], 10)
                 .foregroundColor(CustomColor.baseLight_80)
             }
         }
     }
     var totalExpensesView: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
             Color.red
             HStack  {
                 Image.Custom.outflow
+                    .padding([.leading], 10)
                 VStack(alignment: .leading) {
                     Text("Expenses")
                         .font(.system(size: 14, weight: .medium))
                     Text(viewModel.expense)
                         .font(.system(size: 22, weight: .semibold))
-                }.foregroundColor(CustomColor.baseLight_80)
+                }
+                .padding([.trailing], 10)
+                .foregroundColor(CustomColor.baseLight_80)
             }
         }
     }

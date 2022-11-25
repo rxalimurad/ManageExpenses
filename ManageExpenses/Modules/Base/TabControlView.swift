@@ -14,8 +14,8 @@ struct TabControlView: View {
     @State var showPopUp = false
     @State var showNewEntryScreen = false
     @State var newEntryType: PlusMenuAction?
-    @ObservedObject var homeViewModel = HomeViewModel(dbHandler: FirestoreService())
-    @ObservedObject var transViewModel = TransactionViewModel(dbHandler: FirestoreService())
+    let homeVM = HomeViewModel(dbHandler: FirestoreService())
+    let transVM = TransactionViewModel(dbHandler: FirestoreService())
     var body: some View {
         ZStack {
             if showPopUp {
@@ -31,11 +31,11 @@ struct TabControlView: View {
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            HomeView(viewModel: homeViewModel, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
+                            HomeView(viewModel: homeVM, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
-                            TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transViewModel)
+                            TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transVM)
                         case .budget:
-                            BudgetView(safeAreaInsets: geometry.safeAreaInsets)
+                            BudgetView(safeAreaInsets: geometry.safeAreaInsets, viewModel: BudgetViewModel(service: FirestoreService()))
                         case .user:
                             ProfileView(safeAreaInsets: geometry.safeAreaInsets)
                                 .environmentObject(sessionService)
@@ -82,22 +82,11 @@ struct TabControlView: View {
             
         } content: {
             if let newEntryType = newEntryType {
-               AddExpenseIncomeView(newEntryType: newEntryType, updateViewModel: getUpdateVM())
-                }
+                AddExpenseIncomeView(newEntryType: newEntryType)
             }
         }
-    
-    private func getUpdateVM() -> UpdateTransaction? {
-        var updateVM: UpdateTransaction?
-        if viewRouter.currentPage == .home {
-            updateVM = homeViewModel
-        } else if viewRouter.currentPage == .tranactions {
-            updateVM = transViewModel  as? UpdateTransaction
-        }
-        return updateVM
     }
-        
-   
+    
     
     @ViewBuilder private func plusMenu(geometry: GeometryProxy) -> some View {
         if showPopUp {

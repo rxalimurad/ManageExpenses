@@ -73,17 +73,14 @@ struct BankAccountsView: View {
         }
         
         .fullScreenCover(item: $selectedBank, content: { bank in
-            BankDetailsView(bank: $selectedBank.toUnwrapped(defaultValue: bank))
+            BankDetailsView(bank: $selectedBank.toUnwrapped(defaultValue: bank), viewModel: BankDetailsViewModel(bankId: bank.id, service: FirestoreService())
+            )
         })
         .fullScreenCover(isPresented: $isAddBankShown) {
-            AddBankAccount()
+            AddBankAccount(viewModel: AddBankAccountViewModel(service: FirestoreService()))
         }
         
     }
 }
 
-struct BankAccountsView_Previews: PreviewProvider {
-    static var previews: some View {
-        BankAccountsView()
-    }
-}
+
