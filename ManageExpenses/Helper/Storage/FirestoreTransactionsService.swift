@@ -18,7 +18,7 @@ class FirestoreService: ServiceHandlerType {
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.transactions)
                     .whereField("wallet", isEqualTo: bankId)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -64,7 +64,7 @@ class FirestoreService: ServiceHandlerType {
             Future { promise in
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.banks)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -131,7 +131,7 @@ class FirestoreService: ServiceHandlerType {
             Future { promise in
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.budget)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snap, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -395,7 +395,7 @@ extension FirestoreService {
         let db = Firestore.firestore()
         let collection = db.collection(Constants.firestoreCollection.transactions)
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         return collection
     }
     private func getCollectionPathForTrans(for duration: String,
@@ -407,7 +407,7 @@ extension FirestoreService {
         var collection = self.getCollectionWithFilterBy(filterBy: filterBy)
         collection = self.getCollectionWithCategory(query: collection, selectedCat: selectedCat)
         collection = self.getCollectionWithRange(query: collection, duration: duration, fromDate: fromDate, toDate: toDate)
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email ?? "")
+            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         
         return collection
     }

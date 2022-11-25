@@ -132,6 +132,8 @@ struct HomeView: View {
                 case .successful:
                 if viewModel.transactions.isEmpty {
                     Text("No record found\n\nPlease add new transactions using button below")
+                        .foregroundColor(CustomColor.baseLight_20)
+                        .font(.system(size: 16, weight: .medium))
                         .multilineTextAlignment(.center)
                 } else {
                     EmptyView()
@@ -147,17 +149,9 @@ struct HomeView: View {
     var summaryView: some View {
         VStack {
             HStack(alignment: .center) {
-                ZStack {
-                    Circle()
-                        .strokeBorder(CustomColor.baseLight, lineWidth: 5)
-                    Circle()
-                        .strokeBorder(CustomColor.primaryColor, lineWidth: 2)
-                    Image.Custom.apple
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-                .frame(width: 38, height: 38)
+                ProfilePictureView(name: UserDefaults.standard.currentUser?.name ?? "", size: 32)
                 .padding([.leading], 16)
+                .hidden()
                 
                 Spacer()
                 VStack {

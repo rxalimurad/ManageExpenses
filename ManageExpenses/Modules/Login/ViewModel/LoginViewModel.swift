@@ -48,7 +48,8 @@ class LoginViewModel: ObservableObject, LoginViewModelType {
                     self?.state = .failed(error: error)
                 default: break
                 }
-            } receiveValue: {[weak self] in
+            } receiveValue: {[weak self] name in
+                self?.userDetails.name = name
                 guard let self = self else { return }
                 self.fetchBanks()
             }

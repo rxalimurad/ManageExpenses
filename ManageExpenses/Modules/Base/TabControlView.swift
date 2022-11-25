@@ -35,7 +35,7 @@ struct TabControlView: View {
                         case .tranactions:
                             TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transVM)
                         case .budget:
-                            BudgetView(safeAreaInsets: geometry.safeAreaInsets)
+                            BudgetView(safeAreaInsets: geometry.safeAreaInsets, viewModel: BudgetViewModel(service: FirestoreService()))
                         case .user:
                             ProfileView(safeAreaInsets: geometry.safeAreaInsets)
                                 .environmentObject(sessionService)

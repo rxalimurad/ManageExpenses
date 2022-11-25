@@ -35,14 +35,12 @@ class BudgetViewModel: BudgetViewModelType, UpdateBudget, ObservableObject {
         fetchBudgetList()
     }
     
-
+    
     func fetchBudgetList() {
-        service.fetchBudgetList()
-            .sink { error in
-                print(error)
-            } receiveValue: { budgetList in
+        DataCache.shared.$budget
+            .sink(receiveValue: { budgetList in
                 self.budgetList = budgetList
-            }
+            })
             .store(in: &subscription)
     }
     

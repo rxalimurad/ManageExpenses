@@ -99,6 +99,9 @@ struct FinancialReportView: View {
                 .padding([.vertical], 10)
             } else {
                 Text("No Record Found")
+                    .foregroundColor(CustomColor.baseLight_20)
+                    .font(.system(size: 16, weight: .medium))
+                    .multilineTextAlignment(.center)
             }
         }
     }

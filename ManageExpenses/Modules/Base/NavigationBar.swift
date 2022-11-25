@@ -22,7 +22,7 @@ struct NavigationBar: View {
          top: CGFloat,
          titleColor: Color = CustomColor.baseLight,
          showBackBtn: Bool = true,
-         showRightBtn: Bool = false,
+         showRightBtn: Bool = true,
          action: @escaping () -> Void,
          rightBtnImage: Image? = nil,
          rightBtnAction: (() -> Void)? = nil

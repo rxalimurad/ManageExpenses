@@ -43,7 +43,7 @@ struct BudgetDetail: Identifiable {
             "month" : month,
             "slider" : slider,
             "recieveAlerts" : recieveAlerts,
-            "user" : UserDefaults.standard.currentUser?.email ?? ""
+            "user" : UserDefaults.standard.currentUser?.email.lowercased() ?? ""
             
             
         ]

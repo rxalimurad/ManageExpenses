@@ -67,7 +67,7 @@ struct Transaction: Identifiable, Hashable {
             "toAcc": toAcc,
             "fromAcc" : fromAcc,
             "date" : date,
-            "user" : UserDefaults.standard.currentUser?.email ?? ""
+            "user" : UserDefaults.standard.currentUser?.email.lowercased() ?? ""
             
             
         ]
