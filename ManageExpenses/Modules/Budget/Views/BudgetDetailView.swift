@@ -91,7 +91,7 @@ struct BudgetDetailView: View {
                 .edgesIgnoringSafeArea(.all)
             }
             .fullScreenCover(isPresented: $showCreatBudget) {
-                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: [], budget: viewModel.budget), isEditMode: false, updateDelegate: updateDelegate)
+                CreateBudgetView(viewModel: CreateBudgetViewModel(service: FirestoreService(), excluded: [], budget: viewModel.budget), isEditMode: true, updateDelegate: updateDelegate, dismissDelegate: self)
                
             }
         }
@@ -159,4 +159,16 @@ struct BudgetDetailView: View {
                 height: Constants.bottomSheet.indicatorHeight
             )
     }
+}
+
+
+protocol DismissView {
+    func dismiss()
+}
+extension BudgetDetailView: DismissView {
+    func dismiss() {
+        self.mode.wrappedValue.dismiss()
+    }
+    
+    
 }

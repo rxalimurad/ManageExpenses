@@ -13,29 +13,33 @@ struct CreateBudgetView: View {
     @ObservedObject var viewModel: CreateBudgetViewModel
     var isEditMode: Bool
     weak var updateDelegate: UpdateBudget?
+    var dismissDelegate: DismissView?
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                NavigationBar(title: (isEditMode ? "Edit Budget" : "Create Budget"), top: geometry.safeAreaInsets.top) {
-                    mode.wrappedValue.dismiss()
-                }
-                Spacer()
-                Text("How much do yo want to spend?")
-                    .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
-                    .font(.system(size: 18, weight: .medium))
-                    .padding([.leading], 26)
-                AmountInputWidget(amount: viewModel.budget.limit)
-                    .font(.system(size: 64, weight: .medium))
-                    .foregroundColor(CustomColor.baseLight)
-                    .padding([.top], 13)
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.showAmtKeybd.toggle()
-                        }
+            ZStack {
+                VStack(alignment: .leading) {
+                    NavigationBar(title: (isEditMode ? "Edit Budget" : "Create Budget"), top: geometry.safeAreaInsets.top) {
+                        mode.wrappedValue.dismiss()
                     }
-                
-                addDetailsView(geometry)
-                    .padding([.top], 18)
+                    Spacer()
+                    Text("How much do yo want to spend?")
+                        .foregroundColor(CustomColor.baseLight_80.opacity(0.64))
+                        .font(.system(size: 18, weight: .medium))
+                        .padding([.leading], 26)
+                    AmountInputWidget(amount: viewModel.budget.limit)
+                        .font(.system(size: 64, weight: .medium))
+                        .foregroundColor(CustomColor.baseLight)
+                        .padding([.top], 13)
+                        .onTapGesture {
+                            withAnimation {
+                                viewModel.showAmtKeybd.toggle()
+                            }
+                        }
+                    
+                    addDetailsView(geometry)
+                        .padding([.top], 18)
+                }
+                ViewForServiceAPI(state: $viewModel.state)
             }
             .overlay(KeyboardWidget(geometry: geometry, amount: $viewModel.budget.limit, isShowing: $viewModel.showAmtKeybd), alignment: .center)
             .background(Rectangle().foregroundColor(getBgColor()))
@@ -48,8 +52,8 @@ struct CreateBudgetView: View {
     
     @ViewBuilder private func addDetailsView(_ geometry: GeometryProxy) -> some View {
         VStack {
-            SelectorWidgetView(hint: "Category", text: $viewModel.budget.category, data: $viewModel.categoryData)
-                .padding([.top], 24).allowsHitTesting(!isEditMode)
+            SelectorWidgetView(hint: "Category", text: $viewModel.budget.category, data: $viewModel.categoryData, disabled: isEditMode)
+                .padding([.top], 24)
             
             
             HStack {
@@ -76,7 +80,9 @@ struct CreateBudgetView: View {
             
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 viewModel.updateBudget {
+                    dismissDelegate?.dismiss()
                     mode.wrappedValue.dismiss()
+                    
                     updateDelegate?.refreshView()
                 }
             }

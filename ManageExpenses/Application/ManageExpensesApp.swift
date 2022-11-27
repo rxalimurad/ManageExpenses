@@ -37,7 +37,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
+      //  UNUserNotificationCenter.current().add(request)
     }
     
 }
@@ -67,12 +67,25 @@ struct ManageExpensesApp: App {
                 case .loggedIn:
                     TabControlView(viewRouter: TabControlViewRouter())
                         .fullScreenCover(isPresented: $network.disconnected, content: {
-                            Text("No Internet")
+                            ZStack (alignment: .center) {
+                                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                                ConnectionAlert().show() {}
+                            }
+                            .background(ColoredView(color: .clear))
+                            .edgesIgnoringSafeArea(.all)
                         })
                         .environmentObject(sessionService)
                     
                 case .loggedOut:
                     LoginView()
+                        .fullScreenCover(isPresented: $network.disconnected, content: {
+                            ZStack (alignment: .center) {
+                                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                                ConnectionAlert().show() {}
+                            }
+                            .background(ColoredView(color: .clear))
+                            .edgesIgnoringSafeArea(.all)
+                        })
                         .environmentObject(sessionService)
                     
                 }

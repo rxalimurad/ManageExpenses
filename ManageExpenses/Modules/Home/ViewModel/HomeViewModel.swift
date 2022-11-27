@@ -57,9 +57,15 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
     }
     
     func deleteTransaction(transaction: Transaction, completion: @escaping((Bool) -> Void)) {
+        
         dbHandler.deleteTransaction(transaction: transaction)
-            .sink { _ in
-                completion(false)
+            .sink { error in
+                switch error {
+                case .failure(_):
+                    completion(false)
+                default: break
+                
+                }
             } receiveValue: { _ in
                 completion(true)
             }
@@ -97,7 +103,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
                     self.lineChartData = self.getChartData(transaction: self.transactions, filter: filter)
                     self.state = .successful
                     
-                    if filter == TransactionDuration.thisMonth.rawValue {
+                    if filter == TransactionDuration.thisMonth.rawValue && DataCache.shared.catSpendingDict.isEmpty {
                         for tran in trans ?? [] {
                             if tran.amount < 0 {
                                 if DataCache.shared.catSpendingDict[tran.category.lowercased()] == nil {

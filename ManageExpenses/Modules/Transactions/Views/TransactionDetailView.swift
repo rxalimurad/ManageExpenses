@@ -15,23 +15,19 @@ protocol UpdateTransaction: AnyObject {
 struct TransactionDetailView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var transaction: Transaction
-    
+    @State var state = ServiceAPIState.na
     var updateTransaction: UpdateTransaction
     @State var attachmentImage = Image("")
+    @State var showDeleteDialog = false
     var body: some View {
         GeometryReader { geometry in
+            ZStack {
                 VStack {
                     VStack(alignment: .center) {
                         NavigationBar(title: "Detail Transaction", top: geometry.safeAreaInsets.top, showRightBtn: TransactionCategory(rawValue: transaction.category) != .transfer, action: {
                             mode.wrappedValue.dismiss()
                         }, rightBtnImage: .Custom.delete) {
-                            updateTransaction.deleteTransaction(transaction: transaction) { success in
-                                if success {
-                                    updateTransaction.refresh()
-                                    mode.wrappedValue.dismiss()
-                                }
-                                
-                            }
+                            self.showDeleteDialog.toggle()
                         }
                         AmountInputWidget(amount: "\(transaction.amount)", leading: 0)
                             .font(.system(size: 64, weight: .medium))
@@ -128,7 +124,23 @@ struct TransactionDetailView: View {
                     .padding([.horizontal], 16)
                     .padding([.bottom], geometry.safeAreaInsets.bottom + 20)
                     
-                }.edgesIgnoringSafeArea([.all])
+                }
+                ViewForServiceAPI(state: self.$state)
+            }
+
+                .fullScreenCover(isPresented: $showDeleteDialog) {
+                    ZStack (alignment: .bottom) {
+                        Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                showDeleteDialog.toggle()
+                            }
+                        deleteSheet(geometry.safeAreaInsets)
+                    }
+                    .background(ColoredView(color: .clear))
+                    .edgesIgnoringSafeArea(.all)
+                }
+                
+                .edgesIgnoringSafeArea([.all])
                 .onAppear() {
                     DispatchQueue.global(qos: .background).async {
 //                        attachmentImage = Image.getImage(data: transaction.image)
@@ -153,6 +165,60 @@ struct TransactionDetailView: View {
                 return .black
         }
     }
-    
+    private var indicator: some View {
+        Rectangle()
+            .foregroundColor(CustomColor.primaryColor)
+            .cornerRadius(Constants.bottomSheet.radius)
+            .frame(
+                width: Constants.bottomSheet.indicatorWidth,
+                height: Constants.bottomSheet.indicatorHeight
+            )
+    }
+    private func deleteSheet(_ safeAreaInsets: EdgeInsets) ->  some View {
+        VStack {
+            Button {
+                showDeleteDialog.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+            }
+
+            Text("Delete?")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(CustomColor.baseDark)
+                .padding([.top], 20)
+            Text("Are you sure do you wanna delete this transaction?")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(CustomColor.baseLight_20)
+                .padding([.horizontal], 16)
+                .padding([.top], 20)
+            
+            HStack(spacing: 16) {
+                ButtonWidgetView(title: "No", style: .secondaryButton) {
+                    showDeleteDialog.toggle()
+                }
+                ButtonWidgetView(title: "Yes", style: .primaryButton) {
+                    self.state = .inprogress
+                    updateTransaction.deleteTransaction(transaction: transaction) { success in
+                        if success {
+                            self.state = .successful
+                            updateTransaction.refresh()
+                            mode.wrappedValue.dismiss()
+                        } else {
+                            self.state = .failed(error: NetworkingError("Some error occured"))
+                        }
+
+                    }
+                }
+                
+            }
+            .padding([.top], 16)
+            .padding([.horizontal], 16)
+            .padding([.bottom], 16 + safeAreaInsets.top)
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15, corners: [.topLeft, .topRight])
+    }
     
 }
