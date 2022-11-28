@@ -18,7 +18,7 @@ struct BudgetDetail: Identifiable {
     
     
     static func getEmptyBudget() -> BudgetDetail {
-        BudgetDetail(id: "\(UUID())", category: .new, limit: "", month: Date().month, slider: 50.0, recieveAlerts: false)
+        BudgetDetail(id: "\(UUID())", category: .getNewBankAccount(), limit: "", month: Date().month, slider: 50.0, recieveAlerts: false)
     }
     
     func fromFireStoreData(data: [String: Any]) -> BudgetDetail {
@@ -27,7 +27,7 @@ struct BudgetDetail: Identifiable {
         }
         return BudgetDetail(
             id: data["id"] as! String,
-            category: SelectDataModel.new.fromFireStoreData(data: data["category"] as! [String : Any]),
+            category: SelectDataModel.getNewBankAccount().fromFireStoreData(data: data["category"] as! [String : Any]),
             limit: data["limit"] as! String,
             month: data["month"] as! String,
             slider: data["slider"] as! Double,

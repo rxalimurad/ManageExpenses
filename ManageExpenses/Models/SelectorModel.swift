@@ -17,11 +17,14 @@ struct SelectDataModel: Identifiable {
     var isSelected = false
     
     
-    static let new = SelectDataModel(id: "\(UUID())", desc: "")
+    static func getNewBankAccount() -> SelectDataModel {
+        return SelectDataModel(id: "\(UUID())", desc: "")
+    }
+    
     
     func fromFireStoreData(data: [String: Any]) -> SelectDataModel {
         if data.isEmpty {
-            return .new
+            return .getNewBankAccount()
         }
         return SelectDataModel(
             id: data["id"] as! String,

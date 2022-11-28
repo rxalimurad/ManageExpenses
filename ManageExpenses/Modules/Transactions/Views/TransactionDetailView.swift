@@ -202,7 +202,7 @@ struct TransactionDetailView: View {
                     updateTransaction.deleteTransaction(transaction: transaction) { success in
                         if success {
                             self.state = .successful
-                            updateTransaction.refresh()
+                            showDeleteDialog.toggle()
                             mode.wrappedValue.dismiss()
                         } else {
                             self.state = .failed(error: NetworkingError("Some error occured"))

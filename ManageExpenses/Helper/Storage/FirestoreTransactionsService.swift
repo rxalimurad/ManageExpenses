@@ -72,7 +72,7 @@ class FirestoreService: ServiceHandlerType {
                             if let documents = snapshot?.documents, !documents.isEmpty {
                                 var banks = [SelectDataModel]()
                                 for document in documents {
-                                    banks.append(SelectDataModel.new.fromFireStoreData(data: document.data()))
+                                    banks.append(SelectDataModel.getNewBankAccount().fromFireStoreData(data: document.data()))
                                 }
                                 promise(.success(banks))
                                 

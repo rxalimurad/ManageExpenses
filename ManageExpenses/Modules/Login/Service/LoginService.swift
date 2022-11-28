@@ -14,7 +14,7 @@ protocol LoginServiceType {
     func login(with details: UserDetailsModel) -> AnyPublisher<String, NetworkingError>
     func fetchBanks() -> AnyPublisher<Void, NetworkingError>
 }
-
+                                                                                                                                                      
 class LoginService: LoginServiceType {
     
     func login(with details: UserDetailsModel) -> AnyPublisher<String, NetworkingError> {
@@ -69,7 +69,7 @@ class LoginService: LoginServiceType {
                             if let documents = snap?.documents, !documents.isEmpty {
                                 var banks = [SelectDataModel]()
                                 for doc in documents {
-                                    banks.append(SelectDataModel.new.fromFireStoreData(data: doc.data()))
+                                    banks.append(SelectDataModel.getNewBankAccount().fromFireStoreData(data: doc.data()))
                                 }
                                 DataCache.shared.banks = banks
                                 promise(.success(()))
