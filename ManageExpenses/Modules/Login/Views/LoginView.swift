@@ -56,11 +56,11 @@ struct LoginView: View {
                                 viewModel.googleSignin()
                             })
                             
-//                            ButtonWidgetView(title: "Facebook",
-//                                             image: Image.Custom.facebook,
-//                                             style: .fbButton, action: {
-//                                
-//                            })
+                            ButtonWidgetView(title: "Facebook",
+                                             image: Image.Custom.facebook,
+                                             style: .fbButton, action: {
+                                
+                            })
                             
                             
                             
