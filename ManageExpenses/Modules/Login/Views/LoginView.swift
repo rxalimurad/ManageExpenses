@@ -53,14 +53,14 @@ struct LoginView: View {
                             ButtonWidgetView(title: "Google",
                                              image: Image.Custom.google,
                                              style: .googleButton, action: {
-                                
+                                viewModel.googleSignin()
                             })
                             
-                            ButtonWidgetView(title: "Facebook",
-                                             image: Image.Custom.facebook,
-                                             style: .fbButton, action: {
-                                
-                            })
+//                            ButtonWidgetView(title: "Facebook",
+//                                             image: Image.Custom.facebook,
+//                                             style: .fbButton, action: {
+//                                
+//                            })
                             
                             
                             

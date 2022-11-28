@@ -18,7 +18,7 @@ protocol AddBankAccountViewModelType {
 class AddBankAccountViewModel: AddBankAccountViewModelType, ObservableObject {
     @Published var showAmtKeybd = false
     @Published var isBankAdded = false
-    @Published var bank: SelectDataModel = .new
+    @Published var bank: SelectDataModel = .getNewBankAccount()
     @Published var state: ServiceAPIState = .na
     @Published var isFirstBankState = false
     @Published var isBankNameValid = false

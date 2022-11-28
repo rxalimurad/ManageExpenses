@@ -72,7 +72,7 @@ class FirestoreService: ServiceHandlerType {
                             if let documents = snapshot?.documents, !documents.isEmpty {
                                 var banks = [SelectDataModel]()
                                 for document in documents {
-                                    banks.append(SelectDataModel.new.fromFireStoreData(data: document.data()))
+                                    banks.append(SelectDataModel.getNewBankAccount().fromFireStoreData(data: document.data()))
                                 }
                                 promise(.success(banks))
                                 
@@ -132,6 +132,7 @@ class FirestoreService: ServiceHandlerType {
                 let db = Firestore.firestore()
                 db.collection(Constants.firestoreCollection.budget)
                     .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
+                    .whereField("month", isEqualTo: Date().month)
                     .getDocuments { snap, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -245,9 +246,29 @@ class FirestoreService: ServiceHandlerType {
     func deleteTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future {promise in
-                Firestore.firestore().collection(Constants.firestoreCollection.transactions)
+                let db = Firestore.firestore()
+                let batch = db.batch()
+                //delete Transaction
+                let transRef = db.collection(Constants.firestoreCollection.transactions)
                     .document(transaction.id)
-                    .delete { error in
+                batch.deleteDocument(transRef)
+                var bankDoc = ""
+                for (index, _) in DataCache.shared.banks.enumerated() {
+                    if DataCache.shared.banks[index].id == transaction.wallet {
+                        bankDoc = DataCache.shared.banks[index].id
+                        DataCache.shared.banks[index].balance = "\(-transaction.amount + Double(DataCache.shared.banks[index].balance!)!)"
+                        break
+                    }
+                }
+                let banksRef = db.collection(Constants.firestoreCollection.banks)
+                    .document(bankDoc)
+                batch.deleteDocument(banksRef)
+                
+                if let bank = DataCache.shared.banks.first(where: { $0.id == bankDoc }) {
+                    batch.setData(bank.toFireStoreData(), forDocument: banksRef)
+                }
+                batch.commit() {
+                 error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
                         } else {

@@ -51,7 +51,7 @@ struct SplashView: View {
     }
     
     func fetchData() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             withAnimation {
                 tryAgain = true
             }

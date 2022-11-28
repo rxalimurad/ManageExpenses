@@ -31,3 +31,24 @@ struct CustomAlert {
         
     }
 }
+
+struct ConnectionAlert {
+    func show(action: @escaping(() -> Void)) -> some View {
+        VStack {
+            LottieView(lottieFile: Constants.animationFile.noInternetAnimation, speed: 2)
+                .frame(height: 100)
+            Text("Waiting for internet connection")
+                .font(.system(size: 16, weight: .bold))
+                .foregroundColor(CustomColor.red)
+                .multilineTextAlignment(.center)
+                .padding([.horizontal], 20)
+                .padding([.top], 15)
+                .padding([.bottom], 25)
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15)
+        .padding([.all], 20)
+        
+    }
+}

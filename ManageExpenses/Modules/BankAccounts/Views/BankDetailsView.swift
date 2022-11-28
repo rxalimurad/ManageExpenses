@@ -10,7 +10,7 @@ import SwiftUI
 struct BankDetailsView: View {
 //    private var recentTransactions: FetchedResults<Transaction>
     @Binding var bank: SelectDataModel
-    var viewModel: BankDetailsViewModel
+    @ObservedObject var viewModel: BankDetailsViewModel
     @State var editBankshown = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -50,6 +50,15 @@ struct BankDetailsView: View {
             ForEach(viewModel.transaction, id: \.self) { tran in
                 TransactionView(transaction: tran, showDate: true)
             }
+            .skeletonForEach(itemsCount: 10) { _ in
+                TransactionView(transaction: Transaction.new)
+            }
+            .setSkeleton(
+                $viewModel.isLoading,
+                animationType: .solid(Color.gray.opacity(0.4)),
+                animation: Animation.default,
+                transition: AnyTransition.identity
+            )
 
         }
     }

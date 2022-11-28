@@ -12,6 +12,7 @@ struct SegmentedControlWidgetView: View {
     var items: [String]
    
     @Binding var selectedIndex: String
+    @State var selectedIndexInt: [String] = []
     var padding = 8.0
     var fontSize = 14.0
     var textColor = CustomColor.yellow
@@ -55,14 +56,16 @@ struct SegmentedControlWidgetView: View {
                 
             } else {
                 Picker("", selection: $selectedIndex) {
-                    ForEach(items.indices, id: \.self) { index in
-                        Text(items[index])
+                    ForEach(selectedIndexInt, id: \.self) { index in
+                        Text(items[Int(index)!])
                             .font(.system(size: fontSize, weight: .bold))
                             .padding(.vertical, padding)
-                            .foregroundColor(index == Int(selectedIndex)! ? textColor : CustomColor.baseLight_20)
+                            .foregroundColor(index == selectedIndex ? textColor : CustomColor.baseLight_20)
                     }
                 }.pickerStyle(.segmented)
             }
+        }.onAppear() {
+            selectedIndexInt = items.enumerated().map({ return "\($0.offset)"})
         }
     }
     

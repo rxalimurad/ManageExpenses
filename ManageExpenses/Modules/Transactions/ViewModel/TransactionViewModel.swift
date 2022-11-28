@@ -136,8 +136,13 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
     
     func deleteTransaction(transaction: Transaction, completion: @escaping((Bool) -> Void)) {
         dbHandler.deleteTransaction(transaction: transaction)
-            .sink { _ in
-                completion(false)
+            .sink { error in
+                switch error {
+                case .failure(_):
+                    completion(false)
+                default: break
+                
+                }
             } receiveValue: { _ in
                 completion(true)
             }

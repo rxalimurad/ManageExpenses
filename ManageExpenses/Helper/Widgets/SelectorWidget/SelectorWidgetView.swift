@@ -14,7 +14,7 @@ struct SelectorWidgetView: View {
     
     @State var showSelection = false
     let isMultiSelector: Bool = false
-    
+    var disabled: Bool = false
     var body: some View {
         VStack(alignment: .leading) {
             Button(action: {
@@ -28,9 +28,10 @@ struct SelectorWidgetView: View {
                         
                     }
                     Image.Custom.downArrow
+                        .isShowing(!disabled)
                     
                 }
-            })
+            }).disabled(disabled)
             
             
             

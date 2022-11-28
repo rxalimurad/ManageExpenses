@@ -41,6 +41,7 @@ enum Constants {
     enum animationFile {
         static let splashAnimation = "splashAnimation"
         static let loadingAnimation = "loadingAnimation"
+        static let noInternetAnimation = "nointernet"
     }
     
     

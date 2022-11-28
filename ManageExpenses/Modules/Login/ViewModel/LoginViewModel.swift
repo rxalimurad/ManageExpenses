@@ -9,6 +9,8 @@
 import Foundation
 import Combine
 import SwiftUI
+import Firebase
+import GoogleSignIn
 
 protocol LoginViewModelType {
     var service: LoginServiceType { get }
@@ -55,6 +57,22 @@ class LoginViewModel: ObservableObject, LoginViewModelType {
             }
             .store(in: &subscriptions)
     }
+    
+    func googleSignin() {
+        if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+          GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
+              authenticateUser(for: user, with: error)
+          }
+        } else {
+          guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+          let configuration = GIDConfiguration(clientID: clientID)
+          guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+          guard let rootViewController = windowScene.windows.first?.rootViewController else { return }
+          GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
+            authenticateUser(for: user, with: error)
+          }
+        }
+      }
   
     func fetchBanks() {
         service.fetchBanks()
@@ -75,6 +93,32 @@ class LoginViewModel: ObservableObject, LoginViewModelType {
     
     func setupSession(session: SessionService) {
         self.sessionService = session
+    }
+    
+    private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
+        self.state = .inprogress
+      if let error = error {
+          self.state = .failed(error: NetworkingError(error.localizedDescription))
+        return
+      }
+      
+      guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+      
+      let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+      
+      // 3
+      Auth.auth().signIn(with: credential) { [weak self] (data, error) in
+          guard let self = self else { return }
+        if let error = error {
+            self.state = .failed(error: NetworkingError(error.localizedDescription))
+          print(error.localizedDescription)
+        } else {
+          self.state = .successful
+            self.userDetails.name = user?.profile?.name ?? "Unknown"
+            self.userDetails.email = user?.profile?.email ?? "Unknown"
+            self.fetchBanks()
+        }
+      }
     }
     
 }
