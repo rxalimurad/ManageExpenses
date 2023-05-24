@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import FirebaseFirestore
 struct Transaction: Identifiable, Hashable {
     let id: String
     let amount: Double
@@ -50,7 +49,7 @@ struct Transaction: Identifiable, Hashable {
             type: data["type"] as! String,
             fromAcc: data["fromAcc"] as! String,
             toAcc: data["toAcc"] as! String,
-            date: (data["date"] as! Timestamp).seconds
+            date: 151515151
         )
     }
     

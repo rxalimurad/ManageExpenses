@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 import FirebaseAuth
-import FirebaseFirestore
 
 
 protocol ForgotPasswordServiceType {

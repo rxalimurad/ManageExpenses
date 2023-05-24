@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import FirebaseAuth
-import FirebaseFirestore
 
 
 protocol SignupServiceType {
@@ -47,13 +46,8 @@ final class SignupService: SignupServiceType {
     }
     
     private func saveUserDetails(details: UserDetailsModel, completion: @escaping((Error?) -> Void)) {
-        let db = Firestore.firestore()
-        db.collection(Constants.firestoreCollection.users)
-            .document(details.email)
-            .setData([UserKeys.name.rawValue : details.name, UserKeys.email.rawValue : details.email]) { error in
-                completion(error)
-            }
-        
+        completion(nil)
+
     }
 }
 

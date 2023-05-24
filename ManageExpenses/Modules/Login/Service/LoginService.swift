@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import FirebaseAuth
-import FirebaseFirestore
 
 protocol LoginServiceType {
     func login(with details: UserDetailsModel) -> AnyPublisher<String, NetworkingError>
@@ -44,41 +43,12 @@ class LoginService: LoginServiceType {
     }
     
     func fetchUserDetails(email: String, completion: @escaping ((String)->Void)) {
-        let db = Firestore.firestore()
-        db.collection(Constants.firestoreCollection.users)
-            .document(email)
-            .getDocument { snapshot, error in
-                if let _ = error {
-                    completion("Unknown")
-                } else {
-                    if let document = snapshot, document.exists {
-                        let name = (document.data()?["name"] as? String) ?? "Unknown"
-                        completion(name)
-                    }
-                }
-            }
+        completion("Ali Murad")
     }
     func fetchBanks() -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
-                Firestore.firestore().collection(Constants.firestoreCollection.banks)
-                    .getDocuments { snap, error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if let documents = snap?.documents, !documents.isEmpty {
-                                var banks = [SelectDataModel]()
-                                for doc in documents {
-                                    banks.append(SelectDataModel.getNewBankAccount().fromFireStoreData(data: doc.data()))
-                                }
-                                DataCache.shared.banks = banks
-                                promise(.success(()))
-                                
-                            } else {
-                                promise(.success(()))
-                            }
-                        }
-                    }
+                promise(.success(()))
             }
         }
         .receive(on: RunLoop.main)

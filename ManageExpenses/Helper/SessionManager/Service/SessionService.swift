@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import FirebaseAuth
-import FirebaseFirestore
 
 enum SessionState {
     case loggedIn
