@@ -11,6 +11,16 @@ import Combine
 
 class FirestoreService: ServiceHandlerType {
     
+    func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
+        Deferred {
+            Future { promise in
+                promise(.success(()))
+                
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    
     func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future { promise in
@@ -84,14 +94,7 @@ class FirestoreService: ServiceHandlerType {
     
     
     //MARK: - Transaction Service
-    func addTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
-        Deferred {
-            Future { promise in
-                promise(.success(()))
-                
-            }
-        }.eraseToAnyPublisher()
-    }
+    
     func deleteTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in

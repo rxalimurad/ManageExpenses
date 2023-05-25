@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FirebaseAuth
+//import FirebaseAuth
 struct ProfileView: View {
     @State var isLogoutShown = false
     @State var isAboutusShown = false

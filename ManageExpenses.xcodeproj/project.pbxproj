@@ -36,12 +36,14 @@
 		5F66D714292F8B33006F3DBC /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F66D713292F8B33006F3DBC /* Network.swift */; };
 		5F7706D12907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D02907ABFA00CA68C4 /* AddExpenseIncomeViewModel.swift */; };
 		5F7706D6290A5FD700CA68C4 /* SliderWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7706D5290A5FD700CA68C4 /* SliderWidgetView.swift */; };
-		5F8C4D032A1E423100105B24 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8C4D022A1E423100105B24 /* FirebaseAuth */; };
 		5FAF883D2912493C00233A27 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883C2912493C00233A27 /* UIApplication.swift */; };
 		5FAF883F2912972B00233A27 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAF883E2912972B00233A27 /* SignUpViewModel.swift */; };
 		5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */; };
 		5FB6ECAB28FEA72500D74B68 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */; };
 		5FB6ECAD28FEB6F000D74B68 /* AddExpenseIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */; };
+		5FB8A9AF2A1F246D00195B30 /* FinanceTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8A9AD2A1F246D00195B30 /* FinanceTracker.xcdatamodeld */; };
+		5FB8A9B22A1F4CCF00195B30 /* CombineCoreData in Frameworks */ = {isa = PBXBuildFile; productRef = 5FB8A9B12A1F4CCF00195B30 /* CombineCoreData */; };
+		5FB8AA0C2A1F5B0500195B30 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8AA0B2A1F5B0500195B30 /* Persistence.swift */; };
 		5FBBC198291A1E840092937B /* Color+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC194291A1E840092937B /* Color+Skeleton.swift */; };
 		5FBBC199291A1E840092937B /* View+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC195291A1E840092937B /* View+Skeleton.swift */; };
 		5FBBC19A291A1E840092937B /* ForEach+Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */; };
@@ -295,6 +297,8 @@
 		5FB6ECA828FEA6D500D74B68 /* TransactionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTabView.swift; sourceTree = "<group>"; };
 		5FB6ECAA28FEA72500D74B68 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		5FB6ECAC28FEB6F000D74B68 /* AddExpenseIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIncomeView.swift; sourceTree = "<group>"; };
+		5FB8A9AE2A1F246D00195B30 /* FinanceTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FinanceTracker.xcdatamodel; sourceTree = "<group>"; };
+		5FB8AA0B2A1F5B0500195B30 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5FBBC194291A1E840092937B /* Color+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Skeleton.swift"; sourceTree = "<group>"; };
 		5FBBC195291A1E840092937B /* View+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Skeleton.swift"; sourceTree = "<group>"; };
 		5FBBC196291A1E840092937B /* ForEach+Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ForEach+Skeleton.swift"; sourceTree = "<group>"; };
@@ -517,8 +521,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA94E8862904997D00C5408D /* AlertX in Frameworks */,
-				5F8C4D032A1E423100105B24 /* FirebaseAuth in Frameworks */,
 				FA2134842905CB9F002EEBF4 /* Lottie in Frameworks */,
+				5FB8A9B22A1F4CCF00195B30 /* CombineCoreData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +578,8 @@
 		5F4040A529065E5000ECC069 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				5FB8AA0B2A1F5B0500195B30 /* Persistence.swift */,
+				5FB8A9AD2A1F246D00195B30 /* FinanceTracker.xcdatamodeld */,
 				FAB4651D2916B1DD0092BBFB /* ServiceHandler.swift */,
 				FAB465252916BAA70092BBFB /* FirestoreTransactionsService.swift */,
 				5F180370291E2B1000E40E35 /* Local */,
@@ -1712,7 +1718,7 @@
 			packageProductDependencies = (
 				FA94E8852904997D00C5408D /* AlertX */,
 				FA2134832905CB9F002EEBF4 /* Lottie */,
-				5F8C4D022A1E423100105B24 /* FirebaseAuth */,
+				5FB8A9B12A1F4CCF00195B30 /* CombineCoreData */,
 			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
@@ -1745,7 +1751,7 @@
 			packageReferences = (
 				FA94E8842904997C00C5408D /* XCRemoteSwiftPackageReference "AlertX" */,
 				FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				5F8C4D012A1E423100105B24 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5FB8A9B02A1F4CCF00195B30 /* XCRemoteSwiftPackageReference "CombineCoreData" */,
 			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
@@ -1876,6 +1882,7 @@
 				FA82B4C728FC0F240038E099 /* ChartMetadata.swift in Sources */,
 				FA8BC15A290EF8E40025BE0A /* BankAccountsView.swift in Sources */,
 				FAB4650F291687C30092BBFB /* ForgotPasswordViewModel.swift in Sources */,
+				5FB8AA0C2A1F5B0500195B30 /* Persistence.swift in Sources */,
 				FA82B59028FC1D7F0038E099 /* DoughnutChart.swift in Sources */,
 				FA82B4BE28FC0F240038E099 /* BarLayout.swift in Sources */,
 				FAB465232916B3F90092BBFB /* Transaction.swift in Sources */,
@@ -2038,6 +2045,7 @@
 				FA82B4AD28FC0F240038E099 /* StackedBarChartData.swift in Sources */,
 				FA82B4F228FC0F250038E099 /* PointOfInterestProtocol.swift in Sources */,
 				FA8FC8B9291440CD004AB1BF /* VisualEffectView.swift in Sources */,
+				5FB8A9AF2A1F246D00195B30 /* FinanceTracker.xcdatamodeld in Sources */,
 				FA82B4AC28FC0F240038E099 /* BarChartProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2164,10 +2172,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
-				DEVELOPMENT_TEAM = 46M7YG6X28;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
@@ -2186,8 +2194,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.i2cinc.cmatestuat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aweme.financeTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2253,12 +2262,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5F8C4D012A1E423100105B24 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		5FB8A9B02A1F4CCF00195B30 /* XCRemoteSwiftPackageReference "CombineCoreData" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			repositoryURL = "https://github.com/Alexander-Ignition/CombineCoreData";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
 			};
 		};
 		FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -2280,10 +2289,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F8C4D022A1E423100105B24 /* FirebaseAuth */ = {
+		5FB8A9B12A1F4CCF00195B30 /* CombineCoreData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5F8C4D012A1E423100105B24 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
+			package = 5FB8A9B02A1F4CCF00195B30 /* XCRemoteSwiftPackageReference "CombineCoreData" */;
+			productName = CombineCoreData;
 		};
 		FA2134832905CB9F002EEBF4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2296,6 +2305,19 @@
 			productName = AlertX;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5FB8A9AD2A1F246D00195B30 /* FinanceTracker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5FB8A9AE2A1F246D00195B30 /* FinanceTracker.xcdatamodel */,
+			);
+			currentVersion = 5FB8A9AE2A1F246D00195B30 /* FinanceTracker.xcdatamodel */;
+			path = FinanceTracker.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5F4B7BC728F6C3B600EFC1F5 /* Project object */;
 }

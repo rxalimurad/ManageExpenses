@@ -38,7 +38,7 @@ struct SelectDataModel: Identifiable {
         return [
             "id": id,
             "desc": desc,
-            "balance": balance,
+            "balance": balance ?? "",
             "color" : color.hex,
             "user" : UserDefaults.standard.currentUser?.email.lowercased() ?? ""
             

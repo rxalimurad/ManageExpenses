@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
     @Published internal var options = ["Day","Week","Month", "Year"]
     @Published internal var graphXAxis = ["Hours (24 hour formate)","","", ""]
     var subscriptions =  Set<AnyCancellable>()
-    @Published var isToShowAddBank =  DataCache.shared.banks.isEmpty
+    @Published var isToShowAddBank =  false //,,..DataCache.shared.banks.isEmpty
     @Published var transactions: [DatedTransactions] = []
     @Published var lineChartData: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     var dbHandler: ServiceHandlerType

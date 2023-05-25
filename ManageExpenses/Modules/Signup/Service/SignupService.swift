@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
+//import FirebaseAuth
 
 
 protocol SignupServiceType {
@@ -17,27 +17,8 @@ protocol SignupServiceType {
 final class SignupService: SignupServiceType {
     func signup(with details: UserDetailsModel) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
-            Future {promise in
-                Auth.auth().createUser(withEmail: details.email, password: details.password) {[weak self] res, error  in
-                    if let err = error {
-                        promise(.failure(NetworkingError(err.localizedDescription)))
-                    } else {
-                        res?.user.sendEmailVerification(completion: { error in
-                            if let err  = error {
-                                promise(.failure(NetworkingError(err.localizedDescription)))
-                            } else {
-                                self?.saveUserDetails(details: details) { error in
-                                    if let err  = error {
-                                        promise(.failure(NetworkingError(err.localizedDescription)))
-                                    } else {
-                                        promise(.success(()))
-                                    }
-                                }
-                            }
-                        })
-                        
-                    }
-                }
+            Future { promise in
+                promise(.success(()))
             }
             
         }

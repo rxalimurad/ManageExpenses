@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
+//import FirebaseAuth
 
 protocol LoginServiceType {
     func login(with details: UserDetailsModel) -> AnyPublisher<String, NetworkingError>
@@ -19,23 +19,7 @@ class LoginService: LoginServiceType {
     func login(with details: UserDetailsModel) -> AnyPublisher<String, NetworkingError> {
         Deferred {
             Future { promise in
-                Auth.auth().signIn(withEmail: details.email, password: details.password) {[weak self] res, error  in
-                    if let err = error {
-                        promise(.failure(NetworkingError(err.localizedDescription)))
-                    } else {
-                        self?.checkEmailVerifed(res?.user.isEmailVerified) { verificationError in
-                            if let err = verificationError {
-                                promise(.failure(err))
-                            } else {
-                                self?.fetchUserDetails(email: details.email, completion: { name in
-                                    
-                                    promise(.success(name))
-                                })
-                                
-                            }
-                        }
-                    }
-                }
+                promise(.success("name"))
             }
         }
         .receive(on: RunLoop.main)

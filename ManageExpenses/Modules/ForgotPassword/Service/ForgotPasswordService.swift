@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
+//import FirebaseAuth
 
 
 protocol ForgotPasswordServiceType {
@@ -19,13 +19,7 @@ class ForgotPasswordService: ForgotPasswordServiceType {
     func reset(email: String) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
-                Auth.auth().sendPasswordReset(withEmail: email) { error in
-                    if let err =  error {
-                        promise(.failure(NetworkingError(err.localizedDescription)))
-                    } else {
-                        promise(.success(()))
-                    }
-                }
+                promise(.success(()))
             }
         }
         .receive(on: RunLoop.main)

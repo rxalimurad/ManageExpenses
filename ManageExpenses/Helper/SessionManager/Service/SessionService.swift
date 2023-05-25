@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
+//import FirebaseAuth
 
 enum SessionState {
     case loggedIn
@@ -22,7 +22,7 @@ protocol SessionServiceType {
 }
 
 class SessionService:ObservableObject, SessionServiceType {
-    @Published var state: SessionState = .loggedOut
+    @Published var state: SessionState = .loggedIn//,,...loggedOut
     @Published var userDetails: SessionUserDetails?
     
     init() {
@@ -30,10 +30,9 @@ class SessionService:ObservableObject, SessionServiceType {
     }
     
     func logout() {
-        try? Auth.auth().signOut()
         userDetails = nil
         UserDefaults.standard.currentUser = userDetails
-        state = .loggedOut
+        state = .loggedIn//.loggedOut
         
     }
     func login(with userDetails: UserDetailsModel) {
@@ -47,7 +46,7 @@ class SessionService:ObservableObject, SessionServiceType {
             self.state = .loggedIn
             self.userDetails = currentUser
         } else {
-            self.state = .loggedOut
+            self.state = .loggedIn//.loggedOut
             self.userDetails = nil
         }
     }
