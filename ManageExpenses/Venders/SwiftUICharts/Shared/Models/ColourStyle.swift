@@ -23,7 +23,7 @@ public struct ColourStyle: CTColourStyle, Hashable {
     /// Single Colour
     /// - Parameters:
     ///   - colour: Single Colour
-    public init(colour: Color = Color(.red)) {
+    public init(colour: Color = Color.red) {
         self.colourType = .colour
         self.colour = colour
         self.colours = nil
@@ -39,7 +39,7 @@ public struct ColourStyle: CTColourStyle, Hashable {
     ///   - startPoint: Start point for Gradient.
     ///   - endPoint: End point for Gradient.
     public init(
-        colours: [Color] =  [Color(.red), Color(.blue)],
+        colours: [Color] =  [Color.red, Color.blue],
         startPoint: UnitPoint =  .leading,
         endPoint: UnitPoint =  .trailing
     ) {
@@ -58,7 +58,7 @@ public struct ColourStyle: CTColourStyle, Hashable {
     ///   - startPoint: Start point for Gradient.
     ///   - endPoint: End point for Gradient.
     public init(
-        stops: [GradientStop] = [GradientStop(color: Color(.red), location: 0.0)],
+        stops: [GradientStop] = [GradientStop(color: Color.red, location: 0.0)],
         startPoint: UnitPoint = .leading,
         endPoint: UnitPoint = .trailing
     ) {

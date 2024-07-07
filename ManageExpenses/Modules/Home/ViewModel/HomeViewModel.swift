@@ -53,6 +53,7 @@ class HomeViewModel: ObservableObject, HomeViewModelType, UpdateTransaction {
             .store(in: &subscriptions)
     }
     func refresh() {
+        isToShowAddBank =  DataCache.shared.banks.isEmpty
         self.fetchTransactions(filter: currentFilter)
     }
     

@@ -241,7 +241,7 @@ extension View {
         labelFont: Font = .caption,
         labelColour: Color = Color.primary,
         labelBackground: Color = Color.systemsBackground,
-        lineColour: Color = Color(.blue),
+        lineColour: Color = Color.blue,
         labelBorderColor: Color? = nil,
         strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 10, dash: [CGFloat](), dashPhase: 0),
         customLabelShape: CustomLabelShape? = nil,

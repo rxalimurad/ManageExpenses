@@ -220,7 +220,7 @@ extension View {
         markerName: String,
         markerValue: Int,
         dataPointCount: Int,
-        lineColour: Color = Color(.blue),
+        lineColour: Color = Color.blue,
         labelBorderColor: Color? = nil,
         strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 10, dash: [CGFloat](), dashPhase: 0),
         labelPosition: DisplayValue = .center(specifier: "%.0f"),

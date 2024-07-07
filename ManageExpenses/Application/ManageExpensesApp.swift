@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseCore
 import UserNotifications
-
+import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -37,7 +37,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-      //  UNUserNotificationCenter.current().add(request)
+//        UNUserNotificationCenter.current().add(request)
+    }
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
     }
     
 }

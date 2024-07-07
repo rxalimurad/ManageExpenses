@@ -12,7 +12,7 @@ struct AddBankAccount: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     // Mark: - View Model
-    @ObservedObject var viewModel: AddBankAccountViewModel
+    @StateObject var viewModel: AddBankAccountViewModel
     weak var delegate: UpdateTransaction?
     var isFirstBank = false
     
@@ -79,19 +79,20 @@ struct AddBankAccount: View {
             ButtonWidgetView(title: "Continue", style: .primaryButton) {
                 viewModel.addBankAccount() { success in
                     if success {
-                        viewModel.isBankAdded.toggle()
+//                        viewModel.isBankAdded.toggle()
+                        delegate?.refresh()
                     }
                 }
             }
             .disabled(!validate())
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
-            .alertX(isPresented: $viewModel.isBankAdded, content: {
-                AlertX(title: Text("Bank has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
-                    delegate?.refresh()
-                    mode.wrappedValue.dismiss()
-                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
-            })
+//            .alertX(isPresented: $viewModel.isBankAdded, content: {
+//                AlertX(title: Text("Bank has been successfully added"),  buttonStack: [AlertX.Button.default(Text("OK"), action: {
+//                    delegate?.refresh()
+//                    mode.wrappedValue.dismiss()
+//                })], theme: .custom(windowColor: CustomColor.baseLight, alertTextColor: CustomColor.baseDark  , enableShadow: true, enableRoundedCorners: true, enableTransparency: false, cancelButtonColor: .white, cancelButtonTextColor: .white, defaultButtonColor: CustomColor.primaryColor, defaultButtonTextColor: CustomColor.baseLight), animation: AlertX.AnimationX.classicEffect())
+//            })
         }
         .padding([.horizontal], 16)
         .cornerRadius(30, corners: [.topLeft, .topRight])

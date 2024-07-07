@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>310200443250-744ra7jhki6cb0s27p2qbh9lc6dfriob.apps.googleusercontent.com</string>
+	<string>1040156129909-7lsr8uoq2vqt0m3c8dnf253bl78iq3jo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.310200443250-744ra7jhki6cb0s27p2qbh9lc6dfriob</string>
+	<string>com.googleusercontent.apps.1040156129909-7lsr8uoq2vqt0m3c8dnf253bl78iq3jo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB9VMGXxOFiSgV_LIhHJRdFT5Z0GvnrRjE</string>
+	<string>AIzaSyC_Yc_oWO1iFXc78ZDIKu42vLvTy0UdLUo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>310200443250</string>
+	<string>1040156129909</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.volutiontech.ManageExpenses</string>
+	<string>com.volutiontech.manageExpenses</string>
 	<key>PROJECT_ID</key>
-	<string>manageexpense-40c40</string>
+	<string>expensemanager-5b2d9</string>
 	<key>STORAGE_BUCKET</key>
-	<string>manageexpense-40c40.appspot.com</string>
+	<string>expensemanager-5b2d9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:310200443250:ios:e3e1f15c77672202e13deb</string>
+	<string>1:1040156129909:ios:452d3ab5502f0b27c2163c</string>
 </dict>
 </plist>
