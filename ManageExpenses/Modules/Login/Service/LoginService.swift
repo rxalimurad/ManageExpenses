@@ -28,7 +28,7 @@ class LoginService: LoginServiceType {
                             if let err = verificationError {
                                 promise(.failure(err))
                             } else {
-                                self?.fetchUserDetails(email: details.email, completion: { name in
+                                self?.fetchUserDetails(uid: res?.user.uid ?? "", completion: { name in
                                     
                                     promise(.success(name))
                                 })
@@ -43,10 +43,10 @@ class LoginService: LoginServiceType {
         .eraseToAnyPublisher()
     }
     
-    func fetchUserDetails(email: String, completion: @escaping ((String)->Void)) {
+    func fetchUserDetails(uid: String, completion: @escaping ((String)->Void)) {
         let db = Firestore.firestore()
         db.collection(Constants.firestoreCollection.users)
-            .document(email)
+            .document(uid)
             .getDocument { snapshot, error in
                 if let _ = error {
                     completion("Unknown")

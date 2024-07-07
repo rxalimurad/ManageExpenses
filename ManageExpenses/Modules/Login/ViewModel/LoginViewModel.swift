@@ -106,6 +106,31 @@ class LoginViewModel: NSObject, ObservableObject, LoginViewModelType {
         authorizationController.performRequests()
     }
 
+    private func saveUserDetails(details: UserDetailsModel, completion: @escaping((Error?) -> Void)) {
+        let db = Firestore.firestore()
+        let userDocument = db.collection(Constants.firestoreCollection.users).document(details.uid)
+        
+        userDocument.getDocument { (document, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            if let document = document, document.exists {
+                completion(nil)
+                return
+            }
+            
+            // Data is different or document doesn't exist, proceed to update
+            userDocument.setData([
+                UserKeys.name.rawValue: details.name,
+                UserKeys.email.rawValue: details.email
+            ]) { error in
+                completion(error)
+            }
+        }
+    }
+    
     func fetchBanks() {
         service.fetchBanks()
             .sink { [weak self] res in

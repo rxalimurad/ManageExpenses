@@ -27,7 +27,9 @@ final class SignupService: SignupServiceType {
                             if let err  = error {
                                 promise(.failure(NetworkingError(err.localizedDescription)))
                             } else {
-                                self?.saveUserDetails(details: details) { error in
+                                var detailToSave = details
+                                detailToSave.uid = res?.user.uid ?? ""
+                                self?.saveUserDetails(details: detailToSave) { error in
                                     if let err  = error {
                                         promise(.failure(NetworkingError(err.localizedDescription)))
                                     } else {
@@ -48,13 +50,29 @@ final class SignupService: SignupServiceType {
     
     private func saveUserDetails(details: UserDetailsModel, completion: @escaping((Error?) -> Void)) {
         let db = Firestore.firestore()
-        db.collection(Constants.firestoreCollection.users)
-            .document(details.email)
-            .setData([UserKeys.name.rawValue : details.name, UserKeys.email.rawValue : details.email]) { error in
+        let userDocument = db.collection(Constants.firestoreCollection.users).document(details.uid)
+        
+        userDocument.getDocument { (document, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            if let document = document, document.exists {
+                completion(nil)
+                return
+            }
+            
+            // Data is different or document doesn't exist, proceed to update
+            userDocument.setData([
+                UserKeys.name.rawValue: details.name,
+                UserKeys.email.rawValue: details.email
+            ]) { error in
                 completion(error)
             }
-        
+        }
     }
+
 }
 
 
