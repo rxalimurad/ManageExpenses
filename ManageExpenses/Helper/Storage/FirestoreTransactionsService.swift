@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import FirebaseFirestore
-
+import FirebaseAuth
 
 class FirestoreService: ServiceHandlerType {
     
@@ -16,7 +16,13 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.transactions)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.transactions)
                     .whereField("wallet", isEqualTo: bankId)
                     .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
@@ -46,7 +52,12 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.banks)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                              promise(.failure(NetworkingError("User not authenticated")))
+                              return
+                          }
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.banks)
                     .document(bank)
                     .delete { error in
                         if let err = error {
@@ -62,8 +73,14 @@ class FirestoreService: ServiceHandlerType {
     func getBanksList() -> AnyPublisher<[SelectDataModel], NetworkingError> {
         Deferred {
             Future { promise in
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.banks)
+
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.banks)
                     .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
@@ -86,16 +103,27 @@ class FirestoreService: ServiceHandlerType {
     }
     
     func saveBank(bank: SelectDataModel) -> AnyPublisher<Void, NetworkingError> {
+        
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
                 let db = Firestore.firestore()
                 let batch = db.batch()
-                let bankRef = db.collection(Constants.firestoreCollection.banks)
-                    .document(bank.id)
+                
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                let bankRef = userRef.collection(Constants.firestoreCollection.banks).document(bank.id)
                 batch.setData(bank.toFireStoreData(), forDocument: bankRef)
                 if let transaction = self.getTransactionForSavingBank(bank: bank) {
-                    let transRef = db.collection(Constants.firestoreCollection.transactions)
+                    let transRef = userRef.collection(Constants.firestoreCollection.transactions)
                         .document(transaction.id)
                     batch.setData(transaction.toFireStoreData(), forDocument: transRef)
                 }
@@ -130,7 +158,13 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.budget)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.budget)
                     .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .whereField("month", isEqualTo: Date().month)
                     .getDocuments { snap, error in
@@ -161,7 +195,13 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.budget)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.budget)
                     .document(budget.id)
                     .delete { error in
                         if let err = error {
@@ -178,7 +218,13 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future { promise in
                 let db = Firestore.firestore()
-                db.collection(Constants.firestoreCollection.budget)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.budget)
                     .document(budget.id)
                     .setData(budget.toFireStoreData()) {[weak self] error in
                         if let err = error {
@@ -201,8 +247,16 @@ class FirestoreService: ServiceHandlerType {
             Future { promise in
                 
                 
-                let db = Firestore.firestore()
-                let batch = db.batch()
+                let dbf = Firestore.firestore()
+                
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let db = dbf.collection(Constants.firestoreCollection.users).document(uid)
+                
+                let batch = dbf.batch()
                 //add Transaction
                 let transRef = db.collection(Constants.firestoreCollection.transactions)
                     .document(transaction.id)
@@ -246,8 +300,14 @@ class FirestoreService: ServiceHandlerType {
     func deleteTransaction(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future {promise in
-                let db = Firestore.firestore()
-                let batch = db.batch()
+                let dbf = Firestore.firestore()
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let db = dbf.collection(Constants.firestoreCollection.users).document(uid)
+                let batch = dbf.batch()
                 //delete Transaction
                 let transRef = db.collection(Constants.firestoreCollection.transactions)
                     .document(transaction.id)
@@ -268,20 +328,20 @@ class FirestoreService: ServiceHandlerType {
                     batch.setData(bank.toFireStoreData(), forDocument: banksRef)
                 }
                 batch.commit() {
-                 error in
-                        if let err = error {
-                            promise(.failure(NetworkingError(err.localizedDescription)))
-                        } else {
-                            if transaction.amount < 0 {
-                                if transaction.date >= Date().startOfMonth {
-                                    if DataCache.shared.catSpendingDict[transaction.category.lowercased()] != nil {
-                                        DataCache.shared.catSpendingDict[transaction.category.lowercased()]! -= abs(transaction.amount)
-                                    }
+                    error in
+                    if let err = error {
+                        promise(.failure(NetworkingError(err.localizedDescription)))
+                    } else {
+                        if transaction.amount < 0 {
+                            if transaction.date >= Date().startOfMonth {
+                                if DataCache.shared.catSpendingDict[transaction.category.lowercased()] != nil {
+                                    DataCache.shared.catSpendingDict[transaction.category.lowercased()]! -= abs(transaction.amount)
                                 }
                             }
-                            promise(.success(()))
                         }
+                        promise(.success(()))
                     }
+                }
             }
         }.eraseToAnyPublisher()
     }
@@ -289,8 +349,14 @@ class FirestoreService: ServiceHandlerType {
     func addTransfer(transaction: Transaction) -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
-                let db = Firestore.firestore()
-                let batch = db.batch()
+                let dbf = Firestore.firestore()
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                
+                let db = dbf.collection(Constants.firestoreCollection.users).document(uid)
+                let batch = dbf.batch()
                 let incomeTrans = Transaction(id: "\(UUID())", amount: transaction.amount, category: TransactionCategory.transfer.rawValue, desc: transaction.desc, name: "Transfer from \(transaction.fromAcc)", wallet: transaction.toAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
                 let expenseTrans = Transaction(id: "\(UUID())", amount: -transaction.amount, category: TransactionCategory.transfer.rawValue, desc: transaction.desc, name: "Transfer to \(transaction.toAcc)", wallet: transaction.fromAcc, attachment: "", type: PlusMenuAction.convert.rawValue, fromAcc: "", toAcc: "", date: transaction.date.secondsSince1970)
                 
@@ -347,7 +413,7 @@ class FirestoreService: ServiceHandlerType {
                          fromDate: Date,
                          toDate: Date,
                          completion: @escaping (NetworkingError?, [Transaction]?) -> Void) {
-        
+        //,,..
         self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
             .addSnapshotListener { snapshot, error in
                 if let err = error {
