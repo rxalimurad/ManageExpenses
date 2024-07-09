@@ -286,6 +286,7 @@
 		FAD0858B2C3A7140007BB527 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858A2C3A7140007BB527 /* FirebaseVertexAI-Preview */; };
 		FAD0858E2C3A7213007BB527 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858D2C3A7213007BB527 /* GoogleSignIn */; };
 		FAD085902C3A7213007BB527 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858F2C3A7213007BB527 /* GoogleSignInSwift */; };
+		FAD550132C3DD1DA00D03C3E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FAD550122C3DD1DA00D03C3E /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -539,6 +540,7 @@
 		FABF09C928FBDF3E0072EB16 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		FAC44563290B0354005757E8 /* BudgetViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewCell.swift; sourceTree = "<group>"; };
 		FAD085912C3A84F7007BB527 /* ManageExpenses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ManageExpenses.entitlements; sourceTree = "<group>"; };
+		FAD550122C3DD1DA00D03C3E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,6 +645,7 @@
 		5F4B7BC628F6C3B600EFC1F5 = {
 			isa = PBXGroup;
 			children = (
+				FAD550122C3DD1DA00D03C3E /* Localizable.xcstrings */,
 				5F4B7BD128F6C3B600EFC1F5 /* ManageExpenses */,
 				5F4B7BD028F6C3B600EFC1F5 /* Products */,
 				FA54F5852911A58C0015E40A /* Frameworks */,
@@ -1829,6 +1832,12 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-HK",
+				"fr-CA",
+				de,
+				es,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 5F4B7BC628F6C3B600EFC1F5;
 			packageReferences = (
@@ -1853,6 +1862,7 @@
 			files = (
 				5F56E09F29139C1E006E8F25 /* Launch Screen.storyboard in Resources */,
 				FA21348D2905D2C0002EEBF4 /* loadingAnimation.json in Resources */,
+				FAD550132C3DD1DA00D03C3E /* Localizable.xcstrings in Resources */,
 				5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */,
 				FA2134862905CBFB002EEBF4 /* splashAnimation.json in Resources */,
 				FA543789293358C400514961 /* nointernet.json in Resources */,
@@ -2262,6 +2272,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2273,6 +2284,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2282,9 +2294,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.manageExpenses;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2299,6 +2313,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2310,6 +2325,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2319,9 +2335,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.manageExpenses;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
