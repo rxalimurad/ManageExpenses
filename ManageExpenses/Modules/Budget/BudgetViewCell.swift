@@ -20,7 +20,7 @@ struct BudgetViewCell: View {
                         .isShowing(vm.isLimitExceed)
                 }
                 .padding([.horizontal, .top], 16)
-                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(vm.budget.limit)! - vm.spending))")
+                Text("Remaining \(Utilities.getFormattedAmount(amount: Double(vm.budget.limit) ?? 0 - vm.spending))")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(CustomColor.baseDark)
                     .multilineTextAlignment(.leading)
