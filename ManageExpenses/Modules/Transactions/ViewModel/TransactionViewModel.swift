@@ -81,6 +81,7 @@ class TransactionViewModel: ObservableObject, TransactionViewModelType, UpdateTr
         ) {[weak self] error, trans in
             guard let self = self else { return }
             if let _ = error {
+                isLoading = false
                 self.transactions = []
                 self.financialReportList = []
                 self.pieChartPoints = []

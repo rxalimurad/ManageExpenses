@@ -89,9 +89,12 @@ class LoginViewModel: NSObject, ObservableObject, LoginViewModelType {
                 }
 
                 print("User is signed in with Google")
-                self.userDetails.name = result?.user.displayName ?? ""
+                self.userDetails.uid = result?.user.uid ?? ""
+                self.userDetails.name = result?.user.displayName ?? Utilities.generateFunnyName()
                 self.userDetails.email = result?.user.email ?? ""
-                self.fetchBanks()
+                self.saveUserDetails(details: self.userDetails) { _ in
+                    self.fetchBanks()
+                }
             }
         }
     }
@@ -174,9 +177,13 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
                 }
 
                 print("User is signed in with Apple")
-                self.userDetails.name = result?.user.displayName ?? ""
+                self.userDetails.uid = result?.user.uid ?? ""
+                self.userDetails.name = result?.user.displayName ?? Utilities.generateFunnyName()
                 self.userDetails.email = result?.user.email ?? ""
-                self.fetchBanks()
+                self.saveUserDetails(details: self.userDetails) { _ in
+                    self.fetchBanks()
+                }
+                
             }
         }
     }

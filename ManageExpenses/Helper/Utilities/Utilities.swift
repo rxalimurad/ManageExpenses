@@ -9,7 +9,15 @@ import Foundation
 import SwiftUI
 
 enum Utilities {
-    
+    static func generateFunnyName() -> String {
+        let adjectives = ["Fluffy", "Crazy", "Sneaky", "Jolly", "Wacky", "Giggly", "Grumpy", "Silly", "Zany", "Funky"]
+        let nouns = ["Penguin", "Banana", "Unicorn", "Panda", "Octopus", "Ninja", "Dolphin", "Robot", "Pirate", "Dragon"]
+
+        let randomAdjective = adjectives.randomElement()!
+        let randomNoun = nouns.randomElement()!
+
+        return "\(randomAdjective) \(randomNoun)"
+    }
     
     static func getDate(from interval: String) -> Date {
         Date(seconds: Int64(interval)!)

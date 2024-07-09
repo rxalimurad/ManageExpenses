@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 struct ProfileView: View {
     @State var isLogoutShown = false
+    @State var isDeleteShown = false
     @State var isAboutusShown = false
     @State var isCurrencyShown = false
     @State var isAccountsShown = false
@@ -63,6 +64,8 @@ struct ProfileView: View {
                             getAboutUsCell()
                         }
 
+                      
+                        
                         Divider()
                         Button {
                             isLogoutShown.toggle()
@@ -70,11 +73,18 @@ struct ProfileView: View {
                             getSettingsCell(title: "Logout", img: Image.Custom.logout)
                         }
                         
+                        
                     }
                 }
                 .cornerRadius(20)
                 .padding([.horizontal], 20)
                 .frame(maxHeight: 356)
+                Button {
+                    isDeleteShown.toggle()
+                } label: {
+                    Text("Delete Account")
+                        .foregroundColor(.red)
+                }.padding([.top, .bottom], 20)
                 Spacer()
             }
         }
@@ -93,6 +103,17 @@ struct ProfileView: View {
                         isLogoutShown.toggle()
                     }
                 logoutSheet(safeAreaInsets)
+            }
+            .background(ColoredView(color: .clear))
+            .edgesIgnoringSafeArea(.all)
+        }
+        .fullScreenCover(isPresented: $isDeleteShown) {
+            ZStack (alignment: .bottom) {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isDeleteShown.toggle()
+                    }
+                deleteSheet(safeAreaInsets)
             }
             .background(ColoredView(color: .clear))
             .edgesIgnoringSafeArea(.all)
@@ -150,7 +171,45 @@ struct ProfileView: View {
             Spacer()
         }
     }
-    
+    private func deleteSheet(_ safeAreaInsets: EdgeInsets) ->  some View {
+        VStack {
+            Button {
+                isLogoutShown.toggle()
+            } label: {
+                indicator
+                    .padding([.top], 16)
+            }
+
+            Text("Delete Account?")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(CustomColor.baseDark)
+                .padding([.top], 20)
+            Text("Are you sure do you wanna delete account?")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(CustomColor.baseLight_20)
+                .padding([.horizontal], 16)
+                .padding([.top], 20)
+            
+            HStack(spacing: 16) {
+                ButtonWidgetView(title: "No", style: .secondaryButton) {
+                    isDeleteShown.toggle()
+                }
+                ButtonWidgetView(title: "Yes", style: .primaryButton) {
+                    FirestoreService().deleteAccount {err in
+                        sessionService.logout()
+                    }
+                    
+                }
+                
+            }
+            .padding([.top], 16)
+            .padding([.horizontal], 16)
+            .padding([.bottom], 16 + safeAreaInsets.top)
+        }
+        
+        .background(ColoredView(color: .white))
+        .cornerRadius(15, corners: [.topLeft, .topRight])
+    }
     
     private func logoutSheet(_ safeAreaInsets: EdgeInsets) ->  some View {
         VStack {
@@ -173,7 +232,7 @@ struct ProfileView: View {
             
             HStack(spacing: 16) {
                 ButtonWidgetView(title: "No", style: .secondaryButton) {
-                    
+                    isLogoutShown.toggle()
                 }
                 ButtonWidgetView(title: "Yes", style: .primaryButton) {
                     sessionService.logout()

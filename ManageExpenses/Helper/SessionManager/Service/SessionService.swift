@@ -33,6 +33,7 @@ class SessionService:ObservableObject, SessionServiceType {
     func logout() {
         try? Auth.auth().signOut()
         userDetails = nil
+        DataCache.shared.clear()
         UserDefaults.standard.currentUser = userDetails
         state = .loggedOut
         

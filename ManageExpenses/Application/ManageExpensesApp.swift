@@ -32,12 +32,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     private func scheduleNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Feed the cat"
-        content.subtitle = "It looks hungry"
+        content.title = "Manage It"
+        content.subtitle = "Did you forget to your today's expense?"
         content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        var dateComponents = DateComponents()
+            dateComponents.hour = 25
+            dateComponents.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//        UNUserNotificationCenter.current().add(request)
+        UNUserNotificationCenter.current().add(request)
     }
     func application(_ app: UIApplication,
                      open url: URL,

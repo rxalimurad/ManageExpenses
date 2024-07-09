@@ -61,7 +61,14 @@ class LoginService: LoginServiceType {
     func fetchBanks() -> AnyPublisher<Void, NetworkingError> {
         Deferred {
             Future { promise in
-                Firestore.firestore().collection(Constants.firestoreCollection.banks)
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    promise(.failure(NetworkingError("User not authenticated")))
+                    return
+                }
+                let db = Firestore.firestore()
+
+                let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+                userRef.collection(Constants.firestoreCollection.banks)
                     .getDocuments { snap, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))

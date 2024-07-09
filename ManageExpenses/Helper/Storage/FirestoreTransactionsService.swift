@@ -12,6 +12,68 @@ import FirebaseAuth
 
 class FirestoreService: ServiceHandlerType {
     
+    func deleteAccount(completion: ((Error?) -> Void)?) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let db = Firestore.firestore()
+        let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
+        
+        let group = DispatchGroup()
+        var deleteError: Error?
+        
+        // Function to delete all documents in a subcollection
+        func deleteCollection(_ collectionRef: CollectionReference, completion: @escaping (Error?) -> Void) {
+            collectionRef.getDocuments { (snapshot, error) in
+                guard let documents = snapshot?.documents else {
+                    completion(error)
+                    return
+                }
+                let batch = db.batch()
+                for document in documents {
+                    batch.deleteDocument(document.reference)
+                }
+                batch.commit(completion: completion)
+            }
+        }
+        
+        // Delete 'banks' subcollection
+        group.enter()
+        deleteCollection(userRef.collection(Constants.firestoreCollection.banks)) { error in
+            if let error = error {
+                deleteError = error
+            }
+            group.leave()
+        }
+        
+        // Delete 'budget' subcollection
+        group.enter()
+        deleteCollection(userRef.collection(Constants.firestoreCollection.budget)) { error in
+            if let error = error {
+                deleteError = error
+            }
+            group.leave()
+        }
+        
+        // Delete 'transactions' subcollection
+        group.enter()
+        deleteCollection(userRef.collection(Constants.firestoreCollection.transactions)) { error in
+            if let error = error {
+                deleteError = error
+            }
+            group.leave()
+        }
+        
+        // Once all subcollections are deleted, delete the user document
+        group.notify(queue: .main) {
+            if let deleteError = deleteError {
+                completion?(deleteError)
+            } else {
+                userRef.delete(completion: completion)
+            }
+        }
+    }
+
     func getTransactions(bankId: String) -> AnyPublisher<[Transaction], NetworkingError> {
         Deferred {
             Future { promise in
@@ -24,7 +86,6 @@ class FirestoreService: ServiceHandlerType {
                 let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
                 userRef.collection(Constants.firestoreCollection.transactions)
                     .whereField("wallet", isEqualTo: bankId)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -81,7 +142,6 @@ class FirestoreService: ServiceHandlerType {
 
                 let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
                 userRef.collection(Constants.firestoreCollection.banks)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .getDocuments { snapshot, error in
                         if let err = error {
                             promise(.failure(NetworkingError(err.localizedDescription)))
@@ -165,7 +225,6 @@ class FirestoreService: ServiceHandlerType {
                 
                 let userRef = db.collection(Constants.firestoreCollection.users).document(uid)
                 userRef.collection(Constants.firestoreCollection.budget)
-                    .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
                     .whereField("month", isEqualTo: Date().month)
                     .getDocuments { snap, error in
                         if let err = error {
@@ -414,7 +473,7 @@ class FirestoreService: ServiceHandlerType {
                          toDate: Date,
                          completion: @escaping (NetworkingError?, [Transaction]?) -> Void) {
         //,,..
-        self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)
+        self.getCollectionPathForTrans(for: duration, filterBy: filterBy, selectedCat: selectedCat, fromDate: fromDate, toDate: toDate)?
             .addSnapshotListener { snapshot, error in
                 if let err = error {
                     completion(NetworkingError(err.localizedDescription), nil)
@@ -482,7 +541,6 @@ extension FirestoreService {
         let db = Firestore.firestore()
         let collection = db.collection(Constants.firestoreCollection.transactions)
             .whereField("date", isGreaterThanOrEqualTo: getDate(for: duration))
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         return collection
     }
     private func getCollectionPathForTrans(for duration: String,
@@ -490,18 +548,23 @@ extension FirestoreService {
                                            selectedCat: [String],
                                            fromDate: Date,
                                            toDate: Date
-    ) -> Query {
-        var collection = self.getCollectionWithFilterBy(filterBy: filterBy)
+    ) -> Query? {
+        
+        guard var collection = self.getCollectionWithFilterBy(filterBy: filterBy) else { return nil }
         collection = self.getCollectionWithCategory(query: collection, selectedCat: selectedCat)
         collection = self.getCollectionWithRange(query: collection, duration: duration, fromDate: fromDate, toDate: toDate)
-            .whereField("user", isEqualTo: UserDefaults.standard.currentUser?.email.lowercased() ?? "")
         
         return collection
     }
     
     
-    private func getCollectionWithFilterBy(filterBy: PlusMenuAction) -> Query {
-        let db = Firestore.firestore()
+    private func getCollectionWithFilterBy(filterBy: PlusMenuAction) -> Query? {
+        let dbf = Firestore.firestore()
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        
+        let db = dbf.collection(Constants.firestoreCollection.users).document(uid)
         if filterBy == .all {
             return db.collection(Constants.firestoreCollection.transactions)
         } else {
