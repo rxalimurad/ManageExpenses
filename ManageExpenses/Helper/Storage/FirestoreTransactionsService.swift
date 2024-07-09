@@ -167,7 +167,7 @@ class FirestoreService: ServiceHandlerType {
         Deferred {
             Future {[weak self] promise in
                 guard let self = self else { return }
-                guard let uid = Auth.auth().currentUser?.uid else {
+                guard (Auth.auth().currentUser?.uid) != nil else {
                     promise(.failure(NetworkingError("User not authenticated")))
                     return
                 }
