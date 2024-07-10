@@ -150,7 +150,8 @@ struct AddExpenseIncomeView: View {
     
     func isBudgetExist(category: String) -> Bool {
         if newEntryType == .expense {
-            return DataCache.shared.budget.contains(where: {$0.category.desc.lowercased() == category})
+            
+            return category.isEmpty ? false : DataCache.shared.budget.contains(where: {$0.category.desc.lowercased() == category})
         } else {
             return false
         }

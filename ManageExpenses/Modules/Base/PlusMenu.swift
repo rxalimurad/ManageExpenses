@@ -13,22 +13,22 @@ struct PlusMenu: View {
     let imgWidthAndHeight: CGFloat  = 32
     var body: some View {
         VStack {
-            HStack(spacing: 50) {
-                ZStack {
-                    Circle()
-                        .foregroundColor(CustomColor.blue)
-                        .frame(width: widthAndHeight, height: widthAndHeight)
-                    Image.Custom.transferBtn
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        
-                        .frame(width: imgWidthAndHeight, height: imgWidthAndHeight)
-                        .foregroundColor(.white)
-                }
-                
-            }.onTapGesture {
-                action(.convert)
-            }
+//            HStack(spacing: 50) {
+//                ZStack {
+//                    Circle()
+//                        .foregroundColor(CustomColor.blue)
+//                        .frame(width: widthAndHeight, height: widthAndHeight)
+//                    Image.Custom.transferBtn
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        
+//                        .frame(width: imgWidthAndHeight, height: imgWidthAndHeight)
+//                        .foregroundColor(.white)
+//                }
+//                
+//            }.onTapGesture {
+//                action(.convert)
+//            }
             
             HStack(spacing: 50) {
                 ZStack {

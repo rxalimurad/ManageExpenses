@@ -170,17 +170,24 @@ struct HomeView: View {
                 .padding([.top], safeAreaInsets.top)
             
             
-            
-            HStack(spacing: 16) {
-                totalIncomeView
-                    .cornerRadius(28)
-                    .frame(height: 80)
-                totalExpensesView
-                    .cornerRadius(28)
-                    .frame(height: 80)
+            VStack {
+                Text("This Month's Statistics")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(CustomColor.baseDark)
+                    .padding([.top], 0)
+                    .padding([.leading], 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                HStack(spacing: 16) {
+                    totalIncomeView
+                        .cornerRadius(28)
+                        .frame(height: 80)
+                    totalExpensesView
+                        .cornerRadius(28)
+                        .frame(height: 80)
+                }
+                .padding([.leading, .trailing], 16)
             }
-            .padding([.leading, .trailing], 16)
-            
             
         }.cornerRadius(15)
     }
