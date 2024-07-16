@@ -32,8 +32,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     private func scheduleNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Manage It"
-        content.subtitle = "Did you forget to your today's expense?"
+        content.title = NSLocalizedString("Manage It",comment: "")
+        content.subtitle = NSLocalizedString("Did you forget to your today's expense?",comment: "")
         content.sound = UNNotificationSound.default
         var dateComponents = DateComponents()
             dateComponents.hour = 25

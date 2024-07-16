@@ -534,6 +534,9 @@
         }
       }
     },
+    "Become your own money manager and make every cent count" : {
+      "comment" : "Description for intro page 1"
+    },
     "Budget (%@)" : {
       "localizations" : {
         "de" : {
@@ -650,6 +653,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "類別"
+          }
+        }
+      }
+    },
+    "CFBundleDisplayName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage It"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理它"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理它"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理它"
           }
         }
       }
@@ -893,6 +925,9 @@
           }
         }
       }
+    },
+    "Did you forget to your today's expense?" : {
+
     },
     "Don’t have an account yet? " : {
       "localizations" : {
@@ -1294,6 +1329,47 @@
         }
       }
     },
+    "Gain total control of your money" : {
+      "comment" : "Title for intro page 1",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erhalten Sie die vollständige Kontrolle über Ihr Geld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtenga control total de su dinero"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prenez le contrôle total de votre argent\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完全掌控你的资金"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完全掌控你的资金"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完全掌控你的资金"
+          }
+        }
+      }
+    },
     "How much do yo want to spend?" : {
       "localizations" : {
         "de" : {
@@ -1410,6 +1486,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "收入"
+          }
+        }
+      }
+    },
+    "Know where your money goes" : {
+      "comment" : "Title for intro page 2",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wissen Sie, wohin Ihr Geld fließt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sepa a dónde va su dinero"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sachez où va votre argent"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知道你的钱去哪儿了"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知道你的钱去哪儿了"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知道你的钱去哪儿了"
           }
         }
       }
@@ -1533,6 +1650,9 @@
           }
         }
       }
+    },
+    "Manage It" : {
+
     },
     "No Data" : {
       "localizations" : {
@@ -1770,6 +1890,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "P-O-I標記"
+          }
+        }
+      }
+    },
+    "Planning ahead" : {
+      "comment" : "Title for intro page 3",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorausplanen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planificar el futuro"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planifier à l'avance"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提前计划"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提前计划"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提前计划"
           }
         }
       }
@@ -2134,6 +2295,47 @@
         }
       }
     },
+    "Setup your budget for each category so you in control" : {
+      "comment" : "Description for intro page 3",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richten Sie Ihr Budget für jede Kategorie ein, damit Sie die Kontrolle behalten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura tu presupuesto para cada categoría para que tengas el control"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurez votre budget pour chaque catégorie afin que vous ayez le contrôle"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为每个类别设置预算，以便您掌控"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为每个类别设置预算，以便您掌控"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为每个类别设置预算，以便您掌控"
+          }
+        }
+      }
+    },
     "Sign Up" : {
       "localizations" : {
         "de" : {
@@ -2335,7 +2537,44 @@
       }
     },
     "This Month's Statistics" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Statistiken dieses Monats"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estadísticas de este mes"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les statistiques de ce mois"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月统计数据"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月统计数据"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月统计数据"
+          }
+        }
+      }
     },
     "To" : {
       "localizations" : {
@@ -2453,6 +2692,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "總計"
+          }
+        }
+      }
+    },
+    "Track your transaction easily, with categories and financial report" : {
+      "comment" : "Description for intro page 2",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verfolgen Sie Ihre Transaktionen einfach mit Kategorien und Finanzberichten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Realice un seguimiento de su transacción fácilmente, con categorías e informe financiero"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivez facilement votre transaction, avec des catégories et un rapport financier"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过类别和财务报告轻松跟踪您的交易"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过类别和财务报告轻松跟踪您的交易"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过类别和财务报告轻松跟踪您的交易"
           }
         }
       }
