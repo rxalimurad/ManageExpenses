@@ -31,8 +31,8 @@ struct TabControlView: View {
                     Group {
                         switch viewRouter.currentPage {
                         case .home:
-                            InterstitialContentView()
-//                            HomeView(viewModel: homeVM, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
+//                            InterstitialContentView()
+                            HomeView(viewModel: homeVM, rounter: viewRouter, safeAreaInsets: geometry.safeAreaInsets)
                         case .tranactions:
                             TransactionTabView(safeAreaInsets: geometry.safeAreaInsets, viewModel: transVM)
                         case .budget:

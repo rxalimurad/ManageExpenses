@@ -291,6 +291,7 @@
 		FAD0858E2C3A7213007BB527 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858D2C3A7213007BB527 /* GoogleSignIn */; };
 		FAD085902C3A7213007BB527 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858F2C3A7213007BB527 /* GoogleSignInSwift */; };
 		FAD550132C3DD1DA00D03C3E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FAD550122C3DD1DA00D03C3E /* Localizable.xcstrings */; };
+		C0237576D98A4EA6B15C11F2 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE6DFB46A204A95AB3A81E0 /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -592,6 +593,7 @@
 				FAD085892C3A7140007BB527 /* FirebaseStorageCombine-Community in Frameworks */,
 				FAD085772C3A7140007BB527 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				59764B5F9BE2FA273B41B212 /* Pods_ManageExpenses.framework in Frameworks */,
+				C0237576D98A4EA6B15C11F2 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1819,6 +1821,7 @@
 				5F4B7BCC28F6C3B600EFC1F5 /* Frameworks */,
 				5F4B7BCD28F6C3B600EFC1F5 /* Resources */,
 				F0A9FC09775AE83E3BECB8A5 /* [CP] Copy Pods Resources */,
+				BFE729D4B81A4948802C7CF8 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -1858,6 +1861,7 @@
 				FAD0858A2C3A7140007BB527 /* FirebaseVertexAI-Preview */,
 				FAD0858D2C3A7213007BB527 /* GoogleSignIn */,
 				FAD0858F2C3A7213007BB527 /* GoogleSignInSwift */,
+				3BE6DFB46A204A95AB3A81E0 /* Sentry */,
 			);
 			productName = ManageExpenses;
 			productReference = 5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */;
@@ -1898,6 +1902,7 @@
 				FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				FAD085532C3A7140007BB527 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FAD0858C2C3A7213007BB527 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 5F4B7BD028F6C3B600EFC1F5 /* Products */;
 			projectDirPath = "";
@@ -1983,6 +1988,21 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nGIT_REV=`git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :REVISION ${GIT_REV}\" \"${SRCROOT}/ManageExpenses/Info.plist\"\n\n";
+		};
+		BFE729D4B81A4948802C7CF8 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Upload Debug Symbols to Sentry";
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "# This script is responsable to upload debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\nexport SENTRY_ORG=volutiontech-cf18f0c48\nexport SENTRY_PROJECT=apple-ios\nERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2368,7 +2388,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2398,6 +2418,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 			};
 			name = Debug;
 		};
@@ -2413,7 +2434,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2443,6 +2464,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 			};
 			name = Release;
 		};
@@ -2500,6 +2522,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.1.0;
+			};
+		};
+		94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2664,6 +2694,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAD0858C2C3A7213007BB527 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		3BE6DFB46A204A95AB3A81E0 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
