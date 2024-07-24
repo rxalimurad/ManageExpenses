@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59764B5F9BE2FA273B41B212 /* Pods_ManageExpenses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14693CB3FA047AC1A3C4512 /* Pods_ManageExpenses.framework */; };
 		5F062CDF28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CDE28FD2BEA00BB97D7 /* SegmentedControlWidgetView.swift */; };
 		5F062CE128FD4AC600BB97D7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F062CE028FD4AC600BB97D7 /* TransactionView.swift */; };
 		5F0D72C228FFC4DC00FB0843 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D72C128FFC4DC00FB0843 /* KeyboardView.swift */; };
@@ -15,6 +16,7 @@
 		5F18037B291E398A00E40E35 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037A291E398A00E40E35 /* Color.swift */; };
 		5F18037D291E3B0E00E40E35 /* BankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */; };
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
+		5F48C49C2C50F5DB00D69FA5 /* BannerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BFD28F6C56B00EFC1F5 /* LoginIntroPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */; };
@@ -298,6 +300,8 @@
 		5F18037A291E398A00E40E35 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountViewModel.swift; sourceTree = "<group>"; };
 		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		5F48C4952C50C6A200D69FA5 /* Google_Mobile_Ads_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Google_Mobile_Ads_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerContentView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -336,6 +340,9 @@
 		5FFA01F629308B6A00813C87 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		5FFEA01F29137AF50082745D /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
 		5FFEA02129137B540082745D /* SignupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupService.swift; sourceTree = "<group>"; };
+		6922CD8A3FD58F733400FC27 /* Pods-ManageExpenses.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses.debug.xcconfig"; path = "Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses.debug.xcconfig"; sourceTree = "<group>"; };
+		C5892DEDBF772E1A4B9B4526 /* Pods-ManageExpenses.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageExpenses.release.xcconfig"; path = "Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses.release.xcconfig"; sourceTree = "<group>"; };
+		D14693CB3FA047AC1A3C4512 /* Pods_ManageExpenses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageExpenses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2132AD2905922E002EEBF4 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		FA2134852905CBFB002EEBF4 /* splashAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashAnimation.json; sourceTree = "<group>"; };
 		FA2134872905CF31002EEBF4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -580,6 +587,7 @@
 				FAD085632C3A7140007BB527 /* FirebaseAuthCombine-Community in Frameworks */,
 				FAD085892C3A7140007BB527 /* FirebaseStorageCombine-Community in Frameworks */,
 				FAD085772C3A7140007BB527 /* FirebaseInAppMessaging-Beta in Frameworks */,
+				59764B5F9BE2FA273B41B212 /* Pods_ManageExpenses.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +650,22 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		5F48C4992C50F5D000D69FA5 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				5F48C49A2C50F5DB00D69FA5 /* Banner */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
+		5F48C49A2C50F5DB00D69FA5 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		5F4B7BC628F6C3B600EFC1F5 = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +673,7 @@
 				5F4B7BD128F6C3B600EFC1F5 /* ManageExpenses */,
 				5F4B7BD028F6C3B600EFC1F5 /* Products */,
 				FA54F5852911A58C0015E40A /* Frameworks */,
+				7E1ACD15B6674CD071345859 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -846,6 +871,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		7E1ACD15B6674CD071345859 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6922CD8A3FD58F733400FC27 /* Pods-ManageExpenses.debug.xcconfig */,
+				C5892DEDBF772E1A4B9B4526 /* Pods-ManageExpenses.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FA24E66D29083835008CF65A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,6 +921,8 @@
 		FA54F5852911A58C0015E40A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F48C4952C50C6A200D69FA5 /* Google_Mobile_Ads_SDK.framework */,
+				D14693CB3FA047AC1A3C4512 /* Pods_ManageExpenses.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1568,6 +1604,7 @@
 		FAA478EA28F8810800C06B31 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				5F48C4992C50F5D000D69FA5 /* Ads */,
 				FA54F58129117E960015E40A /* GoogleService-Info.plist */,
 				5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */,
 			);
@@ -1762,10 +1799,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F4B7BF328F6C3BC00EFC1F5 /* Build configuration list for PBXNativeTarget "ManageExpenses" */;
 			buildPhases = (
+				AC543385011EF2284E0EBD6A /* [CP] Check Pods Manifest.lock */,
 				FA8BC154290EF0550025BE0A /* gitRev */,
 				5F4B7BCB28F6C3B600EFC1F5 /* Sources */,
 				5F4B7BCC28F6C3B600EFC1F5 /* Frameworks */,
 				5F4B7BCD28F6C3B600EFC1F5 /* Resources */,
+				F0A9FC09775AE83E3BECB8A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1874,6 +1913,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AC543385011EF2284E0EBD6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ManageExpenses-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0A9FC09775AE83E3BECB8A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ManageExpenses/Pods-ManageExpenses-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FA8BC154290EF0550025BE0A /* gitRev */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -2027,6 +2105,7 @@
 				FA82B50728FC0F260038E099 /* PointShape.swift in Sources */,
 				FA94E8812904704200C5408D /* SelectorWidgetView.swift in Sources */,
 				5FB6ECA928FEA6D500D74B68 /* TransactionTabView.swift in Sources */,
+				5F48C49C2C50F5DB00D69FA5 /* BannerContentView.swift in Sources */,
 				FA82B4F828FC0F250038E099 /* TouchOverlayBox.swift in Sources */,
 				FA8BC158290EF8D10025BE0A /* AddBankAccount.swift in Sources */,
 				FA82B58F28FC1D7F0038E099 /* PieChart.swift in Sources */,
@@ -2263,6 +2342,7 @@
 		};
 		5F4B7BF428F6C3BC00EFC1F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6922CD8A3FD58F733400FC27 /* Pods-ManageExpenses.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2291,7 +2371,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.manageExpenses;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2304,6 +2387,7 @@
 		};
 		5F4B7BF528F6C3BC00EFC1F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5892DEDBF772E1A4B9B4526 /* Pods-ManageExpenses.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2332,7 +2416,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.volutiontech.manageExpenses;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

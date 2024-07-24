@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseCore
 import UserNotifications
 import GoogleSignIn
+import GoogleMobileAds
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -16,6 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         requestNotification()
         scheduleNotification()
+        GADMobileAds.sharedInstance().start()
         return true
     }
     

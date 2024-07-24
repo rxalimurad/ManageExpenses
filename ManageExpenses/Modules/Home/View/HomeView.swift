@@ -115,6 +115,7 @@ struct HomeView: View {
                         Button {
                             selectedTrans = transaction
                         } label: {
+//                            BannerView()
                             TransactionView(transaction: transaction)
                         }
                     }
