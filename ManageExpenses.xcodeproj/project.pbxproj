@@ -17,6 +17,8 @@
 		5F18037D291E3B0E00E40E35 /* BankAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18037C291E3B0E00E40E35 /* BankAccountViewModel.swift */; };
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
 		5F48C49C2C50F5DB00D69FA5 /* BannerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */; };
+		5F48C4A02C50F8E900D69FA5 /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */; };
+		5F48C4A12C50F8E900D69FA5 /* InterstitialContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BFD28F6C56B00EFC1F5 /* LoginIntroPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */; };
@@ -302,6 +304,8 @@
 		5F40409F290295B900ECC069 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		5F48C4952C50C6A200D69FA5 /* Google_Mobile_Ads_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Google_Mobile_Ads_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerContentView.swift; sourceTree = "<group>"; };
+		5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewModel.swift; sourceTree = "<group>"; };
+		5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialContentView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 		5F48C4992C50F5D000D69FA5 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
+				5F48C49D2C50F8E900D69FA5 /* Interstitial */,
 				5F48C49A2C50F5DB00D69FA5 /* Banner */,
 			);
 			path = Ads;
@@ -664,6 +669,15 @@
 				5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */,
 			);
 			path = Banner;
+			sourceTree = "<group>";
+		};
+		5F48C49D2C50F8E900D69FA5 /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */,
+				5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */,
+			);
+			path = Interstitial;
 			sourceTree = "<group>";
 		};
 		5F4B7BC628F6C3B600EFC1F5 = {
@@ -2073,6 +2087,7 @@
 				5F18037B291E398A00E40E35 /* Color.swift in Sources */,
 				FA82B4C428FC0F240038E099 /* SubscriptionSet.swift in Sources */,
 				FA82B4BB28FC0F240038E099 /* BarChart.swift in Sources */,
+				5F48C4A02C50F8E900D69FA5 /* InterstitialViewModel.swift in Sources */,
 				FA82B4CD28FC0F240038E099 /* API.swift in Sources */,
 				FA82B51928FC0F270038E099 /* FilledLineChart.swift in Sources */,
 				FA92998B290E941600033C7E /* FinancialReportCellView.swift in Sources */,
@@ -2176,6 +2191,7 @@
 				FA82B4B828FC0F240038E099 /* StackedBarChart.swift in Sources */,
 				FA54F58429119D570015E40A /* LoginViewModel.swift in Sources */,
 				FABF09CA28FBDF3E0072EB16 /* Shape.swift in Sources */,
+				5F48C4A12C50F8E900D69FA5 /* InterstitialContentView.swift in Sources */,
 				FA82B51D28FC0F270038E099 /* MultiLineChart.swift in Sources */,
 				FA82B4A328FC0F240038E099 /* RoundedRectangleBarShape.swift in Sources */,
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,

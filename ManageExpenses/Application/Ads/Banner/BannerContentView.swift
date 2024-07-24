@@ -5,7 +5,7 @@ import SwiftUI
 struct BannerView: UIViewControllerRepresentable {
   @State private var viewWidth: CGFloat = .zero
   private let bannerView = GADBannerView()
-  private let adUnitID = "ca-app-pub-3940256099942544/2435281174"
+    private let adUnitID = Constants.ads.banner
 
   func makeUIViewController(context: Context) -> some UIViewController {
     let bannerViewController = BannerViewController()
