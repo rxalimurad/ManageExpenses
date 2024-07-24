@@ -16,7 +16,11 @@ struct TransactionTabView: View {
             subHeader
                 .cornerRadius(10)
                 .padding([.horizontal], 16)
-            
+            BannerView()
+                .padding(.top, 20)
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
+                .frame(height: 50)
             transactions
         }
         .fullScreenCover(item: $viewModel.selectedTrans, content: { trans in
@@ -73,6 +77,7 @@ struct TransactionTabView: View {
     var transactions: some View {
         ScrollView {
             VStack {
+                
                 ForEach(viewModel.transactions, id: \.self) { transaction in
                     Button {
                         viewModel.selectedTrans = transaction

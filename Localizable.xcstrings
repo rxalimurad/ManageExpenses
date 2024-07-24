@@ -1935,9 +1935,6 @@
         }
       }
     },
-    "Play Again" : {
-
-    },
     "Receive Alert" : {
       "localizations" : {
         "de" : {
@@ -2538,9 +2535,6 @@
           }
         }
       }
-    },
-    "The Impossible Game" : {
-
     },
     "This Month's Statistics" : {
       "localizations" : {

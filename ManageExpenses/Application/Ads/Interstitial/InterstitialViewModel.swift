@@ -2,6 +2,7 @@ import GoogleMobileAds
 
 class InterstitialViewModel: NSObject, GADFullScreenContentDelegate {
   private var interstitialAd: GADInterstitialAd?
+    private var onfinish: (() -> Void)?
 
   func loadAd() async {
     do {
@@ -13,17 +14,21 @@ class InterstitialViewModel: NSObject, GADFullScreenContentDelegate {
     }
   }
 
-  func showAd() {
+    func showAd(completion: @escaping (() -> Void)) {
+    self.onfinish = completion
     guard let interstitialAd = interstitialAd else {
+        completion()
       return print("Ad wasn't ready.")
+        
+        
     }
-
-    interstitialAd.present(fromRootViewController: nil)
+     interstitialAd.present(fromRootViewController: nil)
   }
 
   // MARK: - GADFullScreenContentDelegate methods
 
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
     interstitialAd = nil
+      self.onfinish?()
   }
 }

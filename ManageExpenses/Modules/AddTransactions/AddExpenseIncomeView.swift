@@ -11,7 +11,7 @@ import AlertX
 struct AddExpenseIncomeView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var viewModel = AddExpenseIncomeViewModel(service: FirestoreService())
-    
+    private let adsVM = InterstitialViewModel()
     // Mark: - State Variables for User Input
     @State var amount = ""
     @State var category = SelectDataModel(id: "", desc: "")
@@ -33,6 +33,7 @@ struct AddExpenseIncomeView: View {
     @State private var phase = 0.0
     
     @State var walletData = DataCache.shared.banks
+    
     
     var newEntryType: PlusMenuAction
     var body: some View {
@@ -77,6 +78,10 @@ struct AddExpenseIncomeView: View {
                 ImagePicker(image: $selectedImage, type: .camera)
             })
             
+        }.onAppear {
+            Task {
+                await adsVM.loadAd()
+            }
         }
     }
     
@@ -122,14 +127,18 @@ struct AddExpenseIncomeView: View {
                     date: Date().secondsSince1970
                 ))
                 {
-                    self.isTransactionAdded.toggle()
+                    adsVM.showAd {
+                        self.isTransactionAdded.toggle()
+                    }
+                    
             }
             }
             .padding([.top], 40)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
-                    mode.wrappedValue.dismiss()
+                        mode.wrappedValue.dismiss()
+                
                 }
             })
         }
@@ -191,7 +200,9 @@ struct AddExpenseIncomeView: View {
                                                 date: Date().secondsSince1970
                                             )
                 ) {
-                    self.isTransactionAdded.toggle()
+                    adsVM.showAd {
+                        self.isTransactionAdded.toggle()
+                    }
                 }
                 
                 
@@ -204,7 +215,7 @@ struct AddExpenseIncomeView: View {
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             .alertX(isPresented: $isTransactionAdded, content: {
                 AlertView(title: "Transaction has been successfully added").show() {
-                    mode.wrappedValue.dismiss()
+                        mode.wrappedValue.dismiss()
                 }
             })
         }

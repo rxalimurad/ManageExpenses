@@ -18,7 +18,6 @@
 		5F4040A0290295BA00ECC069 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F40409F290295B900ECC069 /* SelectionView.swift */; };
 		5F48C49C2C50F5DB00D69FA5 /* BannerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */; };
 		5F48C4A02C50F8E900D69FA5 /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */; };
-		5F48C4A12C50F8E900D69FA5 /* InterstitialContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */; };
 		5F4B7BD328F6C3B600EFC1F5 /* ManageExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */; };
 		5F4B7BD728F6C3BC00EFC1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */; };
 		5F4B7BFD28F6C56B00EFC1F5 /* LoginIntroPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B7BFC28F6C56B00EFC1F5 /* LoginIntroPageView.swift */; };
@@ -56,6 +55,7 @@
 		5FFA01F729308B6A00813C87 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFA01F629308B6A00813C87 /* ProfilePictureView.swift */; };
 		5FFEA02029137AF50082745D /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFEA01F29137AF50082745D /* UserDetailsModel.swift */; };
 		5FFEA02229137B540082745D /* SignupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFEA02129137B540082745D /* SignupService.swift */; };
+		C0237576D98A4EA6B15C11F2 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE6DFB46A204A95AB3A81E0 /* Sentry */; };
 		FA2132AE2905922E002EEBF4 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2132AD2905922E002EEBF4 /* Line.swift */; };
 		FA2134842905CB9F002EEBF4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FA2134832905CB9F002EEBF4 /* Lottie */; };
 		FA2134862905CBFB002EEBF4 /* splashAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = FA2134852905CBFB002EEBF4 /* splashAnimation.json */; };
@@ -291,7 +291,6 @@
 		FAD0858E2C3A7213007BB527 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858D2C3A7213007BB527 /* GoogleSignIn */; };
 		FAD085902C3A7213007BB527 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAD0858F2C3A7213007BB527 /* GoogleSignInSwift */; };
 		FAD550132C3DD1DA00D03C3E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FAD550122C3DD1DA00D03C3E /* Localizable.xcstrings */; };
-		C0237576D98A4EA6B15C11F2 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE6DFB46A204A95AB3A81E0 /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -306,7 +305,6 @@
 		5F48C4952C50C6A200D69FA5 /* Google_Mobile_Ads_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Google_Mobile_Ads_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F48C49B2C50F5DB00D69FA5 /* BannerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerContentView.swift; sourceTree = "<group>"; };
 		5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewModel.swift; sourceTree = "<group>"; };
-		5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialContentView.swift; sourceTree = "<group>"; };
 		5F4B7BCF28F6C3B600EFC1F5 /* ManageExpenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageExpenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4B7BD228F6C3B600EFC1F5 /* ManageExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageExpensesApp.swift; sourceTree = "<group>"; };
 		5F4B7BD628F6C3BC00EFC1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -677,7 +675,6 @@
 			isa = PBXGroup;
 			children = (
 				5F48C49E2C50F8E900D69FA5 /* InterstitialViewModel.swift */,
-				5F48C49F2C50F8E900D69FA5 /* InterstitialContentView.swift */,
 			);
 			path = Interstitial;
 			sourceTree = "<group>";
@@ -1954,6 +1951,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BFE729D4B81A4948802C7CF8 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script is responsable to upload debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\nexport SENTRY_ORG=volutiontech-cf18f0c48\nexport SENTRY_PROJECT=apple-ios\nERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+		};
 		F0A9FC09775AE83E3BECB8A5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1988,21 +2000,6 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nGIT_REV=`git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :REVISION ${GIT_REV}\" \"${SRCROOT}/ManageExpenses/Info.plist\"\n\n";
-		};
-		BFE729D4B81A4948802C7CF8 /* Upload Debug Symbols to Sentry */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Upload Debug Symbols to Sentry";
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This script is responsable to upload debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\nexport SENTRY_ORG=volutiontech-cf18f0c48\nexport SENTRY_PROJECT=apple-ios\nERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2211,7 +2208,6 @@
 				FA82B4B828FC0F240038E099 /* StackedBarChart.swift in Sources */,
 				FA54F58429119D570015E40A /* LoginViewModel.swift in Sources */,
 				FABF09CA28FBDF3E0072EB16 /* Shape.swift in Sources */,
-				5F48C4A12C50F8E900D69FA5 /* InterstitialContentView.swift in Sources */,
 				FA82B51D28FC0F270038E099 /* MultiLineChart.swift in Sources */,
 				FA82B4A328FC0F240038E099 /* RoundedRectangleBarShape.swift in Sources */,
 				FA82B4A528FC0F240038E099 /* GroupedBarDataSets.swift in Sources */,
@@ -2385,10 +2381,11 @@
 				CODE_SIGN_ENTITLEMENTS = ManageExpenses/ManageExpenses.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2406,7 +2403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2418,7 +2415,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 			};
 			name = Debug;
 		};
@@ -2431,10 +2427,11 @@
 				CODE_SIGN_ENTITLEMENTS = ManageExpenses/ManageExpenses.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"ManageExpenses/Preview Content\"";
 				DEVELOPMENT_TEAM = TDTJJT9YLY;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManageExpenses/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Manage It";
@@ -2452,7 +2449,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2464,7 +2461,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 			};
 			name = Release;
 		};
@@ -2492,6 +2488,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -2524,17 +2528,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3BE6DFB46A204A95AB3A81E0 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
 		FA2134832905CB9F002EEBF4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA2134822905CB9F002EEBF4 /* XCRemoteSwiftPackageReference "lottie-ios" */;
@@ -2694,11 +2695,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAD0858C2C3A7213007BB527 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
-		};
-		3BE6DFB46A204A95AB3A81E0 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 94E2DA8C399B43579B6F2F5D /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

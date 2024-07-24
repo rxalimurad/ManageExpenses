@@ -10,8 +10,8 @@ import SwiftUI
 enum Constants {
     
     enum ads {
-        static let banner = "ca-app-pub-3940256099942544/2435281174"
-        static let interstitial = "ca-app-pub-3940256099942544/4411468910"
+        static let banner = "ca-app-pub-6213982913612542/4119004839"
+        static let interstitial = "ca-app-pub-6213982913612542/7912045650"
     }
     
     enum persistanceKey {

@@ -40,7 +40,6 @@ struct HomeView: View {
                                 .xAxisLabels(chartData: viewModel.lineChartData)
                                 .yAxisLabels(chartData: viewModel.lineChartData,
                                              formatter: numberFormatter)
-                            
                                 .id(viewModel.lineChartData.id)
                                 .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 150, maxHeight: 150, alignment: .center)
                                 .padding([.trailing], 16)
@@ -104,6 +103,11 @@ struct HomeView: View {
     @ViewBuilder func getTransactionView(_ transactions: Binding<[DatedTransactions]>) -> some View {
         ZStack {
             VStack {
+                BannerView()
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    .frame(height: 50)
                 ForEach(viewModel.transactions, id: \.self) { datedTransaction in
                     Text(datedTransaction.date)
                         .font(.system(size: 16, weight: .medium))
@@ -115,7 +119,6 @@ struct HomeView: View {
                         Button {
                             selectedTrans = transaction
                         } label: {
-//                            BannerView()
                             TransactionView(transaction: transaction)
                         }
                     }

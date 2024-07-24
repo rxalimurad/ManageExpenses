@@ -79,12 +79,19 @@ struct BudgetView: View {
             }
             
             Spacer()
+            BannerView()
+                .frame(height: 50)
+                .padding(.top, 0)
+                .padding(.horizontal, 0)
+                .padding(.bottom, 0)
+                
+            
             ButtonWidgetView(title: "Create a budget", style: .primaryButton) {
                 withAnimation {
                     showCreatBudget.toggle()
                 }
             }
-            .padding([.top], 40)
+            .padding([.top], 20)
             .padding([.bottom], geometry.safeAreaInsets.bottom +  16)
             
         }

@@ -32,7 +32,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
              options.attachViewHierarchy = true // This adds the view hierarchy to the error events
         }
         // Remove the next line after confirming that your Sentry integration is working.
-        SentrySDK.capture(message: "This app uses Sentry! :)")
 
         FirebaseApp.configure()
         requestNotification()
