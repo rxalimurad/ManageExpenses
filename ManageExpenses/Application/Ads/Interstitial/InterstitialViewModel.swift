@@ -18,7 +18,11 @@ class InterstitialViewModel: NSObject, GADFullScreenContentDelegate {
     self.onfinish = completion
     guard let interstitialAd = interstitialAd else {
         completion()
+        Task {
+            await loadAd()
+        }
       return print("Ad wasn't ready.")
+        
         
         
     }
