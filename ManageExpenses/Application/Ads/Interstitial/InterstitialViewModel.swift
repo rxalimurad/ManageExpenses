@@ -16,6 +16,16 @@ class InterstitialViewModel: NSObject, GADFullScreenContentDelegate {
 
     func showAd(completion: @escaping (() -> Void)) {
     self.onfinish = completion
+    let randomNumber = Int.random(in: 1...2)
+        
+        if randomNumber == 2 {
+            print("Random Number is 2 so not showing ads")
+            completion()
+            return
+        }
+        
+        
+        
     guard let interstitialAd = interstitialAd else {
         completion()
         Task {

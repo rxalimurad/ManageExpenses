@@ -12,6 +12,7 @@ enum Constants {
     enum ads {
         static let banner = "ca-app-pub-6213982913612542/4119004839"
         static let interstitial = "ca-app-pub-6213982913612542/7912045650"
+        static let appOpen = "ca-app-pub-6213982913612542/5912184808"
     }
     
     enum persistanceKey {

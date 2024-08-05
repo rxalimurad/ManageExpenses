@@ -37,7 +37,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         requestNotification()
         scheduleNotification()
         GADMobileAds.sharedInstance().start()
+        
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        AppOpenAdManager.shared.showAdIfAvailable()
     }
     
     private func requestNotification() {
@@ -105,6 +110,9 @@ struct ManageExpensesApp: App {
                             .edgesIgnoringSafeArea(.all)
                         })
                         .environmentObject(sessionService)
+                        .onAppear {
+                                            AppOpenAdManager.shared.showAdIfAvailable()
+                                        }
                     
                 case .loggedOut:
                     LoginView()
